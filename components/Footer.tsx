@@ -9,16 +9,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-gold-500 to-gold-300 flex items-center justify-center text-dark-950 font-serif font-black text-sm">
-                B
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center text-dark-950 font-serif font-black text-sm">
+                M
               </div>
-              <span className="font-serif text-lg font-bold text-white tracking-wide">
-                BOUTIQUE <span className="text-gold-400">EN LIGNE</span>
+              <span className="font-serif text-lg font-normal text-white tracking-wide">
+                MAISON <span className="text-gold-400 italic">ÉLÉGANCE</span>
               </span>
             </div>
             <p className="text-zinc-400 leading-relaxed text-xs">
-              Votre référence mode & prêt-à-porter de luxe accessible. Des créations modernes et raffinées pour toutes vos occasions.
+              Maison de prêt-à-porter & haute couture contemporaine à Abidjan. Confection soignée, fibres nobles et service d'essayage à domicile.
             </p>
             <div className="flex items-center gap-2 text-zinc-300 pt-1">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -37,6 +37,7 @@ export default function Footer() {
               <li><Link href="/catalogue?categorie=chemises" className="hover:text-gold-400 transition-colors">Créations Lin & Wax Chic</Link></li>
               <li><Link href="/catalogue?categorie=chaussures" className="hover:text-gold-400 transition-colors">Escarpins & Mocassins</Link></li>
               <li><Link href="/catalogue?promo=true" className="text-amber-400 hover:text-amber-300 transition-colors">Ventes Privées & Promos</Link></li>
+              <li><Link href="/suivi" className="text-gold-400 hover:text-gold-300 transition-colors font-semibold">Suivi de Commande en Direct</Link></li>
             </ul>
           </div>
 

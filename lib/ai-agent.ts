@@ -79,14 +79,14 @@ async function callGroqAPI(
     `- ${a.nom} (${a.categorie}, ${a.genre}) : ${a.prix.toLocaleString('fr-FR')} FCFA${a.prix_promo ? ` (Promo: ${a.prix_promo.toLocaleString('fr-FR')} FCFA)` : ''}. Tailles: ${a.tailles.join(', ')}. Couleurs: ${a.couleurs.join(', ')}.`
   ).join('\n');
 
-  const systemPrompt = `Tu es Sophia, l'élégante conseillère de vente et styliste personnelle de "Boutique en Ligne" en Côte d'Ivoire.
-Ton ton est chaleureux, raffiné, enthousiaste et très serviable. Tu t'exprimes dans un français ivoirien élégant et naturel.
-Tu conseilles les clients sur leurs tenues selon l'occasion (travail, soirée, mariage, décontracté).
+  const systemPrompt = `Tu es Sophia, première d'atelier et styliste personnelle de la prestigieuse maison de prêt-à-porter "Maison Élégance" à Abidjan (Côte d'Ivoire).
+Ton ton est chaleureux, raffiné, digne des plus grands ateliers de couture tout en restant accessible et attentif. Tu t'exprimes dans un français ivoirien distingué.
+Tu conseilles avec expertise les clients sur leurs tenues selon l'occasion (gala au Sofitel Ivoire, mariage, rendez-vous d'affaires au Plateau, cocktail à Cocody ou détente à Assinie).
 Tu connais parfaitement le catalogue ci-dessous et ses disponibilités en stock.
 Tu réponds de façon concise (2 à 4 phrases maximum) pour garder la conversation fluide.
-Si le client veut commander, demande-lui sa taille, sa couleur préférée, sa commune de livraison et son numéro WhatsApp.
+Si le client veut commander, rassure-le sur le paiement à la livraison après essayage et demande-lui sa taille, sa commune de livraison et son contact WhatsApp.
 
-Catalogue actuel de la boutique :
+Catalogue actuel de la maison :
 ${catalogContext}`;
 
   const messages = [
@@ -123,7 +123,7 @@ async function callGeminiAPI(
     `- ${a.nom} : ${a.prix.toLocaleString('fr-FR')} FCFA (Tailles: ${a.tailles.join(', ')})`
   ).join('\n');
 
-  const systemInstruction = `Tu es Sophia, styliste personnelle chez Boutique en Ligne. Conseille le client avec élégance et amabilité. Réponds en 2 à 3 phrases claires. Catalogue : ${catalogContext}`;
+  const systemInstruction = `Tu es Sophia, première d'atelier et styliste personnelle chez Maison Élégance à Abidjan. Conseille le client avec raffinement, amabilité et expertise de coupe. Réponds en 2 à 3 phrases claires. Catalogue : ${catalogContext}`;
 
   const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
     method: 'POST',
@@ -147,9 +147,9 @@ function fallbackStylistEngine(
 
   if (lower.includes('bonjour') || lower.includes('salut') || lower.includes('hello') || lower.includes('bonsoir')) {
     return {
-      text: 'Bonjour et bienvenue chez Boutique en Ligne ! ✨ Je suis Sophia, votre styliste personnelle. Dites-moi : cherchez-vous une tenue pour une occasion spéciale, le bureau ou le week-end ?',
+      text: 'Bonjour et bienvenue chez Maison Élégance ! ✨ Je suis Sophia, votre styliste d\'atelier. Pour quelle occasion recherchez-vous une création aujourd\'hui ? (Gala, mariage, d\'affaires ou cocktail)',
       articles: articles.slice(0, 2),
-      suggestedActions: ['Robes de soirée', 'Costumes homme', 'Nouveautés', 'Promotions'],
+      suggestedActions: ['Robes de soirée', 'Costumes homme', 'Créations lin & wax', 'Nouveautés'],
     };
   }
 

@@ -6,10 +6,11 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import CartDrawer from '@/components/CartDrawer';
 import StylistChatWidget from '@/components/StylistChatWidget';
+import SizeGuideModal from '@/components/SizeGuideModal';
 import Footer from '@/components/Footer';
 import { Article, CartItem } from '@/lib/types';
 import { getArticleById, getArticles } from '@/lib/supabase';
-import { ShoppingBag, MessageCircle, ArrowLeft, Check, ShieldCheck, Truck, Sparkles } from 'lucide-react';
+import { ShoppingBag, MessageCircle, ArrowLeft, Check, ShieldCheck, Truck, Sparkles, Ruler, RefreshCw, Scissors } from 'lucide-react';
 
 export default function ArticleDetailPage() {
   const params = useParams();
@@ -26,6 +27,7 @@ export default function ArticleDetailPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [stylistOpen, setStylistOpen] = useState(false);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -103,7 +105,7 @@ export default function ArticleDetailPage() {
   }
 
   const whatsappMsg = encodeURIComponent(
-    `Bonjour Boutique en Ligne ! Je souhaite commander cet article :\n\n` +
+    `Bonjour Maison Élégance ! Je souhaite commander cet article :\n\n` +
     `👗 Produit : *${article.nom}*\n` +
     `📏 Taille : *${selectedTaille}*\n` +
     `🎨 Couleur : *${selectedCouleur}*\n` +
@@ -192,19 +194,31 @@ export default function ArticleDetailPage() {
                 <p>{article.description}</p>
               </div>
 
-              {/* Size Selector */}
-              <div className="pt-4 space-y-2">
+              {/* Size Selector with Guide Button */}
+              <div className="pt-4 space-y-2.5">
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-white uppercase tracking-wider">
                     Choisir votre Taille :
                   </span>
-                  <button
-                    onClick={() => setStylistOpen(true)}
-                    className="text-purple-400 hover:text-purple-300 flex items-center gap-1 font-semibold"
-                  >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Doute sur la taille ? Demandez à Sophia</span>
-                  </button>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setSizeGuideOpen(true)}
+                      className="text-gold-400 hover:text-gold-300 flex items-center gap-1 font-semibold underline underline-offset-4 transition-colors"
+                    >
+                      <Ruler className="w-3.5 h-3.5" />
+                      <span>Guide des Tailles</span>
+                    </button>
+                    <span className="text-zinc-600">•</span>
+                    <button
+                      type="button"
+                      onClick={() => setStylistOpen(true)}
+                      className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold transition-colors"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Avis Styliste</span>
+                    </button>
+                  </div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {article.tailles.map((t) => (
@@ -294,13 +308,69 @@ export default function ArticleDetailPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                  <span>Paiement à la livraison</span>
+                  <span>Paiement à la réception</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <RefreshCw className="w-4 h-4 text-gold-400 flex-shrink-0" />
+                  <span>Échange gratuit 48h</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Scissors className="w-4 h-4 text-gold-400 flex-shrink-0" />
+                  <span>Retouches atelier offertes</span>
+                </div>
+              </div>
+
+              {/* Fabric & Care Accordion */}
+              <div className="p-4 rounded-2xl bg-dark-950 border border-white/5 space-y-2 text-xs">
+                <h4 className="font-serif font-bold text-gold-300 uppercase tracking-wider">
+                  Matières & Entretien d'Atelier
+                </h4>
+                <p className="text-zinc-400 leading-relaxed">
+                  Confectionné à partir de fibres nobles (coton peigné, lin pur ou soies italiennes selon le modèle). Lavage délicat à la main ou en machine à 30°C avec couleurs similaires. Repassage doux à la vapeur sur l'envers.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </main>
+
+      {/* Mobile Sticky Buy Bar (Fixed on Small Screens) */}
+      <div className="sm:hidden fixed bottom-0 inset-x-0 z-30 p-3 bg-dark-950/95 border-t border-white/10 backdrop-blur-xl flex items-center justify-between gap-3 shadow-2xl">
+        <div>
+          <span className="text-[10px] text-zinc-400 block">Taille : {selectedTaille}</span>
+          <span className="font-bold text-gold-400 text-sm">
+            {(article.prix_promo || article.prix).toLocaleString('fr-FR')} FCFA
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="p-3 rounded-xl bg-white/10 text-white font-bold text-xs duration-150 ease-premium motion-press"
+            title="Ajouter au panier"
+          >
+            <ShoppingBag className="w-4 h-4" />
+          </button>
+
+          <a
+            href={`https://wa.me/2250778311541?text=${whatsappMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 duration-150 ease-premium motion-press whitespace-nowrap shadow-lg shadow-emerald-900/30"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>Commander WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Size Guide Modal */}
+      <SizeGuideModal
+        isOpen={sizeGuideOpen}
+        onClose={() => setSizeGuideOpen(false)}
+        onOpenStylist={() => setStylistOpen(true)}
+      />
 
       {/* Cart Drawer */}
       <CartDrawer

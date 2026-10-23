@@ -23,19 +23,26 @@ const config: Config = {
           950: '#351e17',
         },
         gold: {
-          400: '#fbbf24',
+          400: '#e5c158',
           500: '#d4af37',
-          600: '#b8962c',
+          600: '#a88424',
+        },
+        atelier: {
+          deep: '#0a231b',
+          emerald: '#12382c',
+          silk: '#1a5d46',
+          gold: '#d4af37',
         },
         dark: {
-          800: '#18181b',
-          900: '#0f0f12',
-          950: '#09090b',
+          800: '#1c1c22',
+          900: '#141418',
+          950: '#0c0c0e',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['"Tenor Sans"', 'system-ui', 'sans-serif'],
+        serif: ['Italiana', 'Georgia', 'serif'],
+        display: ['Italiana', 'Georgia', 'serif'],
       },
       transitionTimingFunction: {
         'premium': 'cubic-bezier(0.4, 0, 0.2, 1)',

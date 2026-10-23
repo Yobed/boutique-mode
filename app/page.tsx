@@ -240,34 +240,34 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* AI Stylist Feature Banner */}
-        <section className="bg-gradient-to-r from-purple-950/70 via-dark-900 to-amber-950/40 border-y border-white/10 py-16">
+        {/* Atelier Stylist Feature Banner */}
+        <section className="bg-gradient-to-r from-dark-900 via-atelier-deep/30 to-dark-900 border-y border-white/10 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-                  Innovation IA
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs font-bold uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                  Service Privé d'Atelier
                 </div>
-                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-                  Besoin d'un Conseil Mode ? <br />
-                  <span className="text-gold-400">Discutez avec Sophia</span>
+                <h3 className="font-serif text-3xl sm:text-4xl font-normal text-white">
+                  Besoin d'un Conseil Coupe ou Style ? <br />
+                  <span className="text-gold-400 italic">Échangez avec Sophia</span>
                 </h3>
                 <p className="text-zinc-300 text-sm leading-relaxed">
-                  Notre styliste virtuelle analyse vos goûts, l'événement prévu (mariage, soirée, travail) et votre budget pour vous recommander les articles exacts disponibles dans votre taille.
+                  Notre première d'atelier analyse vos mensurations, l'occasion prévue (mariage, cocktail, d'affaires) et vos préférences de tissus pour vous recommander la tenue parfaite disponible immédiatement.
                 </p>
                 <div className="pt-2 flex flex-wrap gap-4">
                   <button
                     onClick={() => setStylistOpen(true)}
-                    className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-600/30 transition-all duration-200 ease-premium motion-press"
+                    className="px-6 py-3.5 rounded-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-gold-500/20 transition-all duration-200 ease-premium motion-press"
                   >
-                    Essayer le Styliste IA Gratuit
+                    Consulter la Styliste Privée
                   </button>
                   <a
                     href="https://wa.me/2250778311541?text=Bonjour%20Sophia,%20je%20souhaite%20un%20conseil%20style"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-full bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 ease-premium motion-press"
+                    className="px-6 py-3.5 rounded-full bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 ease-premium motion-press"
                   >
                     Discuter sur WhatsApp
                   </a>
@@ -287,6 +287,88 @@ export default function HomePage() {
                   </div>
                   <div className="bg-gold-500/10 border border-gold-500/30 p-3 rounded-2xl text-gold-200 self-end max-w-[90%]">
                     ✨ <strong>Sophia :</strong> <em>"Magnifique ! Je vous recommande notre Robe Soirée Émeraude Satinée en taille M (32 000 FCFA). Son tomber fluide est divin avec des escarpins nude."</em>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* L'Atelier & Le Savoir-Faire Ébène & Or */}
+        <section className="py-20 bg-dark-950 border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
+              <span className="text-xs uppercase tracking-widest text-gold-400 font-semibold">
+                L'Engagement Maison Élégance
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-normal text-white">
+                L'Art du Vêtement Parfait à Abidjan
+              </h2>
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Chaque pièce est sélectionnée, repassée à la vapeur en atelier et livrée sous housse zippée avec cintre en bois protecteur.
+              </p>
+            </div>
+
+            {/* 3 Pillars Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 rounded-3xl bg-dark-900 border border-white/5 space-y-3 motion-hover-lift">
+                <span className="font-serif text-3xl font-light text-gold-400">01</span>
+                <h3 className="font-serif text-lg font-bold text-white">Fibres Nobles & Teintures Fixées</h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Lin européen thermorégulateur idéal pour le climat tropical abidjanais, crêpe de soie lourd et cotons peignés résistants aux lavages répétés.
+                </p>
+              </div>
+
+              <div className="p-8 rounded-3xl bg-dark-900 border border-white/5 space-y-3 motion-hover-lift">
+                <span className="font-serif text-3xl font-light text-gold-400">02</span>
+                <h3 className="font-serif text-lg font-bold text-white">Essayage Libre à la Livraison</h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Notre coursier express patiente pendant que vous essayez vos vêtements. Si la coupe ne vous convient pas, aucun engagement, vous ne payez rien.
+                </p>
+              </div>
+
+              <div className="p-8 rounded-3xl bg-dark-900 border border-white/5 space-y-3 motion-hover-lift">
+                <span className="font-serif text-3xl font-light text-gold-400">03</span>
+                <h3 className="font-serif text-lg font-bold text-white">Retouches & Ajustements Gratuits</h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Un bas de pantalon à raccourcir ou une taille à cintrer ? Notre maître tailleur prend en charge les ajustements sans frais supplémentaires sous 48h.
+                </p>
+              </div>
+            </div>
+
+            {/* Verified Testimonials */}
+            <div className="mt-16 pt-12 border-t border-white/10">
+              <h3 className="font-serif text-xl font-normal text-center text-white mb-8">
+                Paroles de Nos Clients à Abidjan
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
+                  <p className="text-xs text-zinc-300 italic leading-relaxed">
+                    « J'avais un gala au Sofitel Ivoire samedi soir et pas de tenue. Commande passée vendredi 14h, reçue à 17h à Cocody Danga. La robe émeraude a fait l'unanimité ! »
+                  </p>
+                  <div className="flex items-center gap-2 pt-2 border-t border-white/5 text-[11px]">
+                    <span className="font-bold text-gold-300">Amina K.</span>
+                    <span className="text-zinc-500">• Cocody Deux Plateaux</span>
+                  </div>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
+                  <p className="text-xs text-zinc-300 italic leading-relaxed">
+                    « Le costume en lin beige est une merveille. Tissu très respirant en salle de conférence. Le coursier a attendu que j'essaie la veste avant que je valide le paiement Wave. »
+                  </p>
+                  <div className="flex items-center gap-2 pt-2 border-t border-white/5 text-[11px]">
+                    <span className="font-bold text-gold-300">Jean-Marc B.</span>
+                    <span className="text-zinc-500">• Plateau & Zone 4</span>
+                  </div>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3">
+                  <p className="text-xs text-zinc-300 italic leading-relaxed">
+                    « La styliste Sophia sur le site m'a directement orienté vers la taille L selon mon tour de poitrine. Recommandation parfaite, aucune retouche nécessaire. »
+                  </p>
+                  <div className="flex items-center gap-2 pt-2 border-t border-white/5 text-[11px]">
+                    <span className="font-bold text-gold-300">Fatou D.</span>
+                    <span className="text-zinc-500">• Marcory Residentiel</span>
                   </div>
                 </div>
               </div>

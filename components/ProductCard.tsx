@@ -22,7 +22,7 @@ export default function ProductCard({ article, onAddToCart }: ProductCardProps) 
   };
 
   const whatsappText = encodeURIComponent(
-    `Bonjour Boutique en Ligne ! Je souhaite commander cet article :\n\n` +
+    `Bonjour Maison Élégance ! Je souhaite commander cet article :\n\n` +
     `👗 Produit : *${article.nom}*\n` +
     `📏 Taille : *${selectedTaille}*\n` +
     `🎨 Couleur : *${selectedCouleur}*\n` +

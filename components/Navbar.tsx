@@ -24,16 +24,16 @@ export default function Navbar({ cartItems, onOpenCart, onOpenStylist }: NavbarP
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-500 to-gold-300 flex items-center justify-center text-dark-950 font-serif font-black text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform">
-            B
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-10 h-10 rounded-full bg-gold-500 flex items-center justify-center text-dark-950 font-serif font-black text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform">
+            M
           </div>
           <div>
-            <span className="font-serif text-xl sm:text-2xl font-black tracking-wider text-white">
-              BOUTIQUE <span className="text-gold-400">EN LIGNE</span>
+            <span className="font-serif text-xl sm:text-2xl font-normal tracking-wider text-white">
+              MAISON <span className="text-gold-400 italic">ÉLÉGANCE</span>
             </span>
             <span className="block text-[10px] text-zinc-400 tracking-widest uppercase font-medium">
-              Prêt-à-Porter & Haute Élégance
+              Prêt-à-Porter & Atelier Abidjan
             </span>
           </div>
         </Link>
@@ -52,21 +52,24 @@ export default function Navbar({ cartItems, onOpenCart, onOpenStylist }: NavbarP
           <Link href="/catalogue?genre=homme" className="hover:text-gold-400 transition-colors">
             Homme
           </Link>
-          <Link href="/catalogue?promo=true" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors flex items-center gap-1">
-            <span>Promotions</span>
+          <Link href="/catalogue?promo=true" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors">
+            Promotions
+          </Link>
+          <Link href="/suivi" className="hover:text-gold-400 transition-colors text-xs uppercase tracking-wider text-zinc-400">
+            Suivi Commande
           </Link>
         </nav>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
-          {/* Styliste IA Button */}
+          {/* Styliste Atelier Button */}
           <button
             onClick={onOpenStylist}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-purple-900/60 to-pink-900/60 border border-purple-500/40 text-purple-200 text-xs sm:text-sm font-semibold hover:border-purple-400 hover:text-white transition-all duration-150 ease-premium motion-press shadow-sm shadow-purple-500/20"
-            title="Demander conseil à notre styliste IA"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-200 text-xs sm:text-sm font-semibold hover:border-gold-400 hover:text-white transition-all duration-150 ease-premium motion-press shadow-sm shadow-emerald-900/30"
+            title="Consulter Sophia, notre styliste d'atelier"
           >
-            <Sparkles className="w-4 h-4 text-purple-400 animate-pulse" />
-            <span className="hidden sm:inline">Styliste IA</span>
+            <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-pulse-subtle" />
+            <span className="hidden sm:inline">Styliste Privée</span>
           </button>
 
           {/* WhatsApp Direct */}

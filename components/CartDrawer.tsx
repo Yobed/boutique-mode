@@ -72,7 +72,7 @@ export default function CartDrawer({
         .join('\n');
 
       const waMsg = encodeURIComponent(
-        `🛍️ *NOUVELLE COMMANDE - BOUTIQUE EN LIGNE*\n` +
+        `🛍️ *NOUVELLE COMMANDE - MAISON ÉLÉGANCE*\n` +
         `Numéro : *${numeroCommande}*\n\n` +
         `👤 *Client :* ${nom}\n` +
         `📞 *Contact :* ${telephone}\n` +
@@ -97,9 +97,9 @@ export default function CartDrawer({
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Backdrop */}
+      {/* Backdrop with Warm Obsidian Tint */}
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-[#0c0c0e]/80 backdrop-blur-md animate-fade-in"
         onClick={onClose}
       />
 
@@ -125,31 +125,40 @@ export default function CartDrawer({
           {/* Content */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
             {orderSuccess ? (
-              <div className="py-12 text-center space-y-4">
-                <CheckCircle className="w-16 h-16 text-emerald-400 mx-auto animate-bounce" />
-                <h3 className="font-serif text-xl font-bold text-white">Commande Enregistrée !</h3>
-                <p className="text-sm text-zinc-400">
-                  Votre commande <strong className="text-gold-400">{orderSuccess}</strong> a été transmise. Un récapitulatif a été ouvert sur WhatsApp pour confirmation.
+              <div className="py-12 text-center space-y-4 animate-scale-in">
+                <div className="w-16 h-16 rounded-full bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400 shadow-xl shadow-emerald-900/20">
+                  <CheckCircle className="w-10 h-10" />
+                </div>
+                <h3 className="font-serif text-2xl font-normal text-white">Commande Transmise</h3>
+                <p className="text-xs text-zinc-300 max-w-xs mx-auto leading-relaxed">
+                  Votre référence <strong className="text-gold-400 font-mono">{orderSuccess}</strong> a été enregistrée. Notre atelier a ouvert votre récapitulatif sur WhatsApp pour confirmation de livraison.
                 </p>
                 <button
                   onClick={() => {
                     setOrderSuccess(null);
                     onClose();
                   }}
-                  className="px-6 py-2.5 rounded-full bg-gold-500 text-dark-950 font-bold text-xs uppercase tracking-wider"
+                  className="px-7 py-3 rounded-full bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold text-xs uppercase tracking-wider transition-all duration-150 ease-premium motion-press"
                 >
-                  Continuer mes achats
+                  Continuer la Visite
                 </button>
               </div>
             ) : cartItems.length === 0 ? (
-              <div className="py-16 text-center space-y-3">
-                <ShoppingBag className="w-12 h-12 text-zinc-600 mx-auto" />
-                <p className="text-zinc-400 text-sm">Votre panier est actuellement vide.</p>
+              <div className="py-16 text-center space-y-4">
+                <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-gold-400/60">
+                  <ShoppingBag className="w-8 h-8" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="font-serif text-lg font-normal text-white">Votre Panier est Vide</h4>
+                  <p className="text-zinc-400 text-xs max-w-xs mx-auto">
+                    Découvrez nos créations exclusives de prêt-à-porter confectionnées avec soin.
+                  </p>
+                </div>
                 <button
                   onClick={onClose}
-                  className="px-5 py-2 rounded-full border border-gold-500/40 text-gold-400 text-xs font-semibold hover:bg-gold-500/10 transition-colors"
+                  className="px-6 py-3 rounded-full border border-gold-500/40 text-gold-400 text-xs font-semibold hover:bg-gold-500/10 transition-colors duration-150 ease-premium motion-press uppercase tracking-wider"
                 >
-                  Découvrir les vêtements
+                  Explorer la Collection
                 </button>
               </div>
             ) : (

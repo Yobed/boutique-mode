@@ -15,7 +15,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
     {
       id: 'welcome',
       role: 'assistant',
-      content: 'Bonjour et bienvenue chez Boutique en Ligne ! ✨ Je suis Sophia, votre styliste personnelle. Pour quelle occasion recherchez-vous une tenue aujourd\'hui ?',
+      content: 'Bonjour et bienvenue chez Maison Élégance ! ✨ Je suis Sophia, première d\'atelier et styliste personnelle. Pour quelle occasion recherchez-vous une création aujourd\'hui ?',
       suggestedActions: ['Robes de soirée', 'Costumes homme', 'Ensembles lin & wax', 'Promotions du moment'],
       timestamp: Date.now(),
     },
@@ -93,14 +93,14 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
       {!isOpen && (
         <button
           onClick={onToggle}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-purple-700 via-pink-600 to-amber-500 text-white font-bold text-sm shadow-2xl shadow-purple-600/40 hover:scale-105 transition-all duration-200 ease-premium motion-press group"
-          title="Parler à notre styliste IA"
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3 rounded-full bg-dark-900/95 border border-gold-500/40 text-white font-bold text-sm shadow-2xl shadow-black/80 hover:border-gold-400 hover:scale-105 transition-all duration-200 ease-premium motion-press group"
+          title="Consulter Sophia, notre styliste d'atelier"
         >
           <div className="relative">
-            <Sparkles className="w-5 h-5 text-amber-200 animate-spin" style={{ animationDuration: '4s' }} />
+            <Sparkles className="w-4 h-4 text-gold-400 animate-pulse-subtle" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-dark-950 animate-pulse-subtle" />
           </div>
-          <span className="tracking-wide">Styliste IA</span>
+          <span className="tracking-wide text-xs uppercase font-serif">Styliste Privée</span>
         </button>
       )}
 
@@ -108,21 +108,21 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-dark-950 border border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-white backdrop-blur-xl animate-scale-in">
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-purple-950 via-dark-900 to-dark-950 border-b border-white/10 flex items-center justify-between">
+          <div className="p-4 bg-dark-900/90 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold animate-pulse-subtle">
-                  <Bot className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-full bg-atelier-deep border border-gold-500/30 flex items-center justify-center text-gold-400 font-bold">
+                  <Bot className="w-5 h-5 text-gold-400" />
                 </div>
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-dark-950" />
               </div>
               <div>
                 <h3 className="font-serif font-bold text-sm text-white flex items-center gap-1.5">
-                  Sophia • Styliste IA
+                  Sophia • Première d'Atelier
                   <Sparkles className="w-3.5 h-3.5 text-gold-400" />
                 </h3>
                 <span className="text-[11px] text-emerald-400 font-medium">
-                  En ligne • Vendeuse & Conseillère
+                  En ligne • Conseils Coupe & Mensurations
                 </span>
               </div>
             </div>
@@ -212,10 +212,10 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
 
             {loading && (
               <div className="flex items-center gap-2 text-zinc-400 text-xs py-2">
-                <div className="w-2 h-2 rounded-full bg-gold-400 animate-bounce" />
-                <div className="w-2 h-2 rounded-full bg-gold-400 animate-bounce" style={{ animationDelay: '0.2s' }} />
-                <div className="w-2 h-2 rounded-full bg-gold-400 animate-bounce" style={{ animationDelay: '0.4s' }} />
-                <span>Sophia réfléchit...</span>
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse-subtle" />
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse-subtle" style={{ animationDelay: '0.3s' }} />
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse-subtle" style={{ animationDelay: '0.6s' }} />
+                <span className="text-[11px] font-medium text-zinc-400">Sophia prépare ses recommandations...</span>
               </div>
             )}
             <div ref={messagesEndRef} />
