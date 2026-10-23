@@ -99,12 +99,12 @@ export default function CartDrawer({
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-dark-950 border-l border-white/10 text-white flex flex-col shadow-2xl">
+        <div className="w-screen max-w-md bg-dark-950 border-l border-white/10 text-white flex flex-col shadow-2xl animate-drawer-in">
           {/* Header */}
           <div className="p-5 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -116,7 +116,7 @@ export default function CartDrawer({
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors duration-150 ease-premium motion-press"
             >
               <X className="w-5 h-5" />
             </button>
@@ -183,7 +183,7 @@ export default function CartDrawer({
                           <button
                             type="button"
                             onClick={() => onUpdateQuantity(idx, item.quantite - 1)}
-                            className="p-1 rounded bg-white/5 hover:bg-white/10 text-zinc-300"
+                            className="p-1 rounded bg-white/5 hover:bg-white/10 text-zinc-300 transition-transform duration-100 ease-premium motion-press"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
@@ -193,7 +193,7 @@ export default function CartDrawer({
                           <button
                             type="button"
                             onClick={() => onUpdateQuantity(idx, item.quantite + 1)}
-                            className="p-1 rounded bg-white/5 hover:bg-white/10 text-zinc-300"
+                            className="p-1 rounded bg-white/5 hover:bg-white/10 text-zinc-300 transition-transform duration-100 ease-premium motion-press"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
@@ -202,7 +202,7 @@ export default function CartDrawer({
                       <button
                         type="button"
                         onClick={() => onRemoveItem(idx)}
-                        className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
+                        className="p-2 text-zinc-500 hover:text-red-400 transition-colors duration-150 ease-premium motion-press"
                         title="Supprimer"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -299,7 +299,7 @@ export default function CartDrawer({
                 type="submit"
                 form="order-form"
                 disabled={isSubmitting}
-                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all"
+                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all duration-150 ease-premium motion-press"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>{isSubmitting ? 'Validation...' : 'Valider la commande sur WhatsApp'}</span>

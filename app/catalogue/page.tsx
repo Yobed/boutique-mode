@@ -141,7 +141,7 @@ function CatalogueContent() {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-                className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-white text-xs font-semibold"
+                className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-white text-xs font-semibold duration-150 ease-premium motion-press"
               >
                 <SlidersHorizontal className="w-4 h-4 text-gold-400" />
                 <span>Filtres</span>
@@ -196,8 +196,8 @@ function CatalogueContent() {
 
           {/* Mobile Filter Modal */}
           {mobileFilterOpen && (
-            <div className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-              <div className="max-w-md mx-auto">
+            <div className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm p-4 overflow-y-auto animate-fade-in flex items-center justify-center">
+              <div className="max-w-md w-full bg-dark-950 p-6 rounded-3xl border border-white/10 shadow-2xl animate-scale-in">
                 <FilterSidebar
                   selectedCategorie={categorie}
                   onSelectCategorie={setCategorie}
@@ -213,7 +213,7 @@ function CatalogueContent() {
                 />
                 <button
                   onClick={() => setMobileFilterOpen(false)}
-                  className="w-full mt-4 py-3 bg-gold-500 text-dark-950 font-bold rounded-xl text-sm"
+                  className="w-full mt-4 py-3 bg-gold-500 text-dark-950 font-bold rounded-xl text-sm transition-all duration-150 ease-premium motion-press"
                 >
                   Appliquer les filtres
                 </button>

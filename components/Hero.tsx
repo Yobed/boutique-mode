@@ -25,13 +25,13 @@ export default function Hero({ onOpenStylist }: HeroProps) {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-2xl space-y-6">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold uppercase tracking-widest backdrop-blur-sm animate-fade-up">
             <span className="w-2 h-2 rounded-full bg-gold-400 animate-ping" />
             Nouvelle Collection 2026
           </div>
 
           {/* Heading */}
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white animate-fade-up stagger-1">
             L'Élégance Pure, <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-brand-300 to-amber-200">
               Faite Pour Vous.
@@ -39,15 +39,15 @@ export default function Hero({ onOpenStylist }: HeroProps) {
           </h1>
 
           {/* Description */}
-          <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-normal animate-fade-up stagger-2">
             Découvrez notre sélection exclusive de prêt-à-porter chic : robes de soirée somptueuses, costumes tailleur raffinés, tenues d'affaires et créations contemporaines.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-4 pt-2 animate-fade-up stagger-3">
             <Link
               href="/catalogue"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-dark-950 font-bold text-sm tracking-wide shadow-xl shadow-gold-500/20 transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-dark-950 font-bold text-sm tracking-wide shadow-xl shadow-gold-500/20 transition-all duration-200 ease-premium motion-press hover:scale-105"
             >
               <span>Découvrir les Vêtements</span>
               <ArrowRight className="w-4 h-4" />
@@ -55,7 +55,7 @@ export default function Hero({ onOpenStylist }: HeroProps) {
 
             <button
               onClick={onOpenStylist}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm backdrop-blur-md transition-all hover:border-gold-500/50"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm backdrop-blur-md transition-all duration-200 ease-premium motion-press hover:border-gold-500/50"
             >
               <Sparkles className="w-4 h-4 text-purple-400" />
               <span>Conseillère IA Vendeuse</span>
@@ -63,7 +63,7 @@ export default function Hero({ onOpenStylist }: HeroProps) {
           </div>
 
           {/* Guarantees Badges */}
-          <div className="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 text-xs text-zinc-400">
+          <div className="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 text-xs text-zinc-400 animate-fade-up stagger-4">
             <div className="flex items-center gap-2">
               <Truck className="w-5 h-5 text-gold-400 flex-shrink-0" />
               <span>Livraison 24h à Abidjan</span>

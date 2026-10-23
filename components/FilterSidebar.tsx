@@ -72,7 +72,7 @@ export default function FilterSidebar({
               key={g}
               type="button"
               onClick={() => onSelectGenre(g)}
-              className={`py-1.5 px-2 rounded-lg text-xs font-semibold capitalize transition-all ${
+              className={`py-1.5 px-2 rounded-lg text-xs font-semibold capitalize transition-all duration-150 ease-premium motion-press ${
                 selectedGenre === g
                   ? 'bg-gold-500 text-dark-950 shadow-sm'
                   : 'text-zinc-400 hover:text-white'
@@ -95,7 +95,7 @@ export default function FilterSidebar({
               key={c.value}
               type="button"
               onClick={() => onSelectCategorie(c.value)}
-              className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between ${
+              className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 ease-premium motion-press flex items-center justify-between ${
                 selectedCategorie === c.value
                   ? 'bg-gold-500/15 text-gold-400 font-bold border border-gold-500/30'
                   : 'text-zinc-400 hover:text-white hover:bg-white/5'
@@ -119,7 +119,7 @@ export default function FilterSidebar({
               key={t}
               type="button"
               onClick={() => onSelectTaille(t === 'Toutes' ? '' : t)}
-              className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all ${
+              className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all duration-150 ease-premium motion-press ${
                 (t === 'Toutes' && !selectedTaille) || selectedTaille === t
                   ? 'border-gold-400 bg-gold-400/15 text-gold-300'
                   : 'border-white/10 bg-dark-950 text-zinc-400 hover:border-white/20'

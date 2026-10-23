@@ -109,7 +109,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               <Link
                 href="/catalogue?categorie=robes"
-                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all group"
+                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all duration-200 ease-premium motion-hover-lift motion-press group"
               >
                 <span className="block font-serif font-bold text-base text-white group-hover:text-gold-400">
                   Robes de Soirée
@@ -118,7 +118,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/catalogue?categorie=costumes"
-                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all group"
+                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all duration-200 ease-premium motion-hover-lift motion-press group"
               >
                 <span className="block font-serif font-bold text-base text-white group-hover:text-gold-400">
                   Costumes Homme
@@ -127,7 +127,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/catalogue?categorie=chemises"
-                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all group"
+                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all duration-200 ease-premium motion-hover-lift motion-press group"
               >
                 <span className="block font-serif font-bold text-base text-white group-hover:text-gold-400">
                   Lin Pur & Wax
@@ -136,7 +136,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/catalogue?categorie=chaussures"
-                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all group"
+                className="p-4 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 transition-all duration-200 ease-premium motion-hover-lift motion-press group"
               >
                 <span className="block font-serif font-bold text-base text-white group-hover:text-gold-400">
                   Chaussures & Sacs
@@ -165,7 +165,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setActiveTab('tous')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-150 ease-premium motion-press ${
                   activeTab === 'tous'
                     ? 'bg-gold-500 text-dark-950 shadow-md'
                     : 'text-zinc-400 hover:text-white'
@@ -176,7 +176,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setActiveTab('femme')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-150 ease-premium motion-press ${
                   activeTab === 'femme'
                     ? 'bg-gold-500 text-dark-950 shadow-md'
                     : 'text-zinc-400 hover:text-white'
@@ -187,7 +187,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setActiveTab('homme')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-150 ease-premium motion-press ${
                   activeTab === 'homme'
                     ? 'bg-gold-500 text-dark-950 shadow-md'
                     : 'text-zinc-400 hover:text-white'
@@ -198,7 +198,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setActiveTab('promo')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-150 ease-premium motion-press ${
                   activeTab === 'promo'
                     ? 'bg-red-600 text-white shadow-md'
                     : 'text-zinc-400 hover:text-white'
@@ -232,7 +232,7 @@ export default function HomePage() {
           <div className="mt-14 text-center">
             <Link
               href="/catalogue"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-gold-500 hover:text-dark-950 border border-white/20 text-white font-bold text-sm tracking-wide transition-all shadow-xl"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-gold-500 hover:text-dark-950 border border-white/20 text-white font-bold text-sm tracking-wide transition-all duration-200 ease-premium motion-press shadow-xl"
             >
               <span>Voir Tous les 50+ Vêtements</span>
               <ArrowRight className="w-4 h-4" />
@@ -259,7 +259,7 @@ export default function HomePage() {
                 <div className="pt-2 flex flex-wrap gap-4">
                   <button
                     onClick={() => setStylistOpen(true)}
-                    className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-600/30 transition-all"
+                    className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-600/30 transition-all duration-200 ease-premium motion-press"
                   >
                     Essayer le Styliste IA Gratuit
                   </button>
@@ -267,7 +267,7 @@ export default function HomePage() {
                     href="https://wa.me/2250778311541?text=Bonjour%20Sophia,%20je%20souhaite%20un%20conseil%20style"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-full bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all"
+                    className="px-6 py-3 rounded-full bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 ease-premium motion-press"
                   >
                     Discuter sur WhatsApp
                   </a>

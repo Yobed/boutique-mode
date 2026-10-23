@@ -62,7 +62,7 @@ export default function Navbar({ cartItems, onOpenCart, onOpenStylist }: NavbarP
           {/* Styliste IA Button */}
           <button
             onClick={onOpenStylist}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-purple-900/60 to-pink-900/60 border border-purple-500/40 text-purple-200 text-xs sm:text-sm font-semibold hover:border-purple-400 hover:text-white transition-all shadow-sm shadow-purple-500/20"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-gradient-to-r from-purple-900/60 to-pink-900/60 border border-purple-500/40 text-purple-200 text-xs sm:text-sm font-semibold hover:border-purple-400 hover:text-white transition-all duration-150 ease-premium motion-press shadow-sm shadow-purple-500/20"
             title="Demander conseil à notre styliste IA"
           >
             <Sparkles className="w-4 h-4 text-purple-400 animate-pulse" />
@@ -74,7 +74,7 @@ export default function Navbar({ cartItems, onOpenCart, onOpenStylist }: NavbarP
             href="https://wa.me/2250778311541?text=Bonjour%20Boutique%20en%20Ligne,%20je%20souhaite%20des%20renseignements%20sur%20vos%20v%C3%AAtements"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-900/80 transition-colors"
+            className="p-2.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-900/80 transition-all duration-150 ease-premium motion-press"
             title="Nous écrire sur WhatsApp"
           >
             <MessageCircle className="w-5 h-5" />
@@ -83,12 +83,12 @@ export default function Navbar({ cartItems, onOpenCart, onOpenStylist }: NavbarP
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
-            className="relative p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-gold-500/50 hover:bg-white/10 text-white transition-all"
+            className="relative p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-gold-500/50 hover:bg-white/10 text-white transition-all duration-150 ease-premium motion-press"
             title="Voir mon panier"
           >
             <ShoppingBag className="w-5 h-5 text-gold-400" />
             {totalCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-gold-500 text-dark-950 text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+              <span className="absolute -top-1 -right-1 bg-gold-500 text-dark-950 text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scale-in">
                 {totalCount}
               </span>
             )}

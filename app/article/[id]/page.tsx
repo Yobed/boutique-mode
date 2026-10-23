@@ -149,7 +149,7 @@ export default function ArticleDetailPage() {
                     key={i}
                     type="button"
                     onClick={() => setSelectedPhoto(p)}
-                    className={`w-20 h-24 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${
+                    className={`w-20 h-24 rounded-xl overflow-hidden border-2 transition-all duration-150 ease-premium motion-press flex-shrink-0 ${
                       selectedPhoto === p ? 'border-gold-400 scale-105' : 'border-white/10 opacity-70 hover:opacity-100'
                     }`}
                   >
@@ -212,7 +212,7 @@ export default function ArticleDetailPage() {
                       key={t}
                       type="button"
                       onClick={() => setSelectedTaille(t)}
-                      className={`px-4 py-2 text-sm font-bold rounded-xl border transition-all ${
+                      className={`px-4 py-2 text-sm font-bold rounded-xl border transition-all duration-150 ease-premium motion-press ${
                         selectedTaille === t
                           ? 'border-gold-400 bg-gold-400/20 text-gold-300 shadow-md'
                           : 'border-white/10 bg-dark-900 text-zinc-300 hover:border-white/30'
@@ -236,7 +236,7 @@ export default function ArticleDetailPage() {
                         key={c}
                         type="button"
                         onClick={() => setSelectedCouleur(c)}
-                        className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all ${
+                        className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all duration-150 ease-premium motion-press ${
                           selectedCouleur === c
                             ? 'border-gold-400 bg-gold-400/20 text-gold-300'
                             : 'border-white/10 bg-dark-900 text-zinc-400 hover:border-white/20'
@@ -256,7 +256,7 @@ export default function ArticleDetailPage() {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`w-full py-4 px-6 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-xl ${
+                  className={`w-full py-4 px-6 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-150 ease-premium motion-press shadow-xl ${
                     added
                       ? 'bg-emerald-600 text-white'
                       : 'bg-gold-500 hover:bg-gold-400 text-dark-950 shadow-gold-500/20'
@@ -279,7 +279,7 @@ export default function ArticleDetailPage() {
                   href={`https://wa.me/2250778311541?text=${whatsappMsg}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-4 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-emerald-600/20 transition-all"
+                  className="w-full py-4 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-emerald-600/20 transition-all duration-150 ease-premium motion-press"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span>Commander sur WhatsApp</span>

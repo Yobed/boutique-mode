@@ -32,30 +32,30 @@ export default function ProductCard({ article, onAddToCart }: ProductCardProps) 
   );
 
   return (
-    <div className="group relative bg-dark-900 border border-white/10 rounded-2xl overflow-hidden hover:border-gold-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-black/50 flex flex-col justify-between">
+    <div className="group relative bg-dark-900 border border-white/10 rounded-2xl overflow-hidden motion-hover-lift hover:border-gold-500/50 flex flex-col justify-between">
       {/* Image Container */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-900">
         <img
           src={article.photos[0]}
           alt={article.nom}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-center motion-img-zoom"
           loading="lazy"
         />
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
           {article.prix_promo && (
-            <span className="bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-md shadow-md uppercase">
+            <span className="bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider">
               Promo -{Math.round(((article.prix - article.prix_promo) / article.prix) * 100)}%
             </span>
           )}
           {article.nouveaute && !article.prix_promo && (
-            <span className="bg-gold-500 text-dark-950 text-[11px] font-black px-2.5 py-1 rounded-md shadow-md uppercase">
+            <span className="bg-gold-500 text-dark-950 text-[11px] font-black px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider">
               Nouveau
             </span>
           )}
           {article.vedette && (
-            <span className="bg-purple-600/90 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow uppercase">
+            <span className="bg-purple-600/90 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow uppercase tracking-wider">
               Coup de Cœur
             </span>
           )}
@@ -64,7 +64,7 @@ export default function ProductCard({ article, onAddToCart }: ProductCardProps) 
         {/* Quick View Link */}
         <Link
           href={`/article/${article.id}`}
-          className="absolute top-3 right-3 p-2 rounded-full bg-dark-950/70 text-zinc-300 hover:text-white hover:bg-dark-950 transition-all opacity-0 group-hover:opacity-100"
+          className="absolute top-3 right-3 p-2 rounded-full bg-dark-950/70 text-zinc-300 hover:text-white hover:bg-dark-950 transition-all duration-200 ease-premium motion-press opacity-0 group-hover:opacity-100"
           title="Voir la fiche détaillée"
         >
           <Eye className="w-4 h-4" />
@@ -110,9 +110,9 @@ export default function ProductCard({ article, onAddToCart }: ProductCardProps) 
                   key={t}
                   type="button"
                   onClick={() => setSelectedTaille(t)}
-                  className={`px-2 py-0.5 text-xs font-semibold rounded border transition-all ${
+                  className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all duration-150 ease-premium motion-press ${
                     selectedTaille === t
-                      ? 'border-gold-400 bg-gold-400/10 text-gold-300'
+                      ? 'border-gold-400 bg-gold-400/10 text-gold-300 shadow-sm'
                       : 'border-white/10 bg-white/5 text-zinc-400 hover:border-white/20'
                   }`}
                 >
@@ -128,7 +128,7 @@ export default function ProductCard({ article, onAddToCart }: ProductCardProps) 
           {/* Add to Cart */}
           <button
             onClick={handleAdd}
-            className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+            className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold transition-all duration-150 ease-premium motion-press ${
               added
                 ? 'bg-emerald-600 text-white'
                 : 'bg-white/10 hover:bg-gold-500 hover:text-dark-950 text-white border border-white/10'
@@ -152,7 +152,7 @@ export default function ProductCard({ article, onAddToCart }: ProductCardProps) 
             href={`https://wa.me/2250778311541?text=${whatsappText}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white text-xs font-bold transition-all"
+            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white text-xs font-bold transition-all duration-150 ease-premium motion-press"
             title="Commander directement sur WhatsApp"
           >
             <MessageCircle className="w-3.5 h-3.5" />

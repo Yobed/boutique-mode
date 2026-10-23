@@ -93,12 +93,12 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
       {!isOpen && (
         <button
           onClick={onToggle}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-purple-700 via-pink-600 to-amber-500 text-white font-bold text-sm shadow-2xl shadow-purple-600/40 hover:scale-105 transition-all group"
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-purple-700 via-pink-600 to-amber-500 text-white font-bold text-sm shadow-2xl shadow-purple-600/40 hover:scale-105 transition-all duration-200 ease-premium motion-press group"
           title="Parler à notre styliste IA"
         >
           <div className="relative">
             <Sparkles className="w-5 h-5 text-amber-200 animate-spin" style={{ animationDuration: '4s' }} />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-dark-950" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-dark-950 animate-pulse-subtle" />
           </div>
           <span className="tracking-wide">Styliste IA</span>
         </button>
@@ -106,12 +106,12 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-dark-950 border border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-white backdrop-blur-xl">
+        <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-dark-950 border border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-white backdrop-blur-xl animate-scale-in">
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-purple-950 via-dark-900 to-dark-950 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold animate-pulse-subtle">
                   <Bot className="w-5 h-5" />
                 </div>
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-dark-950" />
@@ -128,7 +128,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
             </div>
             <button
               onClick={onToggle}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors duration-150 ease-premium motion-press"
             >
               <X className="w-5 h-5" />
             </button>
@@ -181,7 +181,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
                           <button
                             type="button"
                             onClick={() => onAddToCart(art, art.tailles[0], art.couleurs[0])}
-                            className="inline-flex items-center gap-1 self-start px-2 py-1 rounded-md bg-gold-500 text-dark-950 text-[10px] font-bold hover:bg-gold-400 transition-colors"
+                            className="inline-flex items-center gap-1 self-start px-2.5 py-1 rounded-md bg-gold-500 text-dark-950 text-[10px] font-bold hover:bg-gold-400 transition-colors duration-150 ease-premium motion-press"
                           >
                             <ShoppingBag className="w-3 h-3" />
                             <span>Ajouter</span>
@@ -200,7 +200,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
                         key={i}
                         type="button"
                         onClick={() => handleSend(sug)}
-                        className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-gold-400/50 hover:bg-white/10 text-[11px] transition-all"
+                        className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-gold-400/50 hover:bg-white/10 text-[11px] transition-all duration-150 ease-premium motion-press"
                       >
                         {sug}
                       </button>
@@ -239,7 +239,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="p-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-dark-950 disabled:opacity-40 transition-all font-bold"
+              className="p-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-dark-950 disabled:opacity-40 transition-all duration-150 ease-premium motion-press font-bold"
             >
               <Send className="w-4 h-4" />
             </button>
