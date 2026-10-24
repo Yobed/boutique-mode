@@ -39,9 +39,9 @@ def setup_adaptive_cyclorama(scene, center, radius):
     bm = bmesh.new()
 
     n_segments = 64
-    r_floor = max(radius * 3.5, 0.5)
-    r_curve = max(radius * 2.0, 0.3)
-    wall_height = max(radius * 5.0, 1.0)
+    r_floor = max(radius * 7.0, 1.5)
+    r_curve = max(radius * 3.5, 0.8)
+    wall_height = max(radius * 6.0, 1.8)
     curve_steps = 12
 
     profile = [(0.0, 0.0), (r_floor, 0.0)]

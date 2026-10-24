@@ -1,0 +1,989 @@
+"""
+component_analyzer.py — Décomposition Visuelle Spatiale et Inférence Géométrique Automatique
+Fait partie intégrante du pipeline procédural générique Image-to-3D pour Blender 5.x.
+
+Améliorations Mission 30B & 32 :
+- Décomposition spatiale bidimensionnelle (analyse verticale Z + analyse transversale X)
+- Détection des profils de révolution (Axisymétrie, Cylinder, Lathe, RingCollar)
+- Détection générique des appendices et branches dépassantes (CurvedSweep)
+- Continuité structurelle des tiges élancées (fusion de colonnes)
+- Sélection de primitives et traçabilité des incertitudes monoculaires
+- Discrimination physique prudente entre cavités/ouvertures sombres et éléments en saillie
+- Zéro faux positif de boutons/cadrans sur les reflets ou ouvertures
+"""
+
+import collections
+import math
+import os
+import sys
+from PIL import Image
+
+PIPELINE_DIR = os.path.dirname(os.path.abspath(__file__))
+if PIPELINE_DIR not in sys.path:
+    sys.path.append(PIPELINE_DIR)
+
+from image_analyzer import ReferenceImageAnalyzer
+
+
+class VisualComponentDecomposer:
+    """
+    Décomposeur structurel de premier plan en composants physiques assemblables.
+    Combine stratification verticale, inférence de révolution, détection d'appendices
+    et sélection raisonnée de primitives 3D.
+    """
+
+    def __init__(self, image_path, category_hint=None):
+        self.image_path = os.path.abspath(image_path)
+        if not os.path.exists(self.image_path):
+            raise FileNotFoundError(f"Image introuvable : {self.image_path}")
+
+        self.category_hint = category_hint
+        # Utiliser l'analyseur de base pour la vision initiale
+        self.base_analyzer = ReferenceImageAnalyzer(self.image_path, category_hint=category_hint)
+        self.base_analyzer.segment_foreground()
+        self.base_analyzer.compute_symmetry()
+        self.base_analyzer.extract_dominant_colors(max_colors=4)
+
+        self.image = self.base_analyzer.raw_image
+        self.mask = self.base_analyzer.mask
+        self.bbox = self.base_analyzer.bbox  # min_x, min_y, max_x, max_y
+        self.palette = self.base_analyzer.palette
+        self.aspect_ratio = self.base_analyzer.aspect_ratio
+
+        self.components = []
+        self.structural_layers = []
+        self.analysis_logs = []
+        self.detected_features = []
+
+    def log(self, msg):
+        self.analysis_logs.append(msg)
+
+    def analyze_strata(self, num_slices=48):
+        """
+        Découpe l'objet en tranches horizontales fines et analyse le profil spatial,
+        les discontinuités géométriques, le vide interne et les contrastes de matière.
+        """
+        min_x, min_y, max_x, max_y = self.bbox
+        bw = max(1, max_x - min_x)
+        bh = max(1, max_y - min_y)
+        pix = self.image.load()
+
+        slices = []
+        for i in range(num_slices):
+            # De la base (y_max) au sommet (y_min)
+            t = i / float(num_slices - 1)
+            y = int(max_y - t * bh)
+            y = min(max(y, 0), self.image.height - 1)
+
+            xs = [x for x in range(min_x, max_x + 1) if self.mask[y][x]]
+            if not xs:
+                continue
+
+            lx, rx = min(xs), max(xs)
+            span_w = rx - lx + 1
+            solid_w = len(xs)
+            void_ratio = 1.0 - (solid_w / float(span_w))
+            cx = (lx + rx) / 2.0
+
+            colors = [pix[x, y] for x in xs]
+            avg_r = sum(c[0] for c in colors) / len(colors)
+            avg_g = sum(c[1] for c in colors) / len(colors)
+            avg_b = sum(c[2] for c in colors) / len(colors)
+            lum = 0.299 * avg_r + 0.587 * avg_g + 0.114 * avg_b
+
+            # Détection des segments connectés le long de X sur cette ligne
+            segments = []
+            in_seg = False
+            s_start = 0
+            for x in range(lx, rx + 1):
+                if self.mask[y][x]:
+                    if not in_seg:
+                        in_seg = True
+                        s_start = x
+                else:
+                    if in_seg:
+                        segments.append((s_start, x - 1))
+                        in_seg = False
+            if in_seg:
+                segments.append((s_start, rx))
+
+            # Filtrer les bruits parasites (< 2.5% de bw)
+            min_seg_w = max(4, int(bw * 0.025))
+            clean_segs = [s for s in segments if (s[1] - s[0] + 1) >= min_seg_w]
+
+            slices.append({
+                "idx": i,
+                "t": t,
+                "y": y,
+                "span_w": span_w,
+                "solid_w": solid_w,
+                "void_ratio": void_ratio,
+                "cx": cx,
+                "avg_rgb": (avg_r, avg_g, avg_b),
+                "lum": lum,
+                "segments": clean_segs
+            })
+
+        if not slices:
+            return []
+
+        # Détection des frontières physiques entre strates
+        cut_indices = []
+        for j in range(1, len(slices)):
+            s_prev = slices[j - 1]
+            s_curr = slices[j]
+
+            # Écart colorimétrique et luminance
+            dr = s_curr["avg_rgb"][0] - s_prev["avg_rgb"][0]
+            dg = s_curr["avg_rgb"][1] - s_prev["avg_rgb"][1]
+            db = s_curr["avg_rgb"][2] - s_prev["avg_rgb"][2]
+            color_dist = math.sqrt(dr * dr + dg * dg + db * db)
+            lum_delta = abs(s_curr["lum"] - s_prev["lum"])
+
+            # Écarts géométriques et topologiques
+            span_delta = abs(s_curr["span_w"] - s_prev["span_w"]) / float(bw)
+            solid_delta = abs(s_curr["solid_w"] - s_prev["solid_w"]) / float(bw)
+            void_delta = abs(s_curr["void_ratio"] - s_prev["void_ratio"])
+            seg_count_delta = abs(len(s_curr["segments"]) - len(s_prev["segments"]))
+            center_shift = abs(s_curr["cx"] - s_prev["cx"]) / float(bw)
+
+            is_cut = False
+            reasons = []
+
+            # 1. Épaulement géométrique franc
+            if span_delta > 0.14 or solid_delta > 0.16:
+                is_cut = True
+                reasons.append(f"geometric_step(span_d={span_delta:.2f}, solid_d={solid_delta:.2f})")
+
+            # 2. Rupture topologique transversale (apparition de colonnes / vides internes)
+            elif seg_count_delta >= 2 or (void_delta > 0.22 and (s_curr["void_ratio"] > 0.15 or s_prev["void_ratio"] > 0.15)):
+                is_cut = True
+                reasons.append(f"transverse_topology_change(segs={len(s_prev['segments'])}->{len(s_curr['segments'])}, void_d={void_delta:.2f})")
+
+            # 3. Transition franche de matériau (changement de teinte/luminance)
+            elif (color_dist > 45.0 or lum_delta > 35.0) and (s_curr["t"] < 0.15 or s_curr["t"] > 0.65 or span_delta > 0.04):
+                is_cut = True
+                reasons.append(f"material_transition(dist={color_dist:.1f}, dL={lum_delta:.1f})")
+
+            elif center_shift > 0.12 and span_delta > 0.04:
+                is_cut = True
+                reasons.append(f"lateral_axis_offset(shift={center_shift:.2f})")
+
+            if is_cut:
+                cut_indices.append((j, reasons))
+
+        # Regroupement des tranches en couches continues
+        cut_points = [0] + [c[0] for c in cut_indices] + [len(slices)]
+        cut_points = sorted(list(set(cut_points)))
+
+        # Fusion des strates trop minces (< 2 tranches sauf si saut de couleur très net ou base/sommet)
+        merged_ranges = []
+        curr_start = cut_points[0]
+        for cp in cut_points[1:]:
+            count = cp - curr_start
+            if count >= 2 or curr_start == 0 or cp == len(slices):
+                merged_ranges.append((curr_start, cp))
+                curr_start = cp
+            else:
+                if merged_ranges:
+                    prev_s, _ = merged_ranges.pop()
+                    merged_ranges.append((prev_s, cp))
+                    curr_start = cp
+                else:
+                    merged_ranges.append((curr_start, cp))
+                    curr_start = cp
+
+        layers = []
+        for idx, (r_start, r_end) in enumerate(merged_ranges):
+            layer_slices = slices[r_start:r_end]
+            if not layer_slices:
+                continue
+
+            t_min = layer_slices[0]["t"]
+            t_max = layer_slices[-1]["t"]
+            h_ratio = len(layer_slices) / float(len(slices))
+
+            avg_span_w = sum(s["span_w"] for s in layer_slices) / len(layer_slices)
+            avg_solid_w = sum(s["solid_w"] for s in layer_slices) / len(layer_slices)
+            avg_void = sum(s["void_ratio"] for s in layer_slices) / len(layer_slices)
+            avg_cx = sum(s["cx"] for s in layer_slices) / len(layer_slices)
+
+            r_m = sum(s["avg_rgb"][0] for s in layer_slices) / len(layer_slices)
+            g_m = sum(s["avg_rgb"][1] for s in layer_slices) / len(layer_slices)
+            b_m = sum(s["avg_rgb"][2] for s in layer_slices) / len(layer_slices)
+            lum_m = sum(s["lum"] for s in layer_slices) / len(layer_slices)
+
+            # Analyse transversale : détection de sous-composants latéraux distincts
+            slice_segs_counts = [len(s["segments"]) for s in layer_slices]
+            median_segs = sorted(slice_segs_counts)[len(slice_segs_counts) // 2]
+
+            lateral_clusters = []
+            if median_segs >= 2 or avg_void > 0.20:
+                all_segs = []
+                for s in layer_slices:
+                    all_segs.extend(s["segments"])
+
+                # Clustering 1D le long de X selon la position centrale
+                clusters = []
+                for (s0, s1) in all_segs:
+                    scx = (s0 + s1) / 2.0
+                    sw = s1 - s0 + 1
+                    matched = False
+                    for c in clusters:
+                        if abs(scx - c["cx"]) < bw * 0.12:
+                            c["samples"].append((scx, sw, s0, s1))
+                            c["cx"] = sum(p[0] for p in c["samples"]) / len(c["samples"])
+                            matched = True
+                            break
+                    if not matched:
+                        clusters.append({"cx": scx, "samples": [(scx, sw, s0, s1)]})
+
+                min_presence = max(2, int(len(layer_slices) * 0.35))
+                valid_c = [c for c in clusters if len(c["samples"]) >= min_presence]
+                valid_c = sorted(valid_c, key=lambda c: c["cx"])
+
+                if len(valid_c) >= 2:
+                    for c_idx, c in enumerate(valid_c):
+                        avg_cw = sum(p[1] for p in c["samples"]) / len(c["samples"])
+                        rel_cx = (c["cx"] - (min_x + bw / 2.0)) / float(bw)
+                        rel_cw = avg_cw / float(bw)
+
+                        # Échantillonnage de la couleur du cluster
+                        clust_colors = []
+                        for s in layer_slices:
+                            y_curr = s["y"]
+                            for p in c["samples"]:
+                                s0, s1 = p[2], p[3]
+                                for x_sample in range(max(min_x, s0), min(max_x + 1, s1 + 1), 2):
+                                    if self.mask[y_curr][x_sample]:
+                                        clust_colors.append(pix[x_sample, y_curr])
+                        if clust_colors:
+                            c_r = sum(col[0] for col in clust_colors) / len(clust_colors)
+                            c_g = sum(col[1] for col in clust_colors) / len(clust_colors)
+                            c_b = sum(col[2] for col in clust_colors) / len(clust_colors)
+                        else:
+                            c_r, c_g, c_b = r_m, g_m, b_m
+
+                        lateral_clusters.append({
+                            "cluster_idx": c_idx,
+                            "rel_cx": rel_cx,
+                            "rel_width": rel_cw,
+                            "mean_rgb": (int(c_r), int(c_g), int(c_b)),
+                            "presence": len(c["samples"]) / float(len(layer_slices))
+                        })
+
+            layers.append({
+                "idx": idx,
+                "start_t": t_min,
+                "end_t": t_max,
+                "height_ratio": h_ratio,
+                "span_w": avg_span_w,
+                "solid_w": avg_solid_w,
+                "void_ratio": avg_void,
+                "relative_width": avg_span_w / float(bw),
+                "relative_offset_x": (avg_cx - (min_x + bw / 2.0)) / float(bw),
+                "mean_rgb": (int(r_m), int(g_m), int(b_m)),
+                "lum": lum_m,
+                "slice_count": len(layer_slices),
+                "lateral_components": lateral_clusters
+            })
+
+        self.structural_layers = layers
+        self.log(f"Strates physiques détectées : {len(layers)}")
+        return layers
+
+    def detect_and_classify_features(self):
+        """
+        Recherche les éléments circulaires et discrimine physiquement les cavités/ouvertures
+        des véritables saillies en relief via analyse multi-secteurs et gradient lumineux.
+        """
+        min_x, min_y, max_x, max_y = self.bbox
+        bw = max(1, max_x - min_x)
+        bh = max(1, max_y - min_y)
+        pix = self.image.load()
+
+        cx_obj = min_x + bw / 2.0
+        cy_obj = min_y + bh / 2.0
+
+        features = []
+        for r_cand in [bw * 0.12, bw * 0.18, bw * 0.25]:
+            # 1. Vérification de cohérence circulaire sur 8 secteurs angulaires
+            sector_diffs = []
+            num_sectors = 8
+            for sec in range(num_sectors):
+                th = (2.0 * math.pi / num_sectors) * sec
+                px_in = int(cx_obj + (r_cand - 6) * math.cos(th))
+                py_in = int(cy_obj + (r_cand - 6) * math.sin(th))
+                px_out = int(cx_obj + (r_cand + 6) * math.cos(th))
+                py_out = int(cy_obj + (r_cand + 6) * math.sin(th))
+
+                if (0 <= px_in < self.image.width and 0 <= py_in < self.image.height and
+                        0 <= px_out < self.image.width and 0 <= py_out < self.image.height):
+                    cin = pix[px_in, py_in]
+                    cout = pix[px_out, py_out]
+                    diff = math.sqrt((cin[0] - cout[0]) ** 2 + (cin[1] - cout[1]) ** 2 + (cin[2] - cout[2]) ** 2)
+                    sector_diffs.append(diff)
+                else:
+                    sector_diffs.append(0.0)
+
+            active_sectors = [d for d in sector_diffs if d > 20.0]
+            # Si le contour circulaire n'est pas présent sur au moins 6 secteurs sur 8, ce n'est pas un disque autonome
+            if len(active_sectors) < 6:
+                continue
+
+            # 2. Mesure de luminance intérieure
+            in_lums = []
+            for dy in range(int(-r_cand * 0.6), int(r_cand * 0.6) + 1):
+                for dx in range(int(-r_cand * 0.6), int(r_cand * 0.6) + 1):
+                    if dx * dx + dy * dy <= (r_cand * 0.6) ** 2:
+                        px, py = int(cx_obj + dx), int(cy_obj + dy)
+                        if 0 <= px < self.image.width and 0 <= py < self.image.height and self.mask[py][px]:
+                            c = pix[px, py]
+                            in_lums.append(0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2])
+
+            # 3. Mesure du pourtour et du gradient haut/bas (recherche de reflet spéculaire haut et ombre basse)
+            top_rim_lums, bot_rim_lums = [], []
+            for s in range(24):
+                th = 2.0 * math.pi * (s / 24)
+                px = int(cx_obj + r_cand * math.cos(th))
+                py = int(cy_obj + r_cand * math.sin(th))
+                if 0 <= px < self.image.width and 0 <= py < self.image.height and self.mask[py][px]:
+                    c = pix[px, py]
+                    lum = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]
+                    if math.sin(th) < -0.3:
+                        top_rim_lums.append(lum)
+                    elif math.sin(th) > 0.3:
+                        bot_rim_lums.append(lum)
+
+            # 4. Mesure du corps porteur environnant
+            body_lums = []
+            for s in range(24):
+                th = 2.0 * math.pi * (s / 24)
+                px = int(cx_obj + 1.5 * r_cand * math.cos(th))
+                py = int(cy_obj + 1.5 * r_cand * math.sin(th))
+                if 0 <= px < self.image.width and 0 <= py < self.image.height and self.mask[py][px]:
+                    c = pix[px, py]
+                    body_lums.append(0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2])
+
+            if not in_lums or not body_lums:
+                continue
+
+            avg_in = sum(in_lums) / len(in_lums)
+            avg_body = sum(body_lums) / len(body_lums)
+            avg_top = sum(top_rim_lums) / len(top_rim_lums) if top_rim_lums else avg_body
+            avg_bot = sum(bot_rim_lums) / len(bot_rim_lums) if bot_rim_lums else avg_body
+            contrast = abs(avg_in - avg_body)
+
+            if contrast > 25.0:
+                # CAS 1 : Cavité ou ouverture sombre (l'intérieur piège la lumière)
+                if avg_in < avg_body - 20:
+                    features.append({
+                        "type": "cavity_or_aperture",
+                        "radius_rel": r_cand / float(bw),
+                        "contrast": round(contrast, 2),
+                        "inside_lum": round(avg_in, 1),
+                        "body_lum": round(avg_body, 1),
+                        "is_protrusion": False,
+                        "justification": f"Luminance interne sombre ({avg_in:.1f} vs {avg_body:.1f}) : cavité/ouverture interne, omission stricte d'un bouton saillant."
+                    })
+                    break
+
+                # CAS 2 : Véritable saillie avec surbrillance supérieure et ombre inférieure
+                elif avg_top > avg_bot + 15 and avg_in >= avg_body - 10:
+                    features.append({
+                        "type": "rotary_dial_or_bezel",
+                        "radius_rel": r_cand / float(bw),
+                        "contrast": round(contrast, 2),
+                        "is_protrusion": True,
+                        "justification": f"Contraste net avec surbrillance supérieure et ombre portée ({avg_top:.1f} vs {avg_bot:.1f}) : relief saillant confirmé."
+                    })
+                    break
+
+                # CAS 3 : Motif ambigu ou reflet interne dans un milieu transparent
+                else:
+                    features.append({
+                        "type": "ambiguous_monocular_feature",
+                        "radius_rel": r_cand / float(bw),
+                        "contrast": round(contrast, 2),
+                        "is_protrusion": False,
+                        "justification": f"Contraste mesuré ({contrast:.1f}) sans preuve physique de saillie : incertitude monoculaire documentée, omission prudente de bouton saillant."
+                    })
+                    break
+
+        self.detected_features = features
+        return features
+
+    def detect_appendages(self, real_w, real_h, current_z_base=0.0):
+        """
+        Détecte génériquement les branches, anses et appendices dépassant du tronc principal.
+        Utilise les segments satellites déconnectés par un intervalle de fond traversant.
+        """
+        min_x, min_y, max_x, max_y = self.bbox
+        bw = max(1, max_x - min_x)
+        bh = max(1, max_y - min_y)
+        pix = self.image.load()
+
+        trunk_axis = min_x + bw / 2.0
+        sat_points = []
+        for step in range(36):
+            t = step / 35.0
+            y = int(max_y - t * (bh - 1))
+            xs = [x for x in range(min_x, max_x + 1) if self.mask[y][x]]
+            if not xs:
+                continue
+
+            segs = []
+            in_s = False
+            s_start = 0
+            for x in range(min_x, max_x + 1):
+                if self.mask[y][x]:
+                    if not in_s:
+                        in_s = True
+                        s_start = x
+                else:
+                    if in_s:
+                        segs.append((s_start, x - 1))
+                        in_s = False
+            if in_s:
+                segs.append((s_start, max_x))
+
+            clean = [s for s in segs if (s[1] - s[0] + 1) >= 4]
+            if len(clean) >= 2:
+                trunk = max(clean, key=lambda s: (s[1] - s[0] + 1) / (1.0 + abs((s[0]+s[1])/2.0 - trunk_axis)*0.05))
+                for sat in clean:
+                    if sat != trunk:
+                        sat_cx = (sat[0] + sat[1]) / 2.0
+                        sat_w = sat[1] - sat[0] + 1
+                        sat_points.append({
+                            "y": y,
+                            "t": t,
+                            "cx": sat_cx,
+                            "w": sat_w,
+                            "seg": sat,
+                            "is_left": sat_cx < trunk_axis
+                        })
+
+        appendages = []
+        for side, pts in [("gauche", [p for p in sat_points if p["is_left"]]),
+                          ("droite", [p for p in sat_points if not p["is_left"]])]:
+            if len(pts) >= 6:
+                ys = [p["y"] for p in pts]
+                y_span = max(ys) - min(ys)
+                if y_span > bh * 0.18:
+                    p_top = min(pts, key=lambda p: p["y"])
+                    p_bot = max(pts, key=lambda p: p["y"])
+                    mid_pts = [p for p in pts if p["y"] > p_top["y"] + y_span*0.25 and p["y"] < p_bot["y"] - y_span*0.25]
+                    bulge = 0.0
+                    if mid_pts:
+                        avg_mid_cx = sum(p["cx"] for p in mid_pts) / len(mid_pts)
+                        chord_cx = (p_top["cx"] + p_bot["cx"]) / 2.0
+                        bulge = abs(avg_mid_cx - chord_cx)
+
+                    if bulge > 3.0:
+                        sorted_pts = sorted(pts, key=lambda p: p["t"])
+                        step_idx = len(sorted_pts) / 6.0
+                        sample_pts = [sorted_pts[int(i * step_idx)] for i in range(6)] + [sorted_pts[-1]]
+
+                        path_3d = []
+                        for sp in sample_pts:
+                            px_rel = (sp["cx"] - (min_x + bw / 2.0)) / float(bw)
+                            x_m = px_rel * real_w
+                            z_m = current_z_base + sp["t"] * real_h
+                            path_3d.append([round(x_m, 4), 0.0, round(z_m, 4)])
+
+                        mean_w = sum(p["w"] for p in pts) / len(pts)
+                        tube_rad = max(0.003, min(0.015, (mean_w / float(bw)) * real_w * 0.5))
+
+                        cols = []
+                        for sp in sample_pts:
+                            py = sp["y"]
+                            s0, s1 = sp["seg"]
+                            for sx in range(s0, s1 + 1):
+                                cols.append(pix[sx, py])
+                        if cols:
+                            ar = sum(c[0] for c in cols) / len(cols)
+                            ag = sum(c[1] for c in cols) / len(cols)
+                            ab = sum(c[2] for c in cols) / len(cols)
+                        else:
+                            ar, ag, ab = 180, 135, 90
+
+                        appendages.append({
+                            "name": f"Anse_Courbee_{side.capitalize()}",
+                            "role": "curved_appendage_handle",
+                            "primitive": "curved_sweep",
+                            "path_points": path_3d,
+                            "radius": round(tube_rad, 4),
+                            "segments": 16,
+                            "mean_rgb": (int(ar), int(ag), int(ab)),
+                            "rationale": f"Appendice en arceau courbé détecté côté {side} (span={y_span}px, déviation={bulge:.1f}px) séparé du corps par un vide traversant.",
+                            "confidence": 0.88,
+                            "assumptions": ["Trajectoire coplanaire dans le plan XZ", "Section tubulaire circulaire constante"],
+                            "uncertainties": ["Courbure hors-plan Y inaccessible sur vue monoculaire unique"]
+                        })
+
+        return appendages
+
+    def synthesize_components(self, target_metric_height=0.20):
+        """
+        Synthétise la liste déclarative des composants 3D en combinant
+        les strates verticales, la décomposition transversale, l'inférence de révolution
+        et la détection d'appendices.
+        """
+        min_x, min_y, max_x, max_y = self.bbox
+        bw = max(1, max_x - min_x)
+        bh = max(1, max_y - min_y)
+
+        self.analyze_strata()
+        features = self.detect_and_classify_features()
+
+        real_h = target_metric_height
+        real_w = real_h / float(self.aspect_ratio)
+        real_d = real_w * 0.65  # Profondeur ergonomique standard
+
+        # 1. Évaluation globale de symétrie et révolution sur le tronc principal
+        global_sym = self.base_analyzer.symmetry_score
+        raw_spans = []
+        trunk_cxs = []
+        for y in range(min_y, max_y + 1, 4):
+            xs = [x for x in range(min_x, max_x + 1) if self.mask[y][x]]
+            if xs:
+                segs = []
+                in_s = False
+                s0 = 0
+                for x in range(min(xs), max(xs) + 1):
+                    if self.mask[y][x]:
+                        if not in_s: in_s = True; s0 = x
+                    else:
+                        if in_s: segs.append((s0, x - 1)); in_s = False
+                if in_s: segs.append((s0, max(xs)))
+                clean = [s for s in segs if (s[1] - s[0] + 1) >= 4]
+                if clean:
+                    trunk = max(clean, key=lambda s: s[1] - s[0] + 1)
+                    raw_spans.append(trunk[1] - trunk[0] + 1)
+                    trunk_cxs.append((trunk[0] + trunk[1]) / 2.0)
+
+        # Axe et symétrie du tronc principal (robuste face aux appendices asymétriques)
+        if trunk_cxs:
+            mean_axis = sum(trunk_cxs) / len(trunk_cxs)
+            trunk_drift = max(abs(cx - mean_axis) for cx in trunk_cxs) / float(bw)
+            trunk_sym = max(0.0, 1.0 - trunk_drift)
+        else:
+            trunk_sym = self.base_analyzer.symmetry_score
+
+        bucket_size = max(10, int(bw * 0.05))
+        hist = collections.Counter([s // bucket_size * bucket_size for s in raw_spans]) if raw_spans else {}
+        dominant_count = hist.most_common(1)[0][1] if hist else 0
+        peak_straight_ratio = dominant_count / float(len(raw_spans)) if raw_spans else 0.0
+
+        # Un solide de révolution axisymétrique présente une symétrie de tronc élevée ET un profil organique/cylindrique.
+        # Un objet dont > 72% des tranches ont une largeur identique caractérise une extrusion prismatique à parois droites (boîte, SSD, pavé).
+        is_global_revolution = (trunk_sym > 0.85) and (peak_straight_ratio < 0.72) and (self.aspect_ratio > 0.65) and (self.aspect_ratio < 3.2)
+
+        # Vérification si l'objet présente un contour très rectangulaire (boîte prismatique)
+        fg_area = sum(sum(1 for v in row if v) for row in self.mask)
+        rect_fill_ratio = fg_area / float(bw * bh)
+        if rect_fill_ratio > 0.82:
+            is_global_revolution = False
+
+        self.log(f"Inférence globale : Symétrie tronc={trunk_sym:.2f}, Parois droites={peak_straight_ratio*100:.1f}%, Remplissage={rect_fill_ratio:.2f} -> Révolution: {is_global_revolution}")
+
+        components = []
+        materials_decl = {}
+        prev_comp_id = None
+        current_z = 0.0
+
+        for idx, layer in enumerate(self.structural_layers):
+            comp_h = max(0.005, layer["height_ratio"] * real_h)
+            layer_offset_x = layer["relative_offset_x"] * real_w
+            rel_w = layer["relative_width"]
+            comp_w = max(0.008, rel_w * real_w)
+
+            # CAS A : Strate décomposée en sous-composants latéraux
+            if layer["lateral_components"]:
+                self.log(f"Strate {idx} : Génération de {len(layer['lateral_components'])} composants latéraux distincts.")
+                for c in layer["lateral_components"]:
+                    sub_idx = c["cluster_idx"]
+                    sub_offset_x = c["rel_cx"] * real_w
+                    sub_w = max(0.010, c["rel_width"] * real_w)
+                    sub_name = f"Element_Lateral_{idx+1}_{sub_idx+1}"
+
+                    # Choix de la primitive selon l'élongation
+                    aspect_col = comp_h / sub_w
+                    if aspect_col > 1.2:
+                        primitive = "cylinder"
+                        radius = sub_w / 2.0
+                        comp_def = {
+                            "id": f"comp_{idx+1}_lat_{sub_idx+1}",
+                            "name": sub_name,
+                            "role": "lateral_columnar_element",
+                            "primitive": "cylinder",
+                            "radius_top": round(radius, 4),
+                            "radius_bottom": round(radius, 4),
+                            "height": round(comp_h, 4),
+                            "segments": 24,
+                            "bevel_width": 0.001,
+                            "location": [round(sub_offset_x, 4), 0.0, round(current_z, 4)],
+                            "confidence": 0.88,
+                            "visual_justification": f"Colonne/rouleau latéral identifié par analyse spatiale transversale (rel_x={c['rel_cx']:+.3f}).",
+                            "relationship": {"type": "lateral_array", "target": prev_comp_id}
+                        }
+                    else:
+                        primitive = "rounded_box"
+                        comp_def = {
+                            "id": f"comp_{idx+1}_lat_{sub_idx+1}",
+                            "name": sub_name,
+                            "role": "lateral_sub_module",
+                            "primitive": "rounded_box",
+                            "dimensions": [round(sub_w, 4), round(real_d * 0.70, 4), round(comp_h, 4)],
+                            "corner_radius": 0.010,
+                            "taper_ratio": 1.0,
+                            "bevel_width": 0.001,
+                            "location": [round(sub_offset_x, 4), 0.0, round(current_z, 4)],
+                            "confidence": 0.85,
+                            "visual_justification": f"Sous-module latéral distinct identifié le long de X (rel_x={c['rel_cx']:+.3f}).",
+                            "relationship": {"type": "lateral_array", "target": prev_comp_id}
+                        }
+
+                    # Matériau spécifique pour ce sous-composant
+                    preset, custom = self.base_analyzer.map_color_to_pbr_preset(c["mean_rgb"])
+                    mat_key = f"M_{sub_name}"
+                    if preset:
+                        materials_decl[mat_key] = {"preset": preset}
+                    else:
+                        materials_decl[mat_key] = {"custom": custom}
+                    comp_def["material"] = mat_key
+                    components.append(comp_def)
+
+                prev_comp_id = components[-1]["id"]
+                current_z += comp_h
+
+            # CAS B : Strate monocomposant horizontale continue
+            else:
+                preset, custom = self.base_analyzer.map_color_to_pbr_preset(layer["mean_rgb"])
+
+                # B.1 Détection de tige élancée continue
+                if rel_w < 0.15 and comp_h > 0.015:
+                    comp_name = f"Tige_Slender_Strate_{idx+1}"
+                    radius = comp_w / 2.0
+                    mat_key = f"M_{comp_name}"
+                    materials_decl[mat_key] = {"preset": preset} if preset else {"custom": custom}
+
+                    comp_entry = {
+                        "id": f"comp_{idx+1}_stem",
+                        "name": comp_name,
+                        "role": "structural_slender_rod",
+                        "primitive": "cylinder",
+                        "material": mat_key,
+                        "radius_top": round(radius, 4),
+                        "radius_bottom": round(radius, 4),
+                        "height": round(comp_h, 4),
+                        "segments": 24,
+                        "bevel_width": 0.0005,
+                        "location": [round(layer_offset_x, 4), 0.0, round(current_z, 4)],
+                        "relationship": {"type": "stacked_on" if prev_comp_id else "base_anchor", "target": prev_comp_id},
+                        "geometric_inference": {
+                            "primitive_chosen": "cylinder",
+                            "selection_rationale": "Section très étroite continue assimilée à une tige/colonne cylindrique porteuse.",
+                            "visual_cues": [f"Largeur relative faible (rel_w={rel_w:.3f} < 0.15)", "Symétrie bilatérale stricte"],
+                            "confidence_level": 0.92,
+                            "confidence_disclaimer": "Quantifie la clarté des indices 2D et non la conformité de faces cachées.",
+                            "geometric_assumptions": ["Axe vertical cylindrique 360°", "Section circulaire uniforme"],
+                            "indeterminate_elements": ["Section interne creuse ou pleine"]
+                        }
+                    }
+
+                # B.2 Détection de solide de révolution
+                elif is_global_revolution:
+                    radius = comp_w / 2.0
+
+                    # Vérifier si c'est une bague/collerette fine intercalaire
+                    if comp_h < 0.016 and 0 < idx < len(self.structural_layers) - 1 and preset in ["natural_wood", "anodized_aluminum", "dark_polymer"]:
+                        comp_name = f"Bague_Collier_Cerclage_{idx+1}"
+                        r_ext = radius * 1.04
+                        r_int = radius * 0.90
+                        mat_key = f"M_{comp_name}"
+                        materials_decl[mat_key] = {"preset": preset} if preset else {"custom": custom}
+
+                        comp_entry = {
+                            "id": f"comp_{idx+1}_ring",
+                            "name": comp_name,
+                            "role": "accent_collar_ring",
+                            "primitive": "ring_collar",
+                            "material": mat_key,
+                            "radius_ext": round(r_ext, 4),
+                            "radius_int": round(r_int, 4),
+                            "height": round(comp_h, 4),
+                            "segments": 32,
+                            "bevel_width": 0.0004,
+                            "location": [round(layer_offset_x, 4), 0.0, round(current_z, 4)],
+                            "relationship": {"type": "stacked_on" if prev_comp_id else "base_anchor", "target": prev_comp_id},
+                            "geometric_inference": {
+                                "primitive_chosen": "ring_collar",
+                                "selection_rationale": "Transition de col/ceinture à fort contraste matière sur un solide de révolution.",
+                                "visual_cues": [f"Hauteur réduite ({comp_h:.3f}m)", f"Matériau contrastant ({preset})", "Symétrie axiale"],
+                                "confidence_level": 0.89,
+                                "confidence_disclaimer": "Quantifie la clarté des indices 2D et non la conformité de faces cachées.",
+                                "geometric_assumptions": ["Cerclage annulaire 360°", "Ajusté au col"],
+                                "indeterminate_elements": ["Épaisseur radiale intérieure non visible"]
+                            }
+                        }
+
+                    else:
+                        comp_name = f"Corps_Revolved_Strate_{idx+1}"
+                        mat_key = f"M_{comp_name}"
+                        materials_decl[mat_key] = {"preset": preset} if preset else {"custom": custom}
+
+                        # Taper conique basé sur l'évolution de la strate
+                        r_top = radius
+                        r_bot = radius
+                        if idx == len(self.structural_layers) - 1:
+                            r_top = radius * 0.92
+                        elif idx == 0:
+                            r_bot = radius * 0.96
+
+                        comp_entry = {
+                            "id": f"comp_{idx+1}_revolved",
+                            "name": comp_name,
+                            "role": "revolved_body_segment",
+                            "primitive": "cylinder",
+                            "material": mat_key,
+                            "radius_top": round(r_top, 4),
+                            "radius_bottom": round(r_bot, 4),
+                            "height": round(comp_h, 4),
+                            "segments": 32,
+                            "bevel_width": 0.001,
+                            "location": [round(layer_offset_x, 4), 0.0, round(current_z, 4)],
+                            "relationship": {"type": "stacked_on" if prev_comp_id else "base_anchor", "target": prev_comp_id},
+                            "geometric_inference": {
+                                "primitive_chosen": "cylinder",
+                                "selection_rationale": "Strate d'un solide de révolution axisymétrique (symétrie bilatérale > 88% sans facettes planes).",
+                                "visual_cues": [f"Symétrie globale={global_sym:.2f}", f"Rayon moyen={radius:.4f}m", "Continuité de courbure"],
+                                "confidence_level": 0.91,
+                                "confidence_disclaimer": "Quantifie la clarté des indices 2D et non la conformité de faces cachées.",
+                                "geometric_assumptions": ["Symétrie de révolution 360° autour de Z", "Section circulaire"],
+                                "indeterminate_elements": ["Forme de l'hémisphère arrière non visible"]
+                            }
+                        }
+
+                # B.3 Forme prismatique standard (Boîte arrondie)
+                else:
+                    comp_d = max(0.010, rel_w * real_d)
+                    if idx == 0:
+                        role = "structural_base"
+                        comp_name = "Socle_Inferieur"
+                        cr = 0.015
+                        taper = 0.98
+                        justif = "Strate d'assise inférieure délimitée par la base de l'objet."
+                    elif idx == len(self.structural_layers) - 1:
+                        role = "top_cap_or_insert"
+                        comp_name = "Chapeau_Superieur"
+                        cr = 0.012
+                        taper = 0.92
+                        justif = "Strate sommitale fermant le volume supérieur."
+                    elif layer["lum"] < 35.0:
+                        role = "inter_module_plate"
+                        comp_name = f"Platine_Separation_{idx+1}"
+                        cr = 0.008
+                        taper = 1.0
+                        justif = "Bande intercalaire sombre délimitant les sous-systèmes mécaniques."
+                    else:
+                        role = "main_body_core"
+                        comp_name = f"Corps_Principal_Strate_{idx+1}"
+                        cr = 0.020
+                        taper = 0.96
+                        justif = "Strate continue constituant le bâti porteur prismatique."
+
+                    mat_key = f"M_{comp_name}"
+                    materials_decl[mat_key] = {"preset": preset} if preset else {"custom": custom}
+
+                    comp_entry = {
+                        "id": f"comp_{idx+1}_{comp_name.lower()}",
+                        "name": comp_name,
+                        "role": role,
+                        "primitive": "rounded_box",
+                        "material": mat_key,
+                        "dimensions": [round(comp_w, 4), round(comp_d, 4), round(comp_h, 4)],
+                        "location": [round(layer_offset_x, 4), 0.0, round(current_z, 4)],
+                        "corner_radius": cr,
+                        "taper_ratio": taper,
+                        "bevel_width": 0.002,
+                        "relationship": {"type": "stacked_on" if prev_comp_id else "base_anchor", "target": prev_comp_id},
+                        "geometric_inference": {
+                            "primitive_chosen": "rounded_box",
+                            "selection_rationale": "Forme prismatique ou boîte industrielle ne présentant pas d'indices de révolution suffisants.",
+                            "visual_cues": [f"Largeur={comp_w:.3f}m", f"Profondeur estimée={comp_d:.3f}m", f"Remplissage={rect_fill_ratio:.2f}"],
+                            "confidence_level": 0.85,
+                            "confidence_disclaimer": "Quantifie la clarté des indices 2D et non la conformité de faces cachées.",
+                            "geometric_assumptions": ["Face avant observée, face arrière supposée plane/symétrique"],
+                            "indeterminate_elements": ["Profondeur Y inférée par heuristique proportionnelle"]
+                        }
+                    }
+
+                components.append(comp_entry)
+                current_z += comp_h
+                prev_comp_id = comp_entry["id"]
+
+        # 2. Détection et ajout des appendices dépassants (anses, branches)
+        detected_appendages = self.detect_appendages(real_w, real_h, current_z_base=0.0)
+        for app_idx, app in enumerate(detected_appendages):
+            app_mat_key = f"M_{app['name']}"
+            preset, custom = self.base_analyzer.map_color_to_pbr_preset(app["mean_rgb"])
+            materials_decl[app_mat_key] = {"preset": preset} if preset else {"custom": custom}
+
+            components.append({
+                "id": f"comp_appendage_{app_idx+1}",
+                "name": app["name"],
+                "role": app["role"],
+                "primitive": app["primitive"],
+                "material": app_mat_key,
+                "path_points": app["path_points"],
+                "radius": app["radius"],
+                "segments": app["segments"],
+                "location": [0.0, 0.0, 0.0],
+                "relationship": {"type": "attached_to", "target": components[0]["id"]},
+                "geometric_inference": {
+                    "primitive_chosen": "curved_sweep",
+                    "selection_rationale": app["rationale"],
+                    "visual_cues": ["Vide traversant séparant la branche du tronc", "Continuité de trajectoire courbée"],
+                    "confidence_level": app["confidence"],
+                    "confidence_disclaimer": "Quantifie la clarté des indices 2D et non la conformité de faces cachées.",
+                    "geometric_assumptions": app["assumptions"],
+                    "indeterminate_elements": app["uncertainties"]
+                }
+            })
+
+        # 3. Traitement des caractéristiques locales (discrimination prudente)
+        confirmed_protrusions = [f for f in features if f.get("is_protrusion")]
+        for f_idx, feat in enumerate(confirmed_protrusions):
+            dial_r = feat["radius_rel"] * real_w
+            mat_dial = "M_Dial_Accent"
+            materials_decl[mat_dial] = {"preset": "dark_polymer"}
+            components.append({
+                "id": f"comp_detail_{f_idx+1}_cadran",
+                "name": "Cadran_Circulaire_Accent",
+                "role": "rotary_dial_bezel",
+                "primitive": "ring_collar",
+                "material": mat_dial,
+                "radius_ext": round(dial_r, 4),
+                "radius_int": round(dial_r * 0.80, 4),
+                "height": 0.004,
+                "bevel_width": 0.0004,
+                "segments": 32,
+                "location": [0.0, -round(real_d * 0.50, 4), round(real_h * 0.50, 4)],
+                "rotation": [1.5708, 0.0, 0.0],
+                "relationship": {"type": "embedded_in_face", "target": components[0]["id"]},
+                "geometric_inference": {
+                    "primitive_chosen": "ring_collar",
+                    "selection_rationale": feat["justification"],
+                    "visual_cues": [f"Contraste={feat.get('contrast', 0):.1f}", "Gradient haut/bas validé"],
+                    "confidence_level": 0.78,
+                    "confidence_disclaimer": "Quantifie la clarté des indices 2D et non la conformité de faces cachées.",
+                    "geometric_assumptions": ["Bouton ou cadran circulaire en saillie"],
+                    "indeterminate_elements": ["Course mécanique ou profondeur d'encastrement"]
+                }
+            })
+
+        # Dimensions englobantes maximales
+        max_comp_w = 0.010
+        max_comp_d = 0.010
+        for c in components:
+            if "dimensions" in c:
+                max_comp_w = max(max_comp_w, c["dimensions"][0])
+                max_comp_d = max(max_comp_d, c["dimensions"][1])
+            elif "radius_top" in c:
+                r = max(c.get("radius_top", 0), c.get("radius_bottom", 0))
+                max_comp_w = max(max_comp_w, r * 2.0)
+                max_comp_d = max(max_comp_d, r * 2.0)
+            elif "radius_ext" in c:
+                r = c.get("radius_ext", 0)
+                max_comp_w = max(max_comp_w, r * 2.0)
+                max_comp_d = max(max_comp_d, r * 2.0)
+            elif "path_points" in c:
+                xs = [abs(p[0]) for p in c["path_points"]]
+                if xs:
+                    max_comp_w = max(max_comp_w, max(xs) * 2.0)
+
+        total_scale = [round(max_comp_w, 4), round(max_comp_d, 4), round(current_z, 4)]
+
+        base_stem = os.path.splitext(os.path.basename(self.image_path))[0]
+        if "." in base_stem:
+            base_stem = os.path.splitext(base_stem)[0]
+
+        spec = {
+            "object_id": f"{base_stem}_spatial_decomposed",
+            "object_name": f"{base_stem.replace('_', ' ').title()} Enhanced Spatial Model",
+            "category": "multi_component_spatial_decomposed",
+            "scale_metric": {
+                "unit": "meters",
+                "dimensions": total_scale
+            },
+            "coordinate_system": {
+                "up_axis": "+Z",
+                "forward_axis": "-Y",
+                "lateral_axis": "+X",
+                "origin": "bottom_center"
+            },
+            "materials": materials_decl,
+            "components": components,
+            "analysis_metadata": {
+                "source_image": self.image_path,
+                "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+                "detected_strata_count": len(self.structural_layers),
+                "total_components_generated": len(components),
+                "feature_analysis": features,
+                "confidence_score": 0.91,
+                "monocular_ambiguity": True,
+                "spatial_decomposition_enabled": True,
+                "geometric_inference_enabled": True,
+                "revolution_profile_detected": is_global_revolution,
+                "appendages_detected_count": len(detected_appendages),
+                "known_facts": [
+                    f"Dimensions boîte englobante 2D : {bw}x{bh} px",
+                    f"Ratio d'aspect mesuré : {self.aspect_ratio:.3f}",
+                    f"Symétrie bilatérale mesurée : {self.base_analyzer.symmetry_score:.3f}",
+                    f"Nombre de strates physiques distinctes : {len(self.structural_layers)}"
+                ],
+                "hypotheses": [
+                    "Décomposition spatiale bidimensionnelle (strates verticales + clusters latéraux transversaux).",
+                    "Inférence automatique de profil de révolution (Cylinder/RingCollar) basée sur la symétrie axiale.",
+                    "Détection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+                    "Discrimination physique cavité vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+                ]
+            }
+        }
+        return spec
+
+
+def main():
+    if len(sys.argv) < 3:
+        print("Usage: python component_analyzer.py --image <image_path> --output <spec_path>")
+        sys.exit(1)
+
+    image_path = None
+    output_path = None
+    for i in range(len(sys.argv)):
+        if sys.argv[i] == "--image" and i + 1 < len(sys.argv):
+            image_path = sys.argv[i + 1]
+        elif sys.argv[i] == "--output" and i + 1 < len(sys.argv):
+            output_path = sys.argv[i + 1]
+
+    if not image_path or not output_path:
+        print("Erreur : --image et --output sont requis.")
+        sys.exit(1)
+
+    import json
+    decomposer = VisualComponentDecomposer(image_path)
+    spec = decomposer.synthesize_components()
+
+    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(spec, f, indent=2)
+
+    print(f"Spécification spatiale générée avec succès : {output_path}")
+    print(f"  - Composants détectés : {len(spec['components'])}")
+    print(f"  - Matériaux physiques : {len(spec['materials'])}")
+    print(f"  - Strates identifiées : {spec['analysis_metadata']['detected_strata_count']}")
+
+
+if __name__ == "__main__":
+    main()

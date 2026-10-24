@@ -1,11 +1,13 @@
 # run_fashion_3d.ps1
 # Pipeline Automatisé Image-to-3D pour Boutique Mode
 # Usage:
-#   .\scripts\3d_pipeline\run_fashion_3d.ps1 -ImagePath "inputs/product_images/sac.png" -Id "sac_cuir"
+#   npm run 3d:model
+#   npm run 3d:model -- -ImagePath "inputs/product_images/mon_article.jpg" -Id "mon_produit"
+#   .\scripts\3d_pipeline\run_fashion_3d.ps1 -ImagePath "inputs/product_images/sac.jpg" -Id "sac_cuir"
 
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$ImagePath,
+    [Parameter(Mandatory=$false)]
+    [string]$ImagePath = "",
 
     [Parameter(Mandatory=$false)]
     [string]$Id = ""
@@ -25,6 +27,18 @@ if (-not (Test-Path $BlenderExe)) {
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectRoot = Resolve-Path (Join-Path $ScriptDir "..\..")
 
+# Image par défaut si non spécifiée
+if (-not $ImagePath) {
+    $DefaultDemo = Join-Path $ProjectRoot "inputs\product_images\sac_demo.jpg"
+    if (Test-Path $DefaultDemo) {
+        $ImagePath = $DefaultDemo
+        Write-Host "Aucune image spécifiée : utilisation de l'image de démonstration ($DefaultDemo)" -ForegroundColor Yellow
+    } else {
+        Write-Error "Veuillez fournir une image via -ImagePath 'inputs/product_images/mon_image.jpg'"
+        exit 1
+    }
+}
+
 if (-not (Test-Path $ImagePath)) {
     # Tenter chemin relatif au projet
     $ResolvedImg = Join-Path $ProjectRoot $ImagePath
@@ -40,7 +54,7 @@ if (-not $Id) {
 }
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "  PIPELINE IMAGE-TO-3D FASHION (BOUTIQUE-MODE)" -ForegroundColor Cyan
+Write-Host "  PIPELINE IMAGE-TO-3D FASHION (BOUTIQUE-MODE v1.2)" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host "Image source : $ImagePath"
 Write-Host "Identifiant  : $Id"
@@ -55,8 +69,8 @@ New-Item -ItemType Directory -Force -Path $PublicModelsDir | Out-Null
 
 $SpecPath = Join-Path $SpecDir "$Id`_spec.json"
 
-# Étape 1 : Analyse d'image & Décomposition multi-composants
-Write-Host "`n[1/3] Analyse visuelle et décomposition multi-composants..." -ForegroundColor Yellow
+# Étape 1 : Analyse d'image & Décomposition spatiale multi-composants
+Write-Host "`n[1/3] Analyse visuelle spatiale & inférence géométrique (Mission 32/33 Engine)..." -ForegroundColor Yellow
 $AnalyzerScript = Join-Path $ScriptDir "component_analyzer.py"
 
 & $BlenderPy $AnalyzerScript --image $ImagePath --output $SpecPath
@@ -66,27 +80,50 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 # Étape 2 : Modélisation procédurale Blender, Shaders PBR & Export GLB
-Write-Host "`n[2/3] Modélisation 3D Blender, Shaders PBR & Rendu Studio..." -ForegroundColor Yellow
+Write-Host "`n[2/3] Modélisation 3D Blender, Shaders PBR Luxe & Rendu Studio..." -ForegroundColor Yellow
 $OrchestratorScript = Join-Path $ScriptDir "orchestrator.py"
 
-& $BlenderExe --factory-startup -b -P $OrchestratorScript -- --spec $SpecPath --output $OutputDir
+& $BlenderExe --factory-startup -b -P $OrchestratorScript -- --spec $SpecPath --output-dir $OutputDir
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Échec de l'orchestrateur Blender."
     exit $LASTEXITCODE
 }
 
-# Étape 3 : Déploiement du modèle GLB dans public/models/ pour Next.js
-Write-Host "`n[3/3] Déploiement du modèle GLB pour la boutique web..." -ForegroundColor Yellow
-$GeneratedGlb = Get-ChildItem -Path $OutputDir -Filter "*.glb" | Select-Object -First 1
+# Étape 3 : Déploiement des actifs GLB & Poster pour Product3DViewer (Next.js)
+Write-Host "`n[3/3] Déploiement du modèle GLB et du poster dans public/models/..." -ForegroundColor Yellow
 
-if ($GeneratedGlb) {
+$SpecJson = Get-Content $SpecPath -Raw | ConvertFrom-Json
+$TargetGlb = Join-Path $OutputDir "$($SpecJson.object_id).glb"
+if (-not (Test-Path $TargetGlb)) {
+    $TargetGlb = (Get-ChildItem -Path $OutputDir -Filter "*.glb" | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
+}
+
+if ($TargetGlb -and (Test-Path $TargetGlb)) {
     $DestGlb = Join-Path $PublicModelsDir "$Id.glb"
-    Copy-Item -Path $GeneratedGlb.FullName -Destination $DestGlb -Force
-    Write-Host "  -> Modèle GLB déployé : $DestGlb ($($GeneratedGlb.Length) octets)" -ForegroundColor Green
-    Write-Host "  -> URL dans le site web : /models/$Id.glb" -ForegroundColor Cyan
+    Copy-Item -Path $TargetGlb -Destination $DestGlb -Force
+    $GlbSize = (Get-Item $DestGlb).Length
+    Write-Host "  -> Modèle GLB déployé : $DestGlb ($GlbSize octets)" -ForegroundColor Green
+    Write-Host "  -> URL du modèle 3D : /models/$Id.glb" -ForegroundColor Cyan
 } else {
     Write-Warning "Aucun fichier GLB trouvé dans $OutputDir"
 }
 
-Write-Host "`nSUCCÈS : Article modélisé avec succès !" -ForegroundColor Green
-Write-Host "Rendus studio disponibles dans : $OutputDir\previews"
+# Déploiement du poster studio (vue hero)
+$PreviewDir = Join-Path $OutputDir "previews"
+$TargetHero = Join-Path $PreviewDir "$($SpecJson.object_id)_render_hero.png"
+if (-not (Test-Path $TargetHero)) {
+    $TargetHero = (Get-ChildItem -Path $PreviewDir -Filter "*hero.png" | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
+}
+
+if ($TargetHero -and (Test-Path $TargetHero)) {
+    $DestPoster = Join-Path $PublicModelsDir "$Id-poster.png"
+    Copy-Item -Path $TargetHero -Destination $DestPoster -Force
+    Write-Host "  -> Poster déployé      : $DestPoster" -ForegroundColor Green
+    Write-Host "  -> URL du poster       : /models/$Id-poster.png" -ForegroundColor Cyan
+}
+
+Write-Host "`n==========================================================" -ForegroundColor Green
+Write-Host "  SUCCÈS : Article modélisé et prêt pour la boutique !" -ForegroundColor Green
+Write-Host "==========================================================" -ForegroundColor Green
+Write-Host "Pour l'afficher dans une page Next.js :" -ForegroundColor White
+Write-Host "  <Product3DViewer modelSrc='/models/$Id.glb' posterSrc='/models/$Id-poster.png' />`n" -ForegroundColor Gray

@@ -1,0 +1,288 @@
+{
+  "object_id": "accessoire_vase_spatial_decomposed",
+  "object_name": "Accessoire Vase Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1112,
+      0.1112,
+      0.2017
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Corps_Revolved_Strate_1": {
+      "preset": "natural_wood"
+    },
+    "M_Corps_Revolved_Strate_2": {
+      "custom": {
+        "base_color": [
+          0.5019607843137255,
+          0.3803921568627451,
+          0.30196078431372547,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Corps_Revolved_Strate_3": {
+      "custom": {
+        "base_color": [
+          0.48627450980392156,
+          0.3764705882352941,
+          0.3058823529411765,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Corps_Revolved_Strate_4": {
+      "preset": "natural_wood"
+    },
+    "M_Corps_Revolved_Strate_5": {
+      "custom": {
+        "base_color": [
+          0.49411764705882355,
+          0.3843137254901961,
+          0.3176470588235294,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_revolved",
+      "name": "Corps_Revolved_Strate_1",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_1",
+      "radius_top": 0.004,
+      "radius_bottom": 0.0038,
+      "height": 0.005,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0040m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_2_revolved",
+      "name": "Corps_Revolved_Strate_2",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_2",
+      "radius_top": 0.032,
+      "radius_bottom": 0.032,
+      "height": 0.0167,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.005
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_revolved"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0320m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_3_revolved",
+      "name": "Corps_Revolved_Strate_3",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_3",
+      "radius_top": 0.0556,
+      "radius_bottom": 0.0556,
+      "height": 0.1542,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.0217
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_revolved"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0556m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_4_revolved",
+      "name": "Corps_Revolved_Strate_4",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_4",
+      "radius_top": 0.0449,
+      "radius_bottom": 0.0449,
+      "height": 0.0208,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0,
+        0.0,
+        0.1758
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_3_revolved"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0449m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_5_revolved",
+      "name": "Corps_Revolved_Strate_5",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_5",
+      "radius_top": 0.011,
+      "radius_bottom": 0.0119,
+      "height": 0.005,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.1967
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_4_revolved"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0119m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\accessoire_vase.png",
+    "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+    "detected_strata_count": 5,
+    "total_components_generated": 5,
+    "feature_analysis": [],
+    "confidence_score": 0.91,
+    "monocular_ambiguity": true,
+    "spatial_decomposition_enabled": true,
+    "geometric_inference_enabled": true,
+    "revolution_profile_detected": true,
+    "appendages_detected_count": 0,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 389x519 px",
+      "Ratio d'aspect mesur\u00e9 : 1.334",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.993",
+      "Nombre de strates physiques distinctes : 5"
+    ],
+    "hypotheses": [
+      "D\u00e9composition spatiale bidimensionnelle (strates verticales + clusters lat\u00e9raux transversaux).",
+      "Inf\u00e9rence automatique de profil de r\u00e9volution (Cylinder/RingCollar) bas\u00e9e sur la sym\u00e9trie axiale.",
+      "D\u00e9tection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+      "Discrimination physique cavit\u00e9 vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+    ]
+  }
+}

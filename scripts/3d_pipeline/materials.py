@@ -1,11 +1,13 @@
 """
-materials.py — Bibliothèque Universelle de Matériaux PBR pour Blender 5.x
+materials.py — Bibliothèque Universelle & Luxe de Matériaux PBR pour Blender 5.x
 Fournit des shaders Principled BSDF étalonnés selon la physique des matériaux.
+Compatible mode, maroquinerie, horlogerie, design produit et architecture.
 """
 
 import bpy
 
 MATERIAL_PRESETS = {
+    # 1. Laques et Céramiques
     "white_satin_lacquer": {
         "base_color": (0.918, 0.922, 0.926, 1.0),
         "roughness": 0.26,
@@ -33,6 +35,8 @@ MATERIAL_PRESETS = {
         "coat_roughness": 0.10,
         "coat_ior": 1.52
     },
+
+    # 2. Métaux Industriels et Horlogers
     "polished_chrome": {
         "base_color": (0.970, 0.970, 0.970, 1.0),
         "roughness": 0.065,
@@ -55,6 +59,8 @@ MATERIAL_PRESETS = {
         "anisotropic": 0.30,
         "coat_weight": 0.0
     },
+
+    # 3. Polymères et Caoutchoucs
     "dark_polymer": {
         "base_color": (0.065, 0.065, 0.065, 1.0),
         "roughness": 0.36,
@@ -76,6 +82,8 @@ MATERIAL_PRESETS = {
         "specular_ior_level": 0.35,
         "coat_weight": 0.0
     },
+
+    # 4. Matières Naturelles et Textiles
     "natural_wood": {
         "base_color": (0.720, 0.540, 0.380, 1.0),
         "roughness": 0.52,
@@ -92,21 +100,23 @@ MATERIAL_PRESETS = {
         "sheen_roughness": 0.50,
         "coat_weight": 0.0
     },
-    "emissive_led_ring": {
-        "base_color": (1.0, 1.0, 1.0, 1.0),
-        "emission_color": (0.35, 0.75, 1.0, 1.0),
-        "emission_strength": 4.0,
-        "roughness": 0.20,
-        "metallic": 0.0
-    },
-    "dark_cavity": {
-        "base_color": (0.015, 0.015, 0.015, 1.0),
-        "roughness": 0.95,
+    "satin_silk_fabric": {
+        "base_color": (0.850, 0.830, 0.800, 1.0),
+        "roughness": 0.30,
         "metallic": 0.0,
-        "specular_ior_level": 0.10,
-        "coat_weight": 0.0
+        "specular_ior_level": 0.45,
+        "sheen_weight": 0.75,
+        "sheen_roughness": 0.30
     },
-    # Presets spécialisés pour la Mode et l'E-Commerce Luxe
+    "suede_nubuck": {
+        "base_color": (0.550, 0.450, 0.360, 1.0),
+        "roughness": 0.85,
+        "metallic": 0.0,
+        "specular_ior_level": 0.25,
+        "sheen_weight": 0.60
+    },
+
+    # 5. Maroquinerie & Cuirs Luxe
     "luxury_leather_black": {
         "base_color": (0.040, 0.040, 0.045, 1.0),
         "roughness": 0.38,
@@ -131,6 +141,8 @@ MATERIAL_PRESETS = {
         "coat_weight": 0.15,
         "coat_roughness": 0.20
     },
+
+    # 6. Bijouterie & Bouclerie Luxe
     "brushed_brass_gold": {
         "base_color": (0.920, 0.780, 0.380, 1.0),
         "roughness": 0.24,
@@ -144,29 +156,23 @@ MATERIAL_PRESETS = {
         "metallic": 1.00,
         "specular_ior_level": 0.65
     },
-    "satin_silk_fabric": {
-        "base_color": (0.850, 0.830, 0.800, 1.0),
-        "roughness": 0.30,
-        "metallic": 0.0,
-        "specular_ior_level": 0.45,
-        "sheen_weight": 0.75,
-        "sheen_roughness": 0.30
+
+    # 7. Éclairage & Éléments Techniques
+    "emissive_led_ring": {
+        "base_color": (1.0, 1.0, 1.0, 1.0),
+        "emission_color": (0.35, 0.75, 1.0, 1.0),
+        "emission_strength": 4.0,
+        "roughness": 0.20,
+        "metallic": 0.0
     },
-    "suede_nubuck": {
-        "base_color": (0.550, 0.450, 0.360, 1.0),
-        "roughness": 0.85,
+    "dark_cavity": {
+        "base_color": (0.015, 0.015, 0.015, 1.0),
+        "roughness": 0.95,
         "metallic": 0.0,
-        "specular_ior_level": 0.25,
-        "sheen_weight": 0.60
+        "specular_ior_level": 0.10,
+        "coat_weight": 0.0
     },
-    "denim_cotton": {
-        "base_color": (0.150, 0.220, 0.350, 1.0),
-        "roughness": 0.82,
-        "metallic": 0.0,
-        "specular_ior_level": 0.30,
-        "sheen_weight": 0.40
-    },
-    "crystal_perfume_glass": {
+    "clear_glass": {
         "base_color": (0.980, 0.980, 0.990, 1.0),
         "roughness": 0.02,
         "metallic": 0.0,
@@ -180,6 +186,7 @@ MATERIAL_PRESETS = {
 def get_or_create_material(name, preset_key=None, custom_params=None):
     """
     Récupère ou crée un matériau Principled BSDF à partir d'un preset ou de paramètres personnalisés.
+    Garantit la compatibilité ascendante Blender 5.x.
     """
     mat = bpy.data.materials.get(name)
     if not mat:
@@ -225,6 +232,12 @@ def get_or_create_material(name, preset_key=None, custom_params=None):
         bsdf.inputs["Coat IOR"].default_value = params.get("coat_ior", 1.50)
     if "sheen_weight" in params and "Sheen Weight" in bsdf.inputs:
         bsdf.inputs["Sheen Weight"].default_value = params["sheen_weight"]
+    if "sheen_roughness" in params and "Sheen Roughness" in bsdf.inputs:
+        bsdf.inputs["Sheen Roughness"].default_value = params.get("sheen_roughness", 0.30)
+    if "transmission_weight" in params and "Transmission Weight" in bsdf.inputs:
+        bsdf.inputs["Transmission Weight"].default_value = params["transmission_weight"]
+    if "ior" in params and "IOR" in bsdf.inputs:
+        bsdf.inputs["IOR"].default_value = params["ior"]
     if "emission_color" in params and "Emission Color" in bsdf.inputs:
         bsdf.inputs["Emission Color"].default_value = params["emission_color"]
     if "emission_strength" in params and "Emission Strength" in bsdf.inputs:

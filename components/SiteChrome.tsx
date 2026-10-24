@@ -41,7 +41,6 @@ export default function SiteChrome({ children }: { children: ReactNode }) {
       {/* Bouton WhatsApp officiel connecté à Sophia */}
       <FloatingWhatsAppButton />
       <CartFeedback />
-      <Cursor />
     </>
   );
 }

@@ -42,7 +42,7 @@ export default function ProductCard({
       <div className="plate transition-colors duration-ui ease-silk group-hover:bg-stone-deep">
       <div ref={plateRef} className="relative aspect-[3/4] overflow-hidden [background-color:inherit]">
         {/* Every layer between the plate and the photo inherits the stone so the packshot's white melts into it. */}
-        <Link href={href} aria-label={article.nom} data-cursor="Voir" className="tilt-depth absolute inset-0 block [background-color:inherit]">
+        <Link href={href} aria-label={article.nom} className="tilt-depth absolute inset-0 z-10 block [background-color:inherit]">
           <Image
             src={article.photos[0]}
             alt={article.nom}

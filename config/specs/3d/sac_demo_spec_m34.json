@@ -1,0 +1,190 @@
+{
+  "object_id": "sac_demo_spatial_decomposed",
+  "object_name": "Sac Demo Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.397,
+      0.2581,
+      0.2017
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Socle_Inferieur": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Corps_Principal_Strate_2": {
+      "custom": {
+        "base_color": [
+          0.6941176470588235,
+          0.6274509803921569,
+          0.5568627450980392,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Chapeau_Superieur": {
+      "preset": "white_satin_lacquer"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_socle_inferieur",
+      "name": "Socle_Inferieur",
+      "role": "structural_base",
+      "primitive": "rounded_box",
+      "material": "M_Socle_Inferieur",
+      "dimensions": [
+        0.0229,
+        0.0149,
+        0.005
+      ],
+      "location": [
+        0.1504,
+        0.0,
+        0.0
+      ],
+      "corner_radius": 0.015,
+      "taper_ratio": 0.98,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.023m",
+          "Profondeur estim\u00e9e=0.015m",
+          "Remplissage=0.81"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    },
+    {
+      "id": "comp_2_corps_principal_strate_2",
+      "name": "Corps_Principal_Strate_2",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Corps_Principal_Strate_2",
+      "dimensions": [
+        0.397,
+        0.2581,
+        0.1917
+      ],
+      "location": [
+        0.0106,
+        0.0,
+        0.005
+      ],
+      "corner_radius": 0.02,
+      "taper_ratio": 0.96,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_socle_inferieur"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.397m",
+          "Profondeur estim\u00e9e=0.258m",
+          "Remplissage=0.81"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    },
+    {
+      "id": "comp_3_chapeau_superieur",
+      "name": "Chapeau_Superieur",
+      "role": "top_cap_or_insert",
+      "primitive": "rounded_box",
+      "material": "M_Chapeau_Superieur",
+      "dimensions": [
+        0.008,
+        0.01,
+        0.005
+      ],
+      "location": [
+        -0.087,
+        0.0,
+        0.1967
+      ],
+      "corner_radius": 0.012,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_corps_principal_strate_2"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.008m",
+          "Profondeur estim\u00e9e=0.010m",
+          "Remplissage=0.81"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_demo.jpg",
+    "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+    "detected_strata_count": 3,
+    "total_components_generated": 3,
+    "feature_analysis": [],
+    "confidence_score": 0.91,
+    "monocular_ambiguity": true,
+    "spatial_decomposition_enabled": true,
+    "geometric_inference_enabled": true,
+    "revolution_profile_detected": false,
+    "appendages_detected_count": 0,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 313x131 px",
+      "Ratio d'aspect mesur\u00e9 : 0.419",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.815",
+      "Nombre de strates physiques distinctes : 3"
+    ],
+    "hypotheses": [
+      "D\u00e9composition spatiale bidimensionnelle (strates verticales + clusters lat\u00e9raux transversaux).",
+      "Inf\u00e9rence automatique de profil de r\u00e9volution (Cylinder/RingCollar) bas\u00e9e sur la sym\u00e9trie axiale.",
+      "D\u00e9tection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+      "Discrimination physique cavit\u00e9 vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+    ]
+  }
+}

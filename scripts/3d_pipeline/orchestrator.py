@@ -172,7 +172,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Orchestrateur Générique 3D")
     parser.add_argument("--spec", required=True, help="Chemin vers le fichier JSON de spécification")
-    parser.add_argument("--output-dir", required=True, help="Dossier de sortie du modèle")
+    parser.add_argument("--output-dir", "--output", dest="output_dir", required=True, help="Dossier de sortie du modèle")
     parser.add_argument("--no-glb", action="store_true", help="Désactiver l'exportation GLB")
     parser.add_argument("--no-render", action="store_true", help="Désactiver les rendus studio")
 

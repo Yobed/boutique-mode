@@ -208,7 +208,7 @@
 @keyframes preloader-out { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
 
 /* Cursor ring (fine pointers): ink ring → indigo dot on links → indigo disc with a label. */
-.cursor-ring {
+.cursor-ring { display: none !important; pointer-events: none !important;
   position: fixed;
   left: 0;
   top: 0;
@@ -261,7 +261,7 @@
 /* 3D tilt (components/fx/Tilt.tsx): a lifting shadow and a light glare that follows the pointer. */
 .tilt { transform-style: preserve-3d; will-change: transform; transition: box-shadow 600ms var(--ease-silk); }
 .tilt[data-active='true'] { box-shadow: 0 40px 70px -40px oklch(0.2 0.03 270 / 0.45); }
-.tilt-glare {
+.tilt-glare { display: none !important; pointer-events: none !important;
   position: absolute;
   inset: 0;
   z-index: 3;
