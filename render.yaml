@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: elsi-boutique
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NEXT_PUBLIC_WHATSAPP_PHONE
+        value: "2250574243752"
