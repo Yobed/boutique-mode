@@ -25,8 +25,9 @@ const CATEGORIES: { label: string; value: CategorieVêtement }[] = [
   { label: 'Chemises & Lin/Wax', value: 'chemises' },
   { label: 'Pantalons & Jupes', value: 'pantalons' },
   { label: 'Chaussures & Escarpins', value: 'chaussures' },
-  { label: 'Sacs & Accessoires', value: 'accessoires' },
-  { label: 'Polos & T-shirts', value: 't-shirts' },
+  { label: 'Sacs', value: 'sacs' },
+  { label: 'Bijoux & Accessoires', value: 'accessoires' },
+  { label: 'Hauts & T-shirts', value: 't-shirts' },
 ];
 
 const TAILLES = ['Toutes', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '37', '38', '39', '40', '41', '42', '43', '44'];
@@ -45,12 +46,12 @@ export default function FilterSidebar({
   onReset,
 }: FilterSidebarProps) {
   return (
-    <div className="bg-dark-900 border border-white/10 rounded-2xl p-5 space-y-6 text-white">
+    <div className="space-y-7 text-ivory">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+      <div className="flex items-center justify-between pb-3 border-b border-ivory/10">
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-gold-400" />
-          <h3 className="font-serif font-bold text-sm text-white">Filtres</h3>
+          <h2 className="text-display text-xl text-ivory">Filtres</h2>
         </div>
         <button
           onClick={onReset}
@@ -63,19 +64,19 @@ export default function FilterSidebar({
 
       {/* Genre */}
       <div>
-        <label className="text-xs font-semibold text-zinc-300 block mb-2 uppercase tracking-wider">
+        <label className="text-zinc-400 block mb-3 uppercase tracking-label text-[11px]">
           Rayon
         </label>
-        <div className="grid grid-cols-3 gap-1.5 bg-dark-950 p-1 rounded-xl border border-white/5">
+        <div className="grid grid-cols-3 gap-1.5 bg-dark-950 p-1 border border-ivory/5">
           {(['tous', 'femme', 'homme'] as GenreVêtement[]).map((g) => (
             <button
               key={g}
               type="button"
               onClick={() => onSelectGenre(g)}
-              className={`py-1.5 px-2 rounded-lg text-xs font-semibold capitalize transition-all duration-150 ease-premium motion-press ${
+              className={`py-2 px-2 text-xs font-semibold capitalize transition-all duration-150 ease-premium motion-press ${
                 selectedGenre === g
                   ? 'bg-gold-500 text-dark-950 shadow-sm'
-                  : 'text-zinc-400 hover:text-white'
+                  : 'text-zinc-400 hover:text-ivory'
               }`}
             >
               {g}
@@ -86,7 +87,7 @@ export default function FilterSidebar({
 
       {/* Catégories */}
       <div>
-        <label className="text-xs font-semibold text-zinc-300 block mb-2 uppercase tracking-wider">
+        <label className="text-zinc-400 block mb-3 uppercase tracking-label text-[11px]">
           Catégorie
         </label>
         <div className="space-y-1">
@@ -95,10 +96,10 @@ export default function FilterSidebar({
               key={c.value}
               type="button"
               onClick={() => onSelectCategorie(c.value)}
-              className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 ease-premium motion-press flex items-center justify-between ${
+              className={`w-full text-left px-3 py-2 text-xs font-medium transition-all duration-150 ease-premium motion-press flex items-center justify-between ${
                 selectedCategorie === c.value
                   ? 'bg-gold-500/15 text-gold-400 font-bold border border-gold-500/30'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  : 'text-zinc-400 hover:text-ivory hover:bg-ivory/5'
               }`}
             >
               <span>{c.label}</span>
@@ -110,7 +111,7 @@ export default function FilterSidebar({
 
       {/* Tailles */}
       <div>
-        <label className="text-xs font-semibold text-zinc-300 block mb-2 uppercase tracking-wider">
+        <label className="text-zinc-400 block mb-3 uppercase tracking-label text-[11px]">
           Taille
         </label>
         <div className="flex flex-wrap gap-1.5">
@@ -119,10 +120,10 @@ export default function FilterSidebar({
               key={t}
               type="button"
               onClick={() => onSelectTaille(t === 'Toutes' ? '' : t)}
-              className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all duration-150 ease-premium motion-press ${
+              className={`min-w-9 px-2.5 py-2 text-xs font-semibold border transition-all duration-150 ease-premium motion-press ${
                 (t === 'Toutes' && !selectedTaille) || selectedTaille === t
                   ? 'border-gold-400 bg-gold-400/15 text-gold-300'
-                  : 'border-white/10 bg-dark-950 text-zinc-400 hover:border-white/20'
+                  : 'border-ivory/10 bg-dark-950 text-zinc-400 hover:border-ivory/20'
               }`}
             >
               {t}
@@ -134,7 +135,7 @@ export default function FilterSidebar({
       {/* Prix Maximum */}
       <div>
         <div className="flex justify-between items-center mb-2">
-          <label className="text-xs font-semibold text-zinc-300 uppercase tracking-wider">
+          <label className="text-zinc-400 uppercase tracking-label text-[11px]">
             Budget Max
           </label>
           <span className="text-xs font-bold text-gold-400">
@@ -153,7 +154,7 @@ export default function FilterSidebar({
       </div>
 
       {/* Promotions Only */}
-      <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+      <div className="pt-2 border-t border-ivory/10 flex items-center justify-between">
         <label htmlFor="promo-toggle" className="text-xs font-semibold text-zinc-300 cursor-pointer">
           Afficher uniquement les Promos
         </label>

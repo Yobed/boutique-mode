@@ -75,10 +75,10 @@ export default function AdminDashboardPage() {
   const totalEnAttente = commandes.filter((c) => c.statut === 'en_attente').length;
 
   return (
-    <div className="min-h-screen bg-dark-950 text-white p-6 sm:p-10">
+    <div className="min-h-screen bg-dark-950 text-ivory p-6 sm:p-10">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-ivory/10">
           <div>
             <Link
               href="/"
@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
               <ArrowLeft className="w-4 h-4" />
               <span>Voir la Boutique Client</span>
             </Link>
-            <h1 className="font-serif text-3xl font-bold text-white flex items-center gap-3">
+            <h1 className="font-serif text-3xl font-bold text-ivory flex items-center gap-3">
               <span>Tableau de Bord Gérant</span>
               <span className="text-xs px-2.5 py-1 rounded-full bg-gold-500/20 text-gold-400 border border-gold-500/30 font-sans font-bold">
                 Admin 0 FCFA
@@ -97,7 +97,7 @@ export default function AdminDashboardPage() {
 
           <button
             onClick={fetchCommandes}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-zinc-200"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-ivory/10 hover:bg-ivory/15 text-xs font-semibold text-zinc-200"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Actualiser</span>
@@ -106,17 +106,17 @@ export default function AdminDashboardPage() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-5 rounded-2xl bg-dark-900 border border-white/10 space-y-2">
+          <div className="p-5 rounded-2xl bg-dark-900 border border-ivory/10 space-y-2">
             <span className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Chiffre d'Affaires</span>
             <div className="text-2xl sm:text-3xl font-bold text-gold-400">
               {totalCA.toLocaleString('fr-FR')} FCFA
             </div>
           </div>
-          <div className="p-5 rounded-2xl bg-dark-900 border border-white/10 space-y-2">
+          <div className="p-5 rounded-2xl bg-dark-900 border border-ivory/10 space-y-2">
             <span className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Commandes Totales</span>
-            <div className="text-2xl sm:text-3xl font-bold text-white">{commandes.length}</div>
+            <div className="text-2xl sm:text-3xl font-bold text-ivory">{commandes.length}</div>
           </div>
-          <div className="p-5 rounded-2xl bg-dark-900 border border-white/10 space-y-2">
+          <div className="p-5 rounded-2xl bg-dark-900 border border-ivory/10 space-y-2">
             <span className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">En Attente de Livraison</span>
             <div className="text-2xl sm:text-3xl font-bold text-amber-400">{totalEnAttente}</div>
           </div>
@@ -124,18 +124,18 @@ export default function AdminDashboardPage() {
 
         {/* Commandes List */}
         <div className="space-y-4">
-          <h2 className="font-serif text-xl font-bold text-white">Dernières Commandes Reçues</h2>
+          <h2 className="font-serif text-xl font-bold text-ivory">Dernières Commandes Reçues</h2>
 
           {loading ? (
             <div className="text-zinc-500 text-sm py-8 text-center">Chargement des commandes...</div>
           ) : commandes.length === 0 ? (
-            <div className="text-zinc-500 text-sm py-12 text-center bg-dark-900 rounded-2xl border border-white/5">
+            <div className="text-zinc-500 text-sm py-12 text-center bg-dark-900 rounded-2xl border border-ivory/5">
               Aucune commande pour le moment. Dès qu'un client valide son panier sur le site ou sur WhatsApp, elle apparaîtra ici !
             </div>
           ) : (
-            <div className="overflow-x-auto bg-dark-900 border border-white/10 rounded-2xl">
+            <div className="overflow-x-auto bg-dark-900 border border-ivory/10 rounded-2xl">
               <table className="w-full text-left text-xs text-zinc-300">
-                <thead className="bg-dark-950 text-zinc-400 uppercase text-[10px] tracking-wider border-b border-white/10">
+                <thead className="bg-dark-950 text-zinc-400 uppercase text-[10px] tracking-wider border-b border-ivory/10">
                   <tr>
                     <th className="p-4">N° Commande</th>
                     <th className="p-4">Client</th>
@@ -147,11 +147,11 @@ export default function AdminDashboardPage() {
                     <th className="p-4">Statut</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-ivory/5">
                   {commandes.map((cmd) => (
-                    <tr key={cmd.numero_commande} className="hover:bg-white/5 transition-colors">
+                    <tr key={cmd.numero_commande} className="hover:bg-ivory/5 transition-colors">
                       <td className="p-4 font-mono font-bold text-gold-400">{cmd.numero_commande}</td>
-                      <td className="p-4 font-semibold text-white">{cmd.client_nom}</td>
+                      <td className="p-4 font-semibold text-ivory">{cmd.client_nom}</td>
                       <td className="p-4">
                         <a
                           href={`https://wa.me/225${cmd.client_telephone.replace(/\D/g, '')}`}
@@ -170,7 +170,7 @@ export default function AdminDashboardPage() {
                           </div>
                         ))}
                       </td>
-                      <td className="p-4 font-bold text-white">{cmd.montant_total.toLocaleString('fr-FR')} FCFA</td>
+                      <td className="p-4 font-bold text-ivory">{cmd.montant_total.toLocaleString('fr-FR')} FCFA</td>
                       <td className="p-4 uppercase text-[10px] font-bold">
                         <span className={`px-2 py-0.5 rounded ${cmd.canal_origine === 'whatsapp' ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/30' : 'bg-purple-950 text-purple-400 border border-purple-500/30'}`}>
                           {cmd.canal_origine}

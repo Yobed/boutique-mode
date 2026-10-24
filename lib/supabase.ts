@@ -87,10 +87,32 @@ export async function searchArticles(query: string, categorie?: string, genre?: 
   });
 }
 
+export type StatutLookup =
+  | { kind: 'found'; statut: Commande['statut']; created_at?: string }
+  | { kind: 'not_found' }
+  | { kind: 'unavailable' };
+
+/** Looks up an order by its public number. `unavailable` in demo mode or on network error. */
+export async function getCommandeStatut(numero: string): Promise<StatutLookup> {
+  const clean = numero.trim().toUpperCase().slice(0, 32);
+  if (!supabase || !clean) return { kind: 'unavailable' };
+  try {
+    const { data, error } = await supabase
+      .from('commandes')
+      .select('statut, created_at')
+      .eq('numero_commande', clean)
+      .maybeSingle();
+    if (error) return { kind: 'unavailable' };
+    return data ? { kind: 'found', statut: data.statut, created_at: data.created_at } : { kind: 'not_found' };
+  } catch {
+    return { kind: 'unavailable' };
+  }
+}
+
 export async function createCommande(cmd: Commande): Promise<{ success: boolean; id?: string; error?: string }> {
   if (!supabase) {
-    console.log('Mode démo : Commande simulée enregistrée :', cmd);
-    return { success: true, id: 'demo-' + Date.now() };
+    // Demo mode (no Supabase env): accept the order without persisting customer data anywhere.
+    return { success: true, id: `demo-${cmd.numero_commande}` };
   }
 
   try {

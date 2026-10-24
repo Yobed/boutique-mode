@@ -1,152 +1,209 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
 import Link from 'next/link';
-import { ShoppingBag, Sparkles, MessageCircle, Menu, X } from 'lucide-react';
-import { CartItem } from '@/lib/types';
+import { usePathname, useRouter } from 'next/navigation';
+import { AnimatePresence, motion } from 'motion/react';
+import { Heart, Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { useStore } from '@/lib/store-context';
+import { BRAND } from '@/lib/config';
 
-interface NavbarProps {
-  cartItems: CartItem[];
-  onOpenCart: () => void;
-  onOpenStylist: () => void;
-}
+const LINKS = [
+  { href: '/catalogue?categorie=sacs', label: 'Sacs' },
+  { href: '/catalogue?categorie=chaussures', label: 'Chaussures' },
+  { href: '/catalogue?categorie=accessoires', label: 'Bijoux' },
+  { href: '/catalogue', label: 'Tout voir' },
+];
 
-export default function Navbar({ cartItems, onOpenCart, onOpenStylist }: NavbarProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const totalCount = cartItems.reduce((acc, item) => acc + item.quantite, 0);
+const iconBtn =
+  'relative grid h-11 w-11 place-items-center text-zinc-300 transition-colors duration-feedback hover:text-ivory';
+
+export default function Navbar() {
+  const { count, openCart, cartIconRef, bump, favorites, setStylistOpen, hydrated } = useStore();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [bumping, setBumping] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (bump === 0) return;
+    setBumping(true);
+    const t = window.setTimeout(() => setBumping(false), 700);
+    return () => window.clearTimeout(t);
+  }, [bump]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setSearchOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (searchOpen) searchRef.current?.focus();
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (!menuOpen && !searchOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setMenuOpen(false);
+      setSearchOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen, searchOpen]);
+
+  const submitSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const q = new FormData(e.currentTarget).get('q')?.toString().trim().slice(0, 80) ?? '';
+    router.push(q ? `/catalogue?q=${encodeURIComponent(q)}` : '/catalogue');
+  };
 
   return (
-    <header className="sticky top-0 z-40 bg-dark-950/90 backdrop-blur-md border-b border-white/10 text-white">
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 text-dark-950 text-xs font-bold py-1.5 text-center px-4 tracking-wide uppercase">
-        ✨ Livraison express en 24h à Abidjan & Intérieur — Paiement à la livraison ou Wave / Mobile Money
-      </div>
+    <header className="sticky top-0 z-50 border-b border-ivory/[0.06] bg-ink-950 text-ivory">
+      <p className="truncate border-b border-ivory/[0.06] px-4 py-2 text-center text-[11px] uppercase tracking-[0.1em] text-zinc-400 sm:tracking-label">
+        Livraison 24 h à Abidjan
+        <span className="hidden sm:inline">
+          <span aria-hidden className="mx-2 text-brass-600">·</span> Essayage chez vous
+        </span>
+        <span className="hidden md:inline">
+          <span aria-hidden className="mx-2 text-brass-600">·</span> Paiement à la réception
+        </span>
+      </p>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-10 h-10 rounded-full bg-gold-500 flex items-center justify-center text-dark-950 font-serif font-black text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform">
-            M
-          </div>
-          <div>
-            <span className="font-serif text-xl sm:text-2xl font-normal tracking-wider text-white">
-              MAISON <span className="text-gold-400 italic">ÉLÉGANCE</span>
-            </span>
-            <span className="block text-[10px] text-zinc-400 tracking-widest uppercase font-medium">
-              Prêt-à-Porter & Atelier Abidjan
-            </span>
-          </div>
+      <div className="relative mx-auto grid h-16 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-[var(--gutter)] md:h-[76px]">
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            className={`${iconBtn} -ml-3 md:hidden`}
+            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={menuOpen}
+            aria-controls="menu-mobile"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+          <nav aria-label="Navigation principale" className="hidden md:block">
+            <ul className="flex items-center gap-7 text-[13px] tracking-[0.06em] text-zinc-300">
+              {LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="link-draw py-1 transition-colors hover:text-ivory">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        <Link href="/" aria-label={`${BRAND.name}, accueil`} className="text-display pl-[0.32em] text-[28px] leading-none tracking-[0.32em] md:text-[34px]">
+          {BRAND.name}
         </Link>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
-          <Link href="/" className="hover:text-gold-400 transition-colors">
-            Accueil
-          </Link>
-          <Link href="/catalogue" className="hover:text-gold-400 transition-colors">
-            Catalogue
-          </Link>
-          <Link href="/catalogue?genre=femme" className="hover:text-gold-400 transition-colors">
-            Femme
-          </Link>
-          <Link href="/catalogue?genre=homme" className="hover:text-gold-400 transition-colors">
-            Homme
-          </Link>
-          <Link href="/catalogue?promo=true" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors">
-            Promotions
-          </Link>
-          <Link href="/suivi" className="hover:text-gold-400 transition-colors text-xs uppercase tracking-wider text-zinc-400">
-            Suivi Commande
-          </Link>
-        </nav>
-
-        {/* Action Buttons */}
-        <div className="flex items-center gap-3">
-          {/* Styliste Atelier Button */}
-          <button
-            onClick={onOpenStylist}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-200 text-xs sm:text-sm font-semibold hover:border-gold-400 hover:text-white transition-all duration-150 ease-premium motion-press shadow-sm shadow-emerald-900/30"
-            title="Consulter Sophia, notre styliste d'atelier"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-pulse-subtle" />
-            <span className="hidden sm:inline">Styliste Privée</span>
+        <div className="flex items-center justify-end gap-0.5">
+          <button type="button" className={`${iconBtn} icon-search hidden sm:grid`} aria-label="Rechercher" aria-expanded={searchOpen} onClick={() => setSearchOpen((o) => !o)}>
+            <Search className="h-[19px] w-[19px]" strokeWidth={1.6} />
           </button>
-
-          {/* WhatsApp Direct */}
-          <a
-            href="https://wa.me/2250778311541?text=Bonjour%20Boutique%20en%20Ligne,%20je%20souhaite%20des%20renseignements%20sur%20vos%20v%C3%AAtements"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-900/80 transition-all duration-150 ease-premium motion-press"
-            title="Nous écrire sur WhatsApp"
-          >
-            <MessageCircle className="w-5 h-5" />
-          </a>
-
-          {/* Cart Button */}
           <button
-            onClick={onOpenCart}
-            className="relative p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-gold-500/50 hover:bg-white/10 text-white transition-all duration-150 ease-premium motion-press"
-            title="Voir mon panier"
+            type="button"
+            onClick={() => setStylistOpen(true)}
+            className="link-draw mr-1 hidden px-3 py-2 text-[12px] uppercase tracking-label text-brass-300 transition-colors hover:text-brass-200 lg:block"
           >
-            <ShoppingBag className="w-5 h-5 text-gold-400" />
-            {totalCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-gold-500 text-dark-950 text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scale-in">
-                {totalCount}
+            Conseil styliste
+          </button>
+          <Link href="/catalogue?favoris=1" className={`${iconBtn} hidden sm:grid`} aria-label={`Mes favoris (${favorites.length})`}>
+            <Heart className="h-[19px] w-[19px]" strokeWidth={1.6} />
+            {hydrated && favorites.length > 0 && <span className="absolute right-1.5 top-2 h-1.5 w-1.5 rounded-full bg-brass-400" aria-hidden />}
+          </Link>
+          <button
+            ref={cartIconRef}
+            type="button"
+            onClick={openCart}
+            data-bump={bumping}
+            className={`${iconBtn} icon-cart -mr-3`}
+            aria-label={`Ouvrir le panier, ${count} article${count > 1 ? 's' : ''}`}
+          >
+            <ShoppingBag className="h-[20px] w-[20px]" strokeWidth={1.6} />
+            {hydrated && count > 0 && (
+              <span key={count} className="cart-count tabular absolute right-0.5 top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-brass-400 px-1 text-[10px] font-semibold text-ink-950">
+                {count}
               </span>
             )}
           </button>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-zinc-300 hover:text-white"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-dark-900 border-b border-white/10 px-6 py-4 space-y-3">
-          <Link
-            href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-zinc-200 font-medium py-1 hover:text-gold-400"
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.form
+            role="search"
+            onSubmit={submitSearch}
+            initial={{ clipPath: 'inset(0 0 100% 0)', opacity: 0 }}
+            animate={{ clipPath: 'inset(0 0 0% 0)', opacity: 1 }}
+            exit={{ clipPath: 'inset(0 0 100% 0)', opacity: 0, transition: { duration: 0.18 } }}
+            className="absolute inset-x-0 top-full border-y border-ivory/[0.06] bg-ink-950"
           >
-            Accueil
-          </Link>
-          <Link
-            href="/catalogue"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-zinc-200 font-medium py-1 hover:text-gold-400"
+            <label className="mx-auto flex max-w-3xl items-center gap-4 px-[var(--gutter)] py-5">
+              <span className="sr-only">Rechercher une pièce</span>
+              <Search className="h-5 w-5 text-brass-400" strokeWidth={1.6} aria-hidden />
+              <input
+                ref={searchRef}
+                name="q"
+                type="search"
+                maxLength={80}
+                placeholder="Robe du soir, lin, costume, taille M…"
+                className="text-display w-full bg-transparent text-2xl text-ivory placeholder:text-zinc-500 focus:outline-none md:text-3xl"
+              />
+            </label>
+          </motion.form>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id="menu-mobile"
+            aria-label="Menu"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)', transition: { duration: 0.2, ease: [0.4, 0, 1, 1] } }}
+            transition={{ duration: 0.36, ease: [0.77, 0, 0.175, 1] }}
+            className="absolute inset-x-0 top-full h-[calc(100dvh-96px)] overflow-y-auto border-t border-ivory/[0.06] bg-ink-950 px-[var(--gutter)] pb-10 pt-6 md:hidden"
           >
-            Catalogue Complet
-          </Link>
-          <Link
-            href="/catalogue?genre=femme"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-zinc-200 font-medium py-1 hover:text-gold-400"
-          >
-            Collection Femme
-          </Link>
-          <Link
-            href="/catalogue?genre=homme"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-zinc-200 font-medium py-1 hover:text-gold-400"
-          >
-            Collection Homme
-          </Link>
-          <Link
-            href="/catalogue?promo=true"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-amber-400 font-semibold py-1"
-          >
-            Promotions & Ventes Flash
-          </Link>
-        </div>
-      )}
+            <form role="search" onSubmit={submitSearch} className="mb-8 flex items-center gap-3 border-b border-ivory/15 pb-3">
+              <Search className="h-5 w-5 text-brass-400" strokeWidth={1.6} aria-hidden />
+              <label className="sr-only" htmlFor="q-mobile">Rechercher</label>
+              <input id="q-mobile" name="q" type="search" maxLength={80} placeholder="Rechercher" className="w-full bg-transparent text-lg placeholder:text-zinc-500 focus:outline-none" />
+            </form>
+            <ul className="space-y-1">
+              {[...LINKS, { href: '/catalogue?favoris=1', label: 'Mes favoris' }, { href: '/suivi', label: 'Suivre ma commande' }].map((l, i) => (
+                <motion.li
+                  key={l.href}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12 + i * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Link href={l.href} className="text-display block py-2.5 text-[32px] leading-tight">
+                    {l.label}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                setStylistOpen(true);
+              }}
+              className="mt-10 w-full border border-brass-500/50 py-4 text-sm uppercase tracking-label text-brass-300"
+            >
+              Demander conseil à Sophia
+            </button>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

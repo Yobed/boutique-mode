@@ -1,165 +1,129 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Article } from '@/lib/types';
-import { ShoppingBag, MessageCircle, Check, Eye } from 'lucide-react';
+import { useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { AnimatePresence, motion } from 'motion/react';
+import type { Article } from '@/lib/types';
+import { formatFCFA } from '@/lib/config';
+import Badges from '@/components/product/Badges';
+import FavoriteButton from '@/components/product/FavoriteButton';
+import VariantSelector from '@/components/product/VariantSelector';
+import AddToCartButton from '@/components/product/AddToCartButton';
+import Tilt from '@/components/fx/Tilt';
 
-interface ProductCardProps {
+interface Props {
   article: Article;
-  onAddToCart: (article: Article, taille: string, couleur: string) => void;
+  priority?: boolean;
+  /** Distinguishes two cards of the same article on one page (layoutId scope). */
+  groupKey?: string;
+  sizes?: string;
 }
 
-export default function ProductCard({ article, onAddToCart }: ProductCardProps) {
-  const [selectedTaille, setSelectedTaille] = useState<string>(article.tailles[0] || 'Standard');
-  const [selectedCouleur, setSelectedCouleur] = useState<string>(article.couleurs[0] || 'Couleur unique');
-  const [added, setAdded] = useState(false);
-
-  const handleAdd = () => {
-    onAddToCart(article, selectedTaille, selectedCouleur);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
-
-  const whatsappText = encodeURIComponent(
-    `Bonjour Maison Élégance ! Je souhaite commander cet article :\n\n` +
-    `👗 Produit : *${article.nom}*\n` +
-    `📏 Taille : *${selectedTaille}*\n` +
-    `🎨 Couleur : *${selectedCouleur}*\n` +
-    `💰 Prix : *${(article.prix_promo || article.prix).toLocaleString('fr-FR')} FCFA*\n` +
-    `📸 Photo : ${article.photos[0] || ''}\n\n` +
-    `Est-il disponible pour livraison ?`
-  );
+export default function ProductCard({
+  article,
+  priority = false,
+  groupKey = 'grid',
+  sizes = '(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw',
+}: Props) {
+  const [taille, setTaille] = useState(article.tailles[0] ?? 'Unique');
+  const [picking, setPicking] = useState(false);
+  const couleur = article.couleurs[0] ?? 'Unique';
+  const plateRef = useRef<HTMLDivElement>(null);
+  const href = `/article/${article.id}`;
+  const second = article.photos[1];
+  const multiSize = article.tailles.length > 1;
+  const soldOut = !article.en_stock || article.quantite_stock <= 0;
 
   return (
-    <div className="group relative bg-dark-900 border border-white/10 rounded-2xl overflow-hidden motion-hover-lift hover:border-gold-500/50 flex flex-col justify-between">
-      {/* Image Container */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-900">
-        <img
-          src={article.photos[0]}
-          alt={article.nom}
-          className="w-full h-full object-cover object-center motion-img-zoom"
-          loading="lazy"
-        />
-
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-          {article.prix_promo && (
-            <span className="bg-red-600 text-white text-[11px] font-black px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider">
-              Promo -{Math.round(((article.prix - article.prix_promo) / article.prix) * 100)}%
-            </span>
+    <article className="group relative">
+      {/* The stone plate: the photograph is mounted, never bled to the edge. */}
+      <Tilt>
+      <div className="plate transition-colors duration-ui ease-silk group-hover:bg-stone-deep">
+      <div ref={plateRef} className="relative aspect-[3/4] overflow-hidden [background-color:inherit]">
+        {/* Every layer between the plate and the photo inherits the stone so the packshot's white melts into it. */}
+        <Link href={href} aria-label={article.nom} data-cursor="Voir" className="tilt-depth absolute inset-0 block [background-color:inherit]">
+          <Image
+            src={article.photos[0]}
+            alt={article.nom}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className={`object-contain p-[9%] mix-blend-multiply transition-[transform,opacity] duration-[900ms] ease-silk group-hover:scale-[1.06] ${second ? 'md:group-hover:opacity-0' : ''} ${soldOut ? 'grayscale-[0.6]' : ''}`}
+          />
+          {second && (
+            <Image
+              src={second}
+              alt=""
+              fill
+              sizes={sizes}
+              className="hidden object-contain p-[9%] opacity-0 mix-blend-multiply transition-opacity duration-[700ms] ease-silk md:block md:group-hover:opacity-100"
+            />
           )}
-          {article.nouveaute && !article.prix_promo && (
-            <span className="bg-gold-500 text-dark-950 text-[11px] font-black px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider">
-              Nouveau
-            </span>
-          )}
-          {article.vedette && (
-            <span className="bg-purple-600/90 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow uppercase tracking-wider">
-              Coup de Cœur
-            </span>
-          )}
-        </div>
-
-        {/* Quick View Link */}
-        <Link
-          href={`/article/${article.id}`}
-          className="absolute top-3 right-3 p-2 rounded-full bg-dark-950/70 text-zinc-300 hover:text-white hover:bg-dark-950 transition-all duration-200 ease-premium motion-press opacity-0 group-hover:opacity-100"
-          title="Voir la fiche détaillée"
-        >
-          <Eye className="w-4 h-4" />
         </Link>
-      </div>
 
-      {/* Content */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
-        <div>
-          <div className="flex items-center justify-between text-xs text-zinc-400 mb-1">
-            <span className="capitalize">{article.categorie}</span>
-            <span className="capitalize text-zinc-500 font-medium">{article.genre}</span>
-          </div>
+        <Badges article={article} className="pointer-events-none absolute left-3 top-3" />
+        <FavoriteButton id={article.id} nom={article.nom} className="absolute right-1 top-1" />
 
-          <Link href={`/article/${article.id}`} className="group-hover:text-gold-400 transition-colors">
-            <h3 className="font-serif font-bold text-white text-base leading-snug line-clamp-1">
-              {article.nom}
-            </h3>
-          </Link>
-
-          <p className="text-zinc-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">
-            {article.description}
-          </p>
-
-          {/* Price */}
-          <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-gold-400 font-bold text-lg">
-              {(article.prix_promo || article.prix).toLocaleString('fr-FR')} FCFA
-            </span>
-            {article.prix_promo && (
-              <span className="text-zinc-500 text-xs line-through">
-                {article.prix.toLocaleString('fr-FR')} FCFA
-              </span>
-            )}
-          </div>
-
-          {/* Size Selector */}
-          <div className="mt-3">
-            <span className="text-[11px] text-zinc-400 block mb-1">Taille :</span>
-            <div className="flex flex-wrap gap-1.5">
-              {article.tailles.map((t) => (
-                <button
-                  key={t}
-                  type="button"
-                  onClick={() => setSelectedTaille(t)}
-                  className={`px-2.5 py-1 text-xs font-semibold rounded-lg border transition-all duration-150 ease-premium motion-press ${
-                    selectedTaille === t
-                      ? 'border-gold-400 bg-gold-400/10 text-gold-300 shadow-sm'
-                      : 'border-white/10 bg-white/5 text-zinc-400 hover:border-white/20'
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
+        {/* Desktop quick-add: rises from the hem of the image on hover / keyboard focus */}
+        <div className="absolute inset-x-0 bottom-0 hidden translate-y-full bg-ink-950/90 p-3 opacity-0 transition-[transform,opacity] duration-ui ease-silk group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 md:block">
+          {multiSize && !soldOut && (
+            <div className="mb-2.5">
+              <VariantSelector label={`Taille pour ${article.nom}`} options={article.tailles} value={taille} onChange={setTaille} groupId={`${groupKey}-${article.id}-d`} size="sm" />
             </div>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="mt-4 pt-3 border-t border-white/5 grid grid-cols-2 gap-2">
-          {/* Add to Cart */}
-          <button
-            onClick={handleAdd}
-            className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-bold transition-all duration-150 ease-premium motion-press ${
-              added
-                ? 'bg-emerald-600 text-white'
-                : 'bg-white/10 hover:bg-gold-500 hover:text-dark-950 text-white border border-white/10'
-            }`}
-          >
-            {added ? (
-              <>
-                <Check className="w-3.5 h-3.5" />
-                <span>Ajouté</span>
-              </>
-            ) : (
-              <>
-                <ShoppingBag className="w-3.5 h-3.5 text-gold-400 group-hover:text-dark-950" />
-                <span>Panier</span>
-              </>
-            )}
-          </button>
-
-          {/* WhatsApp 1-Click Order */}
-          <a
-            href={`https://wa.me/2250778311541?text=${whatsappText}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/40 text-emerald-300 hover:text-white text-xs font-bold transition-all duration-150 ease-premium motion-press"
-            title="Commander directement sur WhatsApp"
-          >
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>WhatsApp</span>
-          </a>
+          )}
+          <AddToCartButton article={article} taille={taille} couleur={couleur} sourceRef={plateRef} />
         </div>
       </div>
-    </div>
+      </div>
+      </Tilt>
+
+      <div className="mt-4 flex items-start justify-between gap-3">
+        <h3 className="text-display text-[18px] leading-[1.15] md:text-[21px]">
+          <Link href={href} className="transition-colors hover:text-indigo">
+            {article.nom}
+          </Link>
+        </h3>
+        <p className="tabular shrink-0 pt-0.5 text-right text-sm">
+          {article.prix_promo ? (
+            <>
+              <span className="block text-ivory">{formatFCFA(article.prix_promo)}</span>
+              <s className="text-xs text-zinc-500">{formatFCFA(article.prix)}</s>
+            </>
+          ) : (
+            <span className="text-ivory">{formatFCFA(article.prix)}</span>
+          )}
+        </p>
+      </div>
+      {article.couleurs.length > 1 && <p className="mt-1 text-xs text-zinc-500">{article.couleurs.length} coloris</p>}
+
+      {/* Mobile: one tap reveals sizes, the second adds. Never hidden behind hover. */}
+      <div className="mt-3 md:hidden">
+        {multiSize && !picking && !soldOut ? (
+          <button
+            type="button"
+            onClick={() => setPicking(true)}
+            aria-expanded={false}
+            className="h-11 w-full border border-ivory/20 text-[12px] uppercase tracking-label text-zinc-200 active:bg-ivory/5"
+          >
+            Choisir ma taille
+          </button>
+        ) : (
+          <AnimatePresence initial={false}>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-2"
+            >
+              {multiSize && !soldOut && (
+                <VariantSelector label={`Taille pour ${article.nom}`} options={article.tailles} value={taille} onChange={setTaille} groupId={`${groupKey}-${article.id}-m`} size="sm" />
+              )}
+              <AddToCartButton article={article} taille={taille} couleur={couleur} sourceRef={plateRef} />
+            </motion.div>
+          </AnimatePresence>
+        )}
+      </div>
+    </article>
   );
 }

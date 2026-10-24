@@ -54,7 +54,8 @@ function findRelevantArticles(message: string, catalog: Article[]): Article[] {
   if (lower.includes('chemise') || lower.includes('wax')) return catalog.filter(a => a.categorie === 'chemises');
   if (lower.includes('pantalon')) return catalog.filter(a => a.categorie === 'pantalons');
   if (lower.includes('chaussure') || lower.includes('escarpin') || lower.includes('mocassin')) return catalog.filter(a => a.categorie === 'chaussures');
-  if (lower.includes('sac') || lower.includes('accessoire')) return catalog.filter(a => a.categorie === 'accessoires');
+  if (lower.includes('sac')) return catalog.filter(a => a.categorie === 'sacs');
+  if (lower.includes('accessoire') || lower.includes('bijou') || lower.includes('collier') || lower.includes('lunette')) return catalog.filter(a => a.categorie === 'accessoires');
 
   // Recherche par genre
   if (lower.includes('homme') || lower.includes('monsieur')) return catalog.filter(a => a.genre === 'homme');
@@ -79,12 +80,12 @@ async function callGroqAPI(
     `- ${a.nom} (${a.categorie}, ${a.genre}) : ${a.prix.toLocaleString('fr-FR')} FCFA${a.prix_promo ? ` (Promo: ${a.prix_promo.toLocaleString('fr-FR')} FCFA)` : ''}. Tailles: ${a.tailles.join(', ')}. Couleurs: ${a.couleurs.join(', ')}.`
   ).join('\n');
 
-  const systemPrompt = `Tu es Sophia, première d'atelier et styliste personnelle de la prestigieuse maison de prêt-à-porter "Maison Élégance" à Abidjan (Côte d'Ivoire).
+  const systemPrompt = `Tu es Sophia, première d'atelier et styliste personnelle de la prestigieuse maison de prêt-à-porter "ELSI" à Abidjan (Côte d'Ivoire).
 Ton ton est chaleureux, raffiné, digne des plus grands ateliers de couture tout en restant accessible et attentif. Tu t'exprimes dans un français ivoirien distingué.
 Tu conseilles avec expertise les clients sur leurs tenues selon l'occasion (gala au Sofitel Ivoire, mariage, rendez-vous d'affaires au Plateau, cocktail à Cocody ou détente à Assinie).
 Tu connais parfaitement le catalogue ci-dessous et ses disponibilités en stock.
 Tu réponds de façon concise (2 à 4 phrases maximum) pour garder la conversation fluide.
-Si le client veut commander, rassure-le sur le paiement à la livraison après essayage et demande-lui sa taille, sa commune de livraison et son contact WhatsApp.
+Si le client veut commander, rassure-le sur le paiement sécurisé à la réception (espèces, Wave, Orange Money ou MTN MoMo), la livraison sous housse sous 24 h et l'échange de taille garanti sous 48 h à domicile. Demande-lui sa taille, sa commune de livraison et son contact WhatsApp.
 
 Catalogue actuel de la maison :
 ${catalogContext}`;
@@ -123,7 +124,7 @@ async function callGeminiAPI(
     `- ${a.nom} : ${a.prix.toLocaleString('fr-FR')} FCFA (Tailles: ${a.tailles.join(', ')})`
   ).join('\n');
 
-  const systemInstruction = `Tu es Sophia, première d'atelier et styliste personnelle chez Maison Élégance à Abidjan. Conseille le client avec raffinement, amabilité et expertise de coupe. Réponds en 2 à 3 phrases claires. Catalogue : ${catalogContext}`;
+  const systemInstruction = `Tu es Sophia, première d'atelier et styliste personnelle chez ELSI à Abidjan. Conseille le client avec raffinement, amabilité et expertise de coupe. Réponds en 2 à 3 phrases claires. Catalogue : ${catalogContext}`;
 
   const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
     method: 'POST',
@@ -147,7 +148,7 @@ function fallbackStylistEngine(
 
   if (lower.includes('bonjour') || lower.includes('salut') || lower.includes('hello') || lower.includes('bonsoir')) {
     return {
-      text: 'Bonjour et bienvenue chez Maison Élégance ! ✨ Je suis Sophia, votre styliste d\'atelier. Pour quelle occasion recherchez-vous une création aujourd\'hui ? (Gala, mariage, d\'affaires ou cocktail)',
+      text: 'Bonjour et bienvenue chez ELSI. Je suis Sophia, votre styliste d\'atelier. Pour quelle occasion recherchez-vous une création aujourd\'hui ? (Gala, mariage, d\'affaires ou cocktail)',
       articles: articles.slice(0, 2),
       suggestedActions: ['Robes de soirée', 'Costumes homme', 'Créations lin & wax', 'Nouveautés'],
     };

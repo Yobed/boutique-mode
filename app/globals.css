@@ -1,81 +1,349 @@
-@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Tenor+Sans&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   ELSI — direction « Galerie ».
+   Each piece is shown like a work on a stone plate, on white.
+   Zodiak for titles (roman + italic), Switzer for text,
+   one accent: Baoulé indigo. Values are OKLCH triplets "L C H".
+   Legacy Tailwind names (ink-950, ivory, brass, zinc…) point at these
+   roles in tailwind.config.ts so older screens follow automatically.
+   ============================================================ */
 @layer base {
   :root {
-    --background: #0c0c0e;
-    --foreground: #f5f3ef;
+    --paper: 1.000 0.000 0;          /* #FFFFFF — page */
+    --panel: 0.971 0.005 78.3;       /* #F7F5F2 — raised panels, drawers */
+    --stone: 0.935 0.007 80.7;       /* #ECE9E4 — plates behind photographs */
+    --stone-deep: 0.884 0.012 79.8;  /* #DDD8D0 — strong rules, pressed states */
+    --ink: 0.191 0.000 0;            /* #141414 — text */
+
+    --mute-200: 0.285 0.006 91.6;    /* #2B2A27 */
+    --mute-300: 0.357 0.007 84.6;    /* #3E3C38 */
+    --mute-400: 0.471 0.008 88.7;    /* #5D5B56 — secondary text, 6.6:1 */
+    --mute-500: 0.553 0.010 84.6;    /* #75726C — captions, 4.7:1 */
+    --mute-600: 0.697 0.011 81.8;    /* #A19D96 — placeholders, disabled */
+
+    --indigo-200: 0.427 0.101 271.0; /* #3B4A86 */
+    --indigo-300: 0.380 0.102 270.2; /* #2E3D78 */
+    --indigo-400: 0.323 0.084 268.7; /* #22305E — the accent: Baoulé indigo dye */
+    --indigo-500: 0.286 0.077 268.9; /* #1B2750 */
+    --indigo-600: 0.247 0.066 269.9; /* #151E40 */
+    --indigo-700: 0.210 0.052 270.1; /* #0F1630 */
+    --indigo-tint: 0.932 0.012 276.1;/* #E6E8F1 */
+
+    --cola-300: 0.494 0.155 28.1;    /* #A8322A — low stock, sale */
+    --cola-400: 0.526 0.161 29.2;    /* #B53A2E */
+    --cola-500: 0.430 0.138 27.9;    /* #8C2620 */
+
+    --green-200: 0.382 0.073 167.6;  /* #0B4F3B — WhatsApp, reassurance */
+    --green-300: 0.424 0.080 168.4;  /* #0E5C46 */
+    --green-400: 0.486 0.096 165.5;  /* #127052 */
+    --green-500: 0.424 0.080 168.4;
+    --green-600: 0.376 0.071 168.1;  /* #0B4D3A */
+    --green-900: 0.931 0.021 166.1;  /* #DCEDE5 */
+    --green-950: 0.966 0.010 164.9;  /* #EEF6F2 */
+
+    /* Motion — see MOTION.md */
+    --ease-silk: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-velvet: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-curtain: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+    --dur-feedback: 150ms;
+    --dur-ui: 280ms;
+    --dur-story: 1200ms;
+
+    /* Type — Zodiak for titles, Switzer for text (loaded in app/layout.tsx) */
+    --font-display: 'Zodiak';
+    --font-text: 'Switzer';
+
+    --header-h: 97px;
+    --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+    --section: clamp(5rem, 3rem + 8vw, 11rem);
+  }
+
+  @media (min-width: 768px) {
+    :root { --header-h: 109px; }
+  }
+
+  html {
+    background: oklch(var(--paper));
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: "Tenor Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    overflow-x: hidden;
-    letter-spacing: 0.015em;
+    background: oklch(var(--paper));
+    color: oklch(var(--ink));
+    font-family: var(--font-text), 'Helvetica Neue', Arial, sans-serif;
+    font-feature-settings: 'kern', 'liga';
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  ::selection { background: oklch(var(--indigo-400)); color: oklch(var(--paper)); }
+  input, textarea, select { caret-color: oklch(var(--indigo-400)); }
+  a { text-underline-offset: 0.25em; text-decoration-thickness: 1px; }
+
+  :focus-visible {
+    outline: 2px solid oklch(var(--indigo-400));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  html { scrollbar-color: oklch(var(--stone-deep)) oklch(var(--paper)); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: oklch(var(--paper)); }
+  ::-webkit-scrollbar-thumb { background: oklch(var(--stone-deep)); border-radius: 10px; border: 2px solid oklch(var(--paper)); }
+  ::-webkit-scrollbar-thumb:hover { background: oklch(var(--mute-500)); }
 }
 
-/* Motion Design Skill Utilities — Archetype: Premium / Luxury */
 @layer utilities {
-  .ease-premium {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .tracking-label { letter-spacing: 0.14em; }
+  .text-display { font-family: var(--font-display), Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+  .text-display em, em.text-display { font-style: italic; }
 
-  .motion-press {
-    transition: transform 80ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .motion-press:active {
-    transform: scale(0.98);
-  }
-
-  .motion-hover-lift {
-    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .motion-hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.15);
-  }
-
-  .motion-img-zoom {
-    transition: transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .group:hover .motion-img-zoom {
-    transform: scale(1.04);
-  }
+  /* Legacy motion helpers kept for older screens */
+  .ease-premium { transition-timing-function: var(--ease-silk); }
+  .motion-press { transition: transform 120ms var(--ease-silk); }
+  .motion-press:active { transform: scale(0.97); }
+  .motion-hover-lift { transition: transform var(--dur-feedback) var(--ease-silk); }
+  .motion-hover-lift:hover { transform: translateY(-2px); }
+  .motion-img-zoom { transition: transform 600ms var(--ease-silk); }
+  .group:hover .motion-img-zoom { transform: scale(1.04); }
 }
 
-/* Reduced Motion Safety Check (LottieFiles motion-design standard) */
+/* ============================================================
+   Galerie components
+   ============================================================ */
+
+/* A plate: the stone mount every photograph sits on. */
+.plate { background: oklch(var(--stone)); padding: clamp(8px, 0.4rem + 0.5vw, 16px); }
+.plate-caption { padding-top: 0.6rem; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(var(--mute-500)); }
+
+/* Primary button: indigo, an ink curtain rises behind the label on hover. */
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  overflow: hidden;
+  padding: 1.05rem 2.1rem;
+  background: oklch(var(--indigo-400));
+  color: oklch(var(--paper));
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: transform var(--dur-feedback) var(--ease-silk);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: oklch(var(--ink));
+  transform: translateY(101%);
+  transition: transform 520ms var(--ease-curtain);
+}
+.btn-primary:hover::before, .btn-primary:focus-visible::before { transform: none; }
+.btn-primary:active { transform: scale(0.98); }
+
+/* Secondary button: a hairline frame that fills with stone. */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border: 1px solid oklch(var(--ink));
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color var(--dur-ui) var(--ease-silk);
+}
+.btn-ghost:hover { background: oklch(var(--stone)); }
+
+/* Link with a drawn underline */
+.link-draw { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--dur-ui) var(--ease-silk); }
+.link-draw:hover, .link-draw:focus-visible { background-size: 100% 1px; }
+
+/* ============================================================
+   Pre-reveal states. `.js` is set before paint; without JS the
+   page renders fully revealed. 4 s failsafes, reduced motion wins.
+   ============================================================ */
+.js [data-hero-title] { visibility: hidden; animation: failsafe-show 0s 4s forwards; }
+.js [data-hero-reveal] { opacity: 0; animation: failsafe-fade 0s 4s forwards; }
+.js [data-plate-reveal] { clip-path: inset(100% 0% 0% 0%); animation: failsafe-clip 0s 4s forwards; }
+@keyframes failsafe-show { to { visibility: visible; } }
+@keyframes failsafe-fade { to { opacity: 1; } }
+@keyframes failsafe-clip { to { clip-path: inset(0% 0% 0% 0%); } }
+
+/* Brand intro: the wordmark rises, an indigo thread draws, the white curtain lifts. CSS only, first visit only. */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: oklch(var(--paper));
+  animation: preloader-out 900ms var(--ease-curtain) 1300ms forwards;
+}
+.no-intro .preloader { display: none; }
+.preloader-inner { display: grid; justify-items: center; gap: 1.1rem; animation: preloader-drift 900ms var(--ease-curtain) 1300ms forwards; }
+.preloader-word { overflow: hidden; padding: 0.06em 0 0.1em 0.3em; font-size: clamp(3.5rem, 2rem + 6vw, 8rem); line-height: 1; letter-spacing: 0.3em; color: oklch(var(--ink)); }
+.preloader-word span { display: inline-block; transform: translateY(110%); animation: preloader-rise 900ms var(--ease-silk) forwards; }
+.preloader-line { display: block; width: min(220px, 40vw); height: 1px; background: oklch(var(--indigo-400)); transform: scaleX(0); animation: preloader-line 1000ms var(--ease-curtain) 350ms forwards; }
+.preloader-sub { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: oklch(var(--mute-500)); opacity: 0; animation: failsafe-fade 600ms var(--ease-silk) 700ms forwards; }
+@keyframes preloader-rise { to { transform: none; } }
+@keyframes preloader-line { to { transform: none; } }
+@keyframes preloader-drift { to { transform: translateY(-40px); opacity: 0; } }
+@keyframes preloader-out { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+
+/* Cursor ring (fine pointers): ink ring → indigo dot on links → indigo disc with a label. */
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  border: 1px solid oklch(var(--ink) / 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transition: width 400ms var(--ease-silk), height 400ms var(--ease-silk), margin 400ms var(--ease-silk), background-color 300ms, border-color 300ms;
+}
+.cursor-ring[data-mode='link'] { width: 10px; height: 10px; margin: -5px 0 0 -5px; background: oklch(var(--indigo-400)); border-color: transparent; }
+.cursor-ring[data-mode='label'] { width: 92px; height: 92px; margin: -46px 0 0 -46px; background: oklch(var(--indigo-400)); border-color: transparent; }
+.cursor-ring span { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: oklch(var(--paper)); }
+
+/* Endless ribbons */
+.marquee { display: flex; overflow: hidden; mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: marquee var(--marquee-dur, 40s) linear infinite; }
+.marquee-reverse { animation-direction: reverse; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group { display: flex; flex-shrink: 0; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Elle / Lui doors: the hovered one opens wider, the other fades back. */
+@media (min-width: 1024px) {
+  .door { flex: 1 1 0; transition: flex-grow 900ms var(--ease-curtain); }
+  .doors:hover .door { flex-grow: 0.75; }
+  .doors .door:hover { flex-grow: 1.5; }
+  .door img { transition: transform 1400ms var(--ease-silk), filter 700ms var(--ease-velvet), opacity 700ms var(--ease-velvet); }
+  .doors:hover .door:not(:hover) img { filter: grayscale(1); opacity: 0.55; }
+}
+
+/* Step numerals: stone italic numerals that fill with indigo from the bottom as --fill grows. */
+.step { --fill: 100%; }
+.js .step { --fill: 0%; }
+.step-num {
+  color: transparent;
+  background-image: linear-gradient(oklch(var(--indigo-400)), oklch(var(--indigo-400))), linear-gradient(oklch(var(--stone-deep)), oklch(var(--stone-deep)));
+  background-size: 100% var(--fill), 100% 100%;
+  background-position: bottom, center;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* 3D tilt (components/fx/Tilt.tsx): a lifting shadow and a light glare that follows the pointer. */
+.tilt { transform-style: preserve-3d; will-change: transform; transition: box-shadow 600ms var(--ease-silk); }
+.tilt[data-active='true'] { box-shadow: 0 40px 70px -40px oklch(0.2 0.03 270 / 0.45); }
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), oklch(1 0 0 / 0.55), transparent 55%);
+  transition: opacity 500ms var(--ease-silk);
+}
+.tilt[data-active='true'] .tilt-glare { opacity: 1; }
+/* Inner parallax: the object slides against the tilt so it reads as standing off the plate. */
+.tilt-depth { translate: calc(var(--px, 0) * -22px) calc(var(--py, 0) * -22px); transition: translate 500ms var(--ease-silk); }
+
+/* Product zoom lens (ProductGallery): the photo scales from the pointer. */
+.zoom-lens img { transition: scale 450ms var(--ease-silk); transform-origin: var(--zx, 50%) var(--zy, 50%); }
+.zoom-lens[data-zoom='true'] img { scale: 2.4; }
+
+/* ============================================================
+   Micro-interactions (CSS only)
+   ============================================================ */
+.skeleton { position: relative; overflow: hidden; background: oklch(var(--stone)); border-radius: 2px; }
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(100deg, transparent 20%, oklch(var(--paper) / 0.7) 50%, transparent 80%);
+  animation: skeleton-sheen 1.6s var(--ease-velvet) infinite;
+}
+@keyframes skeleton-sheen { to { transform: translateX(100%); } }
+
+.icon-heart { transition: transform var(--dur-feedback) var(--ease-silk), color var(--dur-feedback); }
+.icon-heart[data-active='true'] { color: oklch(var(--cola-300)); animation: heart-pop 420ms var(--ease-silk); }
+.icon-heart[data-active='true'] svg { fill: currentColor; }
+@keyframes heart-pop { 0% { transform: scale(1); } 35% { transform: scale(1.28); } 60% { transform: scale(0.94); } 100% { transform: scale(1); } }
+
+.icon-cart[data-bump='true'] { animation: cart-bump 520ms var(--ease-silk); }
+@keyframes cart-bump { 0% { transform: none; } 30% { transform: translateY(2px) scale(0.92); } 65% { transform: translateY(-2px) scale(1.06); } 100% { transform: none; } }
+.icon-cart::after { content: ''; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid oklch(var(--indigo-400)); opacity: 0; pointer-events: none; }
+.icon-cart[data-bump='true']::after { animation: cart-ring 640ms var(--ease-silk); }
+@keyframes cart-ring { 0% { opacity: 0.9; transform: scale(0.6); } 100% { opacity: 0; transform: scale(1.9); } }
+.cart-count { animation: count-in 360ms var(--ease-silk); }
+@keyframes count-in { from { transform: translateY(6px) scale(0.6); opacity: 0; } }
+
+.icon-search svg { transition: transform var(--dur-ui) var(--ease-silk); transform-origin: 40% 40%; }
+.icon-search:hover svg, .icon-search:focus-visible svg { transform: rotate(-14deg) scale(1.06); }
+
+/* Badges: small paper labels pinned on the plate. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.45em 0.7em 0.4em;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  background: oklch(var(--paper));
+  color: oklch(var(--ink));
+}
+.badge-new { background: oklch(var(--paper)); color: oklch(var(--ink)); }
+.badge-low { background: oklch(var(--paper)); color: oklch(var(--cola-300)); }
+.badge-ship { background: oklch(var(--green-950)); color: oklch(var(--green-200)); }
+.badge-ship svg { transition: transform var(--dur-ui) var(--ease-silk); }
+.group:hover .badge-ship svg { transform: translateX(3px); }
+.badge-sale { background: oklch(var(--cola-300)); color: oklch(var(--paper)); }
+.badge-out { background: oklch(var(--stone-deep)); color: oklch(var(--mute-300)); }
+
+/* ============================================================
+   Reduced motion: nothing travels, everything is visible.
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
+  .js [data-hero-title] { visibility: visible; }
+  .js [data-hero-reveal] { opacity: 1; }
+  .js [data-plate-reveal] { clip-path: none; }
+  .js .step { --fill: 100%; }
+  .preloader { display: none; }
+  .marquee-track { animation: none; }
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Stagger delay classes for micro-cascades */
-.stagger-1 { animation-delay: 40ms; }
-.stagger-2 { animation-delay: 80ms; }
-.stagger-3 { animation-delay: 120ms; }
-.stagger-4 { animation-delay: 160ms; }
-.stagger-5 { animation-delay: 200ms; }
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #09090b;
-}
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
 }

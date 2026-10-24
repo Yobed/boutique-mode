@@ -1,21 +1,23 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, X, Send, ShoppingBag, MessageCircle, Bot } from 'lucide-react';
+import { Sparkles, X, Send, ShoppingBag, MessageCircle } from 'lucide-react';
 import { Article, ChatMessage } from '@/lib/types';
 
 interface StylistChatWidgetProps {
   isOpen: boolean;
   onToggle: () => void;
+  /** Hides the floating launcher where it would cover a purchase CTA. */
+  hideLauncher?: boolean;
   onAddToCart: (article: Article, taille: string, couleur: string) => void;
 }
 
-export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: StylistChatWidgetProps) {
+export default function StylistChatWidget({ isOpen, onToggle, onAddToCart, hideLauncher = false }: StylistChatWidgetProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
       role: 'assistant',
-      content: 'Bonjour et bienvenue chez Maison Élégance ! ✨ Je suis Sophia, première d\'atelier et styliste personnelle. Pour quelle occasion recherchez-vous une création aujourd\'hui ?',
+      content: 'Bonjour et bienvenue chez ELSI. Je suis Sophia, première d\'atelier et styliste personnelle. Pour quelle occasion recherchez-vous une création aujourd\'hui ?',
       suggestedActions: ['Robes de soirée', 'Costumes homme', 'Ensembles lin & wax', 'Promotions du moment'],
       timestamp: Date.now(),
     },
@@ -90,34 +92,34 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
   return (
     <>
       {/* Floating Launcher Button */}
-      {!isOpen && (
+      {!isOpen && !hideLauncher && (
         <button
           onClick={onToggle}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3 rounded-full bg-dark-900/95 border border-gold-500/40 text-white font-bold text-sm shadow-2xl shadow-black/80 hover:border-gold-400 hover:scale-105 transition-all duration-200 ease-premium motion-press group"
+          className="fixed bottom-6 right-6 z-40 hidden sm:flex items-center gap-2.5 px-5 py-3 rounded-full bg-dark-900/95 border border-gold-500/40 text-ivory font-medium text-sm shadow-2xl shadow-black/80 hover:border-gold-400 transition-all duration-200 ease-premium motion-press group"
           title="Consulter Sophia, notre styliste d'atelier"
         >
           <div className="relative">
-            <Sparkles className="w-4 h-4 text-gold-400 animate-pulse-subtle" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-dark-950 animate-pulse-subtle" />
+            <Sparkles className="w-4 h-4 text-gold-400" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-dark-950" aria-hidden />
           </div>
-          <span className="tracking-wide text-xs uppercase font-serif">Styliste Privée</span>
+          <span className="tracking-label text-xs uppercase">Conseil styliste</span>
         </button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-dark-950 border border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-white backdrop-blur-xl animate-scale-in">
+        <div role="dialog" aria-label="Conversation avec Sophia, styliste" className="fixed bottom-4 right-[4vw] sm:bottom-6 sm:right-6 z-[65] w-[92vw] sm:w-[420px] h-[580px] max-h-[85vh] bg-dark-950 border border-ivory/15 rounded-card shadow-2xl flex flex-col overflow-hidden text-ivory backdrop-blur-xl animate-scale-in">
           {/* Header */}
-          <div className="p-4 bg-dark-900/90 border-b border-white/10 flex items-center justify-between">
+          <div className="p-4 bg-dark-900/90 border-b border-ivory/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-atelier-deep border border-gold-500/30 flex items-center justify-center text-gold-400 font-bold">
-                  <Bot className="w-5 h-5 text-gold-400" />
+                  <span className="text-display text-lg" aria-hidden>S</span>
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-dark-950" />
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-dark-950" aria-hidden />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-sm text-white flex items-center gap-1.5">
+                <h3 className="text-display text-base text-ivory flex items-center gap-1.5">
                   Sophia • Première d'Atelier
                   <Sparkles className="w-3.5 h-3.5 text-gold-400" />
                 </h3>
@@ -128,7 +130,8 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
             </div>
             <button
               onClick={onToggle}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors duration-150 ease-premium motion-press"
+              aria-label="Fermer la conversation"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-ivory hover:bg-ivory/10 transition-colors duration-150 ease-premium motion-press"
             >
               <X className="w-5 h-5" />
             </button>
@@ -147,7 +150,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
                   className={`max-w-[85%] rounded-2xl px-4 py-2.5 leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-gold-500 text-dark-950 font-medium rounded-br-none shadow-md'
-                      : 'bg-dark-900 border border-white/10 text-zinc-200 rounded-bl-none'
+                      : 'bg-dark-900 border border-ivory/10 text-zinc-200 rounded-bl-none'
                   }`}
                 >
                   {msg.content}
@@ -159,16 +162,16 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
                     {msg.articles.map((art) => (
                       <div
                         key={art.id}
-                        className="flex gap-2.5 p-2 rounded-xl bg-white/5 border border-white/10 hover:border-gold-500/40 transition-colors"
+                        className="flex gap-2.5 p-2 rounded-xl bg-ivory/5 border border-ivory/10 hover:border-gold-500/40 transition-colors"
                       >
                         <img
                           src={art.photos[0]}
                           alt={art.nom}
-                          className="w-14 h-18 object-cover rounded-lg bg-zinc-800 flex-shrink-0"
+                          className="w-14 h-18 object-contain p-1 mix-blend-multiply bg-stone flex-shrink-0"
                         />
                         <div className="flex-1 min-w-0 flex flex-col justify-between">
                           <div>
-                            <h4 className="font-serif font-bold text-white text-[11px] truncate">
+                            <h4 className="font-serif font-bold text-ivory text-[11px] truncate">
                               {art.nom}
                             </h4>
                             <div className="text-gold-400 font-bold text-xs mt-0.5">
@@ -200,7 +203,7 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
                         key={i}
                         type="button"
                         onClick={() => handleSend(sug)}
-                        className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:border-gold-400/50 hover:bg-white/10 text-[11px] transition-all duration-150 ease-premium motion-press"
+                        className="px-2.5 py-1 rounded-full bg-ivory/5 border border-ivory/10 text-zinc-300 hover:text-ivory hover:border-gold-400/50 hover:bg-ivory/10 text-[11px] transition-all duration-150 ease-premium motion-press"
                       >
                         {sug}
                       </button>
@@ -212,9 +215,9 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
 
             {loading && (
               <div className="flex items-center gap-2 text-zinc-400 text-xs py-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse-subtle" />
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse-subtle" style={{ animationDelay: '0.3s' }} />
-                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse-subtle" style={{ animationDelay: '0.6s' }} />
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" style={{ animationDelay: '0.3s' }} />
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" style={{ animationDelay: '0.6s' }} />
                 <span className="text-[11px] font-medium text-zinc-400">Sophia prépare ses recommandations...</span>
               </div>
             )}
@@ -227,17 +230,19 @@ export default function StylistChatWidget({ isOpen, onToggle, onAddToCart }: Sty
               e.preventDefault();
               handleSend();
             }}
-            className="p-3 bg-dark-900 border-t border-white/10 flex items-center gap-2"
+            className="p-3 bg-dark-900 border-t border-ivory/10 flex items-center gap-2"
           >
             <input
+              aria-label="Votre message à Sophia"
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Écrivez votre message à Sophia..."
-              className="flex-1 bg-dark-950 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500"
+              className="flex-1 bg-dark-950 border border-ivory/10 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-ivory placeholder-zinc-500 focus:outline-none focus:border-gold-500"
             />
             <button
               type="submit"
+              aria-label="Envoyer le message"
               disabled={loading || !input.trim()}
               className="p-2.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-dark-950 disabled:opacity-40 transition-all duration-150 ease-premium motion-press font-bold"
             >

@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { processStylistChat } from '@/lib/ai-agent';
 
-const WHATSAPP_GATEWAY_URL = process.env.WHATSAPP_GATEWAY_URL || 'https://bogbes-whatsapp-gateway.onrender.com';
-const WHATSAPP_API_KEY = process.env.WHATSAPP_API_KEY || 'bogbes_secret_key_2026';
-const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'boutique_secret_token_2026';
+// No hard-coded fallbacks: without these env vars the webhook stays disabled.
+const WHATSAPP_GATEWAY_URL = process.env.WHATSAPP_GATEWAY_URL;
+const WHATSAPP_API_KEY = process.env.WHATSAPP_API_KEY;
+const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
+const WEBHOOK_SECRET = process.env.WHATSAPP_WEBHOOK_SECRET;
 
 // 1. Webhook Verification (pour Meta Cloud API standard)
 export async function GET(req: NextRequest) {
@@ -12,7 +14,7 @@ export async function GET(req: NextRequest) {
   const token = searchParams.get('hub.verify_token');
   const challenge = searchParams.get('hub.challenge');
 
-  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+  if (VERIFY_TOKEN && mode === 'subscribe' && token === VERIFY_TOKEN) {
     return new Response(challenge, { status: 200 });
   }
 
@@ -21,6 +23,13 @@ export async function GET(req: NextRequest) {
 
 // 2. Ingestion des messages entrants (WhatsApp Gateway Baileys / Meta)
 export async function POST(req: NextRequest) {
+  // The gateway must prove it is ours, otherwise anyone could make the shop's number message arbitrary people.
+  if (!WEBHOOK_SECRET || !WHATSAPP_API_KEY || !WHATSAPP_GATEWAY_URL) {
+    return NextResponse.json({ error: 'Webhook non configuré' }, { status: 503 });
+  }
+  if (req.headers.get('x-webhook-secret') !== WEBHOOK_SECRET) {
+    return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
+  }
   try {
     const payload = await req.json();
 

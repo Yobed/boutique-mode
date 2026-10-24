@@ -1,294 +1,215 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Navbar from '@/components/Navbar';
+import { AnimatePresence, motion } from 'motion/react';
+import { SlidersHorizontal, X } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import FilterSidebar from '@/components/FilterSidebar';
-import CartDrawer from '@/components/CartDrawer';
-import StylistChatWidget from '@/components/StylistChatWidget';
-import Footer from '@/components/Footer';
-import { Article, CartItem, CategorieVêtement, GenreVêtement } from '@/lib/types';
+import { ProductGridSkeleton } from '@/components/ui/Skeleton';
 import { getArticles } from '@/lib/supabase';
-import { Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { useStore } from '@/lib/store-context';
+import { unitPrice } from '@/lib/cart.ts';
+import type { Article, CategorieVêtement, GenreVêtement } from '@/lib/types';
+
+type Sort = 'selection' | 'prix-asc' | 'prix-desc';
+const MAX_PRICE = 100000;
 
 function CatalogueContent() {
-  const searchParams = useSearchParams();
+  const params = useSearchParams();
+  const { favorites } = useStore();
   const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [stylistOpen, setStylistOpen] = useState(false);
-  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
-  // Filtres
-  const [searchQuery, setSearchQuery] = useState('');
-  const [categorie, setCategorie] = useState<CategorieVêtement>(
-    (searchParams.get('categorie') as CategorieVêtement) || 'tous'
-  );
-  const [genre, setGenre] = useState<GenreVêtement>(
-    (searchParams.get('genre') as GenreVêtement) || 'tous'
-  );
+  const [query, setQuery] = useState(params.get('q') ?? '');
+  const [categorie, setCategorie] = useState<CategorieVêtement>((params.get('categorie') as CategorieVêtement) || 'tous');
+  const [genre, setGenre] = useState<GenreVêtement>((params.get('genre') as GenreVêtement) || 'tous');
   const [taille, setTaille] = useState('');
-  const [maxPrice, setMaxPrice] = useState(100000);
-  const [onlyPromo, setOnlyPromo] = useState(searchParams.get('promo') === 'true');
-  const [sortBy, setSortBy] = useState<'populaire' | 'prix-asc' | 'prix-desc'>('populaire');
+  const [maxPrice, setMaxPrice] = useState(MAX_PRICE);
+  const [onlyPromo, setOnlyPromo] = useState(params.get('promo') === 'true');
+  const [onlyFav, setOnlyFav] = useState(params.get('favoris') === '1');
+  const [sort, setSort] = useState<Sort>('selection');
 
+  // Keep state in sync when the header search or a nav link changes the URL.
   useEffect(() => {
-    async function load() {
-      try {
-        const data = await getArticles();
-        setArticles(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    load();
+    setQuery(params.get('q') ?? '');
+    setCategorie((params.get('categorie') as CategorieVêtement) || 'tous');
+    setGenre((params.get('genre') as GenreVêtement) || 'tous');
+    setOnlyPromo(params.get('promo') === 'true');
+    setOnlyFav(params.get('favoris') === '1');
+  }, [params]);
 
-    try {
-      const saved = localStorage.getItem('boutique_cart');
-      if (saved) setCartItems(JSON.parse(saved));
-    } catch {}
+  const load = useCallback(() => {
+    setStatus('loading');
+    getArticles()
+      .then((data) => {
+        setArticles(data);
+        setStatus('ready');
+      })
+      .catch(() => setStatus('error'));
   }, []);
 
-  const saveCart = (items: CartItem[]) => {
-    setCartItems(items);
-    try {
-      localStorage.setItem('boutique_cart', JSON.stringify(items));
-    } catch {}
-  };
+  useEffect(() => {
+    load();
+  }, [load]);
 
-  const handleAddToCart = (article: Article, t: string, c: string) => {
-    const existing = cartItems.findIndex(
-      (item) => item.article.id === article.id && item.taille === t && item.couleur === c
-    );
-    let updated: CartItem[];
-    if (existing > -1) {
-      updated = [...cartItems];
-      updated[existing].quantite += 1;
-    } else {
-      updated = [...cartItems, { article, taille: t, couleur: c, quantite: 1 }];
-    }
-    saveCart(updated);
-    setCartOpen(true);
-  };
-
-  const handleResetFilters = () => {
-    setSearchQuery('');
+  const reset = () => {
+    setQuery('');
     setCategorie('tous');
     setGenre('tous');
     setTaille('');
-    setMaxPrice(100000);
+    setMaxPrice(MAX_PRICE);
     setOnlyPromo(false);
+    setOnlyFav(false);
   };
 
-  // Filtrage
-  const filtered = articles
-    .filter((item) => {
-      // Recherche
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const mName = item.nom.toLowerCase().includes(q);
-        const mDesc = item.description.toLowerCase().includes(q);
-        const mCat = item.categorie.toLowerCase().includes(q);
-        if (!mName && !mDesc && !mCat) return false;
-      }
-      // Catégorie
-      if (categorie !== 'tous' && item.categorie !== categorie) return false;
-      // Genre
-      if (genre !== 'tous' && item.genre !== genre && item.genre !== 'mixte') return false;
-      // Taille
-      if (taille && !item.tailles.includes(taille)) return false;
-      // Budget
-      if (maxPrice < 100000 && (item.prix_promo || item.prix) > maxPrice) return false;
-      // Promo
-      if (onlyPromo && !item.prix_promo) return false;
-
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const list = articles.filter((a) => {
+      if (q && ![a.nom, a.description, a.categorie, ...a.couleurs].some((s) => s.toLowerCase().includes(q))) return false;
+      if (categorie !== 'tous' && a.categorie !== categorie) return false;
+      if (genre !== 'tous' && a.genre !== genre && a.genre !== 'mixte') return false;
+      if (taille && !a.tailles.includes(taille)) return false;
+      if (maxPrice < MAX_PRICE && unitPrice(a) > maxPrice) return false;
+      if (onlyPromo && !a.prix_promo) return false;
+      if (onlyFav && !favorites.includes(a.id)) return false;
       return true;
-    })
-    .sort((a, b) => {
-      const pA = a.prix_promo || a.prix;
-      const pB = b.prix_promo || b.prix;
-      if (sortBy === 'prix-asc') return pA - pB;
-      if (sortBy === 'prix-desc') return pB - pA;
-      return 0; // populaire
     });
+    if (sort === 'prix-asc') return [...list].sort((a, b) => unitPrice(a) - unitPrice(b));
+    if (sort === 'prix-desc') return [...list].sort((a, b) => unitPrice(b) - unitPrice(a));
+    return list;
+  }, [articles, query, categorie, genre, taille, maxPrice, onlyPromo, onlyFav, favorites, sort]);
+
+  const title = onlyFav ? 'Vos favoris' : genre === 'femme' ? 'Femme' : genre === 'homme' ? 'Homme' : categorie !== 'tous' ? categorie : 'La collection';
+
+  const sidebar = (
+    <FilterSidebar
+      selectedCategorie={categorie}
+      onSelectCategorie={setCategorie}
+      selectedGenre={genre}
+      onSelectGenre={setGenre}
+      selectedTaille={taille}
+      onSelectTaille={setTaille}
+      maxPrice={maxPrice}
+      onMaxPriceChange={setMaxPrice}
+      onlyPromo={onlyPromo}
+      onTogglePromo={setOnlyPromo}
+      onReset={reset}
+    />
+  );
 
   return (
-    <>
-      <Navbar
-        cartItems={cartItems}
-        onOpenCart={() => setCartOpen(true)}
-        onOpenStylist={() => setStylistOpen(true)}
-      />
-
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-        {/* Top Header & Search Bar */}
-        <div className="mb-8 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white">
-                Catalogue Prêt-à-Porter
-              </h1>
-              <p className="text-zinc-400 text-xs mt-1">
-                {filtered.length} article{filtered.length > 1 ? 's' : ''} disponible{filtered.length > 1 ? 's' : ''} immédiatement à Abidjan
-              </p>
-            </div>
-
-            {/* Sort & Mobile Filter Toggle */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-                className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-white text-xs font-semibold duration-150 ease-premium motion-press"
-              >
-                <SlidersHorizontal className="w-4 h-4 text-gold-400" />
-                <span>Filtres</span>
-              </button>
-
-              <div className="flex items-center gap-2 bg-dark-900 border border-white/10 rounded-xl px-3 py-2 text-xs">
-                <ArrowUpDown className="w-3.5 h-3.5 text-zinc-400" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-transparent text-white focus:outline-none cursor-pointer"
-                >
-                  <option value="populaire" className="bg-dark-900">Les plus populaires</option>
-                  <option value="prix-asc" className="bg-dark-900">Prix croissant</option>
-                  <option value="prix-desc" className="bg-dark-900">Prix décroissant</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Search Box */}
-          <div className="relative">
-            <Search className="w-5 h-5 text-zinc-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Rechercher une robe, un costume, du lin, du wax, une chemise..."
-              className="w-full bg-dark-900 border border-white/10 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500 shadow-md"
-            />
-          </div>
+    <div className="mx-auto max-w-[1440px] px-[var(--gutter)] pb-24 pt-10 md:pt-16">
+      <header className="mb-10 flex flex-col gap-6 border-b border-ivory/[0.08] pb-8 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h1 className="text-display text-[clamp(2.6rem,1.6rem+3vw,5rem)] capitalize leading-none">{title}</h1>
+          <p className="tabular mt-3 text-sm text-zinc-400" aria-live="polite">
+            {status === 'ready' ? `${filtered.length} pièce${filtered.length > 1 ? 's' : ''}` : ' '}
+            {query && status === 'ready' && <> pour « {query} »</>}
+          </p>
         </div>
+        <div className="flex items-center gap-3">
+          <label className="sr-only" htmlFor="tri">
+            Trier
+          </label>
+          <select id="tri" value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="h-11 border border-ivory/15 bg-ink-950 px-3 text-sm text-zinc-200 focus:border-brass-300 focus:outline-none">
+            <option value="selection">Notre sélection</option>
+            <option value="prix-asc">Prix croissant</option>
+            <option value="prix-desc">Prix décroissant</option>
+          </select>
+          <button type="button" onClick={() => setFiltersOpen(true)} aria-expanded={filtersOpen} className="flex h-11 items-center gap-2 border border-ivory/15 px-4 text-sm text-zinc-200 lg:hidden">
+            <SlidersHorizontal className="h-4 w-4" /> Filtres
+          </button>
+        </div>
+      </header>
 
-        {/* Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Desktop */}
-          <div className="hidden lg:block lg:col-span-1">
-            <FilterSidebar
-              selectedCategorie={categorie}
-              onSelectCategorie={setCategorie}
-              selectedGenre={genre}
-              onSelectGenre={setGenre}
-              selectedTaille={taille}
-              onSelectTaille={setTaille}
-              maxPrice={maxPrice}
-              onMaxPriceChange={setMaxPrice}
-              onlyPromo={onlyPromo}
-              onTogglePromo={setOnlyPromo}
-              onReset={handleResetFilters}
-            />
-          </div>
+      <div className="grid gap-10 lg:grid-cols-[240px_1fr]">
+        <aside aria-label="Filtres" className="hidden lg:block">
+          {sidebar}
+        </aside>
 
-          {/* Mobile Filter Modal */}
-          {mobileFilterOpen && (
-            <div className="lg:hidden fixed inset-0 z-50 bg-[#0c0c0e]/85 backdrop-blur-md p-4 overflow-y-auto animate-fade-in flex items-center justify-center">
-              <div className="max-w-md w-full bg-dark-950 p-6 rounded-3xl border border-white/10 shadow-2xl animate-scale-in">
-                <FilterSidebar
-                  selectedCategorie={categorie}
-                  onSelectCategorie={setCategorie}
-                  selectedGenre={genre}
-                  onSelectGenre={setGenre}
-                  selectedTaille={taille}
-                  onSelectTaille={setTaille}
-                  maxPrice={maxPrice}
-                  onMaxPriceChange={setMaxPrice}
-                  onlyPromo={onlyPromo}
-                  onTogglePromo={setOnlyPromo}
-                  onReset={handleResetFilters}
-                />
-                <button
-                  onClick={() => setMobileFilterOpen(false)}
-                  className="w-full mt-4 py-3 bg-gold-500 text-dark-950 font-bold rounded-xl text-sm transition-all duration-150 ease-premium motion-press"
-                >
-                  Appliquer les filtres
-                </button>
-              </div>
+        <div>
+          {status === 'loading' && <ProductGridSkeleton count={6} />}
+
+          {status === 'error' && (
+            <div role="alert" className="py-20 text-center">
+              <p className="text-display text-3xl">La vitrine ne répond pas.</p>
+              <p className="mt-3 text-sm text-zinc-400">Vérifiez votre connexion puis réessayez.</p>
+              <button type="button" onClick={load} className="mt-6 bg-ivory px-7 py-3.5 text-xs font-medium uppercase tracking-label text-ink-950 hover:bg-brass-300">
+                Réessayer
+              </button>
             </div>
           )}
 
-          {/* Product Grid */}
-          <div className="lg:col-span-3">
-            {loading ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="animate-pulse bg-dark-900 border border-white/5 rounded-2xl h-80" />
+          {status === 'ready' && filtered.length === 0 && (
+            <div className="py-20 text-center">
+              <p className="text-display text-3xl">{onlyFav ? 'Aucun favori pour l’instant.' : 'Rien ne correspond.'}</p>
+              <p className="mt-3 text-sm text-zinc-400">{onlyFav ? 'Touchez le cœur d’une pièce pour la garder ici.' : 'Élargissez un filtre ou essayez un autre mot.'}</p>
+              <button type="button" onClick={reset} className="mt-6 border border-ivory/20 px-7 py-3.5 text-xs uppercase tracking-label text-zinc-200 hover:border-brass-300">
+                Tout afficher
+              </button>
+            </div>
+          )}
+
+          {status === 'ready' && filtered.length > 0 && (
+            <motion.ul layout className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3">
+              <AnimatePresence mode="popLayout" initial={false}>
+                {filtered.map((a, i) => (
+                  <motion.li
+                    key={a.id}
+                    layout
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0, transition: { delay: Math.min(i, 8) * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
+                    exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
+                  >
+                    <ProductCard article={a} priority={i < 2} sizes="(min-width: 1024px) 26vw, 50vw" />
+                  </motion.li>
                 ))}
-              </div>
-            ) : filtered.length === 0 ? (
-              <div className="py-20 text-center space-y-3 bg-dark-900 border border-white/5 rounded-3xl p-8">
-                <p className="text-zinc-400 text-sm">
-                  Aucun vêtement ne correspond à vos critères de recherche.
-                </p>
-                <button
-                  onClick={handleResetFilters}
-                  className="px-5 py-2.5 rounded-full bg-gold-500 text-dark-950 font-bold text-xs uppercase tracking-wider"
-                >
-                  Réinitialiser les filtres
+              </AnimatePresence>
+            </motion.ul>
+          )}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {filtersOpen && (
+          <div className="fixed inset-0 z-[70] lg:hidden" role="dialog" aria-modal="true" aria-label="Filtres">
+            <motion.div className="absolute inset-0 bg-ink-950/70" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setFiltersOpen(false)} />
+            <motion.div
+              className="absolute inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto bg-ink-900 px-6 pb-8 pt-4"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%', transition: { duration: 0.22, ease: [0.4, 0, 1, 1] } }}
+              transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <p className="text-display text-2xl">Filtres</p>
+                <button type="button" onClick={() => setFiltersOpen(false)} aria-label="Fermer les filtres" className="grid h-11 w-11 place-items-center">
+                  <X className="h-5 w-5" />
                 </button>
               </div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-                {filtered.map((article) => (
-                  <ProductCard
-                    key={article.id}
-                    article={article}
-                    onAddToCart={handleAddToCart}
-                  />
-                ))}
-              </div>
-            )}
+              {sidebar}
+              <button type="button" onClick={() => setFiltersOpen(false)} className="tabular mt-6 h-14 w-full bg-ivory text-[13px] font-medium uppercase tracking-label text-ink-950">
+                Voir {filtered.length} pièce{filtered.length > 1 ? 's' : ''}
+              </button>
+            </motion.div>
           </div>
-        </div>
-      </main>
-
-      {/* Cart Drawer */}
-      <CartDrawer
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        cartItems={cartItems}
-        onUpdateQuantity={(idx, q) => {
-          const upd = [...cartItems];
-          if (q <= 0) upd.splice(idx, 1);
-          else upd[idx].quantite = q;
-          saveCart(upd);
-        }}
-        onRemoveItem={(idx) => {
-          const upd = cartItems.filter((_, i) => i !== idx);
-          saveCart(upd);
-        }}
-        onClearCart={() => saveCart([])}
-      />
-
-      {/* Stylist Chat Widget */}
-      <StylistChatWidget
-        isOpen={stylistOpen}
-        onToggle={() => setStylistOpen(!stylistOpen)}
-        onAddToCart={handleAddToCart}
-      />
-
-      <Footer />
-    </>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
 export default function CataloguePage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-dark-950 flex items-center justify-center text-zinc-400">Chargement du catalogue...</div>}>
+    <Suspense
+      fallback={
+        <div className="mx-auto max-w-[1440px] px-[var(--gutter)] pt-16">
+          <ProductGridSkeleton />
+        </div>
+      }
+    >
       <CatalogueContent />
     </Suspense>
   );

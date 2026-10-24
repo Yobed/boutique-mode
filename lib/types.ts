@@ -5,6 +5,7 @@ export type CategorieVêtement =
   | 'pantalons'
   | 'costumes'
   | 'chaussures'
+  | 'sacs'
   | 'accessoires'
   | 't-shirts';
 
@@ -25,6 +26,11 @@ export interface Article {
   quantite_stock: number;
   vedette?: boolean;
   nouveaute?: boolean;
+  modele_3d?: {
+    src: string;
+    poster?: string;
+    cameraOrbit?: string;
+  };
   created_at?: string;
 }
 

@@ -1,93 +1,65 @@
-import React from 'react';
 import Link from 'next/link';
-import { MessageCircle, Phone, MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { BRAND, WHATSAPP_DISPLAY, waLink } from '@/lib/config';
+
+const COLUMNS = [
+  {
+    title: 'Collection',
+    links: [
+      { href: '/catalogue?genre=femme', label: 'Femme' },
+      { href: '/catalogue?genre=homme', label: 'Homme' },
+      { href: '/catalogue?categorie=accessoires', label: 'Accessoires' },
+      { href: '/catalogue?promo=true', label: 'Prix doux' },
+    ],
+  },
+  {
+    title: 'Service',
+    links: [
+      { href: '/suivi', label: 'Suivre ma commande' },
+      { href: '/catalogue?favoris=1', label: 'Mes favoris' },
+      { href: '/commande', label: 'Finaliser ma commande' },
+    ],
+  },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-950 border-t border-white/10 text-zinc-400 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center text-dark-950 font-serif font-black text-sm">
-                M
-              </div>
-              <span className="font-serif text-lg font-normal text-white tracking-wide">
-                MAISON <span className="text-gold-400 italic">ÉLÉGANCE</span>
-              </span>
-            </div>
-            <p className="text-zinc-400 leading-relaxed text-xs">
-              Maison de prêt-à-porter & haute couture contemporaine à Abidjan. Confection soignée, fibres nobles et service d'essayage à domicile.
-            </p>
-            <div className="flex items-center gap-2 text-zinc-300 pt-1">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>100% Garanti & Paiement Sécurisé</span>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="space-y-2.5">
-            <h4 className="font-serif font-bold text-sm text-white uppercase tracking-wider">
-              Collections
-            </h4>
-            <ul className="space-y-1.5">
-              <li><Link href="/catalogue?genre=femme" className="hover:text-gold-400 transition-colors">Robes & Ensembles Femme</Link></li>
-              <li><Link href="/catalogue?genre=homme" className="hover:text-gold-400 transition-colors">Costumes & Chemises Homme</Link></li>
-              <li><Link href="/catalogue?categorie=chemises" className="hover:text-gold-400 transition-colors">Créations Lin & Wax Chic</Link></li>
-              <li><Link href="/catalogue?categorie=chaussures" className="hover:text-gold-400 transition-colors">Escarpins & Mocassins</Link></li>
-              <li><Link href="/catalogue?promo=true" className="text-amber-400 hover:text-amber-300 transition-colors">Ventes Privées & Promos</Link></li>
-              <li><Link href="/suivi" className="text-gold-400 hover:text-gold-300 transition-colors font-semibold">Suivi de Commande en Direct</Link></li>
-            </ul>
-          </div>
-
-          {/* Zones de Livraison */}
-          <div className="space-y-2.5">
-            <h4 className="font-serif font-bold text-sm text-white uppercase tracking-wider">
-              Livraison Express 24h
-            </h4>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Expédition quotidienne partout à Abidjan : Cocody, Marcory, Plateau, Yopougon, Treichville, Port-Bouët, Bingerville.
-            </p>
-            <p className="text-xs text-zinc-400 leading-relaxed pt-1">
-              Expéditions vers l'intérieur du pays via compagnies partenaires (Yamoussoukro, Bouaké, San-Pédro, Korhogo).
-            </p>
-          </div>
-
-          {/* Contact & Support */}
-          <div className="space-y-2.5">
-            <h4 className="font-serif font-bold text-sm text-white uppercase tracking-wider">
-              Contact & Commandes
-            </h4>
-            <div className="space-y-2">
-              <a
-                href="https://wa.me/2250778311541"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-semibold"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>+225 07 78 31 15 41 (WhatsApp)</span>
-              </a>
-              <div className="flex items-center gap-2 text-zinc-400">
-                <Phone className="w-4 h-4 text-gold-400" />
-                <span>Service Client 7j/7 : 08h - 22h</span>
-              </div>
-              <div className="flex items-center gap-2 text-zinc-400">
-                <MapPin className="w-4 h-4 text-gold-400" />
-                <span>Abidjan, Côte d'Ivoire</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <p>© {new Date().getFullYear()} Boutique en Ligne. Tous droits réservés.</p>
-          <p className="flex items-center justify-center gap-1 text-zinc-500">
-            Fait avec <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> • Propulsé par Next.js & IA Styliste
+    <footer className="border-t border-ivory/[0.07] bg-ink-950 text-zinc-400">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-[var(--gutter)] py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:py-20">
+        <div className="space-y-5">
+          <p className="text-display text-5xl tracking-[0.3em] text-ivory">{BRAND.name}</p>
+          <p className="max-w-xs text-sm leading-relaxed">
+            Vêtements et accessoires choisis, ajustés et repassés dans notre atelier d’Abidjan, livrés sous housse jusqu’à votre porte.
           </p>
         </div>
+
+        {COLUMNS.map((col) => (
+          <nav key={col.title} aria-label={col.title}>
+            <h2 className="mb-4 text-[11px] uppercase tracking-label text-zinc-500">{col.title}</h2>
+            <ul className="space-y-2.5 text-sm">
+              {col.links.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="link-draw text-zinc-300 hover:text-ivory">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+
+        <div className="space-y-3 text-sm">
+          <h2 className="mb-4 text-[11px] uppercase tracking-label text-zinc-500">Atelier & Conciergerie</h2>
+          <p className="text-zinc-300">Atelier & Salon Privé : Cocody Danga, Abidjan</p>
+          <a href={waLink()} target="_blank" rel="noopener noreferrer" className="link-draw tabular block text-emerald-300 hover:text-emerald-200">
+            WhatsApp {WHATSAPP_DISPLAY}
+          </a>
+          <p>Tous les jours, 8 h – 21 h</p>
+          <p>Livraison Abidjan 24 h · Échange garanti 48 h</p>
+        </div>
+      </div>
+      <div className="mx-auto flex max-w-[1440px] flex-col justify-between gap-2 border-t border-ivory/[0.06] px-[var(--gutter)] py-6 text-xs text-zinc-500 sm:flex-row">
+        <p>© {new Date().getFullYear()} {BRAND.name} · Cocody Danga, Abidjan · RCCM CI-ABJ-2024-B-14892</p>
+        <p>Paiement sécurisé à la réception · Échange 48 h · Wave · Orange Money · MTN MoMo</p>
       </div>
     </footer>
   );
