@@ -36,7 +36,7 @@ export default function SiteChrome({ children }: { children: ReactNode }) {
         isOpen={stylistOpen}
         onToggle={() => setStylistOpen(!stylistOpen)}
         onAddToCart={(article, taille, couleur) => add(article, taille, couleur)}
-        hideLauncher={pathname?.startsWith('/article') || pathname?.startsWith('/commande')}
+        hideLauncher={true}
       />
       {/* Bouton WhatsApp officiel connecté à Sophia */}
       <FloatingWhatsAppButton />

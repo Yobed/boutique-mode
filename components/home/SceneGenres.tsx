@@ -46,24 +46,24 @@ export default function SceneGenres() {
       </h2>
       <div className="doors mx-auto flex max-w-[1440px] flex-col gap-14 px-[var(--gutter)] lg:h-[74svh] lg:flex-row lg:gap-4">
         {DOORS.map((d) => (
-          <Link key={d.href} href={d.href} data-door data-cursor="Entrer" className="door group flex min-w-0 flex-col">
+          <Link key={d.href} href={d.href} data-door data-cursor="Entrer" className="door group flex min-w-0 flex-col overflow-hidden">
             <div data-door-frame className="relative h-[46svh] overflow-hidden bg-stone transition-colors duration-500 group-hover:bg-stone-deep lg:h-auto lg:flex-1">
               <div data-door-img className="absolute inset-0 [background-color:inherit]">
                 <Image src={d.img} alt={d.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-contain p-[12%] mix-blend-multiply group-hover:scale-[1.06]" />
               </div>
             </div>
-            <div className="relative -mt-[0.45em] flex items-end justify-between gap-4 px-1 text-[clamp(2.6rem,1.2rem+2.9vw,4.8rem)]">
-              <span data-door-title className="text-display block italic leading-[0.85] transition-colors duration-500 group-hover:text-indigo">
+            <div className="relative z-10 -mt-[0.35em] flex items-end justify-between gap-4 px-1 text-[clamp(1.75rem,0.9rem+1.6vw,2.75rem)]">
+              <span data-door-title className="text-display block italic leading-[0.9] truncate transition-colors duration-500 group-hover:text-indigo">
                 {d.title}
               </span>
               <span
                 aria-hidden
-                className="mb-[0.12em] grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/25 text-base text-ink transition-[background-color,color,transform,border-color] duration-500 ease-silk group-hover:-rotate-45 group-hover:border-indigo group-hover:bg-indigo group-hover:text-paper"
+                className="mb-[0.12em] grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/25 text-sm text-ink transition-[background-color,color,transform,border-color] duration-500 ease-silk group-hover:-rotate-45 group-hover:border-indigo group-hover:bg-indigo group-hover:text-paper"
               >
                 →
               </span>
             </div>
-            <span className="mt-3 px-1 text-sm text-mute-400">{d.kicker}</span>
+            <span className="mt-2.5 px-1 text-xs sm:text-sm text-mute-400 truncate">{d.kicker}</span>
           </Link>
         ))}
       </div>
