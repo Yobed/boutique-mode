@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import StylistChatWidget from '@/components/StylistChatWidget';
+import FloatingWhatsAppButton from '@/components/chrome/FloatingWhatsAppButton';
 import CartFeedback from '@/components/chrome/CartFeedback';
 import Cursor from '@/components/fx/Cursor';
 import { useStore } from '@/lib/store-context';
@@ -37,6 +38,8 @@ export default function SiteChrome({ children }: { children: ReactNode }) {
         onAddToCart={(article, taille, couleur) => add(article, taille, couleur)}
         hideLauncher={pathname?.startsWith('/article') || pathname?.startsWith('/commande')}
       />
+      {/* Bouton WhatsApp officiel connecté à Sophia */}
+      <FloatingWhatsAppButton />
       <CartFeedback />
       <Cursor />
     </>

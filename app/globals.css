@@ -347,3 +347,19 @@
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Suppression totale du badge Powered by Netlify */
+.netlify-badge,
+[data-netlify-badge],
+iframe[src*="netlify"],
+a[href*="netlify.com"][class*="badge"],
+#netlify-badge,
+.built-with-badge {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+}
