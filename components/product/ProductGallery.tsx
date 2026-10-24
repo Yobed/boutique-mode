@@ -182,7 +182,7 @@ function Lightbox({ photos, nom, index, go, onClose }: LightboxProps) {
 }
 
 export default function ProductGallery({ photos, nom, plateRef, modele_3d, selectedColor }: Props) {
-  const [viewMode, setViewMode] = useState<'photos' | '3d'>('3d');
+  const [viewMode, setViewMode] = useState<'photos' | '3d'>(modele_3d ? '3d' : 'photos');
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState<number | null>(null);
   const slides = useRef<(HTMLDivElement | null)[]>([]);

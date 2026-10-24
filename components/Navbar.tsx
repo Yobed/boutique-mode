@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/catalogue?categorie=sacs', label: 'Sacs' },
   { href: '/catalogue?categorie=chaussures', label: 'Chaussures' },
   { href: '/catalogue?categorie=accessoires', label: 'Bijoux' },
+  { href: '/3d', label: 'Studio 3D ✨' },
   { href: '/catalogue', label: 'Tout voir' },
 ];
 

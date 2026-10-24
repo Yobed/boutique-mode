@@ -10,6 +10,7 @@ import { PROOF, SHOW_CUSTOMER_PROOF } from '@/lib/marketing';
 import { useStore } from '@/lib/store-context';
 import { gsap, introDelay, MQ, SplitText, useGSAP } from '@/lib/gsap';
 import Magnetic from '@/components/fx/Magnetic';
+import { Sparkles } from 'lucide-react';
 
 interface PlateProps {
   article: Article;
@@ -157,6 +158,13 @@ export default function SceneHero({ article, side }: { article: Article; side: A
               Découvrir la collection
             </Link>
           </Magnetic>
+          <Link
+            href="/3d"
+            className="inline-flex items-center gap-2 rounded-full border border-brass-500/40 bg-ink-950/90 px-4 py-2.5 text-xs font-serif font-medium text-brass-300 shadow-lg backdrop-blur-md transition-all hover:bg-brass-400 hover:text-ink-950 hover:scale-105 active:scale-95"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-brass-400" />
+            <span>Vue 3D 360° du Sac</span>
+          </Link>
           <button type="button" onClick={() => setStylistOpen(true)} className="link-draw py-2 text-sm text-ink">
             Être conseillé·e par Sophia
           </button>
