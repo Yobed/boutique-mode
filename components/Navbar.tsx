@@ -67,10 +67,10 @@ export default function Navbar() {
       <p className="truncate border-b border-ivory/[0.06] px-4 py-2 text-center text-[11px] uppercase tracking-[0.1em] text-zinc-400 sm:tracking-label">
         Livraison 24 h à Abidjan
         <span className="hidden sm:inline">
-          <span aria-hidden className="mx-2 text-brass-600">·</span> Essayage chez vous
+          <span aria-hidden className="mx-2 text-brass-600">·</span> Paiement sécurisé à la réception
         </span>
         <span className="hidden md:inline">
-          <span aria-hidden className="mx-2 text-brass-600">·</span> Paiement à la réception
+          <span aria-hidden className="mx-2 text-brass-600">·</span> Échange garanti sous 48 h
         </span>
       </p>
 

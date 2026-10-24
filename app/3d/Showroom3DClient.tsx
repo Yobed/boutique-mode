@@ -203,8 +203,8 @@ export default function Showroom3DClient() {
               </div>
               <div className="space-y-1">
                 <Truck className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">Essayage à domicile</p>
-                <p className="text-[10px]">Coursier patiente</p>
+                <p className="text-[11px] font-medium text-linen-100">Sous housse zippée</p>
+                <p className="text-[10px]">Repassée vapeur</p>
               </div>
               <div className="space-y-1">
                 <ShieldCheck className="w-4 h-4 mx-auto text-brass-400" />
