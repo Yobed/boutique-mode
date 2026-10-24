@@ -58,6 +58,34 @@ GROQ_API_KEY="gsk_votre_cle_groq_gratuite"
 
 ---
 
+## 💎 Studio 3D & Modélisation d'Articles Image-vers-3D
+
+Le projet intègre désormais le **pipeline de modélisation 3D procédurale Blender** pour transformer automatiquement des photos d'articles de mode en modèles 3D interactifs (`.glb`) :
+
+### 1. Modéliser un article depuis sa photo (en 1 clic) :
+Déposez la photo dans `inputs/product_images/` puis lancez :
+```powershell
+npm run 3d:model -- -ImagePath "inputs/product_images/mon_sac.jpg" -Id "sac_luxe"
+```
+Le modèle est automatiquement analysé, modélisé sous Blender 5.2.2 avec shaders PBR physiques (cuir, métal, soie, verre), validé (100% manifold) et copié dans `public/models/sac_luxe.glb`.
+
+### 2. Afficher le modèle 3D dans le site Web (React / Next.js) :
+Utilisez le composant interactif `Product3DViewer` :
+```tsx
+import Product3DViewer from '@/components/3d/Product3DViewer';
+
+<Product3DViewer
+  modelSrc="/models/sac_luxe.glb"
+  alt="Sac en Cuir Luxe"
+  autoRotate={true}
+/>
+```
+
+Pour tous les détails et personnalisations de matières, consultez le guide complet :
+👉 [`docs/3d-pipeline/IMAGE_TO_3D_FASHION_GUIDE.md`](docs/3d-pipeline/IMAGE_TO_3D_FASHION_GUIDE.md)
+
+---
+
 ## ☁️ Déploiement Gratuit sur Netlify (0 FCFA/mois)
 
 1. Poussez le projet sur GitHub :

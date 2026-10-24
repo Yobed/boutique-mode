@@ -1,0 +1,7 @@
+# Not needed by the deployed site
+.agents
+.claude
+scripts
+public/3d/raw
+*.blend
+*.blend1

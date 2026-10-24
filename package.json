@@ -7,13 +7,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test lib/*.test.ts",
+    "whatsapp:bot": "node services/elsi-whatsapp-bot/server.js",
+    "3d:model": "powershell -ExecutionPolicy Bypass -File scripts/3d_pipeline/run_fashion_3d.ps1",
+    "3d:pipeline": "C:\\Users\\WILFRIED\\Downloads\\Blender-5.2.2-Portable\\blender-5.2.2-windows-x64\\blender.exe --factory-startup -b -P scripts/3d_pipeline/orchestrator.py --"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@supabase/supabase-js": "^2.49.1",
     "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.475.0",
-    "next": "15.1.7",
+    "motion": "^12.23.12",
+    "next": "^15.5.28",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.1"

@@ -1,0 +1,233 @@
+{
+  "object_id": "sac_demo_decomposed",
+  "object_name": "Sac Demo Multi-Component Model",
+  "category": "multi_component_decomposed_object",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.4316,
+      0.2805,
+      0.2
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Socle_Inferieur": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Corps_Central_Strate_1": {
+      "preset": "natural_wood"
+    },
+    "M_Corps_Central_Strate_2": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Chapeau_Superieur": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Dial_Accent": {
+      "preset": "dark_polymer"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_socle_inferieur",
+      "name": "Socle_Inferieur",
+      "role": "structural_base",
+      "primitive": "rounded_box",
+      "material": "M_Socle_Inferieur",
+      "dimensions": [
+        0.0214,
+        0.0139,
+        0.0063
+      ],
+      "location": [
+        0.1504,
+        0.0,
+        0.0
+      ],
+      "corner_radius": 0.02,
+      "taper_ratio": 0.95,
+      "bevel_width": 0.002,
+      "confidence": 0.88,
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "visual_justification": "Strate inf\u00e9rieure continue d\u00e9limit\u00e9e par un \u00e9paulement franc et transition de teinte.",
+      "uncertainties": [
+        "Profondeur front-to-back estim\u00e9e selon heuristique 0.65x large",
+        "Face arri\u00e8re non visible suppos\u00e9e sym\u00e9trique \u00e0 la face avant"
+      ]
+    },
+    {
+      "id": "comp_2_corps_central_strate_1",
+      "name": "Corps_Central_Strate_1",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Corps_Central_Strate_1",
+      "dimensions": [
+        0.2069,
+        0.1345,
+        0.025
+      ],
+      "location": [
+        0.1023,
+        0.0,
+        0.0063
+      ],
+      "corner_radius": 0.025,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.002,
+      "confidence": 0.91,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_socle_inferieur"
+      },
+      "visual_justification": "Strate m\u00e9diane de largeur maximale constituant le volume principal.",
+      "uncertainties": [
+        "Profondeur front-to-back estim\u00e9e selon heuristique 0.65x large",
+        "Face arri\u00e8re non visible suppos\u00e9e sym\u00e9trique \u00e0 la face avant"
+      ]
+    },
+    {
+      "id": "comp_3_corps_central_strate_2",
+      "name": "Corps_Central_Strate_2",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Corps_Central_Strate_2",
+      "dimensions": [
+        0.4316,
+        0.2805,
+        0.1625
+      ],
+      "location": [
+        -0.004,
+        0.0,
+        0.0312
+      ],
+      "corner_radius": 0.025,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.002,
+      "confidence": 0.91,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_corps_central_strate_1"
+      },
+      "visual_justification": "Strate m\u00e9diane de largeur maximale constituant le volume principal.",
+      "uncertainties": [
+        "Profondeur front-to-back estim\u00e9e selon heuristique 0.65x large",
+        "Face arri\u00e8re non visible suppos\u00e9e sym\u00e9trique \u00e0 la face avant"
+      ]
+    },
+    {
+      "id": "comp_4_chapeau_superieur",
+      "name": "Chapeau_Superieur",
+      "role": "top_cap_or_insert",
+      "primitive": "rounded_box",
+      "material": "M_Chapeau_Superieur",
+      "dimensions": [
+        0.01,
+        0.01,
+        0.0063
+      ],
+      "location": [
+        -0.087,
+        0.0,
+        0.1938
+      ],
+      "corner_radius": 0.015,
+      "taper_ratio": 0.9,
+      "bevel_width": 0.002,
+      "confidence": 0.82,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_3_corps_central_strate_2"
+      },
+      "visual_justification": "Strate sommitale avec d\u00e9crochement de largeur et d\u00e9calage de centre.",
+      "uncertainties": [
+        "Profondeur front-to-back estim\u00e9e selon heuristique 0.65x large",
+        "Face arri\u00e8re non visible suppos\u00e9e sym\u00e9trique \u00e0 la face avant"
+      ]
+    },
+    {
+      "id": "comp_detail_1_cadran",
+      "name": "Cadran_Circulaire_Accent",
+      "role": "rotary_dial_bezel",
+      "primitive": "ring_collar",
+      "material": "M_Dial_Accent",
+      "radius_ext": 0.0956,
+      "radius_int": 0.0765,
+      "height": 0.003,
+      "bevel_width": 0.0004,
+      "segments": 32,
+      "location": [
+        0.0,
+        -0.1403,
+        0.1
+      ],
+      "rotation": [
+        1.5708,
+        0.0,
+        0.0
+      ],
+      "confidence": 0.78,
+      "relationship": {
+        "type": "embedded_in_face",
+        "target": "comp_1_socle_inferieur"
+      },
+      "visual_justification": "Contraste circulaire d\u00e9tect\u00e9 au centre de la face avant (contraste=43.92).",
+      "uncertainties": [
+        "Profondeur d'encastrement estim\u00e9e"
+      ]
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_demo.jpg",
+    "analyzer_module": "component_analyzer.py",
+    "detected_strata_count": 4,
+    "detected_features_count": 1,
+    "confidence_score": 0.88,
+    "monocular_ambiguity": true,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 313x131 px",
+      "Ratio d'aspect mesur\u00e9 : 0.419",
+      "Nombre de strates physiques distinctes identifi\u00e9es : 4"
+    ],
+    "hypotheses": [
+      "Chaque strate verticale avec discontinuit\u00e9 g\u00e9om\u00e9trique et colorim\u00e9trique est mod\u00e9lis\u00e9e comme une pi\u00e8ce \u00e9tanche ind\u00e9pendante.",
+      "Profondeur Y fix\u00e9e selon le coefficient ergonomique 0.65x largeur en absence de vue orthogonale."
+    ],
+    "structural_breakdown": [
+      {
+        "component_id": "comp_1_socle_inferieur",
+        "role": "structural_base",
+        "justification": "Strate inf\u00e9rieure continue d\u00e9limit\u00e9e par un \u00e9paulement franc et transition de teinte."
+      },
+      {
+        "component_id": "comp_2_corps_central_strate_1",
+        "role": "main_body_core",
+        "justification": "Strate m\u00e9diane de largeur maximale constituant le volume principal."
+      },
+      {
+        "component_id": "comp_3_corps_central_strate_2",
+        "role": "main_body_core",
+        "justification": "Strate m\u00e9diane de largeur maximale constituant le volume principal."
+      },
+      {
+        "component_id": "comp_4_chapeau_superieur",
+        "role": "top_cap_or_insert",
+        "justification": "Strate sommitale avec d\u00e9crochement de largeur et d\u00e9calage de centre."
+      },
+      {
+        "component_id": "comp_detail_1_cadran",
+        "role": "rotary_dial_bezel",
+        "justification": "Contraste circulaire d\u00e9tect\u00e9 au centre de la face avant (contraste=43.92)."
+      }
+    ]
+  }
+}

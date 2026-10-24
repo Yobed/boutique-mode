@@ -1,4 +1,4 @@
-# PRODUCT.md — Maison Élégance (Boutique de Prêt-à-Porter & Haute Couture)
+# PRODUCT.md — ELSI (Vêtements & Accessoires — Abidjan)
 
 ## Register
 **brand** (with dedicated e-commerce product flow)
@@ -22,7 +22,7 @@ Offrir aux femmes et hommes d'Abidjan et d'Afrique de l'Ouest une expérience de
 - **Templates SaaS occidentaux froids** : Boutons "Sign up for a 14-day free trial", terminologie anglophone déplacée.
 
 ## Strategic Design Principles
-1. **Luxe & Sobriété** : Fond noir obsidienne chaleureux teinté d'ambre (`#0c0c0e`), accents or champagne satiné (`#d4af37`), vert émeraude atelier (`#12382c`).
+1. **Luxe & Sobriété** : Fond noir obsidienne chaleureux teinté d'ambre (`#0c0c0e`), accent laiton brossé, jade atelier pour WhatsApp et la réassurance (tokens OKLCH dans DESIGN.md).
 2. **Zéro Friction WhatsApp & Mobile** : Chaque vêtement dispose d'une commande directe préremplie en 1 clic vers le WhatsApp de la boutique.
 3. **Réassurance Totale** : Mise en avant claire du paiement à la réception, de l'essayage à la livraison et de l'échange de taille garanti 48h.
-4. **Typographie Haute Couture** : Titres en serif éditorial noble (*Italiana / Editorial Serif*), métadonnées précises et lisibles en *Plus Jakarta Sans*.
+4. **Typographie Haute Couture** : titres en *Bodoni Moda* (romain + italique), texte et interface en *Jost*. Voir DESIGN.md.

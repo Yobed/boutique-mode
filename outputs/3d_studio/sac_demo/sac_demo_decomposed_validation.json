@@ -1,0 +1,108 @@
+{
+  "verdict": "PASS",
+  "objects_count": 5,
+  "total_base_vertices": 352,
+  "total_base_faces": 248,
+  "total_evaluated_vertices": 1056,
+  "total_evaluated_triangles": 2096,
+  "issues": [],
+  "objects_audit": {
+    "Socle_Inferieur": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Corps_Central_Strate_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Corps_Central_Strate_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Chapeau_Superieur": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Cadran_Circulaire_Accent": {
+      "base_verts": 128,
+      "base_faces": 128,
+      "eval_verts": 384,
+      "eval_triangles": 768,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.219589,
+      -0.1433,
+      0.0
+    ],
+    "max": [
+      0.211589,
+      0.140113,
+      0.2001
+    ],
+    "dimensions": [
+      0.431178,
+      0.283413,
+      0.2001
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.4316,
+      "actual": 0.431178,
+      "error_pct": 0.1,
+      "match": true
+    },
+    "dy": {
+      "target": 0.2805,
+      "actual": 0.283413,
+      "error_pct": 1.04,
+      "match": true
+    },
+    "dz": {
+      "target": 0.2,
+      "actual": 0.2001,
+      "error_pct": 0.05,
+      "match": true
+    }
+  }
+}
