@@ -5,6 +5,13 @@ import { getArticleById, getArticles } from '@/lib/supabase';
 
 type Params = { params: Promise<{ id: string }> };
 
+export async function generateStaticParams() {
+  const articles = await getArticles();
+  return articles.map((article) => ({
+    id: article.id,
+  }));
+}
+
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { id } = await params;
   const article = await getArticleById(id);
