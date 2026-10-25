@@ -21,7 +21,7 @@
     "monocular_estimate": true,
     "poster": "/models/art-008-poster.png",
     "reasons": [
-      "revue visuelle : gros plan sur une paire de chaussures, modèle déformé ; refaire avec un packshot d'une seule chaussure"
+      "revue visuelle : gros plan sur une paire de chaussures, mod\u00e8le d\u00e9form\u00e9 ; refaire avec un packshot d'une seule chaussure"
     ],
     "recolor": false,
     "silhouette_iou": 0.911,
@@ -37,12 +37,14 @@
     "monocular_estimate": true,
     "override": true,
     "poster": "/models/art-009-poster.png",
-    "reasons": [],
+    "reasons": [
+      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+    ],
     "recolor": false,
     "silhouette_iou": 0.757,
     "source_image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80",
     "src": "/models/art-009.glb",
-    "status": "ok"
+    "status": "review"
   },
   "art-101": {
     "backend": "triposr",
@@ -60,16 +62,16 @@
     "status": "ok"
   },
   "art-102": {
-    "backend": "multiview",
+    "backend": "blender_procedural",
     "cameraOrbit": "0deg 75deg 105%",
-    "faces": 60000,
-    "generated_at": "2026-10-25T11:29:30+00:00",
+    "faces": 7324,
+    "generated_at": "2026-10-25T11:50:50+00:00",
     "monocular_estimate": false,
     "override": true,
     "poster": "/models/art-102-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.871,
+    "silhouette_iou": 0.95,
     "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
     "src": "/models/art-102.glb",
     "status": "ok"
@@ -81,12 +83,14 @@
     "generated_at": "2026-10-24T19:38:49+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-103-poster.png",
-    "reasons": [],
+    "reasons": [
+      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+    ],
     "recolor": false,
     "silhouette_iou": 0.797,
     "source_image": "https://images.unsplash.com/photo-1640901555383-7335ec5a6476?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-103.glb",
-    "status": "ok"
+    "status": "review"
   },
   "art-104": {
     "backend": "triposr",
@@ -95,12 +99,14 @@
     "generated_at": "2026-10-24T19:47:30+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-104-poster.png",
-    "reasons": [],
+    "reasons": [
+      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+    ],
     "recolor": false,
     "silhouette_iou": 0.607,
     "source_image": "https://images.unsplash.com/photo-1548175604-bc2d52e2271f?w=1600&auto=format&q=80&exp=8",
     "src": "/models/art-104.glb",
-    "status": "ok"
+    "status": "review"
   },
   "art-105": {
     "backend": "triposr",
@@ -109,12 +115,14 @@
     "generated_at": "2026-10-24T19:41:27+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-105-poster.png",
-    "reasons": [],
+    "reasons": [
+      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+    ],
     "recolor": false,
     "silhouette_iou": 0.687,
     "source_image": "https://images.unsplash.com/photo-1761646238176-b480909e6ba6?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-105.glb",
-    "status": "ok"
+    "status": "review"
   },
   "art-202": {
     "backend": "triposr",
@@ -138,12 +146,14 @@
     "generated_at": "2026-10-25T10:23:52+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-203-poster.png",
-    "reasons": [],
+    "reasons": [
+      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+    ],
     "recolor": false,
     "silhouette_iou": 0.882,
     "source_image": "https://images.unsplash.com/photo-1789110518369-5e33011ac08c?w=1600&auto=format&q=80",
     "src": "/models/art-203.glb",
-    "status": "ok"
+    "status": "review"
   },
   "art-204": {
     "backend": "triposr",
@@ -233,20 +243,6 @@
     "silhouette_iou": 0.953,
     "source_image": "inputs/multiview/targus_backpack_sheet.png",
     "src": "/models/sac-a-dos-targus.glb",
-    "status": "ok"
-  },
-  "test-102": {
-    "backend": "triposr",
-    "cameraOrbit": "0deg 75deg 105%",
-    "faces": 60000,
-    "generated_at": "2026-10-25T11:20:05+00:00",
-    "monocular_estimate": true,
-    "poster": "/models/test-102-poster.png",
-    "reasons": [],
-    "recolor": false,
-    "silhouette_iou": 0.758,
-    "source_image": "public/images/planches/art-102-face.jpg",
-    "src": "/models/test-102.glb",
     "status": "ok"
   }
 }
