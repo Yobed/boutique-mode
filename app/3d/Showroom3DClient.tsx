@@ -1,220 +1,148 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, MessageCircle, ShoppingBag, ShieldCheck, Clock, Truck, Sparkles, Check } from 'lucide-react';
+import { ArrowLeft, Check, MessageCircle, Sparkles } from 'lucide-react';
 import Product3DViewer from '@/components/3d/Product3DViewer';
-import { useStore } from '@/lib/store-context';
 
 const WHATSAPP_PHONE = '2250574243752';
-
 const COLOR_OPTIONS = [
-  {
-    key: 'Noir',
-    label: 'Noir Ébène',
-    colorHex: '#18181b',
-    desc: 'Cuir grainé d’un noir profond et intemporel, magnifié par les finitions laiton doré.',
-  },
-  {
-    key: 'Bordeaux',
-    label: 'Bordeaux Royal',
-    colorHex: '#581c24',
-    desc: 'Teinte carmin envoûtante, riche en reflets chauds pour vos soirées élégantes.',
-  },
-  {
-    key: 'Cognac',
-    label: 'Cognac Cuir',
-    colorHex: '#8b4513',
-    desc: 'Cuir ambré aux accents naturels de maroquinerie sellier artisanale.',
-  },
+  { key: 'noir', label: 'Noir', colorHex: '#171717' },
+  { key: 'marron', label: 'Marron', colorHex: '#774126' },
+  { key: 'bordeaux', label: 'Bordeaux', colorHex: '#642a31' },
+  { key: 'bleu-marine', label: 'Bleu marine', colorHex: '#23364e' },
+  { key: 'camel', label: 'Camel', colorHex: '#b87a43' },
+  { key: 'gris', label: 'Gris', colorHex: '#77736d' },
 ];
 
 export default function Showroom3DClient() {
-  const [selectedColor, setSelectedColor] = useState('Noir');
-  const { add } = useStore();
-
-  const activeColorInfo =
-    COLOR_OPTIONS.find((c) => c.key === selectedColor) || COLOR_OPTIONS[0];
-
+  const [selectedColor, setSelectedColor] = useState('Marron');
+  const activeColor = COLOR_OPTIONS.find((color) => color.label === selectedColor) ?? COLOR_OPTIONS[1];
   const whatsappMessage = encodeURIComponent(
-    `Bonjour Sophia, je viens d'explorer le Sac Signature en vue 3D sur le site. Je souhaite le commander en teinte ${activeColorInfo.label} (32 000 FCFA). Est-il disponible pour une livraison à domicile ?`
+    `Bonjour, j'ai vu la maquette 3D de la chaussure Derby homme. Pouvez-vous me confirmer le prix, les pointures et la disponibilité du coloris ${activeColor.label} ?`
   );
   const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappMessage}`;
 
   return (
-    <div className="min-h-screen bg-ink-950 text-linen-100 pb-24 pt-6">
+    <main className="min-h-screen bg-ink-950 pb-20 pt-6 text-linen-100">
       <div className="mx-auto max-w-[1440px] px-[var(--gutter)]">
-        {/* Fil d'Ariane & Retour */}
-        <nav className="mb-6 flex items-center justify-between gap-4 border-b border-white/10 pb-4 text-xs font-serif text-zinc-400">
-          <Link
-            href="/"
-            className="group flex items-center gap-2 hover:text-brass-300 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Retour à l'accueil</span>
+        <nav className="mb-7 flex items-center justify-between gap-4 border-b border-white/10 pb-4 text-xs text-zinc-400">
+          <Link href="/" className="group flex items-center gap-2 transition-colors hover:text-brass-300">
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <span>Retour à l’accueil</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="tracking-widest uppercase text-[10px] text-brass-300">
-              Expérience 3D Interactive
-            </span>
-          </div>
+          <span className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-brass-300">
+            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            Maquette 3D interactive
+          </span>
         </nav>
 
-        {/* Grille principale Showroom 3D */}
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
-          {/* Colonne gauche : Visualiseur 3D interactif (7 colonnes) */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="relative">
-              <Product3DViewer
-                modelSrc="/models/sac-elsi.glb"
-                posterSrc="/models/sac-elsi-poster.png"
-                alt="Sac à Main Cuir Grainé ELSI en 3D 360°"
-                cameraOrbit="0deg 75deg 105%"
-                selectedColor={selectedColor}
-                onColorChange={(c) => setSelectedColor(c)}
-                showColorPicker={true}
-                className="w-full aspect-[4/4] sm:aspect-[4/4.2] rounded-3xl"
-              />
-            </div>
+        <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-12">
+          <section className="space-y-4 lg:col-span-7" aria-label="Chaussure en vue 3D">
+            <Product3DViewer
+              modelSrc="/models/chaussure-homme-cognac.glb"
+              posterSrc="/models/chaussure-homme-cognac-poster.png"
+              alt="Maquette 3D d’une paire de chaussures Derby pour homme, coloris marron cognac"
+              cameraOrbit="20deg 72deg 125%"
+              selectedColor={selectedColor}
+              onColorChange={setSelectedColor}
+              colorOptions={COLOR_OPTIONS.map((color) => color.key)}
+              showColorPicker={false}
+              background="#d6d0c8"
+              className="aspect-[4/3] w-full rounded-3xl border-white/10"
+            />
 
-            {/* Conseils d'interaction */}
-            <div className="grid grid-cols-3 gap-3 text-center text-xs text-zinc-400 border border-white/5 rounded-2xl p-3 bg-ink-900/40">
+            <div className="grid grid-cols-3 rounded-2xl border border-white/10 bg-ink-900/60 p-4 text-center text-xs text-zinc-400">
               <div>
-                <span className="block text-brass-300 font-medium font-serif">Pivoter</span>
-                <span>Glissez le doigt ou la souris</span>
+                <span className="mb-1 block font-serif text-brass-300">Vue 360°</span>
+                <span>Glisse pour pivoter</span>
               </div>
               <div className="border-x border-white/10 px-2">
-                <span className="block text-brass-300 font-medium font-serif">Zoomer</span>
-                <span>Pincez ou molette</span>
+                <span className="mb-1 block font-serif text-brass-300">Zoom</span>
+                <span>Pince ou utilise la molette</span>
               </div>
               <div>
-                <span className="block text-brass-300 font-medium font-serif">Couleurs</span>
-                <span>Pastilles en direct</span>
+                <span className="mb-1 block font-serif text-brass-300">Coloris</span>
+                <span>Aperçu simulé</span>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Colonne droite : Fiche d'exception & Commandes directes (5 colonnes) */}
-          <div className="lg:col-span-5 space-y-7 lg:sticky lg:top-24">
+          <section className="space-y-7 lg:col-span-5 lg:sticky lg:top-24">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-brass-400/10 border border-brass-400/30 px-3 py-1 text-xs text-brass-300 mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Pièce Phare · Maroquinerie d'Exception</span>
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brass-400/30 bg-brass-400/10 px-3 py-1 text-xs text-brass-300">
+                <Sparkles className="h-3.5 w-3.5" />
+                Chaussures homme
               </div>
-              <h1 className="text-display text-3xl sm:text-4xl text-linen-100 tracking-tight leading-tight">
-                Sac à Main Signature Cuir Grainé
+              <h1 className="text-display text-4xl leading-tight tracking-tight sm:text-5xl">
+                Derby <span className="text-brass-300">Homme</span>
               </h1>
-              <p className="mt-3 text-2xl font-serif text-brass-400">
-                32 000 FCFA
-              </p>
-              <p className="mt-2 text-xs text-zinc-400">
-                TVA comprise · Livraison 24h & Essayage offert à domicile
-              </p>
+              <p className="mt-3 text-lg text-zinc-300">Coloris de référence : marron cognac</p>
+              <p className="mt-5 font-serif text-xl text-brass-300">Prix à confirmer</p>
+              <p className="mt-2 text-sm text-zinc-400">Pointures, disponibilité et délai à confirmer auprès de la boutique.</p>
             </div>
 
-            {/* Sélecteur de Couleurs avec descriptif */}
-            <div className="space-y-3 rounded-2xl bg-ink-900/60 p-5 border border-white/10">
-              <span className="block text-xs font-serif tracking-widest uppercase text-brass-300">
-                Teinte de cuir sélectionnée : <strong className="text-linen-100">{activeColorInfo.label}</strong>
-              </span>
-
-              <div className="flex items-center gap-3 pt-1">
-                {COLOR_OPTIONS.map((c) => {
-                  const isSelected = selectedColor === c.key;
+            <div className="space-y-4 rounded-2xl border border-white/10 bg-ink-900/60 p-5">
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-brass-300">Coloris de la planche</p>
+                <p className="mt-1 text-sm text-linen-100">Sélection : {activeColor.label}</p>
+              </div>
+              <div className="flex flex-wrap gap-3" aria-label="Aperçu indicatif des coloris">
+                {COLOR_OPTIONS.map((color) => {
+                  const isSelected = selectedColor === color.label;
                   return (
                     <button
-                      key={c.key}
+                      key={color.key}
                       type="button"
-                      onClick={() => setSelectedColor(c.key)}
-                      className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium transition-all ${
+                      onClick={() => setSelectedColor(color.label)}
+                      aria-label={`Afficher le coloris ${color.label}`}
+                      aria-pressed={isSelected}
+                      className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-xs transition-colors ${
                         isSelected
-                          ? 'bg-brass-400 text-ink-950 shadow-lg scale-105 font-semibold'
-                          : 'bg-ink-950 text-zinc-300 border border-white/10 hover:border-brass-400/50'
+                          ? 'border-brass-300 bg-brass-400 text-ink-950'
+                          : 'border-white/10 bg-ink-950 text-zinc-300 hover:border-brass-400/50'
                       }`}
                     >
-                      <span
-                        className="w-3.5 h-3.5 rounded-full border border-white/20"
-                        style={{ backgroundColor: c.colorHex }}
-                      />
-                      <span>{c.label}</span>
-                      {isSelected && <Check className="w-3.5 h-3.5" />}
+                      <span className="h-3.5 w-3.5 rounded-full border border-white/25" style={{ backgroundColor: color.colorHex }} />
+                      {color.label}
+                      {isSelected && <Check className="h-3.5 w-3.5" />}
                     </button>
                   );
                 })}
               </div>
-
-              <p className="text-xs text-zinc-400 pt-1 leading-relaxed italic">
-                "{activeColorInfo.desc}"
+              <p className="text-xs leading-relaxed text-zinc-400">
+                Les changements de couleur sont une simulation visuelle basée sur la planche fournie ; ils ne confirment pas le stock de ces coloris.
               </p>
             </div>
 
-            {/* Boutons d'Action Clés */}
-            <div className="space-y-3">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-3 rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white shadow-xl hover:bg-[#20ba59] transition-all hover:scale-[1.02] active:scale-95"
-              >
-                <MessageCircle className="w-5 h-5 fill-current" />
-                <span>Commander sur WhatsApp avec Sophia</span>
-              </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#20ba59]"
+            >
+              <MessageCircle className="h-5 w-5 fill-current" />
+              Demander le prix et la disponibilité
+            </a>
 
-              <Link
-                href="/article/art-101"
-                className="w-full flex items-center justify-center gap-2 rounded-full border border-brass-400/40 bg-ink-900 px-6 py-3.5 text-sm font-serif text-brass-300 hover:bg-brass-400 hover:text-ink-950 transition-all text-center"
-              >
-                <span>Voir la fiche catalogue complète</span>
-              </Link>
+            <div className="space-y-3 border-t border-white/10 pt-5">
+              <h2 className="text-xs uppercase tracking-[0.16em] text-brass-300">D’après la planche de référence</h2>
+              <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-2 text-sm">
+                <dt className="text-zinc-500">Type</dt><dd>Derby à lacets</dd>
+                <dt className="text-zinc-500">Coloris montré</dt><dd>Marron cognac</dd>
+                <dt className="text-zinc-500">Semelle visible</dt><dd>Noire, à relief</dd>
+              </dl>
+              <p className="text-xs leading-relaxed text-zinc-400">
+                Cette maquette 3D est construite à partir de la planche illustrée. Les dimensions indiquées sur celle-ci sont données à titre d’exemple ; les détails et caractéristiques du produit réel restent à confirmer.
+              </p>
             </div>
 
-            {/* Fiche Technique & Savoir-Faire */}
-            <div className="border-t border-white/10 pt-5 space-y-3">
-              <h3 className="text-xs font-serif uppercase tracking-widest text-brass-300">
-                Spécifications Artisanales
-              </h3>
-              <ul className="text-xs text-zinc-300 space-y-2 leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Cuir :</strong> Cuir de vachette pleine fleur grainé, tannage végétal de prestige.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Finitions :</strong> Fermoir quart-de-tour en laiton massif brossé or mat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Porté :</strong> Poignée haute rigide + bandoulière réglable et amovible.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Confection :</strong> Atelier ELSI Abidjan — coutures sellier renforcées.</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Engagements ELSI */}
-            <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-center text-zinc-400">
-              <div className="space-y-1">
-                <Clock className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">24 h à Abidjan</p>
-                <p className="text-[10px]">Livraison express</p>
-              </div>
-              <div className="space-y-1">
-                <Truck className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">Sous housse zippée</p>
-                <p className="text-[10px]">Repassée vapeur</p>
-              </div>
-              <div className="space-y-1">
-                <ShieldCheck className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">Garantie 48 h</p>
-                <p className="text-[10px]">Échange sans frais</p>
-              </div>
-            </div>
-          </div>
+            <Link href="/catalogue" className="inline-flex text-sm text-brass-300 underline-offset-4 hover:underline">
+              Parcourir le catalogue
+            </Link>
+          </section>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -61,7 +61,9 @@ def make_leather_image():
     size = 512
     rng = random.Random(305)
     texels = array.array("f")
-    base = tuple(srgb_to_linear(c) for c in (112, 51, 29))
+    # Keep the packed texture nearly neutral so the GLB base-color factor can
+    # recolor the whole leather surface without inheriting a brown tint.
+    base = tuple(srgb_to_linear(c) for c in (215, 215, 215))
     coarse = [[rng.random() for _ in range(32)] for _ in range(32)]
     for y in range(size):
         v = y / size * 32
@@ -78,10 +80,8 @@ def make_leather_image():
             sx = fx * fx * (3 - 2 * fx)
             sy = fy * fy * (3 - 2 * fy)
             cloud = (a * (1 - sx) + b * sx) * (1 - sy) + (c * (1 - sx) + d * sx) * sy
-            grain = math.sin((x + 0.6 * math.sin(y * 0.13)) * 0.73) * 0.016
-            grain += math.sin((x * 0.29 + y * 0.41)) * 0.007
-            grain += (rng.random() - 0.5) * 0.018
-            light = 0.92 + (cloud - 0.5) * 0.13 + grain
+            grain = (rng.random() - 0.5) * 0.006
+            light = 0.97 + (cloud - 0.5) * 0.06 + grain
             texels.extend((base[0] * light, base[1] * light, base[2] * light, 1.0))
     image = bpy.data.images.new("Cognac leather | subtle full-grain", width=size, height=size, alpha=False)
     image.colorspace_settings.name = "sRGB"
@@ -424,21 +424,21 @@ def add_area(name, location, power, size, hex_color, target):
 def make_poster(objects):
     world = bpy.data.worlds.new("Fond studio charbon")
     world.use_nodes = True
-    world.node_tree.nodes["Background"].inputs["Color"].default_value = color("#191716")
-    world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.35
+    world.node_tree.nodes["Background"].inputs["Color"].default_value = color("#ded8d0")
+    world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.4
     bpy.context.scene.world = world
 
-    floor_mat = material("Studio · pierre anthracite", "#282523", 0.58)
+    floor_mat = material("Studio · pierre sable", "#a99e92", 0.72)
     bpy.ops.mesh.primitive_plane_add(size=2.0, location=(0, 0, 0.001))
     floor = bpy.context.object
     floor.name = "Studio floor · render only"
     floor.data.materials.append(floor_mat)
 
     target = (0.0, 0.0, 0.061)
-    add_area("Softbox principal", (0.22, -0.33, 0.55), 14, 0.44, "#fff0dc", target)
-    add_area("Reflet cuir chaud", (-0.16, 0.22, 0.35), 9, 0.30, "#e4a46d", target)
-    add_area("Lumière contour", (0.20, 0.32, 0.26), 12, 0.24, "#f7e1c5", target)
-    add_area("Remplissage doux", (-0.30, -0.15, 0.22), 4, 0.38, "#d7e0ee", target)
+    add_area("Softbox principal", (0.22, -0.33, 0.55), 20, 0.44, "#fff4e9", target)
+    add_area("Reflet cuir chaud", (-0.16, 0.22, 0.35), 12, 0.30, "#edbd92", target)
+    add_area("Lumière contour", (0.20, 0.32, 0.26), 16, 0.24, "#fff0df", target)
+    add_area("Remplissage doux", (-0.30, -0.15, 0.22), 7, 0.38, "#e2e6ec", target)
 
     camera_data = bpy.data.cameras.new("Caméra produit")
     camera = bpy.data.objects.new("Caméra produit", camera_data)
@@ -462,7 +462,7 @@ def make_poster(objects):
     scene.render.film_transparent = False
     scene.view_settings.view_transform = "AgX"
     scene.view_settings.look = "AgX - Medium High Contrast"
-    scene.view_settings.exposure = -1.0
+    scene.view_settings.exposure = -0.8
     scene.render.filepath = POSTER_PATH
     scene.camera.data.lens = 56
     bpy.ops.render.render(write_still=True)
@@ -487,15 +487,22 @@ def main():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
 
-    leather = material("Cuir cognac · pleine fleur", "#70331d", 0.43, coat=0.02, specular=0.10)
+    leather = material("Cuir cognac · pleine fleur", "#75401f", 0.45, coat=0.01, specular=0.12)
     leather_img = make_leather_image()
     shader = next(n for n in leather.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
     texture = leather.node_tree.nodes.new("ShaderNodeTexImage")
     texture.image = leather_img
     texture.interpolation = "Linear"
-    leather.node_tree.links.new(texture.outputs["Color"], shader.inputs["Base Color"])
+    texture_mix = leather.node_tree.nodes.new("ShaderNodeMixRGB")
+    texture_mix.blend_type = "MULTIPLY"
+    texture_mix.inputs[0].default_value = 1.0
+    texture_mix.inputs[2].default_value = color("#75401f")
+    leather.node_tree.links.new(texture.outputs["Color"], texture_mix.inputs[1])
+    leather.node_tree.links.new(texture_mix.outputs["Color"], shader.inputs["Base Color"])
 
-    cap = material("Cuir cognac · bout et parements", "#5d2917", 0.46, coat=0.01, specular=0.10)
+    # Share one leather material so the live color selector recolors the upper
+    # and the cap-toe consistently in the exported GLB.
+    cap = leather
     lining = material("Doublure cuir brun foncé", "#21120e", 0.52, specular=0.06)
     rubber = material("Semelle gomme noire", "#12100e", 0.58, specular=0.06)
     welt = material("Trépointe cuir brun", "#3d2115", 0.38)

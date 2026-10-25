@@ -2,14 +2,13 @@ import type { Metadata } from 'next';
 import Showroom3DClient from './Showroom3DClient';
 
 export const metadata: Metadata = {
-  title: 'Studio 3D 360° · Sac à Main Signature · Maison ELSI',
+  title: 'Chaussure Derby Homme · Vue 3D 360° · Maison ELSI',
   description:
-    'Explorez le Sac à Main Signature ELSI en 3D interactive 360°. Testez les teintes de cuir en temps réel et commandez directement sur WhatsApp.',
+    'Explorez une maquette 3D interactive d’une chaussure Derby pour homme, réalisée à partir de la planche de référence fournie.',
   openGraph: {
-    title: 'Studio 3D 360° · Maison ELSI',
-    description:
-      'Modèle 3D immersif : pivotez à 360°, zoomez sur les détails de maroquinerie et changez les teintes de cuir en direct.',
-    images: ['/models/sac-elsi-poster.png'],
+    title: 'Chaussure Derby Homme · Maison ELSI',
+    description: 'Maquette 3D interactive d’une Derby cognac à lacets.',
+    images: ['/models/chaussure-homme-cognac-poster.png'],
   },
 };
 

@@ -14,6 +14,8 @@ interface Product3DViewerProps {
   selectedColor?: string;
   onColorChange?: (color: string) => void;
   showColorPicker?: boolean;
+  /** Teintes à afficher. Par défaut, garde la palette historique à trois teintes. */
+  colorOptions?: string[];
   /** false : modèle déjà coloré d'après la photo, ni recoloration du matériau ni sélecteur de teintes. */
   recolor?: boolean;
   /** Fond CSS du visualiseur (défaut sombre). */
@@ -24,19 +26,39 @@ const DEFAULT_BACKGROUND = '#0b0d11';
 
 const COLOR_MAP: Record<string, { label: string; bg: string; factor: [number, number, number, number] }> = {
   noir: {
-    label: 'Noir Ébène',
+    label: 'Noir',
     bg: '#18181b',
-    factor: [0.035, 0.035, 0.035, 1.0],
+    factor: [0.009, 0.009, 0.012, 1.0],
   },
   bordeaux: {
-    label: 'Bordeaux Royal',
+    label: 'Bordeaux',
     bg: '#581c24',
-    factor: [0.32, 0.04, 0.07, 1.0],
+    factor: [0.098, 0.012, 0.018, 1.0],
   },
   cognac: {
-    label: 'Cognac Cuir',
+    label: 'Cognac',
     bg: '#8b4513',
-    factor: [0.46, 0.22, 0.07, 1.0],
+    factor: [0.258, 0.061, 0.006, 1.0],
+  },
+  marron: {
+    label: 'Marron',
+    bg: '#774126',
+    factor: [0.184, 0.055, 0.021, 1.0],
+  },
+  'bleu-marine': {
+    label: 'Bleu marine',
+    bg: '#23364e',
+    factor: [0.016, 0.038, 0.078, 1.0],
+  },
+  camel: {
+    label: 'Camel',
+    bg: '#b87a43',
+    factor: [0.479, 0.195, 0.058, 1.0],
+  },
+  gris: {
+    label: 'Gris',
+    bg: '#77736d',
+    factor: [0.184, 0.168, 0.15, 1.0],
   },
 };
 
@@ -50,6 +72,7 @@ export default function Product3DViewer({
   selectedColor = 'Noir',
   onColorChange,
   showColorPicker = true,
+  colorOptions,
   recolor = true,
   background = DEFAULT_BACKGROUND,
 }: Product3DViewerProps) {
@@ -90,23 +113,16 @@ export default function Product3DViewer({
       setIsLoaded(true);
       if (!recolor || !viewer.model?.materials) return;
 
-      const mat =
-        viewer.model.materials.find(
-          (m: any) =>
-            m.name?.toLowerCase().includes('cuir') ||
-            m.name?.toLowerCase().includes('leather')
-        ) || viewer.model.materials[0];
+      const materials = viewer.model.materials.filter((material: any) => {
+        const name = material.name?.toLowerCase() || '';
+        return name.includes('cuir') || name.includes('leather');
+      });
+      const targets = materials.length ? materials : viewer.model.materials.slice(0, 1);
+      const norm = (currentColor || '').toLowerCase().trim().replace(/\s+/g, '-');
+      const found = COLOR_MAP[norm] || COLOR_MAP.noir;
 
-      if (mat && mat.pbrMetallicRoughness) {
-        const norm = (currentColor || '').toLowerCase().trim();
-        const found =
-          COLOR_MAP[norm] ||
-          (norm.includes('noir') ? COLOR_MAP.noir : null) ||
-          (norm.includes('bordeaux') ? COLOR_MAP.bordeaux : null) ||
-          (norm.includes('cognac') ? COLOR_MAP.cognac : null) ||
-          COLOR_MAP.noir;
-
-        mat.pbrMetallicRoughness.setBaseColorFactor(found.factor);
+      for (const material of targets) {
+        material.pbrMetallicRoughness?.setBaseColorFactor(found.factor);
       }
     };
 
@@ -117,10 +133,12 @@ export default function Product3DViewer({
   }, [currentColor, recolor]);
 
   const handleSelectColor = (colorKey: string) => {
-    const cap = colorKey.charAt(0).toUpperCase() + colorKey.slice(1);
-    setCurrentColor(cap);
-    if (onColorChange) onColorChange(cap);
+    const label = COLOR_MAP[colorKey]?.label || colorKey;
+    setCurrentColor(label);
+    if (onColorChange) onColorChange(label);
   };
+
+  const visibleColorKeys = colorOptions ?? ['noir', 'bordeaux', 'cognac'];
 
   const resetCamera = () => {
     if (viewerRef.current) {
@@ -221,10 +239,11 @@ export default function Product3DViewer({
       {/* Sélecteur de Couleurs Flottant Direct sur le Viewer */}
       {showColorPicker && recolor && (
         <div className="absolute top-4 right-4 z-10 flex items-center gap-2 p-1.5 rounded-full bg-ink-950/85 backdrop-blur-md border border-brass-400/30 shadow-xl">
-          {Object.entries(COLOR_MAP).map(([key, info]) => {
+          {visibleColorKeys.map((key) => {
+            const info = COLOR_MAP[key];
+            if (!info) return null;
             const isSelected =
-              currentColor.toLowerCase().trim() === key ||
-              currentColor.toLowerCase().includes(key);
+              currentColor.toLowerCase().trim().replace(/\s+/g, '-') === key;
             return (
               <button
                 key={key}
