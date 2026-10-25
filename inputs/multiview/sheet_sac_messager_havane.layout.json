@@ -1,0 +1,45 @@
+{
+  "note": "Sac Messager Cuir Havane",
+  "boxes": {
+    "front": [
+      14,
+      20,
+      304,
+      317
+    ],
+    "back": [
+      324,
+      18,
+      594,
+      317
+    ],
+    "left": [
+      624,
+      17,
+      764,
+      317
+    ],
+    "right": [
+      825,
+      18,
+      944,
+      317
+    ],
+    "top": [
+      46,
+      348,
+      424,
+      514
+    ],
+    "bottom": [
+      517,
+      385,
+      884,
+      505
+    ]
+  },
+  "ignore": [
+    "top"
+  ],
+  "ignore_reason": "vue de dessus en perspective"
+}

@@ -212,7 +212,12 @@ export const ARTICLES_DEMO: Article[] = [
     genre: 'mixte',
     tailles: ['Unique'],
     couleurs: ['Havane'],
-    photos: [P('1691480150204-66dd1eb77391', 6)],
+    photos: ['/images/planches/art-102-face.jpg', '/images/planches/art-102-planche.jpg'],
+    modele_3d: {
+      src: '/models/art-102.glb',
+      poster: '/models/art-102-poster.png',
+      cameraOrbit: '0deg 75deg 105%',
+    },
     en_stock: true,
     quantite_stock: 6,
     vedette: true,

@@ -60,17 +60,17 @@
     "status": "ok"
   },
   "art-102": {
-    "backend": "triposr",
+    "backend": "multiview",
     "cameraOrbit": "0deg 75deg 105%",
     "faces": 60000,
-    "generated_at": "2026-10-25T03:02:58+00:00",
-    "monocular_estimate": true,
+    "generated_at": "2026-10-25T10:57:48+00:00",
+    "monocular_estimate": false,
     "override": true,
     "poster": "/models/art-102-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.77,
-    "source_image": "https://images.unsplash.com/photo-1691480150204-66dd1eb77391?w=1600&auto=format&q=80&exp=6",
+    "silhouette_iou": 0.901,
+    "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
     "src": "/models/art-102.glb",
     "status": "ok"
   },
