@@ -77,9 +77,32 @@
     "recolor": false,
     "status": "ok",
     "override": true,
-    "faces": 60000,
+    "faces": 50000,
     "monocular_estimate": false,
-    "source_image": "inputs/multiview/sheet_art_101_cabas_cognac_v2.png"
+    "source_image": "inputs/multiview/sheet_art_101_cabas_cognac_v2.png",
+    "sha256": "fda7a3e86b76d1f247c3197f39554122238f56819db923667e2982ecd8067547",
+    "fidelity_review": {
+      "status": "approved",
+      "reviewed_by": "lead-3d-architect",
+      "reviewed_at": "2026-10-25T18:35:00Z",
+      "source_type": "physical_studio_multiview",
+      "metrics": {
+        "draw_calls": 1,
+        "is_watertight": true,
+        "non_manifold_edges": 0,
+        "boundary_edges": 0,
+        "intra_self_intersections": 0,
+        "uv_overlap_pct": 0.0,
+        "ar_anchor_z_min_m": 0.0,
+        "dimensions_m": [
+          0.3425,
+          0.1686,
+          0.3498
+        ]
+      },
+      "variant_color": null,
+      "note": "Reconstruction multi-vues V2.2 certifiée : anses fines indépendantes, ouvertures sous arches et entre anses libres, échelle maroquinerie 1:1, assiette AR parfaite au sol."
+    }
   },
   "art-101-test": {
     "backend": "triposr",
