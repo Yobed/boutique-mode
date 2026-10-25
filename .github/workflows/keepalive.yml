@@ -1,0 +1,21 @@
+name: ELSI 24/7 Cloud Keep-Alive
+
+on:
+  schedule:
+    # Runs every 5 minutes (standard cron syntax)
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: Ping Services
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping WhatsApp Bot & Web Store
+        run: |
+          echo "Pinging ELSI WhatsApp Bot..."
+          curl -s -f -m 30 "https://elsi-whatsapp-bot.onrender.com/health" || true
+          echo "Pinging ELSI Web Store..."
+          curl -s -f -m 30 "https://boutique-mode.onrender.com" || true
+          echo "Ping complete."
