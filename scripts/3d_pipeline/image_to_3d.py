@@ -36,7 +36,7 @@ WORK_ROOT = os.path.join(ROOT, "outputs", "3d_neural")
 MANIFEST_PATH = os.path.join(ROOT, "config", "models3d.json")
 
 DEFAULT_CATEGORIES = ("sacs", "chaussures", "accessoires")  # objets : les vêtements portés se détourent mal
-MC_RESOLUTION = 256             # grille d'extraction du réseau ; le maillage est ensuite lissé puis décimé
+MC_RESOLUTION = 192             # grille d'extraction du réseau ; le maillage est ensuite lissé puis décimé à 60 000 faces
 QUALITY_FACES = {"web": 60_000, "high": 150_000}  # faces du GLB final (texture 2048 px dans les deux cas)
 MIN_IOU = 0.50
 DARK_LUMINANCE = 70             # luminance moyenne (0-255) sous laquelle le fond du visualiseur passe en clair
