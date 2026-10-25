@@ -70,13 +70,15 @@
     "status": "ok"
   },
   "art-101": {
-    "backend": "blender_fashion",
+    "backend": "triposr",
     "cameraOrbit": "0deg 75deg 105%",
-    "override": true,
     "poster": "/models/art-101-poster.png",
-    "recolor": true,
     "src": "/models/art-101.glb",
-    "status": "ok"
+    "recolor": false,
+    "status": "ok",
+    "override": true,
+    "faces": 65466,
+    "monocular_estimate": true
   },
   "art-101-test": {
     "backend": "triposr",
