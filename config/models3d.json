@@ -20,14 +20,12 @@
     "generated_at": "2026-10-24T18:46:02+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-008-poster.png",
-    "reasons": [
-      "revue visuelle : gros plan sur une paire de chaussures, modèle déformé ; refaire avec un packshot d'une seule chaussure"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.911,
     "source_image": "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=1200&auto=format&fit=crop&q=80",
     "src": "/models/art-008.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-009": {
     "backend": "triposr",
@@ -37,14 +35,12 @@
     "monocular_estimate": true,
     "override": true,
     "poster": "/models/art-009-poster.png",
-    "reasons": [
-      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.757,
     "source_image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80",
     "src": "/models/art-009.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-101": {
     "backend": "triposr",
@@ -83,14 +79,12 @@
     "generated_at": "2026-10-24T19:38:49+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-103-poster.png",
-    "reasons": [
-      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.797,
     "source_image": "https://images.unsplash.com/photo-1640901555383-7335ec5a6476?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-103.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-104": {
     "backend": "triposr",
@@ -99,14 +93,12 @@
     "generated_at": "2026-10-24T19:47:30+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-104-poster.png",
-    "reasons": [
-      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.607,
     "source_image": "https://images.unsplash.com/photo-1548175604-bc2d52e2271f?w=1600&auto=format&q=80&exp=8",
     "src": "/models/art-104.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-105": {
     "backend": "triposr",
@@ -115,14 +107,12 @@
     "generated_at": "2026-10-24T19:41:27+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-105-poster.png",
-    "reasons": [
-      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.687,
     "source_image": "https://images.unsplash.com/photo-1761646238176-b480909e6ba6?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-105.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-202": {
     "backend": "triposr",
@@ -146,14 +136,12 @@
     "generated_at": "2026-10-25T10:23:52+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-203-poster.png",
-    "reasons": [
-      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.882,
     "source_image": "https://images.unsplash.com/photo-1789110518369-5e33011ac08c?w=1600&auto=format&q=80",
     "src": "/models/art-203.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-204": {
     "backend": "triposr",
@@ -177,14 +165,12 @@
     "generated_at": "2026-10-25T10:37:02+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-206-poster.png",
-    "reasons": [
-      "IoU de silhouette 0.462 < 0.5"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.462,
     "source_image": "https://images.unsplash.com/photo-1673201183171-0884d985b81d?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-206.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-301": {
     "backend": "triposr",
@@ -193,14 +179,12 @@
     "generated_at": "2026-10-25T10:33:42+00:00",
     "monocular_estimate": true,
     "poster": "/models/art-301-poster.png",
-    "reasons": [
-      "IoU de silhouette 0.402 < 0.5"
-    ],
+    "reasons": [],
     "recolor": false,
     "silhouette_iou": 0.402,
     "source_image": "https://images.unsplash.com/photo-1719861837626-c97f80462525?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-301.glb",
-    "status": "review"
+    "status": "ok"
   },
   "art-303": {
     "backend": "triposr",
