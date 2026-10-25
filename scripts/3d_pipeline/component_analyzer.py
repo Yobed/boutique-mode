@@ -462,6 +462,7 @@ class VisualComponentDecomposer:
                             "cx": sat_cx,
                             "w": sat_w,
                             "seg": sat,
+                            "trunk": trunk,
                             "is_left": sat_cx < trunk_axis
                         })
 
@@ -471,57 +472,110 @@ class VisualComponentDecomposer:
             if len(pts) >= 6:
                 ys = [p["y"] for p in pts]
                 y_span = max(ys) - min(ys)
-                if y_span > bh * 0.18:
-                    p_top = min(pts, key=lambda p: p["y"])
-                    p_bot = max(pts, key=lambda p: p["y"])
-                    mid_pts = [p for p in pts if p["y"] > p_top["y"] + y_span*0.25 and p["y"] < p_bot["y"] - y_span*0.25]
-                    bulge = 0.0
-                    if mid_pts:
-                        avg_mid_cx = sum(p["cx"] for p in mid_pts) / len(mid_pts)
-                        chord_cx = (p_top["cx"] + p_bot["cx"]) / 2.0
-                        bulge = abs(avg_mid_cx - chord_cx)
+                mean_w = sum(p["w"] for p in pts) / len(pts)
+                width_ratio = mean_w / float(bw)
 
-                    if bulge > 3.0:
-                        sorted_pts = sorted(pts, key=lambda p: p["t"])
-                        step_idx = len(sorted_pts) / 6.0
-                        sample_pts = [sorted_pts[int(i * step_idx)] for i in range(6)] + [sorted_pts[-1]]
+                # Filtre 1 : Une anse ou appendice tubulaire doit être élancé (width_ratio <= 0.22)
+                # et occuper une portion raisonnable de la hauteur (15% à 72% de bh).
+                # Élimine les silhouettes globales d'escarpins/chaussures où un côté entier était pris pour une anse.
+                if not (bh * 0.15 <= y_span <= bh * 0.72) or width_ratio > 0.22:
+                    continue
 
-                        path_3d = []
-                        for sp in sample_pts:
-                            px_rel = (sp["cx"] - (min_x + bw / 2.0)) / float(bw)
-                            x_m = px_rel * real_w
-                            z_m = current_z_base + sp["t"] * real_h
-                            path_3d.append([round(x_m, 4), 0.0, round(z_m, 4)])
+                p_top = min(pts, key=lambda p: p["y"])
+                p_bot = max(pts, key=lambda p: p["y"])
 
-                        mean_w = sum(p["w"] for p in pts) / len(pts)
-                        tube_rad = max(0.003, min(0.015, (mean_w / float(bw)) * real_w * 0.5))
+                # Filtre 2 : Contrôle topologique de double ancrage (Boucle fermée / Enclosed loop).
+                # Au-dessus de p_top et en-dessous de p_bot, il doit y avoir de la matière pleine reliant
+                # le satellite au tronc principal (sinon c'est une concavité ouverte : semelle, dossier, pieds).
+                top_y = p_top["y"]
+                bot_y = p_bot["y"]
 
-                        cols = []
-                        for sp in sample_pts:
-                            py = sp["y"]
-                            s0, s1 = sp["seg"]
-                            for sx in range(s0, s1 + 1):
-                                cols.append(pix[sx, py])
-                        if cols:
-                            ar = sum(c[0] for c in cols) / len(cols)
-                            ag = sum(c[1] for c in cols) / len(cols)
-                            ab = sum(c[2] for c in cols) / len(cols)
-                        else:
-                            ar, ag, ab = 180, 135, 90
+                has_top_bridge = False
+                for check_y in range(max(min_y, top_y - 8), top_y):
+                    left_b = min(p_top["seg"][0], p_top["trunk"][0])
+                    right_b = max(p_top["seg"][1], p_top["trunk"][1])
+                    span_b = right_b - left_b + 1
+                    if span_b > 0:
+                        filled = sum(1 for x in range(left_b, right_b + 1) if self.mask[check_y][x])
+                        if filled / float(span_b) > 0.70:
+                            has_top_bridge = True
+                            break
 
-                        appendages.append({
-                            "name": f"Anse_Courbee_{side.capitalize()}",
-                            "role": "curved_appendage_handle",
-                            "primitive": "curved_sweep",
-                            "path_points": path_3d,
-                            "radius": round(tube_rad, 4),
-                            "segments": 16,
-                            "mean_rgb": (int(ar), int(ag), int(ab)),
-                            "rationale": f"Appendice en arceau courbé détecté côté {side} (span={y_span}px, déviation={bulge:.1f}px) séparé du corps par un vide traversant.",
-                            "confidence": 0.88,
-                            "assumptions": ["Trajectoire coplanaire dans le plan XZ", "Section tubulaire circulaire constante"],
-                            "uncertainties": ["Courbure hors-plan Y inaccessible sur vue monoculaire unique"]
-                        })
+                has_bot_bridge = False
+                for check_y in range(bot_y + 1, min(max_y + 1, bot_y + 9)):
+                    left_b = min(p_bot["seg"][0], p_bot["trunk"][0])
+                    right_b = max(p_bot["seg"][1], p_bot["trunk"][1])
+                    span_b = right_b - left_b + 1
+                    if span_b > 0:
+                        filled = sum(1 for x in range(left_b, right_b + 1) if self.mask[check_y][x])
+                        if filled / float(span_b) > 0.70:
+                            has_bot_bridge = True
+                            break
+
+                # Rejet formel si l'appendice ne forme pas un pont physique fermé aux deux extrémités
+                if not (has_top_bridge and has_bot_bridge):
+                    continue
+
+                mid_pts = [p for p in pts if p["y"] > p_top["y"] + y_span*0.25 and p["y"] < p_bot["y"] - y_span*0.25]
+                bulge = 0.0
+                if mid_pts:
+                    avg_mid_cx = sum(p["cx"] for p in mid_pts) / len(mid_pts)
+                    chord_cx = (p_top["cx"] + p_bot["cx"]) / 2.0
+                    bulge = abs(avg_mid_cx - chord_cx)
+
+                if bulge > 3.0:
+                    sorted_pts = sorted(pts, key=lambda p: p["t"])
+                    step_idx = len(sorted_pts) / 6.0
+                    sample_pts = [sorted_pts[int(i * step_idx)] for i in range(6)] + [sorted_pts[-1]]
+
+                    # Filtre 3 : Continuité et régularité géométrique de l'arceau.
+                    # Une vraie anse/poignée décrit une trajectoire continue et lisse.
+                    # Si les points échantillonnés sautent brutalement en X (zigzag entre dossier, accoudoir et pied),
+                    # ce n'est pas un appendice tubulaire continu mais un artefact de silhouette.
+                    is_continuous_arch = True
+                    for i in range(1, len(sample_pts)):
+                        dx_jump = abs(sample_pts[i]["cx"] - sample_pts[i-1]["cx"])
+                        if dx_jump > bw * 0.12:
+                            is_continuous_arch = False
+                            break
+                    if not is_continuous_arch:
+                        continue
+
+                    path_3d = []
+                    for sp in sample_pts:
+                        px_rel = (sp["cx"] - (min_x + bw / 2.0)) / float(bw)
+                        x_m = px_rel * real_w
+                        z_m = current_z_base + sp["t"] * real_h
+                        path_3d.append([round(x_m, 4), 0.0, round(z_m, 4)])
+
+                    tube_rad = max(0.003, min(0.015, (mean_w / float(bw)) * real_w * 0.5))
+
+                    cols = []
+                    for sp in sample_pts:
+                        py = sp["y"]
+                        s0, s1 = sp["seg"]
+                        for sx in range(s0, s1 + 1):
+                            cols.append(pix[sx, py])
+                    if cols:
+                        ar = sum(c[0] for c in cols) / len(cols)
+                        ag = sum(c[1] for c in cols) / len(cols)
+                        ab = sum(c[2] for c in cols) / len(cols)
+                    else:
+                        ar, ag, ab = 180, 135, 90
+
+                    appendages.append({
+                        "name": f"Anse_Courbee_{side.capitalize()}",
+                        "role": "curved_appendage_handle",
+                        "primitive": "curved_sweep",
+                        "path_points": path_3d,
+                        "radius": round(tube_rad, 4),
+                        "segments": 16,
+                        "mean_rgb": (int(ar), int(ag), int(ab)),
+                        "rationale": f"Appendice en arceau courbé détecté côté {side} (span={y_span}px, déviation={bulge:.1f}px) avec ancrages plein amont et aval confirmés.",
+                        "confidence": 0.88,
+                        "assumptions": ["Trajectoire coplanaire dans le plan XZ", "Section tubulaire circulaire constante"],
+                        "uncertainties": ["Courbure hors-plan Y inaccessible sur vue monoculaire unique"]
+                    })
 
         return appendages
 
