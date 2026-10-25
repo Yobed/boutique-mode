@@ -172,8 +172,8 @@ export const ARTICLES_DEMO: Article[] = [
     couleurs: ['Noir', 'Bordeaux', 'Cognac'],
     photos: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80'],
     modele_3d: {
-      src: '/models/sac-elsi.glb',
-      poster: '/models/sac-elsi-poster.png',
+      src: '/models/art-009.glb',
+      poster: '/models/art-009-poster.png',
       cameraOrbit: '0deg 75deg 105%',
     },
     en_stock: true,
@@ -194,8 +194,8 @@ export const ARTICLES_DEMO: Article[] = [
     couleurs: ['Cognac', 'Noir', 'Bordeaux'],
     photos: [P('1691480250099-a63081ecfcb8', 6)],
     modele_3d: {
-      src: '/models/sac-elsi.glb',
-      poster: '/models/sac-elsi-poster.png',
+      src: '/models/art-101.glb',
+      poster: '/models/art-101-poster.png',
       cameraOrbit: '0deg 75deg 105%',
     },
     en_stock: true,
