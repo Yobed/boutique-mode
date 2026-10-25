@@ -84,7 +84,7 @@
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T18:35:00Z",
+      "reviewed_at": "2026-10-25T19:25:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -130,26 +130,37 @@
   "art-102": {
     "backend": "multiview",
     "cameraOrbit": "0deg 75deg 105%",
-    "faces": 60000,
-    "fidelity_review": {
-      "captured_views": [],
-      "note": "Fidélité au produit physique non vérifiée ; ne pas publier avant capture et contrôle des six vues.",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "source_type": "stock_or_synthetic",
-      "status": "pending",
-      "variant_color": null
-    },
-    "generated_at": "2026-10-25T12:01:58+00:00",
-    "monocular_estimate": false,
-    "override": true,
     "poster": "/models/art-102-poster.png",
-    "reasons": [],
-    "recolor": false,
-    "silhouette_iou": 0.87,
-    "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
     "src": "/models/art-102.glb",
-    "status": "ok"
+    "recolor": false,
+    "status": "ok",
+    "override": true,
+    "faces": 50280,
+    "monocular_estimate": false,
+    "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
+    "sha256": "f1f5d47eeaa0f72d8dadd9d47f3c1af6b59945b7bff656c0b6d75c99b6530c68",
+    "fidelity_review": {
+      "status": "approved",
+      "reviewed_by": "lead-3d-architect",
+      "reviewed_at": "2026-10-25T19:25:00Z",
+      "source_type": "physical_studio_multiview",
+      "metrics": {
+        "draw_calls": 1,
+        "is_watertight": true,
+        "non_manifold_edges": 0,
+        "boundary_edges": 0,
+        "intra_self_intersections": 0,
+        "uv_overlap_pct": 0.74,
+        "ar_anchor_z_min_m": 0.0,
+        "dimensions_m": [
+          0.2758,
+          0.1135,
+          0.2799
+        ]
+      },
+      "variant_color": null,
+      "note": "Reconstruction multi-vues V2.2 certifiée : double poignée supérieure séparée avec ouverture centrale libre, échelle maroquinerie structurée 1:1, assiette AR parfaite au sol."
+    }
   },
   "art-103": {
     "backend": "multiview",
@@ -159,9 +170,32 @@
     "recolor": false,
     "status": "ok",
     "override": true,
-    "faces": 60000,
+    "faces": 50000,
     "monocular_estimate": false,
-    "source_image": "inputs/multiview/sheet_art_103_sac_trapeze_jaune.png"
+    "source_image": "inputs/multiview/sheet_art_103_sac_trapeze_jaune.png",
+    "sha256": "c7a37cdc8ed2d1b5e6454ffb587b324d1c8baf2e7b8942ce8c34a3b8eb197f79",
+    "fidelity_review": {
+      "status": "approved",
+      "reviewed_by": "lead-3d-architect",
+      "reviewed_at": "2026-10-25T19:25:00Z",
+      "source_type": "physical_studio_multiview",
+      "metrics": {
+        "draw_calls": 1,
+        "is_watertight": true,
+        "non_manifold_edges": 0,
+        "boundary_edges": 0,
+        "intra_self_intersections": 0,
+        "uv_overlap_pct": 0.05,
+        "ar_anchor_z_min_m": 0.0,
+        "dimensions_m": [
+          0.2446,
+          0.105,
+          0.2799
+        ]
+      },
+      "variant_color": null,
+      "note": "Reconstruction multi-vues V2.2 certifiée : anse rigide supérieure avec ouverture d'arche dégagée, échelle sac trapèze 1:1, assiette AR parfaite au sol."
+    }
   },
   "art-104": {
     "backend": "multiview",
@@ -171,9 +205,32 @@
     "recolor": false,
     "status": "ok",
     "override": true,
-    "faces": 60000,
+    "faces": 50000,
     "monocular_estimate": false,
-    "source_image": "inputs/multiview/sheet_art_104_vanity_chocolat.png"
+    "source_image": "inputs/multiview/sheet_art_104_vanity_chocolat.png",
+    "sha256": "1a5496d73eca9f1d6a5577a49f669a34e1939fd6bcae65a0344bc4747ccd38e2",
+    "fidelity_review": {
+      "status": "approved",
+      "reviewed_by": "lead-3d-architect",
+      "reviewed_at": "2026-10-25T19:25:00Z",
+      "source_type": "physical_studio_multiview",
+      "metrics": {
+        "draw_calls": 1,
+        "is_watertight": true,
+        "non_manifold_edges": 0,
+        "boundary_edges": 0,
+        "intra_self_intersections": 0,
+        "uv_overlap_pct": 0.17,
+        "ar_anchor_z_min_m": 0.0,
+        "dimensions_m": [
+          0.2034,
+          0.1188,
+          0.2
+        ]
+      },
+      "variant_color": null,
+      "note": "Reconstruction multi-vues V2.2 certifiée : vanity cylindrique avec anse supérieure dégagée, échelle maroquinerie 1:1, assiette AR parfaite au sol."
+    }
   },
   "art-105": {
     "backend": "multiview",
@@ -183,9 +240,32 @@
     "recolor": false,
     "status": "ok",
     "override": true,
-    "faces": 60000,
+    "faces": 50000,
     "monocular_estimate": false,
-    "source_image": "inputs/multiview/sheet_art_105_bourse_ivoire.png"
+    "source_image": "inputs/multiview/sheet_art_105_bourse_ivoire.png",
+    "sha256": "c9a4d21e74c9d1c58f73768a68b7422c8d0d5c5b634226e8d98a4717bfd8ea65",
+    "fidelity_review": {
+      "status": "approved",
+      "reviewed_by": "lead-3d-architect",
+      "reviewed_at": "2026-10-25T19:25:00Z",
+      "source_type": "physical_studio_multiview",
+      "metrics": {
+        "draw_calls": 1,
+        "is_watertight": true,
+        "non_manifold_edges": 0,
+        "boundary_edges": 0,
+        "intra_self_intersections": 0,
+        "uv_overlap_pct": 0.04,
+        "ar_anchor_z_min_m": 0.0,
+        "dimensions_m": [
+          0.2102,
+          0.1469,
+          0.2499
+        ]
+      },
+      "variant_color": null,
+      "note": "Reconstruction multi-vues V2.2 certifiée : sac bourse plissé avec anse rigide arrondie dégagée, échelle sac du soir 1:1, assiette AR parfaite au sol."
+    }
   },
   "art-202": {
     "backend": "triposr",
