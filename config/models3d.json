@@ -77,14 +77,14 @@
     "recolor": false,
     "status": "ok",
     "override": true,
-    "faces": 50000,
+    "faces": 50352,
     "monocular_estimate": false,
     "source_image": "inputs/multiview/sheet_art_101_cabas_cognac_v2.png",
-    "sha256": "fda7a3e86b76d1f247c3197f39554122238f56819db923667e2982ecd8067547",
+    "sha256": "bca366f3d020034c3e79652d1e0c89dbe206cc559f977139e3fe53096a590be3",
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T19:25:00Z",
+      "reviewed_at": "2026-10-25T20:34:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -92,16 +92,16 @@
         "non_manifold_edges": 0,
         "boundary_edges": 0,
         "intra_self_intersections": 0,
-        "uv_overlap_pct": 0.0,
+        "uv_overlap_pct": 1.32,
         "ar_anchor_z_min_m": 0.0,
         "dimensions_m": [
-          0.3425,
-          0.1686,
-          0.3498
+          0.3126,
+          0.1742,
+          0.35
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiée : anses fines indépendantes, ouvertures sous arches et entre anses libres, échelle maroquinerie 1:1, assiette AR parfaite au sol."
+      "note": "Reconstruction multi-vues V2.2 certifiee : suppression complete de la sangle parasite sur les flancs (0 oreilles), galbe souple du cuir avec soufflets, texture continue sans vague horizontale, double anse distincte ajouree."
     }
   },
   "art-101-test": {
