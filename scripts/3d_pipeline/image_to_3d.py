@@ -233,7 +233,7 @@ def process_sheet(sheet, model_id, quality="web", layout_path=None):
     if layout.get("mode") == "single":
         return process_image(_crop_panel(sheet, layout, work_dir), model_id, "triposr", quality, source_label=source)
     boxes = multiview.load_layout(layout_path) if layout_path else None
-    report = multiview.reconstruct_sheet(sheet, work_dir, target_faces=QUALITY_FACES[quality], boxes=boxes)
+    report = multiview.reconstruct_sheet(sheet, work_dir, target_faces=QUALITY_FACES[quality], boxes=boxes, handle_config=layout.get("handle"))
     reasons = quality_reasons(report)
     entry = manifest_entry(model_id, report, reasons, source, pick_background(work_dir))
     if reasons:

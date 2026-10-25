@@ -7,5 +7,14 @@
     "right": [1056, 78, 1288, 461],
     "bottom": [1054, 498, 1309, 735]
   },
-  "ignore": ["top"]
+  "ignore": ["top"],
+  "handle": {
+    "type": "single",
+    "w_h": 0.460,
+    "radius": 0.012,
+    "rim_y": 0.634,
+    "z_front": [0.0, 0.0],
+    "z_back": [0.0, 0.0],
+    "gamma": 0.85
+  }
 }
