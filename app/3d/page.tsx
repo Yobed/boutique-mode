@@ -1,18 +1,16 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getArticleById } from '@/lib/supabase';
 import Showroom3DClient from './Showroom3DClient';
 
 export const metadata: Metadata = {
-  title: 'Studio 3D 360° · Sac à Main Signature · Maison ELSI',
+  title: 'Studio produit · Maison ELSI',
   description:
-    'Explorez le Sac à Main Signature ELSI en 3D interactive 360°. Testez les teintes de cuir en temps réel et commandez directement sur WhatsApp.',
-  openGraph: {
-    title: 'Studio 3D 360° · Maison ELSI',
-    description:
-      'Modèle 3D immersif : pivotez à 360°, zoomez sur les détails de maroquinerie et changez les teintes de cuir en direct.',
-    images: ['/models/sac-elsi-poster.png'],
-  },
+    'Consultez les photos et les informations du produit. Une vue 3D est affichée uniquement après validation de sa fidélité au produit physique.',
 };
 
-export default function Showroom3DPage() {
-  return <Showroom3DClient />;
+export default async function Showroom3DPage() {
+  const article = await getArticleById('art-101');
+  if (!article) notFound();
+  return <Showroom3DClient article={article} />;
 }

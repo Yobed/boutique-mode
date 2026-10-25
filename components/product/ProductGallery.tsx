@@ -17,7 +17,7 @@ interface Props {
     src: string;
     poster?: string;
     cameraOrbit?: string;
-    recolor?: boolean;
+    variantColor?: string;
     background?: string;
   };
   selectedColor?: string;
@@ -186,21 +186,39 @@ function Lightbox({ photos, nom, index, go, onClose }: LightboxProps) {
 }
 
 export default function ProductGallery({ photos, nom, plateRef, modele_3d, selectedColor }: Props) {
-  const [viewMode, setViewMode] = useState<'photos' | '3d'>(modele_3d ? '3d' : 'photos');
+  const [viewMode, setViewMode] = useState<'photos' | '3d'>('photos');
+  const [modelFailed, setModelFailed] = useState(false);
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState<number | null>(null);
   const slides = useRef<(HTMLDivElement | null)[]>([]);
   const viewerPlateRef = useRef<HTMLDivElement>(null);
   const many = photos.length > 1;
+  const modelColorMatches = Boolean(
+    modele_3d?.variantColor &&
+      selectedColor &&
+      modele_3d.variantColor.trim().toLocaleLowerCase('fr-FR') === selectedColor.trim().toLocaleLowerCase('fr-FR')
+  );
+  const canShowModel = Boolean(modele_3d && modelColorMatches && !modelFailed);
+
+  // A new asset is never opened automatically; the buyer explicitly selects 3D after seeing photos.
+  useEffect(() => {
+    setViewMode('photos');
+    setModelFailed(false);
+  }, [modele_3d?.src]);
+
+  // A model approved for one color must not carry over to another catalog variant.
+  useEffect(() => {
+    if (!modelColorMatches) setViewMode('photos');
+  }, [modelColorMatches]);
 
   // The plate in view is the one that flies to the cart.
   useEffect(() => {
-    if (viewMode === '3d' && modele_3d) {
+    if (viewMode === '3d' && canShowModel) {
       plateRef.current = viewerPlateRef.current;
     } else {
       plateRef.current = slides.current[active] ?? slides.current[0] ?? null;
     }
-  }, [active, plateRef, viewMode, modele_3d]);
+  }, [active, canShowModel, plateRef, viewMode]);
 
   // Track the slide in view (mobile carousel and desktop stack alike).
   useEffect(() => {
@@ -221,7 +239,7 @@ export default function ProductGallery({ photos, nom, plateRef, modele_3d, selec
 
   return (
     <div className="relative -mx-[var(--gutter)] lg:mx-0">
-      {modele_3d && (
+      {canShowModel && modele_3d && (
         <div className="mb-4 flex items-center justify-center gap-2 px-[var(--gutter)] lg:px-0">
           <div className="inline-flex rounded-full bg-ink-950/80 p-1 border border-ivory/10 backdrop-blur-md shadow-lg">
             <button
@@ -234,7 +252,7 @@ export default function ProductGallery({ photos, nom, plateRef, modele_3d, selec
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Vue 3D 360°
+              Vue 3D validée · {modele_3d.variantColor}
             </button>
             <button
               type="button"
@@ -252,15 +270,31 @@ export default function ProductGallery({ photos, nom, plateRef, modele_3d, selec
         </div>
       )}
 
-      {modele_3d && viewMode === '3d' ? (
+      {modele_3d && !modelFailed && !modelColorMatches && (
+        <p className="mb-4 px-[var(--gutter)] text-center text-xs text-zinc-400 lg:px-0">
+          La vue 3D fidèle est validée pour le coloris {modele_3d.variantColor} uniquement.
+        </p>
+      )}
+      {modelFailed && (
+        <p role="status" className="mb-4 px-[var(--gutter)] text-center text-xs text-zinc-400 lg:px-0">
+          La vue 3D n’a pas pu être chargée. Les photos du produit restent disponibles.
+        </p>
+      )}
+
+      {canShowModel && modele_3d && viewMode === '3d' ? (
         <div ref={viewerPlateRef} className="px-[var(--gutter)] lg:px-0">
           <Product3DViewer
             modelSrc={modele_3d.src}
             posterSrc={modele_3d.poster}
             cameraOrbit={modele_3d.cameraOrbit}
-            recolor={modele_3d.recolor ?? true}
+            recolor={false}
             background={modele_3d.background}
             selectedColor={selectedColor}
+            showColorPicker={false}
+            onModelError={() => {
+              setModelFailed(true);
+              setViewMode('photos');
+            }}
             alt={`Modèle 3D de ${nom}`}
             className="w-full aspect-[4/5] lg:aspect-[3/4] shadow-2xl"
           />

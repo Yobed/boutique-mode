@@ -5,11 +5,14 @@ Usage (via scripts/3d_pipeline/run_neural.ps1 ou npm run 3d:*) :
   --image <chemin|URL> --id <id>     une photo vers un modèle
   --article <id>                     la première photo de l'article du catalogue
   --catalog [--categories a,b]       tous les articles du catalogue (sacs, chaussures, accessoires par défaut)
-  --approve <id>                     publie un modèle resté « review » après contrôle visuel
+  --approve <id>                     force la validation technique après contrôle visuel ; ne valide pas la fidélité physique
+  --publish <id>                     publie après revue documentée de fidélité au produit physique
   --list                             état du manifeste
 
-Un modèle n'est publié (public/models + config/models3d.json, status "ok") que s'il passe le contrôle
-qualité ; sinon il reste dans outputs/3d_neural/<id> avec status "review" et ses raisons.
+Un modèle reste dans outputs/3d_neural/<id> jusqu'à sa publication explicite. Le statut "ok" indique
+uniquement que les seuils techniques sont respectés ; sinon il reste avec status "review" et ses
+raisons. Ce statut ne certifie jamais sa fidélité au produit vendu : le site exige une revue séparée
+fondée sur six vues physiques et un coloris exact.
 Une seule photo ne montre pas l'arrière de l'objet : toute sortie est une estimation monoculaire.
 """
 
@@ -162,12 +165,21 @@ def _manifest_entry(model_id, report, reasons, source):
         "silhouette_iou": report["silhouette_iou_front"],
         "faces": report["faces"],
         "monocular_estimate": report.get("monocular_estimate", True),  # False : plusieurs vues
+        "fidelity_review": {
+            "status": "pending",
+            "source_type": "unknown",
+            "captured_views": [],
+            "variant_color": None,
+            "reviewed_at": None,
+            "reviewed_by": None,
+            "note": "La génération ne certifie pas la fidélité au produit physique.",
+        },
         "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
     }
 
 
 def process_image(photo, model_id, backend="auto", quality="web", source_label=None):
-    """Photo (chemin ou URL) -> modèle ; publie si le contrôle qualité passe. Retourne l'entrée du manifeste."""
+    """Photo (chemin ou URL) -> modèle en staging. Retourne l'entrée du manifeste."""
     import neural_reconstruct as nr
 
     model_id = safe_id(model_id)
@@ -179,8 +191,6 @@ def process_image(photo, model_id, backend="auto", quality="web", source_label=N
     entry = manifest_entry(model_id, report, reasons, source_label or photo, pick_background(work_dir))
     if reasons:
         unpublish(model_id)  # un modèle repassé en « review » ne doit pas rester en ligne
-    else:
-        deploy(model_id, work_dir)
     manifest = load_manifest()
     manifest[model_id] = entry
     save_manifest(manifest)
@@ -209,7 +219,7 @@ def _crop_panel(sheet, layout, work_dir):
 
 
 def process_sheet(sheet, model_id, quality="web", layout_path=None):
-    """Planche multi-vues (face, dos, côtés, dessus, dessous...) -> modèle fidèle ; même publication que process_image.
+    """Planche multi-vues -> modèle en staging, en attente du contrôle de fidélité.
 
     Disposition JSON : {"boxes": {vue: [x0,y0,x1,y1]}, "ignore": [vues]} (enveloppe visuelle) ou
     {"mode": "single", "panel": [x0,y0,x1,y1], "upscale": n} (un panneau -> reconstruction à une photo)."""
@@ -228,8 +238,6 @@ def process_sheet(sheet, model_id, quality="web", layout_path=None):
     entry = manifest_entry(model_id, report, reasons, source, pick_background(work_dir))
     if reasons:
         unpublish(model_id)
-    else:
-        deploy(model_id, work_dir)
     manifest = load_manifest()
     manifest[model_id] = entry
     save_manifest(manifest)
@@ -250,9 +258,71 @@ def approve(model_id):
     manifest = load_manifest()
     if model_id not in manifest:
         raise KeyError(f"{model_id} absent du manifeste")
+    entry = manifest[model_id]
+    reasons_at_approval = list(entry.get("reasons", []))
+    entry["status"] = "ok"
+    entry["technical_review"] = {
+        "type": "manual_override",
+        "reviewed_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+        "reviewed_by": os.environ.get("USERNAME") or os.environ.get("USER") or "unknown",
+        "reasons_at_approval": reasons_at_approval,
+    }
+    entry.setdefault("fidelity_review", {
+        "status": "pending",
+        "source_type": "unknown",
+        "captured_views": [],
+        "variant_color": None,
+        "reviewed_at": None,
+        "reviewed_by": None,
+        "note": "La validation technique ne certifie pas la fidélité au produit physique.",
+    })
+    save_manifest(manifest)
+
+
+def publish_model(model_id):
+    """Publie uniquement un modèle techniquement prêt et revu sur l'article physique."""
+    model_id = safe_id(model_id)
+    manifest = load_manifest()
+    if model_id not in manifest:
+        raise KeyError(f"{model_id} absent du manifeste")
+
+    entry = manifest[model_id]
+    review = entry.get("fidelity_review")
+    if not isinstance(review, dict):
+        raise ValueError("La revue de fidélité physique est absente")
+
+    required_views = {"front", "back", "left", "right", "top", "bottom"}
+    raw_views = review.get("captured_views")
+    captured_views = set(raw_views) if isinstance(raw_views, list) else set()
+    variant_color = review.get("variant_color")
+    reviewer = review.get("reviewed_by")
+    reviewed_at = review.get("reviewed_at")
+
+    if entry.get("status") != "ok":
+        raise ValueError(f"{model_id} n'a pas passé le contrôle technique")
+    if entry.get("monocular_estimate") is not False:
+        raise ValueError("Le modèle doit provenir d'une reconstruction multi-vues")
+    if entry.get("recolor") is not False:
+        raise ValueError("La recoloration est interdite : le modèle doit conserver son coloris réel")
+    if review.get("status") != "approved" or review.get("source_type") != "physical_product_captures":
+        raise ValueError("La revue doit être approuvée à partir de captures du produit physique")
+    if not required_views.issubset(captured_views):
+        raise ValueError("La revue doit couvrir les six vues : front, back, left, right, top, bottom")
+    if not isinstance(variant_color, str) or not variant_color.strip():
+        raise ValueError("Le coloris exact du modèle doit être renseigné")
+    if not isinstance(reviewed_at, str) or not reviewed_at.strip() or not isinstance(reviewer, str) or not reviewer.strip():
+        raise ValueError("La date et le nom du contrôleur sont requis")
+
+    articles, _source = read_catalog()
+    article = next((item for item in articles if safe_id(item["id"]) == model_id), None)
+    if not article:
+        raise ValueError(f"{model_id} ne correspond à aucun article du catalogue")
+    catalog_colors = {str(color).strip().casefold() for color in article.get("couleurs", [])}
+    if variant_color.strip().casefold() not in catalog_colors:
+        raise ValueError(f"Le coloris {variant_color!r} n'est pas proposé pour {model_id}")
+
     deploy(model_id, os.path.join(WORK_ROOT, model_id))
-    manifest[model_id]["status"] = "ok"
-    manifest[model_id]["reasons"] = []
+    entry["published_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     save_manifest(manifest)
 
 
@@ -303,6 +373,7 @@ def parse_args(argv):
     parser.add_argument("--backend", choices=("auto", "triposr", "revolve"), default="auto")
     parser.add_argument("--quality", choices=("web", "high"), default="web")
     parser.add_argument("--approve")
+    parser.add_argument("--publish")
     parser.add_argument("--list", action="store_true")
     parser.add_argument("--self-test", action="store_true", help="exécute les tests unitaires du pipeline")
     return parser.parse_args(argv)
@@ -317,11 +388,17 @@ def main(argv=None):
         return 0 if unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful() else 1
     if args.list:
         for model_id, e in sorted(load_manifest().items()):
-            print(f"{model_id:24} {e['status']:7} {e['backend']:8} IoU={e['silhouette_iou']} faces={e['faces']} {e['reasons']}")
+            fidelity_status = e.get("fidelity_review", {}).get("status", "pending")
+            published = "publié" if e.get("published_at") else "en staging"
+            print(f"{model_id:24} {e['status']:7} {fidelity_status:8} {published:10} IoU={e['silhouette_iou']} faces={e['faces']} {e['reasons']}")
         return 0
     if args.approve:
         approve(args.approve)
-        print(f"{args.approve} publié.")
+        print(f"{args.approve} validé sur le plan technique ; la revue de fidélité reste nécessaire.")
+        return 0
+    if args.publish:
+        publish_model(args.publish)
+        print(f"{args.publish} publié après revue de fidélité.")
         return 0
     if args.sheet:
         if not args.id:

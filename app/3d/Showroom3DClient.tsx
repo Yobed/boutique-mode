@@ -1,220 +1,98 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, MessageCircle, ShoppingBag, ShieldCheck, Clock, Truck, Sparkles, Check } from 'lucide-react';
-import Product3DViewer from '@/components/3d/Product3DViewer';
-import { useStore } from '@/lib/store-context';
+import { ArrowLeft, MessageCircle, Sparkles } from 'lucide-react';
+import ProductGallery from '@/components/product/ProductGallery';
+import type { Article } from '@/lib/types';
 
 const WHATSAPP_PHONE = '2250574243752';
 
-const COLOR_OPTIONS = [
-  {
-    key: 'Noir',
-    label: 'Noir Ébène',
-    colorHex: '#18181b',
-    desc: 'Cuir grainé d’un noir profond et intemporel, magnifié par les finitions laiton doré.',
-  },
-  {
-    key: 'Bordeaux',
-    label: 'Bordeaux Royal',
-    colorHex: '#581c24',
-    desc: 'Teinte carmin envoûtante, riche en reflets chauds pour vos soirées élégantes.',
-  },
-  {
-    key: 'Cognac',
-    label: 'Cognac Cuir',
-    colorHex: '#8b4513',
-    desc: 'Cuir ambré aux accents naturels de maroquinerie sellier artisanale.',
-  },
-];
-
-export default function Showroom3DClient() {
-  const [selectedColor, setSelectedColor] = useState('Noir');
-  const { add } = useStore();
-
-  const activeColorInfo =
-    COLOR_OPTIONS.find((c) => c.key === selectedColor) || COLOR_OPTIONS[0];
-
+export default function Showroom3DClient({ article }: { article: Article }) {
+  const plateRef = useRef<HTMLDivElement>(null);
+  const referenceColor = article.modele_3d?.variantColor ?? article.couleurs[0] ?? 'Unique';
+  const price = article.prix_promo ?? article.prix;
+  const formattedPrice = new Intl.NumberFormat('fr-FR').format(price);
   const whatsappMessage = encodeURIComponent(
-    `Bonjour Sophia, je viens d'explorer le Sac Signature en vue 3D sur le site. Je souhaite le commander en teinte ${activeColorInfo.label} (32 000 FCFA). Est-il disponible pour une livraison à domicile ?`
+    'Bonjour ELSI, je souhaite des informations sur ' +
+      article.nom +
+      ' (' +
+      referenceColor +
+      '), au prix affiché de ' +
+      formattedPrice +
+      ' FCFA.'
   );
-  const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappMessage}`;
+  const whatsappUrl = 'https://wa.me/' + WHATSAPP_PHONE + '?text=' + whatsappMessage;
 
   return (
-    <div className="min-h-screen bg-ink-950 text-linen-100 pb-24 pt-6">
+    <main className="min-h-screen bg-ink-950 pb-24 pt-6 text-linen-100">
       <div className="mx-auto max-w-[1440px] px-[var(--gutter)]">
-        {/* Fil d'Ariane & Retour */}
-        <nav className="mb-6 flex items-center justify-between gap-4 border-b border-white/10 pb-4 text-xs font-serif text-zinc-400">
-          <Link
-            href="/"
-            className="group flex items-center gap-2 hover:text-brass-300 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span>Retour à l'accueil</span>
+        <nav aria-label="Navigation" className="mb-8 border-b border-white/10 pb-4">
+          <Link href="/" className="group inline-flex items-center gap-2 text-xs text-zinc-400 transition-colors hover:text-brass-300">
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Retour à l’accueil
           </Link>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="tracking-widest uppercase text-[10px] text-brass-300">
-              Expérience 3D Interactive
-            </span>
-          </div>
         </nav>
 
-        {/* Grille principale Showroom 3D */}
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14 items-start">
-          {/* Colonne gauche : Visualiseur 3D interactif (7 colonnes) */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="relative">
-              <Product3DViewer
-                modelSrc="/models/sac-elsi.glb"
-                posterSrc="/models/sac-elsi-poster.png"
-                alt="Sac à Main Cuir Grainé ELSI en 3D 360°"
-                cameraOrbit="0deg 75deg 105%"
-                selectedColor={selectedColor}
-                onColorChange={(c) => setSelectedColor(c)}
-                showColorPicker={true}
-                className="w-full aspect-[4/4] sm:aspect-[4/4.2] rounded-3xl"
-              />
-            </div>
+        <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
+          <section aria-label={'Photos et vue 3D de ' + article.nom} className="lg:col-span-7">
+            <ProductGallery
+              photos={article.photos}
+              nom={article.nom}
+              plateRef={plateRef}
+              modele_3d={article.modele_3d}
+              selectedColor={referenceColor}
+            />
+          </section>
 
-            {/* Conseils d'interaction */}
-            <div className="grid grid-cols-3 gap-3 text-center text-xs text-zinc-400 border border-white/5 rounded-2xl p-3 bg-ink-900/40">
-              <div>
-                <span className="block text-brass-300 font-medium font-serif">Pivoter</span>
-                <span>Glissez le doigt ou la souris</span>
-              </div>
-              <div className="border-x border-white/10 px-2">
-                <span className="block text-brass-300 font-medium font-serif">Zoomer</span>
-                <span>Pincez ou molette</span>
-              </div>
-              <div>
-                <span className="block text-brass-300 font-medium font-serif">Couleurs</span>
-                <span>Pastilles en direct</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Colonne droite : Fiche d'exception & Commandes directes (5 colonnes) */}
-          <div className="lg:col-span-5 space-y-7 lg:sticky lg:top-24">
+          <section className="space-y-6 lg:sticky lg:top-24 lg:col-span-5">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-brass-400/10 border border-brass-400/30 px-3 py-1 text-xs text-brass-300 mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Pièce Phare · Maroquinerie d'Exception</span>
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brass-400/30 bg-brass-400/10 px-3 py-1 text-xs text-brass-300">
+                <Sparkles className="h-3.5 w-3.5" />
+                Studio produit
               </div>
-              <h1 className="text-display text-3xl sm:text-4xl text-linen-100 tracking-tight leading-tight">
-                Sac à Main Signature Cuir Grainé
-              </h1>
-              <p className="mt-3 text-2xl font-serif text-brass-400">
-                32 000 FCFA
-              </p>
-              <p className="mt-2 text-xs text-zinc-400">
-                TVA comprise · Livraison 24h & Essayage offert à domicile
-              </p>
+              <h1 className="text-display text-3xl leading-tight tracking-tight sm:text-4xl">{article.nom}</h1>
+              <p className="mt-4 font-serif text-2xl text-brass-400">{formattedPrice} FCFA</p>
+              <p className="mt-4 leading-relaxed text-zinc-300">{article.description}</p>
             </div>
 
-            {/* Sélecteur de Couleurs avec descriptif */}
-            <div className="space-y-3 rounded-2xl bg-ink-900/60 p-5 border border-white/10">
-              <span className="block text-xs font-serif tracking-widest uppercase text-brass-300">
-                Teinte de cuir sélectionnée : <strong className="text-linen-100">{activeColorInfo.label}</strong>
-              </span>
-
-              <div className="flex items-center gap-3 pt-1">
-                {COLOR_OPTIONS.map((c) => {
-                  const isSelected = selectedColor === c.key;
-                  return (
-                    <button
-                      key={c.key}
-                      type="button"
-                      onClick={() => setSelectedColor(c.key)}
-                      className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium transition-all ${
-                        isSelected
-                          ? 'bg-brass-400 text-ink-950 shadow-lg scale-105 font-semibold'
-                          : 'bg-ink-950 text-zinc-300 border border-white/10 hover:border-brass-400/50'
-                      }`}
-                    >
-                      <span
-                        className="w-3.5 h-3.5 rounded-full border border-white/20"
-                        style={{ backgroundColor: c.colorHex }}
-                      />
-                      <span>{c.label}</span>
-                      {isSelected && <Check className="w-3.5 h-3.5" />}
-                    </button>
-                  );
-                })}
+            <dl className="grid gap-3 border-y border-white/10 py-5 text-sm sm:grid-cols-2">
+              <div>
+                <dt className="text-xs uppercase tracking-wider text-zinc-500">Coloris au catalogue</dt>
+                <dd className="mt-1 text-zinc-200">{article.couleurs.join(' · ') || 'Unique'}</dd>
               </div>
+              <div>
+                <dt className="text-xs uppercase tracking-wider text-zinc-500">Tailles au catalogue</dt>
+                <dd className="mt-1 text-zinc-200">{article.tailles.join(' · ') || 'Unique'}</dd>
+              </div>
+            </dl>
 
-              <p className="text-xs text-zinc-400 pt-1 leading-relaxed italic">
-                "{activeColorInfo.desc}"
-              </p>
-            </div>
+            <p role="status" className="border-l-2 border-brass-400/60 pl-4 text-sm leading-relaxed text-zinc-400">
+              {article.modele_3d
+                ? 'Modèle 3D validé pour le coloris ' + article.modele_3d.variantColor + '.'
+                : 'La vue 3D reste masquée tant que sa fidélité au produit physique n’a pas été vérifiée. Les photos du catalogue restent visibles.'}
+            </p>
 
-            {/* Boutons d'Action Clés */}
             <div className="space-y-3">
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-3 rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white shadow-xl hover:bg-[#20ba59] transition-all hover:scale-[1.02] active:scale-95"
+                className="flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#20ba59]"
               >
-                <MessageCircle className="w-5 h-5 fill-current" />
-                <span>Commander sur WhatsApp avec Sophia</span>
+                <MessageCircle className="h-5 w-5" />
+                Demander la disponibilité sur WhatsApp
               </a>
-
               <Link
-                href="/article/art-101"
-                className="w-full flex items-center justify-center gap-2 rounded-full border border-brass-400/40 bg-ink-900 px-6 py-3.5 text-sm font-serif text-brass-300 hover:bg-brass-400 hover:text-ink-950 transition-all text-center"
+                href={'/article/' + article.id}
+                className="flex w-full items-center justify-center rounded-full border border-brass-400/40 bg-ink-900 px-6 py-3.5 text-center text-sm font-serif text-brass-300 transition-colors hover:bg-brass-400 hover:text-ink-950"
               >
-                <span>Voir la fiche catalogue complète</span>
+                Voir la fiche catalogue complète
               </Link>
             </div>
-
-            {/* Fiche Technique & Savoir-Faire */}
-            <div className="border-t border-white/10 pt-5 space-y-3">
-              <h3 className="text-xs font-serif uppercase tracking-widest text-brass-300">
-                Spécifications Artisanales
-              </h3>
-              <ul className="text-xs text-zinc-300 space-y-2 leading-relaxed">
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Cuir :</strong> Cuir de vachette pleine fleur grainé, tannage végétal de prestige.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Finitions :</strong> Fermoir quart-de-tour en laiton massif brossé or mat.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Porté :</strong> Poignée haute rigide + bandoulière réglable et amovible.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-brass-400 font-bold">•</span>
-                  <span><strong>Confection :</strong> Atelier ELSI Abidjan — coutures sellier renforcées.</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Engagements ELSI */}
-            <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-5 text-center text-zinc-400">
-              <div className="space-y-1">
-                <Clock className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">24 h à Abidjan</p>
-                <p className="text-[10px]">Livraison express</p>
-              </div>
-              <div className="space-y-1">
-                <Truck className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">Sous housse zippée</p>
-                <p className="text-[10px]">Repassée vapeur</p>
-              </div>
-              <div className="space-y-1">
-                <ShieldCheck className="w-4 h-4 mx-auto text-brass-400" />
-                <p className="text-[11px] font-medium text-linen-100">Garantie 48 h</p>
-                <p className="text-[10px]">Échange sans frais</p>
-              </div>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
