@@ -1,0 +1,331 @@
+"""
+semantic_classifier.py — Moteur de Classification Sémantique Prudente & Anti-Contamination
+Projet : boutique-mode / Pipeline Image-to-3D
+
+Mission 36 :
+Élimine la contamination sémantique par le nom de fichier ou des métadonnées erronées.
+Distingue :
+  1. Métadonnées fournies explicitement par l'utilisateur (--category, --force-category)
+  2. Indices visuels mesurés dans l'image (Aspect Ratio, Symétrie, Évidement interne/anse, Profil de révolution, Tiges élancées, Rectitude prismatique)
+  3. Hypothèses géométriques déduites
+  4. Valeurs de repli universelles (generic_spatial_decomposed)
+
+Détecte les contradictions et refuse d'imposer des templates inadaptés (ex: sac sur canapé).
+"""
+
+import math
+import os
+import re
+from PIL import Image
+
+
+CATEGORY_MAPPINGS = {
+    "fashion_handbag": ["sac", "bag", "handbag", "pochette", "tote", "besace", "maroquinerie", "cuir_sac"],
+    "horizontal_lounge_furniture": ["sofa", "couch", "canape", "canapé", "fauteuil", "lounge", "meuble", "seating", "bench"],
+    "tableware_lathe": ["vase", "carafe", "pitcher", "bouteille", "pot", "flacon", "ceramique", "tableware"],
+    "slender_pedestal_lamp": ["lamp", "lampe", "luminaire", "lighting", "lampadaire"],
+    "prismatic_enclosure_electronics": ["ssd", "powerbank", "boitier", "boîtier", "enclosure", "electronics", "hub"]
+}
+
+
+def extract_keyword_hint(text):
+    """Extrait une hypothèse sémantique à partir d'une chaîne de caractères (nom de fichier ou hint)."""
+    if not text:
+        return None
+    cleaned = text.lower()
+    for cat, kws in CATEGORY_MAPPINGS.items():
+        for kw in kws:
+            if re.search(r'(^|[^a-z0-9_])' + re.escape(kw) + r'([^a-z0-9_]|$)', cleaned) or kw in cleaned:
+                return cat
+    return None
+
+
+def extract_visual_metrics(mask, bbox, width, height):
+    """
+    Extrait les descripteurs géométriques et topologiques rigoureux à partir du masque binaire.
+    """
+    min_x, min_y, max_x, max_y = bbox
+    bw = max(1, max_x - min_x + 1)
+    bh = max(1, max_y - min_y + 1)
+    
+    aspect_ratio = bh / float(bw) # H / W
+    
+    # 1. Remplissage du masque dans sa boîte englobante
+    fg_pixels = 0
+    void_rows = 0
+    void_pixels = 0
+    slice_widths = []
+    min_row_stem = bw
+    
+    for y in range(min_y, max_y + 1):
+        xs = [x for x in range(min_x, max_x + 1) if mask[y][x]]
+        if xs:
+            row_w = len(xs)
+            fg_pixels += row_w
+            span = max(xs) - min(xs) + 1
+            slice_widths.append(span)
+            
+            # Évidement interne (trou traversant sous anse ou structure ajourée)
+            void_in_row = span - row_w
+            if void_in_row > max(8, int(bw * 0.04)):
+                void_rows += 1
+                void_pixels += void_in_row
+                
+            # Recherche de tige ultra-fine dans les 70% supérieurs
+            if y < min_y + bh * 0.75:
+                if row_w < min_row_stem:
+                    min_row_stem = row_w
+        else:
+            slice_widths.append(0)
+            
+    rect_fill_ratio = fg_pixels / float(bw * bh)
+    void_ratio = void_rows / float(bh)
+    stem_ratio = min_row_stem / float(bw) # Étroitesse maximale du mât
+    
+    # 2. Symétrie axiale centrale bilatérale
+    cx = (min_x + max_x) / 2.0
+    sym_matches = 0
+    total_tested = 0
+    for y in range(min_y, max_y + 1, 2):
+        for dx in range(1, int(bw / 2.0) + 1, 2):
+            x_left = int(cx - dx)
+            x_right = int(cx + dx)
+            if min_x <= x_left and x_right <= max_x:
+                total_tested += 1
+                if mask[y][x_left] == mask[y][x_right]:
+                    sym_matches += 1
+    symmetry_score = (sym_matches / float(total_tested)) if total_tested > 0 else 0.5
+    
+    # 3. Rectitude des parois dans le corps central (entre 20% et 80% de la hauteur)
+    mid_widths = []
+    y_20 = int(min_y + bh * 0.20)
+    y_80 = int(min_y + bh * 0.80)
+    for y in range(y_20, y_80):
+        xs = [x for x in range(min_x, max_x + 1) if mask[y][x]]
+        if xs:
+            mid_widths.append(max(xs) - min(xs) + 1)
+            
+    if mid_widths:
+        mean_w = sum(mid_widths) / float(len(mid_widths))
+        std_w = (sum((w - mean_w)**2 for w in mid_widths) / float(len(mid_widths)))**0.5
+        width_cv = std_w / mean_w # Coefficient de variation des largeurs (proche de 0 pour pavé/boîtier droit)
+        slender_ratio = mean_w / float(bw)
+    else:
+        width_cv = 1.0
+        slender_ratio = 1.0
+        
+    # 4. Détection de profil d'assise horizontal étalé (canapé / lounge)
+    is_stepped_horizontal = False
+    if aspect_ratio <= 0.60 and len(slice_widths) >= 10:
+        bot_widths = slice_widths[-int(len(slice_widths) * 0.35):]
+        top_widths = slice_widths[:int(len(slice_widths) * 0.40)]
+        avg_bot = sum(bot_widths) / len(bot_widths) if bot_widths else 0
+        avg_top = sum(top_widths) / len(top_widths) if top_widths else 0
+        if avg_bot > bw * 0.70 and avg_top > 0:
+            is_stepped_horizontal = True
+            
+    # 5. Détection de profil de révolution (solide sans évidement interne, courbure organique, symétrie stricte)
+    is_revolution_candidate = False
+    if symmetry_score > 0.88 and 1.05 <= aspect_ratio <= 2.8 and void_ratio < 0.05 and width_cv > 0.10:
+        is_revolution_candidate = True
+        
+    return {
+        "aspect_ratio": aspect_ratio,
+        "width_px": bw,
+        "height_px": bh,
+        "rect_fill_ratio": rect_fill_ratio,
+        "symmetry_score": symmetry_score,
+        "void_ratio": void_ratio,
+        "void_pixels": void_pixels,
+        "stem_ratio": stem_ratio,
+        "width_cv": width_cv,
+        "slender_ratio": slender_ratio,
+        "is_stepped_horizontal": is_stepped_horizontal,
+        "is_revolution_candidate": is_revolution_candidate
+    }
+
+
+def compute_visual_scores(metrics):
+    """
+    Calcule les probabilités d'appartenance [0.0, 1.0] pour chaque archétype visuel.
+    """
+    ar = metrics["aspect_ratio"]
+    sym = metrics["symmetry_score"]
+    fill = metrics["rect_fill_ratio"]
+    void_r = metrics["void_ratio"]
+    stem_r = metrics["stem_ratio"]
+    cv = metrics["width_cv"]
+    
+    scores = {}
+    
+    # 1. Mobilier lounge / Canapé horizontal (Aspect ratio faible, profil d'assise très large)
+    if ar <= 0.55:
+        score_sofa = 0.94
+        if metrics["is_stepped_horizontal"]:
+            score_sofa = 0.98
+    elif ar <= 0.62:
+        score_sofa = 0.70
+    else:
+        score_sofa = 0.02
+    scores["horizontal_lounge_furniture"] = score_sofa
+    
+    # 2. Lampe de table à mât élancé (Tige ultra fine reliant base et abat-jour)
+    if ar >= 1.30 and stem_r < 0.15 and sym > 0.80:
+        score_lamp = 0.98
+    elif ar >= 1.20 and stem_r < 0.25:
+        score_lamp = 0.75
+    else:
+        score_lamp = 0.04
+    scores["slender_pedestal_lamp"] = score_lamp
+    
+    # 3. Boîtier électronique prismatique (Parois très droites cv < 0.06, zéro vide interne, fort remplissage)
+    if cv < 0.06 and void_r < 0.03 and fill > 0.70 and 0.45 <= ar <= 1.80 and not metrics["is_stepped_horizontal"]:
+        score_ssd = 0.95
+        if cv < 0.02:
+            score_ssd = 0.98
+    else:
+        score_ssd = 0.08
+    scores["prismatic_enclosure_electronics"] = score_ssd
+    
+    # 4. Solide de révolution / Tableware (Vase, Carafe axisymétrique organique sans vide interne)
+    if metrics["is_revolution_candidate"]:
+        score_lathe = 0.96
+        if ar >= 1.25:
+            score_lathe = 0.98
+    elif sym > 0.88 and 0.85 <= ar <= 2.2 and void_r < 0.05 and cv > 0.12:
+        score_lathe = 0.85
+    else:
+        score_lathe = 0.05
+    scores["tableware_lathe"] = score_lathe
+    
+    # 5. Sac à main / Maroquinerie (Format modéré 0.70 <= AR <= 1.45, anse ajourée void_r > 0.10 ou silhouette trapézoïdale)
+    if 0.70 <= ar <= 1.45:
+        if void_r > 0.12: # Anse ajourée visible
+            score_bag = 0.97
+        elif metrics["is_revolution_candidate"] or stem_r < 0.15 or cv < 0.04:
+            # Un solide de révolution, une tige élancée ou un boîtier prismatique pur ne sont pas des sacs
+            score_bag = 0.05
+        elif cv > 0.08:
+            score_bag = 0.88
+        else:
+            score_bag = 0.30
+    else:
+        score_bag = 0.02
+    scores["fashion_handbag"] = score_bag
+    
+    # 6. Décomposition spatiale générique (Repli universel sans préjugé géométrique)
+    scores["generic_spatial_decomposed"] = 0.75
+    
+    return scores
+
+
+def classify_product_semantics(
+    image_path,
+    mask,
+    bbox,
+    width,
+    height,
+    category_hint=None,
+    force_override=False
+):
+    """
+    Réalise l'arbitrage sémantique complet avec détection formelle de contradiction.
+    """
+    fname = os.path.basename(image_path)
+    filename_hint = extract_keyword_hint(fname)
+    explicit_hint = extract_keyword_hint(category_hint) if category_hint else None
+    
+    # 1. Extraction des métriques visuelles observables
+    metrics = extract_visual_metrics(mask, bbox, width, height)
+    scores = compute_visual_scores(metrics)
+    
+    # Sélection du meilleur archétype visuel (hors repli générique)
+    specific_scores = {k: v for k, v in scores.items() if k != "generic_spatial_decomposed"}
+    best_visual_cat = max(specific_scores, key=specific_scores.get)
+    best_visual_score = specific_scores[best_visual_cat]
+    
+    # Si la confiance visuelle spécifique est trop faible, le repli générique prévaut
+    if best_visual_score < 0.60:
+        best_visual_cat = "generic_spatial_decomposed"
+        best_visual_score = 0.75
+        
+    contradiction_detected = False
+    contradiction_details = None
+    forced_override_applied = False
+    final_category = best_visual_cat
+    final_confidence = best_visual_score
+    
+    # 2. Analyse des contradictions : Métadonnée Explicite
+    if explicit_hint:
+        hint_score = scores.get(explicit_hint, 0.0)
+        if hint_score < 0.35:
+            # Contradiction formelle entre métadonnée explicite et l'image
+            contradiction_detected = True
+            msg = (
+                f"CONTRADICTION MAJEURE : L'argument explicite '--category {category_hint}' "
+                f"(archétype: {explicit_hint}) est en contradiction absolue avec la silhouette observée "
+                f"(Ratio aspect={metrics['aspect_ratio']:.3f}, Symétrie={metrics['symmetry_score']:.3f}, "
+                f"Score visuel compatible={hint_score:.2f} << Score visuel naturel={best_visual_score:.2f} pour '{best_visual_cat}')."
+            )
+            contradiction_details = msg
+            
+            if force_override:
+                final_category = explicit_hint
+                final_confidence = 0.50
+                forced_override_applied = True
+                print(f"[AVERTISSEMENT PIPELINE] {msg} -> Forçage manuel appliqué via --force-category.")
+            else:
+                final_category = best_visual_cat
+                final_confidence = best_visual_score
+                print(f"[REJET SÉMANTIQUE] {msg} -> Rejet de la catégorie imposée, application de la vérité visuelle.")
+        else:
+            final_category = explicit_hint
+            final_confidence = max(hint_score, 0.90)
+            
+    # 3. Analyse des contradictions : Nom de fichier (Indice secondaire)
+    elif filename_hint:
+        fn_score = scores.get(filename_hint, 0.0)
+        if fn_score < 0.35 or (best_visual_score - fn_score > 0.35):
+            contradiction_detected = True
+            msg = (
+                f"CONTAMINATION SÉMANTIQUE DÉTECTÉE PAR NOM DE FICHIER : Le fichier '{fname}' suggère "
+                f"'{filename_hint}', mais les métriques visuelles de l'image (AR={metrics['aspect_ratio']:.3f}, "
+                f"Symétrie={metrics['symmetry_score']:.3f}) réfutent cette catégorie (compatibilité: {fn_score:.2f}). "
+                f"L'archétype visuel prouvé '{best_visual_cat}' (score: {best_visual_score:.2f}) prévaut rigoureusement."
+            )
+            contradiction_details = msg
+            print(f"[ANTI-CONTAMINATION] {msg}")
+            final_category = best_visual_cat
+            final_confidence = best_visual_score
+        else:
+            # Nom de fichier concorde avec l'image
+            final_category = filename_hint
+            final_confidence = max(fn_score, 0.92)
+            
+    # 4. Rapport de décision complet
+    decision_report = {
+        "final_category": final_category,
+        "final_confidence": round(final_confidence, 3),
+        "visual_category": best_visual_cat,
+        "visual_confidence": round(best_visual_score, 3),
+        "user_metadata_hint": category_hint,
+        "extracted_filename_hint": filename_hint,
+        "contradiction_detected": contradiction_detected,
+        "contradiction_details": contradiction_details,
+        "forced_override_applied": forced_override_applied,
+        "visual_metrics": metrics,
+        "visual_compatibility_scores": {k: round(v, 3) for k, v in scores.items()},
+        "observed_cues": [
+            f"Dimensions 2D : {metrics['width_px']}x{metrics['height_px']} px",
+            f"Ratio d'aspect H/W : {metrics['aspect_ratio']:.3f}",
+            f"Symétrie bilatérale : {metrics['symmetry_score']:.3f}",
+            f"Facteur de remplissage rectangulaire : {metrics['rect_fill_ratio']:.3f}",
+            f"Taux d'évidement interne : {metrics['void_ratio']*100:.1f}% ({metrics['void_pixels']} px)",
+            f"Étroitesse minimale de tige/mât : {metrics['stem_ratio']:.3f}",
+            f"Variabilité des largeurs (CV) : {metrics['width_cv']:.4f}",
+            f"Profil d'assise horizontal détecté : {metrics['is_stepped_horizontal']}",
+            f"Profil de révolution axisymétrique détecté : {metrics['is_revolution_candidate']}"
+        ]
+    }
+    
+    return decision_report

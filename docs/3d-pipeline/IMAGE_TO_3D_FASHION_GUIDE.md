@@ -1,5 +1,9 @@
 # Guide Pratique : Modélisation 3D d'Articles de Mode à partir d'Images (Pipeline Image-to-3D)
 
+> **Nouveau :** pour transformer automatiquement les photos du catalogue en modèles 3D, quel que soit l'objet, utilisez
+> le pipeline neuronal : [NEURAL_IMAGE_TO_3D.md](NEURAL_IMAGE_TO_3D.md) (`npm run 3d:catalog`). Le pipeline Blender
+> décrit ci-dessous reste utile pour les gabarits procéduraux à matériaux PBR contrôlés.
+
 Ce guide décrit comment utiliser le pipeline 3D procédural transféré depuis le studio Blender pour modéliser automatiquement et semi-automatiquement des articles de mode (maroquinerie, souliers, accessoires, bijoux, lunettes, parfums) pour la boutique en ligne.
 
 ---

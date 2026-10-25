@@ -1,0 +1,47 @@
+{
+  "semantic_classifier.py": {
+    "size": 13874,
+    "sha256": "109c186bb0f98f63e5cc8ca1c749bcab56194ed450312feb4f498b316874cb44",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\semantic_classifier.py"
+  },
+  "component_analyzer.py": {
+    "size": 87344,
+    "sha256": "27d9eea51f473b2145a9d485818852f888f3de35df0a9009524276b8067ea465",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\component_analyzer.py"
+  },
+  "image_analyzer.py": {
+    "size": 31284,
+    "sha256": "a8ffb315e2074c31f31dd66e85b413434fc2b4a9c08fe06e004df4315f1f04fd",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\image_analyzer.py"
+  },
+  "builder.py": {
+    "size": 11280,
+    "sha256": "1c7007cfe237a2532758357cbc088a8253bfcc9ec7e93de6827eda03c642031e",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\builder.py"
+  },
+  "materials.py": {
+    "size": 8601,
+    "sha256": "7f95319abdccb5dec36ee0b7eb7adab396045f0f360c16037b1c85832d1a9580",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\materials.py"
+  },
+  "orchestrator.py": {
+    "size": 7651,
+    "sha256": "f8b58ea3403482c9edc1754ca7a397fee78638dec6f241350b3500e51c63e0b7",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\orchestrator.py"
+  },
+  "studio.py": {
+    "size": 9587,
+    "sha256": "94e078a34958a1a7311dbb129bc11709ab2d295054508aca57abe84137c918d9",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\studio.py"
+  },
+  "validator.py": {
+    "size": 4926,
+    "sha256": "fe326033ce607498f7a0779580fffd79e8b93855dc34c469c4d1736e1bc26979",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\validator.py"
+  },
+  "run_fashion_3d.ps1": {
+    "size": 6507,
+    "sha256": "30d8e18ce356ba6a79c3820e1011bbd8107e2b1facdfc4d95d0497d12b397129",
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\scripts\\3d_pipeline\\run_fashion_3d.ps1"
+  }
+}
