@@ -75,12 +75,12 @@
     "poster": "/models/art-101-poster.png",
     "src": "/models/art-101.glb",
     "recolor": false,
-    "status": "ok",
+    "status": "CERTIFIED_READY",
     "override": true,
     "faces": 50352,
     "monocular_estimate": false,
     "source_image": "inputs/multiview/sheet_art_101_cabas_cognac_v2.png",
-    "sha256": "bca366f3d020034c3e79652d1e0c89dbe206cc559f977139e3fe53096a590be3",
+    "sha256": "40260d75643e7591ba908d69468db8a8188cd0f1d4dcfe150f5791782315fd65",
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
@@ -102,7 +102,9 @@
       },
       "variant_color": null,
       "note": "Reconstruction multi-vues V2.2 certifiee : suppression complete de la sangle parasite sur les flancs (0 oreilles), galbe souple du cuir avec soufflets, texture continue sans vague horizontale, double anse distincte ajouree."
-    }
+    },
+    "file_size_bytes": 2221800,
+    "file_size_mb": 2.12
   },
   "art-101-test": {
     "backend": "triposr",
