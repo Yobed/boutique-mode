@@ -426,109 +426,9 @@ def bake_views_texture(vertices, faces, uvs, normals, views, dims, flips, size):
     return Image.fromarray(texture), float((total_w > 0.05).mean())
 
 
-# ----------------------------------------------------------------------------- anses paramétriques réalistes
-def make_tube_mesh(points, radius=0.010, n_seg=16):
-    """Génère un maillage tubulaire étanche le long d'une ligne 3D avec transport parallèle de Bishop."""
-    import trimesh
-    points = np.asarray(points, dtype=np.float64)
-    n_pts = len(points)
-    tangents = np.zeros_like(points)
-    tangents[0] = points[1] - points[0]
-    tangents[-1] = points[-1] - points[-2]
-    for i in range(1, n_pts - 1):
-        tangents[i] = points[i+1] - points[i-1]
-    tangents /= np.maximum(np.linalg.norm(tangents, axis=1, keepdims=True), 1e-9)
-    normals = np.zeros_like(points)
-    binormals = np.zeros_like(points)
-    up = np.array([0.0, 0.0, 1.0])
-    if abs(np.dot(tangents[0], up)) > 0.9:
-        up = np.array([1.0, 0.0, 0.0])
-    n0 = np.cross(tangents[0], up)
-    normals[0] = n0 / np.linalg.norm(n0)
-    binormals[0] = np.cross(tangents[0], normals[0])
-    for i in range(1, n_pts):
-        axis = np.cross(tangents[i-1], tangents[i])
-        ax_len = np.linalg.norm(axis)
-        if ax_len < 1e-8:
-            normals[i] = normals[i-1]
-        else:
-            axis /= ax_len
-            ang = np.arccos(np.clip(np.dot(tangents[i-1], tangents[i]), -1.0, 1.0))
-            n_rot = normals[i-1] * np.cos(ang) + np.cross(axis, normals[i-1]) * np.sin(ang) + axis * np.dot(axis, normals[i-1]) * (1 - np.cos(ang))
-            normals[i] = n_rot / np.linalg.norm(n_rot)
-        binormals[i] = np.cross(tangents[i], normals[i])
-        binormals[i] /= np.linalg.norm(binormals[i])
-    angles = np.linspace(0, 2*np.pi, n_seg, endpoint=False)
-    verts = []
-    for i in range(n_pts):
-        p = points[i]
-        n, b = normals[i], binormals[i]
-        for s in range(n_seg):
-            verts.append(p + radius * (np.cos(angles[s]) * n + np.sin(angles[s]) * b))
-    verts = np.array(verts)
-    faces = []
-    for i in range(n_pts - 1):
-        for s in range(n_seg):
-            ns = (s + 1) % n_seg
-            faces.append([i * n_seg + s, i * n_seg + ns, (i + 1) * n_seg + ns])
-            faces.append([i * n_seg + s, (i + 1) * n_seg + ns, (i + 1) * n_seg + s])
-    c0 = len(verts)
-    verts = np.vstack([verts, [points[0]]])
-    for s in range(n_seg):
-        faces.append([c0, (s + 1) % n_seg, s])
-    c1 = len(verts)
-    verts = np.vstack([verts, [points[-1]]])
-    off = (n_pts - 1) * n_seg
-    for s in range(n_seg):
-        faces.append([c1, off + s, off + (s + 1) % n_seg])
-    return trimesh.Trimesh(vertices=verts, faces=np.array(faces, dtype=int), process=True)
-
-
-def build_handle_path_2d(w_h, y_rim, H, y_anchor_offset=0.04, gamma=0.82, n_pts=60):
-    """Profil 2D d'une anse (tiges plongeantes dans le corps + arche continue)."""
-    y_anchors = np.linspace(y_rim - y_anchor_offset, y_rim, 8)
-    left_stem = np.column_stack([np.full_like(y_anchors, -w_h), y_anchors])
-    thetas = np.linspace(0.0, np.pi, n_pts)
-    arch_x = -w_h * np.cos(thetas)
-    arch_y = y_rim + (H - y_rim) * (np.sin(thetas) ** gamma)
-    arch = np.column_stack([arch_x, arch_y])
-    right_stem = np.column_stack([np.full_like(y_anchors, w_h), y_anchors[::-1]])
-    return np.vstack([left_stem, arch, right_stem])
-
-
-def build_handles_mesh(handle_config, H):
-    """Génère les anses (simples ou doubles) séparées et sans fusion."""
-    import trimesh
-    htype = handle_config.get("type", "single")
-    w_h = float(handle_config.get("w_h", 0.18))
-    radius = float(handle_config.get("radius", 0.010))
-    rim_y = float(handle_config.get("rim_y", 0.65))
-    gamma = float(handle_config.get("gamma", 0.82))
-    anchor_offset = float(handle_config.get("anchor_offset", 0.04))
-    z_front = handle_config.get("z_front", [0.0, 0.0])
-    z_back = handle_config.get("z_back", [0.0, 0.0])
-
-    h2d = build_handle_path_2d(w_h=w_h, y_rim=rim_y, H=H, y_anchor_offset=anchor_offset, gamma=gamma)
-    hx, hy = h2d[:, 0], h2d[:, 1]
-    t_y = np.clip((hy - rim_y) / max(1e-6, (H - rim_y)), 0.0, 1.0)
-
-    tubes = []
-    if htype == "dual":
-        hz_f = z_front[0] * (1.0 - t_y) + z_front[1] * t_y
-        tube_f = make_tube_mesh(np.column_stack([hx, hy, hz_f]), radius=radius)
-        hz_b = z_back[0] * (1.0 - t_y) + z_back[1] * t_y
-        tube_b = make_tube_mesh(np.column_stack([hx, hy, hz_b]), radius=radius)
-        tubes.extend([tube_f, tube_b])
-    else:
-        hz = z_front[0] * (1.0 - t_y) + z_front[1] * t_y
-        tube = make_tube_mesh(np.column_stack([hx, hy, hz]), radius=radius)
-        tubes.append(tube)
-    return trimesh.util.concatenate(tubes)
-
-
 # ----------------------------------------------------------------------------- pipeline complet
 def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4096, target_faces=60_000,
-                      boxes=None, enhance=True, handle_config=None):
+                      boxes=None, enhance=True):
     """Planche -> GLB texturé + rapport (mêmes clés que neural_reconstruct.reconstruct)."""
     import json
     import time
@@ -538,27 +438,10 @@ def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4
 
     t0 = time.time()
     os.makedirs(out_dir, exist_ok=True)
-
-    if handle_config is None:
-        candidate = os.path.splitext(sheet_path)[0] + ".layout.json"
-        if os.path.exists(candidate):
-            try:
-                with open(candidate, encoding="utf-8") as f:
-                    meta = json.load(f)
-                    handle_config = meta.get("handle")
-            except Exception:
-                pass
-
     views = extract_views(sheet_path, layout, boxes=boxes, enhance=enhance)
     dims = estimate_dims(views)
     flips = choose_orientations(views, dims)
     field, grid = carve(views, dims, flips, HULL_GRID)
-
-    if handle_config and "rim_y" in handle_config:
-        xs, ys, zs, voxel = grid
-        X, Y, Z = np.meshgrid(xs, ys, zs, indexing="ij")
-        field[Y > float(handle_config["rim_y"])] = 0.0
-
     keep = field > 0.5
     if keep.sum() == 0:
         raise ValueError("enveloppe vide : les silhouettes sont incohérentes")
@@ -566,14 +449,11 @@ def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4
 
     for step in MARCHING_STEPS:  # pas fin d'abord (anses fines) ; si la décimation ne peut pas suivre sans casser
         mesh = hull_mesh(field, grid, step)  # l'étanchéité, on retombe sur un pas plus grossier
-        if handle_config:
-            handle_mesh = build_handles_mesh(handle_config, dims[1])
-            mesh = trimesh.util.concatenate([mesh, handle_mesh])
         mesh = fm.decimate(fm.smooth(mesh, SMOOTH_ITERATIONS), target_faces)
         if len(mesh.faces) <= target_faces * MAX_FACES_RATIO:
             break
     # Finitions arrondies organiques (anse et flancs) après décimation
-    trimesh.smoothing.filter_humphrey(mesh, alpha=0.05, beta=0.5, iterations=8)
+    trimesh.smoothing.filter_humphrey(mesh, alpha=0.1, beta=0.5, iterations=15)
     watertight = bool(mesh.is_watertight)
     vertices, faces, uvs, normals = fm.unwrap(mesh)
     texture, covered = bake_views_texture(vertices, faces, uvs, normals, views, dims, flips, texture_size)
