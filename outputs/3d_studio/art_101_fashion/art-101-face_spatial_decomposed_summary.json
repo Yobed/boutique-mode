@@ -1,0 +1,60 @@
+{
+  "object_id": "art-101-face_spatial_decomposed",
+  "object_name": "Art-101-Face Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "validation_verdict": "FAIL",
+  "base_vertices": 2272,
+  "base_faces": 1296,
+  "evaluated_vertices": 6368,
+  "evaluated_triangles": 12576,
+  "bounding_box": {
+    "min": [
+      -0.10592,
+      -0.04425,
+      -0.009843
+    ],
+    "max": [
+      0.105392,
+      0.04425,
+      0.207714
+    ],
+    "dimensions": [
+      0.211312,
+      0.0885,
+      0.217558
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion\\art-101-face_spatial_decomposed.blend",
+    "size": 188995,
+    "sha256": "3d95a0c601e8d5a315f9896dcdcc0d0db1233943d053dcde8aed45aefdc8df57"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion\\art-101-face_spatial_decomposed.glb",
+    "size": 476512,
+    "sha256": "a9f1867514baea8d7dfc2399ad1e00e10602fac0514f94df4434561df1dfaf99",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "art-101-face_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion\\previews\\art-101-face_spatial_decomposed_hero.png",
+      776964
+    ],
+    [
+      "art-101-face_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion\\previews\\art-101-face_spatial_decomposed_front.png",
+      812581
+    ],
+    [
+      "art-101-face_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion\\previews\\art-101-face_spatial_decomposed_side.png",
+      742209
+    ],
+    [
+      "art-101-face_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion\\previews\\art-101-face_spatial_decomposed_top.png",
+      645658
+    ]
+  ]
+}

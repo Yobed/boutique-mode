@@ -1,0 +1,60 @@
+{
+  "object_id": "art-101-face_spatial_decomposed",
+  "object_name": "Art-101-Face Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "validation_verdict": "PASS",
+  "base_vertices": 280,
+  "base_faces": 188,
+  "evaluated_vertices": 616,
+  "evaluated_triangles": 1216,
+  "bounding_box": {
+    "min": [
+      -0.095132,
+      -0.0429,
+      0.0
+    ],
+    "max": [
+      0.095132,
+      0.036885,
+      0.2681
+    ],
+    "dimensions": [
+      0.190264,
+      0.079785,
+      0.2681
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion_bag\\art-101-face_spatial_decomposed.blend",
+    "size": 130608,
+    "sha256": "3272957ac8feed04d2fedb283504ce73424e91e3193f3faae14922068f0831e1"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion_bag\\art-101-face_spatial_decomposed.glb",
+    "size": 57564,
+    "sha256": "9817a0e5c6e8b5d14ebbe0b877694d0e205a09115870e693faf4fe79d5a5e42b",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "art-101-face_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion_bag\\previews\\art-101-face_spatial_decomposed_hero.png",
+      765074
+    ],
+    [
+      "art-101-face_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion_bag\\previews\\art-101-face_spatial_decomposed_front.png",
+      807083
+    ],
+    [
+      "art-101-face_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion_bag\\previews\\art-101-face_spatial_decomposed_side.png",
+      765752
+    ],
+    [
+      "art-101-face_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\art_101_fashion_bag\\previews\\art-101-face_spatial_decomposed_top.png",
+      684611
+    ]
+  ]
+}

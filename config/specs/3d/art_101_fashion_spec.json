@@ -1,0 +1,1355 @@
+{
+  "object_id": "art-101-face_spatial_decomposed",
+  "object_name": "Art-101-Face Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1922,
+      0.0885,
+      0.2
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Element_Lateral_1_1": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Element_Lateral_1_2": {
+      "custom": {
+        "base_color": [
+          0.4666666666666667,
+          0.38823529411764707,
+          0.36470588235294116,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_1_3": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Element_Lateral_2_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_2_2": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_2_3": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_3_1": {
+      "custom": {
+        "base_color": [
+          0.6745098039215687,
+          0.5607843137254902,
+          0.5058823529411764,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_3_2": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_3_3": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_4_1": {
+      "preset": "natural_wood"
+    },
+    "M_Element_Lateral_4_2": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_4_3": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_4_4": {
+      "preset": "natural_wood"
+    },
+    "M_Element_Lateral_5_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_5_2": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_5_3": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_5_4": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_5_5": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Element_Lateral_5_6": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_6_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_6_2": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_6_3": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_7_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_7_2": {
+      "custom": {
+        "base_color": [
+          0.6980392156862745,
+          0.5725490196078431,
+          0.49411764705882355,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_7_3": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_7_4": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_7_5": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_8_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_8_2": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_8_3": {
+      "preset": "natural_wood"
+    },
+    "M_Element_Lateral_8_4": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_9_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_9_2": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Element_Lateral_9_3": {
+      "preset": "natural_wood"
+    },
+    "M_Element_Lateral_9_4": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_10_1": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Element_Lateral_10_2": {
+      "custom": {
+        "base_color": [
+          0.8117647058823529,
+          0.6980392156862745,
+          0.611764705882353,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_10_3": {
+      "preset": "white_satin_lacquer"
+    },
+    "M_Anse_Courbee_Gauche": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Anse_Courbee_Droite": {
+      "preset": "white_satin_lacquer"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_lat_1",
+      "name": "Element_Lateral_1_1",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0052,
+      "radius_bottom": 0.0052,
+      "height": 0.0167,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0892,
+        0.0,
+        0.0
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.459).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": null
+      },
+      "material": "M_Element_Lateral_1_1"
+    },
+    {
+      "id": "comp_1_lat_2",
+      "name": "Element_Lateral_1_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.1639,
+        0.0885,
+        0.0167
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.004,
+        0.0,
+        0.0
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.021).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": null
+      },
+      "material": "M_Element_Lateral_1_2"
+    },
+    {
+      "id": "comp_1_lat_3",
+      "name": "Element_Lateral_1_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0307,
+        0.0885,
+        0.0167
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0822,
+        0.0,
+        0.0
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.422).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": null
+      },
+      "material": "M_Element_Lateral_1_3"
+    },
+    {
+      "id": "comp_2_lat_1",
+      "name": "Element_Lateral_2_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.011,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.092,
+        0.0,
+        0.0167
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.473).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_1_lat_3"
+      },
+      "material": "M_Element_Lateral_2_1"
+    },
+    {
+      "id": "comp_2_lat_2",
+      "name": "Element_Lateral_2_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.1688,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.001,
+        0.0,
+        0.0167
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.005).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_1_lat_3"
+      },
+      "material": "M_Element_Lateral_2_2"
+    },
+    {
+      "id": "comp_2_lat_3",
+      "name": "Element_Lateral_2_3",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.005,
+      "radius_bottom": 0.005,
+      "height": 0.0125,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        0.0905,
+        0.0,
+        0.0167
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=+0.465).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_1_lat_3"
+      },
+      "material": "M_Element_Lateral_2_3"
+    },
+    {
+      "id": "comp_3_lat_1",
+      "name": "Element_Lateral_3_1",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0062,
+      "radius_bottom": 0.0062,
+      "height": 0.0417,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.091,
+        0.0,
+        0.0292
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.468).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_lat_3"
+      },
+      "material": "M_Element_Lateral_3_1"
+    },
+    {
+      "id": "comp_3_lat_2",
+      "name": "Element_Lateral_3_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.183,
+        0.0885,
+        0.0417
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0011,
+        0.0,
+        0.0292
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.006).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_lat_3"
+      },
+      "material": "M_Element_Lateral_3_2"
+    },
+    {
+      "id": "comp_3_lat_3",
+      "name": "Element_Lateral_3_3",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.005,
+      "radius_bottom": 0.005,
+      "height": 0.0417,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        0.0938,
+        0.0,
+        0.0292
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=+0.482).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_lat_3"
+      },
+      "material": "M_Element_Lateral_3_3"
+    },
+    {
+      "id": "comp_4_lat_1",
+      "name": "Element_Lateral_4_1",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0067,
+      "radius_bottom": 0.0067,
+      "height": 0.025,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.087,
+        0.0,
+        0.0708
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.447).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_3_lat_3"
+      },
+      "material": "M_Element_Lateral_4_1"
+    },
+    {
+      "id": "comp_4_lat_2",
+      "name": "Element_Lateral_4_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.141,
+        0.0885,
+        0.025
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0028,
+        0.0,
+        0.0708
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.014).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_3_lat_3"
+      },
+      "material": "M_Element_Lateral_4_2"
+    },
+    {
+      "id": "comp_4_lat_3",
+      "name": "Element_Lateral_4_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0283,
+        0.0885,
+        0.025
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0579,
+        0.0,
+        0.0708
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.297).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_3_lat_3"
+      },
+      "material": "M_Element_Lateral_4_3"
+    },
+    {
+      "id": "comp_4_lat_4",
+      "name": "Element_Lateral_4_4",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0054,
+      "radius_bottom": 0.0054,
+      "height": 0.025,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        0.0892,
+        0.0,
+        0.0708
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=+0.459).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_3_lat_3"
+      },
+      "material": "M_Element_Lateral_4_4"
+    },
+    {
+      "id": "comp_5_lat_1",
+      "name": "Element_Lateral_5_1",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0076,
+      "radius_bottom": 0.0076,
+      "height": 0.0417,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0884,
+        0.0,
+        0.0958
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.455).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_lat_4"
+      },
+      "material": "M_Element_Lateral_5_1"
+    },
+    {
+      "id": "comp_5_lat_2",
+      "name": "Element_Lateral_5_2",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0171,
+      "radius_bottom": 0.0171,
+      "height": 0.0417,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0608,
+        0.0,
+        0.0958
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.313).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_lat_4"
+      },
+      "material": "M_Element_Lateral_5_2"
+    },
+    {
+      "id": "comp_5_lat_3",
+      "name": "Element_Lateral_5_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0384,
+        0.0885,
+        0.0417
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0351,
+        0.0,
+        0.0958
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.180).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_lat_4"
+      },
+      "material": "M_Element_Lateral_5_3"
+    },
+    {
+      "id": "comp_5_lat_4",
+      "name": "Element_Lateral_5_4",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.1244,
+        0.0885,
+        0.0417
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0015,
+        0.0,
+        0.0958
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.008).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_lat_4"
+      },
+      "material": "M_Element_Lateral_5_4"
+    },
+    {
+      "id": "comp_5_lat_5",
+      "name": "Element_Lateral_5_5",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0461,
+        0.0885,
+        0.0417
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.059,
+        0.0,
+        0.0958
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.303).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_lat_4"
+      },
+      "material": "M_Element_Lateral_5_5"
+    },
+    {
+      "id": "comp_5_lat_6",
+      "name": "Element_Lateral_5_6",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0068,
+      "radius_bottom": 0.0068,
+      "height": 0.0417,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        0.0895,
+        0.0,
+        0.0958
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=+0.460).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_lat_4"
+      },
+      "material": "M_Element_Lateral_5_6"
+    },
+    {
+      "id": "comp_6_lat_1",
+      "name": "Element_Lateral_6_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0689,
+        0.0885,
+        0.0167
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0631,
+        0.0,
+        0.1375
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.324).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_5_lat_6"
+      },
+      "material": "M_Element_Lateral_6_1"
+    },
+    {
+      "id": "comp_6_lat_2",
+      "name": "Element_Lateral_6_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0632,
+        0.0885,
+        0.0167
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0035,
+        0.0,
+        0.1375
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.018).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_5_lat_6"
+      },
+      "material": "M_Element_Lateral_6_2"
+    },
+    {
+      "id": "comp_6_lat_3",
+      "name": "Element_Lateral_6_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0548,
+        0.0885,
+        0.0167
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0701,
+        0.0,
+        0.1375
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.360).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_5_lat_6"
+      },
+      "material": "M_Element_Lateral_6_3"
+    },
+    {
+      "id": "comp_7_lat_1",
+      "name": "Element_Lateral_7_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0567,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0691,
+        0.0,
+        0.1542
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.356).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_6_lat_3"
+      },
+      "material": "M_Element_Lateral_7_1"
+    },
+    {
+      "id": "comp_7_lat_2",
+      "name": "Element_Lateral_7_2",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.005,
+      "radius_bottom": 0.005,
+      "height": 0.0125,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0336,
+        0.0,
+        0.1542
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.173).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_6_lat_3"
+      },
+      "material": "M_Element_Lateral_7_2"
+    },
+    {
+      "id": "comp_7_lat_3",
+      "name": "Element_Lateral_7_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0565,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0007,
+        0.0,
+        0.1542
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.004).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_6_lat_3"
+      },
+      "material": "M_Element_Lateral_7_3"
+    },
+    {
+      "id": "comp_7_lat_4",
+      "name": "Element_Lateral_7_4",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0689,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0353,
+        0.0,
+        0.1542
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.181).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_6_lat_3"
+      },
+      "material": "M_Element_Lateral_7_4"
+    },
+    {
+      "id": "comp_7_lat_5",
+      "name": "Element_Lateral_7_5",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0625,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0663,
+        0.0,
+        0.1542
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.341).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_6_lat_3"
+      },
+      "material": "M_Element_Lateral_7_5"
+    },
+    {
+      "id": "comp_8_lat_1",
+      "name": "Element_Lateral_8_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0656,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0647,
+        0.0,
+        0.1667
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.333).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_7_lat_5"
+      },
+      "material": "M_Element_Lateral_8_1"
+    },
+    {
+      "id": "comp_8_lat_2",
+      "name": "Element_Lateral_8_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.054,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0004,
+        0.0,
+        0.1667
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.002).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_7_lat_5"
+      },
+      "material": "M_Element_Lateral_8_2"
+    },
+    {
+      "id": "comp_8_lat_3",
+      "name": "Element_Lateral_8_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0132,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0303,
+        0.0,
+        0.1667
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.156).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_7_lat_5"
+      },
+      "material": "M_Element_Lateral_8_3"
+    },
+    {
+      "id": "comp_8_lat_4",
+      "name": "Element_Lateral_8_4",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0612,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0669,
+        0.0,
+        0.1667
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.344).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_7_lat_5"
+      },
+      "material": "M_Element_Lateral_8_4"
+    },
+    {
+      "id": "comp_9_lat_1",
+      "name": "Element_Lateral_9_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.07,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0625,
+        0.0,
+        0.1792
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.322).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_8_lat_4"
+      },
+      "material": "M_Element_Lateral_9_1"
+    },
+    {
+      "id": "comp_9_lat_2",
+      "name": "Element_Lateral_9_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0179,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0105,
+        0.0,
+        0.1792
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.054).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_8_lat_4"
+      },
+      "material": "M_Element_Lateral_9_2"
+    },
+    {
+      "id": "comp_9_lat_3",
+      "name": "Element_Lateral_9_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0162,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0187,
+        0.0,
+        0.1792
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.096).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_8_lat_4"
+      },
+      "material": "M_Element_Lateral_9_3"
+    },
+    {
+      "id": "comp_9_lat_4",
+      "name": "Element_Lateral_9_4",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.07,
+        0.0885,
+        0.0125
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0625,
+        0.0,
+        0.1792
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.322).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_8_lat_4"
+      },
+      "material": "M_Element_Lateral_9_4"
+    },
+    {
+      "id": "comp_10_lat_1",
+      "name": "Element_Lateral_10_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0846,
+        0.0885,
+        0.0083
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0552,
+        0.0,
+        0.1917
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.284).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_9_lat_4"
+      },
+      "material": "M_Element_Lateral_10_1"
+    },
+    {
+      "id": "comp_10_lat_2",
+      "name": "Element_Lateral_10_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0187,
+        0.0885,
+        0.0083
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0017,
+        0.0,
+        0.1917
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.008).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_9_lat_4"
+      },
+      "material": "M_Element_Lateral_10_2"
+    },
+    {
+      "id": "comp_10_lat_3",
+      "name": "Element_Lateral_10_3",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.086,
+        0.0885,
+        0.0083
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0545,
+        0.0,
+        0.1917
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.280).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_9_lat_4"
+      },
+      "material": "M_Element_Lateral_10_3"
+    },
+    {
+      "id": "comp_appendage_1",
+      "name": "Anse_Courbee_Gauche",
+      "role": "curved_appendage_handle",
+      "primitive": "curved_sweep",
+      "material": "M_Anse_Courbee_Gauche",
+      "path_points": [
+        [
+          -0.0901,
+          0.0,
+          0.0
+        ],
+        [
+          -0.0961,
+          0.0,
+          0.0457
+        ],
+        [
+          -0.0284,
+          0.0,
+          0.0857
+        ],
+        [
+          -0.089,
+          0.0,
+          0.12
+        ],
+        [
+          -0.0645,
+          0.0,
+          0.1371
+        ],
+        [
+          -0.0353,
+          0.0,
+          0.16
+        ],
+        [
+          -0.0022,
+          0.0,
+          0.2
+        ]
+      ],
+      "radius": 0.0121,
+      "segments": 16,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "attached_to",
+        "target": "comp_1_lat_1"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "curved_sweep",
+        "selection_rationale": "Appendice en arceau courb\u00e9 d\u00e9tect\u00e9 c\u00f4t\u00e9 gauche (span=362px, d\u00e9viation=4.3px) s\u00e9par\u00e9 du corps par un vide traversant.",
+        "visual_cues": [
+          "Vide traversant s\u00e9parant la branche du tronc",
+          "Continuit\u00e9 de trajectoire courb\u00e9e"
+        ],
+        "confidence_level": 0.88,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Trajectoire coplanaire dans le plan XZ",
+          "Section tubulaire circulaire constante"
+        ],
+        "indeterminate_elements": [
+          "Courbure hors-plan Y inaccessible sur vue monoculaire unique"
+        ]
+      }
+    },
+    {
+      "id": "comp_appendage_2",
+      "name": "Anse_Courbee_Droite",
+      "role": "curved_appendage_handle",
+      "primitive": "curved_sweep",
+      "material": "M_Anse_Courbee_Droite",
+      "path_points": [
+        [
+          0.0242,
+          0.0,
+          0.0
+        ],
+        [
+          0.0928,
+          0.0,
+          0.0514
+        ],
+        [
+          0.0895,
+          0.0,
+          0.0857
+        ],
+        [
+          0.0931,
+          0.0,
+          0.1029
+        ],
+        [
+          0.0879,
+          0.0,
+          0.1314
+        ],
+        [
+          0.0628,
+          0.0,
+          0.16
+        ],
+        [
+          0.059,
+          0.0,
+          0.1943
+        ]
+      ],
+      "radius": 0.0123,
+      "segments": 16,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "attached_to",
+        "target": "comp_1_lat_1"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "curved_sweep",
+        "selection_rationale": "Appendice en arceau courb\u00e9 d\u00e9tect\u00e9 c\u00f4t\u00e9 droite (span=352px, d\u00e9viation=67.4px) s\u00e9par\u00e9 du corps par un vide traversant.",
+        "visual_cues": [
+          "Vide traversant s\u00e9parant la branche du tronc",
+          "Continuit\u00e9 de trajectoire courb\u00e9e"
+        ],
+        "confidence_level": 0.88,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Trajectoire coplanaire dans le plan XZ",
+          "Section tubulaire circulaire constante"
+        ],
+        "indeterminate_elements": [
+          "Courbure hors-plan Y inaccessible sur vue monoculaire unique"
+        ]
+      }
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\public\\images\\planches\\art-101-face.jpg",
+    "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+    "detected_strata_count": 10,
+    "total_components_generated": 40,
+    "feature_analysis": [],
+    "confidence_score": 0.91,
+    "monocular_ambiguity": true,
+    "spatial_decomposition_enabled": true,
+    "geometric_inference_enabled": true,
+    "revolution_profile_detected": false,
+    "appendages_detected_count": 2,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 353x363 px",
+      "Ratio d'aspect mesur\u00e9 : 1.028",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.962",
+      "Nombre de strates physiques distinctes : 10"
+    ],
+    "hypotheses": [
+      "D\u00e9composition spatiale bidimensionnelle (strates verticales + clusters lat\u00e9raux transversaux).",
+      "Inf\u00e9rence automatique de profil de r\u00e9volution (Cylinder/RingCollar) bas\u00e9e sur la sym\u00e9trie axiale.",
+      "D\u00e9tection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+      "Discrimination physique cavit\u00e9 vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+    ]
+  },
+  "semantic_classification": {
+    "final_category": "generic_spatial_decomposed",
+    "final_confidence": 0.75,
+    "visual_category": "generic_spatial_decomposed",
+    "visual_confidence": 0.75,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": null,
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 1.0282485875706215,
+      "width_px": 354,
+      "height_px": 364,
+      "rect_fill_ratio": 0.9743279319550506,
+      "symmetry_score": 0.9614767255216693,
+      "void_ratio": 0.0989010989010989,
+      "void_pixels": 1997,
+      "stem_ratio": 0.9096045197740112,
+      "width_cv": 0.0012553374724905276,
+      "slender_ratio": 0.999290560586126,
+      "has_lamp_profile": false,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.05,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 354x364 px",
+      "Ratio d'aspect H/W : 1.028",
+      "Sym\u00e9trie bilat\u00e9rale : 0.961",
+      "Facteur de remplissage rectangulaire : 0.974",
+      "Taux d'\u00e9videment interne : 9.9% (1997 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.910",
+      "Variabilit\u00e9 des largeurs (CV) : 0.0013",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  }
+}

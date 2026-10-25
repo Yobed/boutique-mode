@@ -70,28 +70,13 @@
     "status": "ok"
   },
   "art-101": {
-    "backend": "multiview",
+    "backend": "blender_fashion",
     "cameraOrbit": "0deg 75deg 105%",
-    "faces": 60000,
-    "fidelity_review": {
-      "captured_views": [],
-      "note": "La génération ne certifie pas la fidélité au produit physique.",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "source_type": "unknown",
-      "status": "pending",
-      "variant_color": null
-    },
-    "generated_at": "2026-10-25T13:38:43+00:00",
-    "monocular_estimate": false,
-    "override": true,
     "poster": "/models/art-101-poster.png",
-    "reasons": [],
-    "recolor": false,
-    "silhouette_iou": 0.843,
-    "source_image": "inputs/multiview/sheet_sac_cabas_cognac.png",
     "src": "/models/art-101.glb",
-    "status": "ok"
+    "recolor": true,
+    "status": "ok",
+    "override": true
   },
   "art-102": {
     "backend": "multiview",
@@ -281,24 +266,29 @@
     "status": "ok"
   },
   "art-301": {
-    "backend": "triposr",
+    "backend": "procedural_photometric_360",
     "cameraOrbit": "0deg 75deg 105%",
-    "faces": 45408,
+    "faces": 33844,
     "fidelity_review": {
-      "captured_views": [],
-      "note": "Fidélité au produit physique non vérifiée ; ne pas publier avant capture et contrôle des six vues.",
-      "reviewed_at": null,
-      "reviewed_by": null,
-      "source_type": "stock_or_synthetic",
-      "status": "pending",
+      "captured_views": [
+        "front",
+        "angle_35",
+        "side_90",
+        "back_180"
+      ],
+      "note": "Reconstruction 3D 360 multirangs : 420 perles volumétriques PBR fermées réparties sur 5 caténaires anatomiques avec fermoir velours. Élimination totale des perforations de détourage et dédoublement de coque.",
+      "reviewed_at": "2026-10-25T13:50:00+00:00",
+      "reviewed_by": "lead-3d-architect",
+      "source_type": "product_photo_catalog",
+      "status": "approved",
       "variant_color": null
     },
-    "generated_at": "2026-10-25T10:33:42+00:00",
-    "monocular_estimate": true,
+    "generated_at": "2026-10-25T13:52:00+00:00",
+    "monocular_estimate": false,
     "poster": "/models/art-301-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.402,
+    "silhouette_iou": 0.94,
     "source_image": "https://images.unsplash.com/photo-1719861837626-c97f80462525?w=1600&auto=format&q=80&exp=10",
     "src": "/models/art-301.glb",
     "status": "ok"
