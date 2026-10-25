@@ -19,6 +19,7 @@ SKIP_ABOVE = 700          # une vue déjà grande n'a pas besoin de super-résol
 TILE = 160
 OVERLAP = 16
 SCALE = 4
+BACK_PROJECTION_PASSES = 2
 
 _cache = {}
 
@@ -55,11 +56,23 @@ def _run_tiled(rgb):
     return out
 
 
+def _back_project(big, rgb):
+    """Rétroprojection : l'image agrandie, une fois réduite, doit redonner la photo d'origine. Le réseau invente des
+    détails mais dérive en couleur et en teinte (taches sur les aplats noirs) ; on rajoute l'écart à chaque passe."""
+    h, w = rgb.shape[:2]
+    big = big.astype(np.float32)
+    for _ in range(BACK_PROJECTION_PASSES):
+        down = np.asarray(Image.fromarray(np.clip(big, 0, 255).astype(np.uint8)).resize((w, h), Image.BICUBIC), np.float32)
+        residual = np.clip(rgb.astype(np.float32) - down + 128, 0, 255).astype(np.uint8)
+        big += np.asarray(Image.fromarray(residual).resize((big.shape[1], big.shape[0]), Image.BICUBIC), np.float32) - 128
+    return np.clip(big, 0, 255)
+
+
 def upscale_rgb(rgb):
     """rgb uint8 (h, w, 3) -> uint8 plus grand (x4 puis réduit à TARGET_LONG_SIDE). Inchangé si déjà grand ou poids absents."""
     if max(rgb.shape[:2]) >= SKIP_ABOVE or not os.path.exists(WEIGHTS):
         return rgb
-    big = _run_tiled(rgb)
+    big = _back_project(_run_tiled(rgb), rgb)
     scale = min(1.0, TARGET_LONG_SIDE / max(big.shape[:2]))
     image = Image.fromarray(np.clip(big, 0, 255).astype(np.uint8))
     if scale < 1.0:

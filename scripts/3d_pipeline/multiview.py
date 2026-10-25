@@ -41,6 +41,8 @@ ORIENTATION_MARGIN = 1.02   # gain de volume minimal pour contredire la conventi
 HULL_GRID = 256
 HULL_SMOOTH_SIGMA = 1.5
 MARCHING_STEP = 1
+MARCHING_STEPS = (1, 2)
+MAX_FACES_RATIO = 1.5   # au-delà, la décimation a calé : on retente avec un maillage de départ plus grossier
 HULL_PAD_VOXELS = 3
 ZBUF_SIZE = 512
 ALPHA_ERODE_PX = 3
@@ -51,7 +53,7 @@ BG_KEY_LOW_RATIO, BG_KEY_HIGH_RATIO = 0.25, 0.5
 BG_PURE_DISTANCE, BG_PURE_FRACTION = 14, 0.6   # un vrai trou est presque entièrement de la couleur du fond
 ALPHA_ERODE_FRACTION = 0.015  # le bord de la silhouette mélange objet et fond : on ne lit pas la couleur dessus
 FACING_MIN_COS = 0.3
-FACING_POWER = 4
+FACING_POWER = 10   # une vue domine chaque face : mélanger des vues légèrement désalignées dédouble les chaînes de fermeture
 CONFIDENT_WEIGHT = (0.8 - FACING_MIN_COS) ** FACING_POWER  # une vue qui regarde le texel à ~37° suffit
 DEPTH_EPSILON_FRACTION = 0.02
 MIN_COMPONENT_FRACTION = 0.01
@@ -351,7 +353,7 @@ def reprojection_iou(views, volume_grid, dims, flips):
 
 
 # ----------------------------------------------------------------------------- maillage
-def hull_mesh(field, grid):
+def hull_mesh(field, grid, step=MARCHING_STEP):
     import trimesh
     from scipy import ndimage
     from skimage import measure
@@ -362,7 +364,7 @@ def hull_mesh(field, grid):
     volume = ndimage.gaussian_filter(volume, HULL_SMOOTH_SIGMA)
     # pas de 2 : ~4x moins de faces (le champ est déjà flouté sur 1,5 voxel) ; une décimation lourde ensuite
     # casserait l'étanchéité sur les anses fines
-    verts, faces, _, _ = measure.marching_cubes(volume, level=0.5, step_size=MARCHING_STEP)
+    verts, faces, _, _ = measure.marching_cubes(volume, level=0.5, step_size=step)
     origin = np.array([xs[0], ys[0], zs[0]]) - pad * voxel
     mesh = trimesh.Trimesh(vertices=origin + verts * voxel, faces=faces, process=True)
     parts = mesh.split(only_watertight=False)
@@ -425,7 +427,7 @@ def bake_views_texture(vertices, faces, uvs, normals, views, dims, flips, size):
 
 
 # ----------------------------------------------------------------------------- pipeline complet
-def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=2048, target_faces=60_000,
+def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4096, target_faces=60_000,
                       boxes=None):
     """Planche -> GLB texturé + rapport (mêmes clés que neural_reconstruct.reconstruct)."""
     import json
@@ -445,8 +447,11 @@ def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=2
         raise ValueError("enveloppe vide : les silhouettes sont incohérentes")
     ious = reprojection_iou(views, (keep, grid), dims, flips)
 
-    mesh = hull_mesh(field, grid)
-    mesh = fm.decimate(fm.smooth(mesh, SMOOTH_ITERATIONS), target_faces)
+    for step in MARCHING_STEPS:  # pas fin d'abord (anses fines) ; si la décimation ne peut pas suivre sans casser
+        mesh = hull_mesh(field, grid, step)  # l'étanchéité, on retombe sur un pas plus grossier
+        mesh = fm.decimate(fm.smooth(mesh, SMOOTH_ITERATIONS), target_faces)
+        if len(mesh.faces) <= target_faces * MAX_FACES_RATIO:
+            break
     watertight = bool(mesh.is_watertight)
     vertices, faces, uvs, normals = fm.unwrap(mesh)
     texture, covered = bake_views_texture(vertices, faces, uvs, normals, views, dims, flips, texture_size)
