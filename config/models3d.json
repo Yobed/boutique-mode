@@ -63,13 +63,13 @@
     "backend": "multiview",
     "cameraOrbit": "0deg 75deg 105%",
     "faces": 60000,
-    "generated_at": "2026-10-25T10:57:48+00:00",
+    "generated_at": "2026-10-25T11:29:30+00:00",
     "monocular_estimate": false,
     "override": true,
     "poster": "/models/art-102-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.901,
+    "silhouette_iou": 0.871,
     "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
     "src": "/models/art-102.glb",
     "status": "ok"
@@ -233,6 +233,20 @@
     "silhouette_iou": 0.953,
     "source_image": "inputs/multiview/targus_backpack_sheet.png",
     "src": "/models/sac-a-dos-targus.glb",
+    "status": "ok"
+  },
+  "test-102": {
+    "backend": "triposr",
+    "cameraOrbit": "0deg 75deg 105%",
+    "faces": 60000,
+    "generated_at": "2026-10-25T11:20:05+00:00",
+    "monocular_estimate": true,
+    "poster": "/models/test-102-poster.png",
+    "reasons": [],
+    "recolor": false,
+    "silhouette_iou": 0.758,
+    "source_image": "public/images/planches/art-102-face.jpg",
+    "src": "/models/test-102.glb",
     "status": "ok"
   }
 }
