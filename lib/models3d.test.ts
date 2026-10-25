@@ -1,7 +1,7 @@
 // Run: npm test  (node --test with native TypeScript type stripping)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { attachGeneratedModel, modelKey, type Models3dManifest } from './models3d.ts';
+import { attachGeneratedModel, isSheetPhoto, modelKey, type Models3dManifest } from './models3d.ts';
 import type { Article } from './types';
 
 const sac: Article = {
@@ -18,6 +18,12 @@ test('modelKey matches the Python safe_id normalisation', () => {
   assert.equal(modelKey('ART 009'), 'art-009');
   assert.equal(modelKey('  sac_Cuir-Noir '), 'sac_cuir-noir');
   assert.equal(modelKey('--x--'), 'x');
+});
+
+test('recognises multi-view sheets so they are never used as thumbnails', () => {
+  assert.equal(isSheetPhoto('/images/planches/art-102-planche.jpg'), true);
+  assert.equal(isSheetPhoto('/images/planches/art-102-face.jpg'), false);
+  assert.equal(isSheetPhoto('https://images.unsplash.com/photo-1?w=1200'), false);
 });
 
 test('attaches an approved generated model without recoloring', () => {

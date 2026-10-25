@@ -17,6 +17,9 @@ export interface GeneratedModel {
 
 export type Models3dManifest = Record<string, GeneratedModel>;
 
+/** Les planches multi-vues (`*-planche.jpg`) sont larges : elles se lisent en pleine largeur, jamais en vignette. */
+export const isSheetPhoto = (src: string): boolean => src.includes('-planche.');
+
 /** Même normalisation que `safe_id` côté Python (scripts/3d_pipeline/image_to_3d.py). */
 export function modelKey(id: string): string {
   return id.trim().toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '');

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ChevronLeft, ChevronRight, X, Camera, Sparkles } from 'lucide-react';
 import Product3DViewer from '@/components/3d/Product3DViewer';
+import { isSheetPhoto } from '@/lib/models3d';
 
 interface Props {
   photos: string[];
@@ -44,9 +45,10 @@ interface FigureProps {
 /** One plate: unveils as it enters, drifts slightly inside its frame while the page scrolls. */
 function Figure({ src, index, nom, hidden, onOpen, register }: FigureProps) {
   const ref = useRef<HTMLDivElement | null>(null);
+  const sheet = isSheetPhoto(src);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const drift = useTransform(scrollYProgress, [0, 1], reduce ? ['0%', '0%'] : ['-5%', '5%']);
+  const drift = useTransform(scrollYProgress, [0, 1], reduce || sheet ? ['0%', '0%'] : ['-5%', '5%']);
 
   return (
     <motion.div
@@ -55,7 +57,7 @@ function Figure({ src, index, nom, hidden, onOpen, register }: FigureProps) {
         register(el);
       }}
       data-slide={index}
-      className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden bg-stone lg:aspect-[3/4]"
+      className={`relative w-full shrink-0 snap-center overflow-hidden bg-stone ${sheet ? 'aspect-[3/2]' : 'aspect-[4/5] lg:aspect-[3/4]'}`}
       initial={index === 0 ? false : { clipPath: 'inset(10% 0% 10% 0%)', opacity: 0.4 }}
       whileInView={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
       viewport={{ once: true, amount: 0.25 }}
@@ -86,7 +88,7 @@ function Figure({ src, index, nom, hidden, onOpen, register }: FigureProps) {
               fill
               priority={index === 0}
               sizes="(min-width: 1024px) 54vw, 100vw"
-              className="object-contain p-[8%] mix-blend-multiply"
+              className={`object-contain mix-blend-multiply ${sheet ? 'p-[1.5%]' : 'p-[8%]'}`}
             />
           </motion.span>
         </motion.button>

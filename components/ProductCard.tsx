@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'motion/react';
 import type { Article } from '@/lib/types';
 import { formatFCFA } from '@/lib/config';
+import { isSheetPhoto } from '@/lib/models3d';
 import Badges from '@/components/product/Badges';
 import FavoriteButton from '@/components/product/FavoriteButton';
 import VariantSelector from '@/components/product/VariantSelector';
@@ -31,7 +32,7 @@ export default function ProductCard({
   const couleur = article.couleurs[0] ?? 'Unique';
   const plateRef = useRef<HTMLDivElement>(null);
   const href = `/article/${article.id}`;
-  const second = article.photos[1];
+  const second = article.photos.slice(1).find((src) => !isSheetPhoto(src)); // pas de planche en survol de vignette
   const multiSize = article.tailles.length > 1;
   const soldOut = !article.en_stock || article.quantite_stock <= 0;
 
