@@ -1,0 +1,54 @@
+{
+  "metric": "Chamfer Silhouette Score (CS)",
+  "pipeline_version": "Master Prompt V2.2",
+  "verdict": "FAIL",
+  "threshold_required": 0.85,
+  "cs_score": 0.5065,
+  "cs_linear": 0.2914,
+  "mask_iou_2d": 0.3084,
+  "chamfer_distance_px": 30.76,
+  "chamfer_normalized": 0.0567,
+  "optimal_pose_6dof": {
+    "yaw": 219.69,
+    "pitch": 33.88,
+    "roll": -19.83,
+    "scale": 1.0528,
+    "tx": -0.5,
+    "ty": -1.98
+  },
+  "orbital_stability": {
+    "angles_count": 12,
+    "areas_per_angle": [
+      46572,
+      46917,
+      48626,
+      45171,
+      50251,
+      50228,
+      50247,
+      50670,
+      48635,
+      49069,
+      46925,
+      47411
+    ],
+    "perimeters_per_angle": [
+      14756,
+      15769,
+      16132,
+      18702,
+      18113,
+      19052,
+      18861,
+      18258,
+      19926,
+      19285,
+      18013,
+      15047
+    ],
+    "silhouette_area_variation_cv": 0.0353
+  },
+  "source_image": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\collier_art301_ref.png",
+  "glb_model": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\public\\models\\art-301.glb",
+  "verification_board_path": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\detourage_diagnostic\\cs_art301_board.png"
+}

@@ -14,7 +14,15 @@ Caractéristiques d'excellence joaillère :
 
 import math
 import random
+import hashlib
 import bpy
+
+def derive_product_seed(product_id: str) -> int:
+    """
+    Génère un seed pseudo-aléatoire déterministe via SHA-256 (Master Prompt V2.2).
+    Éradique les variations non reproductibles causées par le hash() natif randomisé par processus.
+    """
+    return int.from_bytes(hashlib.sha256(product_id.encode("utf-8")).digest()[:4], "little")
 
 def build_luxury_lobster_clasp(clasp_loc, scale=0.010, mat_gold="M_Or_Poli"):
     """

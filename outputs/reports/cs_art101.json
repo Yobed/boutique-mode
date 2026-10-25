@@ -1,0 +1,54 @@
+{
+  "metric": "Chamfer Silhouette Score (CS)",
+  "pipeline_version": "Master Prompt V2.2",
+  "verdict": "FAIL",
+  "threshold_required": 0.85,
+  "cs_score": 0.3344,
+  "cs_linear": 0.0,
+  "mask_iou_2d": 0.7237,
+  "chamfer_distance_px": 53.96,
+  "chamfer_normalized": 0.0913,
+  "optimal_pose_6dof": {
+    "yaw": 18.36,
+    "pitch": 60.3,
+    "roll": -12.07,
+    "scale": 1.3351,
+    "tx": -21.08,
+    "ty": 21.06
+  },
+  "orbital_stability": {
+    "angles_count": 12,
+    "areas_per_angle": [
+      27422,
+      27496,
+      25156,
+      21755,
+      25334,
+      27751,
+      27629,
+      27671,
+      24823,
+      21209,
+      24915,
+      27696
+    ],
+    "perimeters_per_angle": [
+      22296,
+      22484,
+      20456,
+      16786,
+      21132,
+      23110,
+      22369,
+      23081,
+      20441,
+      16165,
+      20249,
+      23124
+    ],
+    "silhouette_area_variation_cv": 0.0865
+  },
+  "source_image": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sofa_demo.png",
+  "glb_model": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\public\\models\\art-101.glb",
+  "verification_board_path": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\detourage_diagnostic\\cs_art101_board.png"
+}

@@ -84,8 +84,9 @@ def build_master_necklace():
         }
     ]
     
-    print("Génération des 5 rangs de perles...")
-    bead_groups = jewelry_engine.generate_necklace_beads(tier_configs, seed=108)
+    print("Génération des 5 rangs de perles avec seed déterministe SHA-256...")
+    seed_det = jewelry_engine.derive_product_seed("art-301")
+    bead_groups = jewelry_engine.generate_necklace_beads(tier_configs, seed=seed_det)
     
     # Fusionner chaque groupe de matériau en un seul Mesh unifié pour minimiser les draw calls WebGL
     final_objects = []
@@ -125,8 +126,7 @@ def build_master_necklace():
     bpy.ops.object.shade_smooth()
     final_objects.append(clasp)
     
-    # 5. Centrage global et ajustement d'envergure
-    # Calcul de la boîte englobante
+    # 5. Centrage global et calage assiette AR 1:1 (Z_min = 0.0, centrage X=0, Y=0)
     min_x = min_y = min_z = 1e9
     max_x = max_y = max_z = -1e9
     for obj in final_objects:
@@ -141,14 +141,31 @@ def build_master_necklace():
             
     cx = (min_x + max_x) / 2.0
     cy = (min_y + max_y) / 2.0
-    cz = (min_z + max_z) / 2.0
     
     for obj in final_objects:
         obj.location.x -= cx
         obj.location.y -= cy
-        obj.location.z -= cz
+        obj.location.z -= min_z
         
-    print(f"Modèle assemblé avec succès : {len(final_objects)} objets unifiés.")
+    # Appliquer toutes les transformations géométriques
+    bpy.ops.object.select_all(action='DESELECT')
+    for obj in final_objects:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = final_objects[0]
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+    bpy.ops.object.select_all(action='DESELECT')
+
+    # 6. Dépliage UV smart_project pour éliminer les recouvrements UV inter-perles
+    for obj in final_objects:
+        bpy.context.view_layer.objects.active = obj
+        obj.select_set(True)
+        bpy.ops.object.mode_set(mode='EDIT')
+        bpy.ops.mesh.select_all(action='SELECT')
+        bpy.ops.uv.smart_project(angle_limit=math.radians(66.0), island_margin=0.005)
+        bpy.ops.object.mode_set(mode='OBJECT')
+        obj.select_set(False)
+        
+    print(f"Modèle assemblé et calibré AR : {len(final_objects)} objets unifiés.")
     return final_objects
 
 

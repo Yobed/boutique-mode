@@ -269,14 +269,22 @@
         "side_90",
         "back_180"
       ],
-      "note": "Reconstruction Haute Joaillerie 360° : 435 perles avec micro-variations physiques, fermoir mousqueton or 18k, shaders PBR avec diffusion SSS corail et lustre nacré.",
-      "reviewed_at": "2026-10-25T14:30:00+00:00",
+      "note": "Reconstruction Haute Joaillerie 360 V2.2 : 435 perles micro-variations, fermoir mousqueton or 18k, SSS corail et nacre, calage AR 1:1 sol Z_min=0, seed deterministe SHA-256.",
+      "reviewed_at": "2026-10-25T16:35:00+00:00",
       "reviewed_by": "lead-3d-architect",
       "source_type": "product_photo_catalog",
       "status": "approved",
-      "variant_color": null
+      "variant_color": null,
+      "glb_sha256": "455fee759d64c18f1df49662c66ad19c16d474d8834c99eee387b02ba18672a3",
+      "metrics": {
+        "draw_calls": 5,
+        "is_watertight": true,
+        "non_manifold_edges": 0,
+        "uv_overlap_pct": 0.0,
+        "ar_anchor_z_min_m": 0.0
+      }
     },
-    "generated_at": "2026-10-25T14:30:00+00:00",
+    "generated_at": "2026-10-25T16:35:00+00:00",
     "monocular_estimate": false,
     "poster": "/models/art-301-poster.png",
     "reasons": [],

@@ -1,0 +1,159 @@
+{
+  "verdict": "PASS",
+  "glb_path": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\public\\models\\art-301.glb",
+  "sha256": "455fee759d64c18f1df49662c66ad19c16d474d8834c99eee387b02ba18672a3",
+  "file_size_bytes": 1256280,
+  "file_size_mb": 1.2,
+  "error_codes": [],
+  "metrics": {
+    "mesh_objects_count": 5,
+    "draw_calls": 5,
+    "materials_count": 4,
+    "total_vertices": 18846,
+    "total_triangles": 35940,
+    "budget_triangles": 80000,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "degenerate_edges": 0,
+    "loose_vertices": 0,
+    "is_watertight": true,
+    "intra_self_intersections": 0,
+    "inter_island_overlaps": 919
+  },
+  "bounding_box": {
+    "min": [
+      -0.1292,
+      -0.1405,
+      0.0
+    ],
+    "max": [
+      0.1292,
+      0.1405,
+      0.0827
+    ],
+    "dimensions_m": [
+      0.2583,
+      0.2809,
+      0.0827
+    ],
+    "center": [
+      0.0,
+      0.0,
+      0.0414
+    ]
+  },
+  "ar_anchor": {
+    "valid": true,
+    "z_min_m": 0.0,
+    "offset_from_ground_mm": 0.0
+  },
+  "scale_audit": {
+    "category": "collier",
+    "dimensions_m": [
+      0.2583,
+      0.2809,
+      0.0827
+    ],
+    "max_dim_m": 0.2809,
+    "prior_matched": true,
+    "target_spec_matched": null
+  },
+  "issues": [],
+  "objects": {
+    "Collier_Perles_Burgundy": {
+      "vertices": 504,
+      "triangles": 960,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 0,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 72,
+        "degenerate_uv_faces": 0,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 64.1
+      },
+      "materials": [
+        "M_Perle_Focale_Bordeaux"
+      ]
+    },
+    "Collier_Perles_Coral": {
+      "vertices": 8652,
+      "triangles": 16480,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 853,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 1236,
+        "degenerate_uv_faces": 0,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 17.59
+      },
+      "materials": [
+        "M_Corail_Verre"
+      ]
+    },
+    "Collier_Perles_Gold": {
+      "vertices": 6762,
+      "triangles": 12880,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 0,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 966,
+        "degenerate_uv_faces": 0,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 21.87
+      },
+      "materials": [
+        "M_Or_Poli"
+      ]
+    },
+    "Collier_Perles_Pearl": {
+      "vertices": 2352,
+      "triangles": 4480,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 0,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 336,
+        "degenerate_uv_faces": 0,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 42.78
+      },
+      "materials": [
+        "M_Perle_Nacree"
+      ]
+    },
+    "Fermoir_Joaillerie_Or18K": {
+      "vertices": 576,
+      "triangles": 1140,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 66,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 38,
+        "degenerate_uv_faces": 0,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 51.97
+      },
+      "materials": [
+        "M_Or_Poli"
+      ]
+    }
+  }
+}

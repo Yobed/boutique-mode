@@ -1,0 +1,83 @@
+{
+  "verdict": "PASS",
+  "glb_path": "c:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\public\\models\\art-101.glb",
+  "sha256": "62be10d70f0c170f78e6f7bb1a544b34efbf75d1446d221d39467e3136358232",
+  "file_size_bytes": 2273460,
+  "file_size_mb": 2.17,
+  "error_codes": [],
+  "metrics": {
+    "mesh_objects_count": 1,
+    "draw_calls": 1,
+    "materials_count": 1,
+    "total_vertices": 30000,
+    "total_triangles": 60000,
+    "budget_triangles": 90000,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "degenerate_edges": 0,
+    "loose_vertices": 0,
+    "is_watertight": true,
+    "intra_self_intersections": 0,
+    "inter_island_overlaps": 0
+  },
+  "bounding_box": {
+    "min": [
+      -0.4909,
+      -0.2573,
+      -0.0003
+    ],
+    "max": [
+      0.4924,
+      0.2499,
+      1.0002
+    ],
+    "dimensions_m": [
+      0.9833,
+      0.5073,
+      1.0005
+    ],
+    "center": [
+      0.0008,
+      -0.0037,
+      0.5
+    ]
+  },
+  "ar_anchor": {
+    "valid": true,
+    "z_min_m": -0.0003,
+    "offset_from_ground_mm": -0.3
+  },
+  "scale_audit": {
+    "category": "fauteuil",
+    "dimensions_m": [
+      0.9833,
+      0.5073,
+      1.0005
+    ],
+    "max_dim_m": 1.0005,
+    "prior_matched": true,
+    "target_spec_matched": null
+  },
+  "issues": [],
+  "objects": {
+    "geometry_0": {
+      "vertices": 30000,
+      "triangles": 60000,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 0,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 28,
+        "degenerate_uv_faces": 234,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 69.98
+      },
+      "materials": [
+        "Material_0"
+      ]
+    }
+  }
+}
