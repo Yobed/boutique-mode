@@ -1,0 +1,16 @@
+# Dépendances du moteur image-vers-3D (CPU). Versions testées entre parenthèses.
+# torch : installez la variante adaptée à la machine (CPU : https://pytorch.org/get-started/locally/)
+torch>=2.2            # 2.14.0+cpu
+transformers>=4.35    # 5.17.0 (les couches ViT renommées en 5.x sont converties par le moteur embarqué)
+omegaconf>=2.3        # 2.4.0
+einops>=0.7           # 0.8.2
+trimesh>=4.0          # 5.2.0
+scikit-image>=0.22    # 0.26.0  (marching cubes, remplace torchmcubes qui exige un compilateur C++)
+scipy>=1.11           # 1.18.1
+pillow>=10.1          #
+numpy>=1.26           # 2.5.3
+onnxruntime>=1.17     # détourage U²-Net
+fast-simplification>=0.1  # 5.2.0 — décimation du maillage
+xatlas>=0.0.9         # 0.0.11 — dépliage UV pour la texture
+spandrel>=0.3         # 0.4.2 — charge Real-ESRGAN (super-résolution des vues sources)
+huggingface_hub>=0.20 # importé par le moteur embarqué (aucun accès réseau à l'exécution)

@@ -10,7 +10,13 @@ param(
     [string]$ImagePath = "",
 
     [Parameter(Mandatory=$false)]
-    [string]$Id = ""
+    [string]$Id = "",
+
+    [Parameter(Mandatory=$false)]
+    [string]$Category = "",
+
+    [Parameter(Mandatory=$false)]
+    [switch]$ForceCategory = $false
 )
 
 $ErrorActionPreference = "Stop"
@@ -73,10 +79,30 @@ $SpecPath = Join-Path $SpecDir "$Id`_spec.json"
 Write-Host "`n[1/3] Analyse visuelle spatiale & inférence géométrique (Mission 32/33 Engine)..." -ForegroundColor Yellow
 $AnalyzerScript = Join-Path $ScriptDir "component_analyzer.py"
 
-& $BlenderPy $AnalyzerScript --image $ImagePath --output $SpecPath
+$AnalyzerArgs = @("--image", $ImagePath, "--output", $SpecPath)
+if ($Category) {
+    $AnalyzerArgs += @("--category", $Category)
+}
+if ($ForceCategory) {
+    $AnalyzerArgs += @("--force-category")
+}
+
+& $BlenderPy $AnalyzerScript @AnalyzerArgs
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Échec de l'analyseur de composants."
     exit $LASTEXITCODE
+}
+
+$SpecCheck = Get-Content $SpecPath -Raw | ConvertFrom-Json
+if ($SpecCheck.semantic_classification) {
+    $sc = $SpecCheck.semantic_classification
+    Write-Host "  -> Catégorie certifiée   : $($SpecCheck.category) (confiance: $($sc.final_confidence))" -ForegroundColor Green
+    if ($sc.contradiction_detected) {
+        Write-Host "  -> [ANTI-CONTAMINATION] Contradiction sémantique détectée et corrigée par vision !" -ForegroundColor Magenta
+        if ($sc.contradiction_details) {
+            Write-Host "     $($sc.contradiction_details)" -ForegroundColor DarkGray
+        }
+    }
 }
 
 # Étape 2 : Modélisation procédurale Blender, Shaders PBR & Export GLB

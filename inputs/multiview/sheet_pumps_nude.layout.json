@@ -1,0 +1,11 @@
+{
+  "note": "Escarpins nude : les vues en perspective d'une paire sont incohérentes pour une enveloppe visuelle (talon en bloc). On reconstruit un seul escarpin, depuis son profil, avec TripoSR.",
+  "mode": "single",
+  "panel": [
+    368,
+    475,
+    527,
+    646
+  ],
+  "upscale": 3
+}

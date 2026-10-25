@@ -14,7 +14,13 @@ interface Product3DViewerProps {
   selectedColor?: string;
   onColorChange?: (color: string) => void;
   showColorPicker?: boolean;
+  /** false : modèle déjà coloré d'après la photo, ni recoloration du matériau ni sélecteur de teintes. */
+  recolor?: boolean;
+  /** Fond CSS du visualiseur (défaut sombre). */
+  background?: string;
 }
+
+const DEFAULT_BACKGROUND = '#0b0d11';
 
 const COLOR_MAP: Record<string, { label: string; bg: string; factor: [number, number, number, number] }> = {
   noir: {
@@ -44,6 +50,8 @@ export default function Product3DViewer({
   selectedColor = 'Noir',
   onColorChange,
   showColorPicker = true,
+  recolor = true,
+  background = DEFAULT_BACKGROUND,
 }: Product3DViewerProps) {
   const viewerRef = useRef<any>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -80,7 +88,7 @@ export default function Product3DViewer({
 
     const applyColor = () => {
       setIsLoaded(true);
-      if (!viewer.model?.materials) return;
+      if (!recolor || !viewer.model?.materials) return;
 
       const mat =
         viewer.model.materials.find(
@@ -106,7 +114,7 @@ export default function Product3DViewer({
     if (viewer.loaded) applyColor();
 
     return () => viewer.removeEventListener('load', applyColor);
-  }, [currentColor]);
+  }, [currentColor, recolor]);
 
   const handleSelectColor = (colorKey: string) => {
     const cap = colorKey.charAt(0).toUpperCase() + colorKey.slice(1);
@@ -143,7 +151,8 @@ export default function Product3DViewer({
 
   return (
     <div
-      className={`relative w-full aspect-square bg-[#0b0d11] rounded-2xl overflow-hidden border border-brass-400/20 shadow-2xl group select-none ${className}`}
+      className={`relative w-full aspect-square rounded-2xl overflow-hidden border border-brass-400/20 shadow-2xl group select-none ${className}`}
+      style={{ backgroundColor: background }}
     >
       {/* Script Google Model Viewer autonome */}
       <Script
@@ -165,6 +174,8 @@ export default function Product3DViewer({
         shadow-intensity="1.4"
         shadow-softness="0.8"
         exposure="1.0"
+        environment-image="neutral"
+        tone-mapping="neutral"
         camera-orbit={cameraOrbit}
         interaction-prompt="auto"
         onLoad={() => setIsLoaded(true)}
@@ -172,7 +183,7 @@ export default function Product3DViewer({
           {
             width: '100%',
             height: '100%',
-            backgroundColor: '#0b0d11',
+            backgroundColor: background,
             '--poster-color': 'transparent',
           } as any
         }
@@ -180,7 +191,8 @@ export default function Product3DViewer({
         {/* Slot de chargement / poster */}
         <div
           slot="poster"
-          className="w-full h-full flex flex-col items-center justify-center bg-[#0b0d11] text-linen-100"
+          className="w-full h-full flex flex-col items-center justify-center text-linen-100"
+          style={{ backgroundColor: background }}
         >
           {posterSrc ? (
             <img
@@ -207,7 +219,7 @@ export default function Product3DViewer({
       </div>
 
       {/* Sélecteur de Couleurs Flottant Direct sur le Viewer */}
-      {showColorPicker && (
+      {showColorPicker && recolor && (
         <div className="absolute top-4 right-4 z-10 flex items-center gap-2 p-1.5 rounded-full bg-ink-950/85 backdrop-blur-md border border-brass-400/30 shadow-xl">
           {Object.entries(COLOR_MAP).map(([key, info]) => {
             const isSelected =

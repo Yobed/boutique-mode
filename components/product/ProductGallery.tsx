@@ -16,6 +16,8 @@ interface Props {
     src: string;
     poster?: string;
     cameraOrbit?: string;
+    recolor?: boolean;
+    background?: string;
   };
   selectedColor?: string;
 }
@@ -254,6 +256,8 @@ export default function ProductGallery({ photos, nom, plateRef, modele_3d, selec
             modelSrc={modele_3d.src}
             posterSrc={modele_3d.poster}
             cameraOrbit={modele_3d.cameraOrbit}
+            recolor={modele_3d.recolor ?? true}
+            background={modele_3d.background}
             selectedColor={selectedColor}
             alt={`Modèle 3D de ${nom}`}
             className="w-full aspect-[4/5] lg:aspect-[3/4] shadow-2xl"

@@ -30,6 +30,10 @@ export interface Article {
     src: string;
     poster?: string;
     cameraOrbit?: string;
+    /** false : le modèle porte déjà les couleurs de la photo, le visualiseur ne le recolore pas (défaut : true). */
+    recolor?: boolean;
+    /** Fond du visualiseur (CSS). Défaut sombre ; clair pour les produits noirs, invisibles sur fond sombre. */
+    background?: string;
   };
   created_at?: string;
 }

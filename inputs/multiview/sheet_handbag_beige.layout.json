@@ -1,0 +1,45 @@
+{
+  "note": "Sac à main femme beige (planche 'Vues multiples')",
+  "boxes": {
+    "front": [
+      8,
+      80,
+      266,
+      382
+    ],
+    "back": [
+      274,
+      80,
+      526,
+      382
+    ],
+    "left": [
+      534,
+      80,
+      668,
+      382
+    ],
+    "right": [
+      672,
+      80,
+      818,
+      382
+    ],
+    "top": [
+      826,
+      80,
+      1066,
+      382
+    ],
+    "bottom": [
+      1074,
+      80,
+      1305,
+      382
+    ]
+  },
+  "ignore": [
+    "top"
+  ],
+  "ignore_reason": "vue de dessus en perspective d'un sac ouvert : son contour creuse l'enveloppe"
+}

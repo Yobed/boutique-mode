@@ -10,7 +10,8 @@ import bpy
 import bmesh
 
 WORKSPACE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-sys.path.append(os.path.join(WORKSPACE_DIR, "scripts", "validation"))
+# validate_scene.py ships beside this validator in scripts/3d_pipeline.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import validate_scene
 
 
@@ -128,3 +129,59 @@ def validate_model_quality(mesh_objects, expected_dims=None, tolerance_pct=5.0):
                 results["verdict"] = "FAIL"
 
     return results
+
+def main(argv=None):
+    """Importe un GLB dans Blender, exécute l'audit et retourne un code fiable."""
+    import argparse
+    import json
+
+    if argv is None:
+        raw_argv = sys.argv
+        argv = raw_argv[raw_argv.index("--") + 1:] if "--" in raw_argv else raw_argv[1:]
+
+    parser = argparse.ArgumentParser(description="Valide la géométrie et l'export d'un fichier GLB.")
+    parser.add_argument("--glb", required=True, help="Chemin du fichier GLB à contrôler")
+    parser.add_argument("--spec", required=True, help="Spécification JSON de référence")
+    args = parser.parse_args(argv)
+
+    if not os.path.isfile(args.glb):
+        parser.error(f"Fichier GLB introuvable: {args.glb}")
+    if not os.path.isfile(args.spec):
+        parser.error(f"Spécification introuvable: {args.spec}")
+
+    try:
+        with open(args.spec, "r", encoding="utf-8") as spec_file:
+            spec = json.load(spec_file)
+
+        # Exclude Blender's startup cube and any other pre-existing scene objects.
+        for obj in list(bpy.context.scene.objects):
+            bpy.data.objects.remove(obj, do_unlink=True)
+
+        # Blender's glTF importer is an operator registered by the bundled addon.
+        if not hasattr(bpy.ops.import_scene, "gltf"):
+            bpy.ops.preferences.addon_enable(module="io_scene_gltf2")
+        bpy.ops.import_scene.gltf(filepath=os.path.abspath(args.glb))
+
+        mesh_objects = [obj for obj in bpy.context.scene.objects if obj.type == "MESH"]
+        if not mesh_objects:
+            raise RuntimeError("Le GLB ne contient aucun objet maillé.")
+
+        expected_dims = spec.get("scale_metric", {}).get("dimensions")
+        report = validate_model_quality(mesh_objects, expected_dims=expected_dims)
+        report["glb_path"] = os.path.abspath(args.glb)
+        report["glb_bytes"] = os.path.getsize(args.glb)
+        report["objects"] = [obj.name for obj in mesh_objects]
+        print("VALIDATION_RESULT:" + json.dumps(report, ensure_ascii=False, sort_keys=True))
+        return 0 if report["verdict"] == "PASS" else 2
+    except Exception as exc:
+        failure = {
+            "verdict": "ERROR",
+            "glb_path": os.path.abspath(args.glb),
+            "error": f"{type(exc).__name__}: {exc}",
+        }
+        print("VALIDATION_RESULT:" + json.dumps(failure, ensure_ascii=False, sort_keys=True))
+        return 3
+
+
+if __name__ == "__main__":
+    sys.exit(main())

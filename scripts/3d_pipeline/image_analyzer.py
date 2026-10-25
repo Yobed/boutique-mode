@@ -24,6 +24,8 @@ PIPELINE_DIR = os.path.dirname(os.path.abspath(__file__))
 if PIPELINE_DIR not in sys.path:
     sys.path.append(PIPELINE_DIR)
 
+from semantic_classifier import classify_product_semantics
+
 
 class ReferenceImageAnalyzer:
     """Analyseur de vision par ordinateur pour images de référence de produits."""
@@ -309,13 +311,21 @@ class ReferenceImageAnalyzer:
         materials["M_Accent"] = {"preset": "emissive_led_ring"}
         materials["M_Rubber"] = {"preset": "matte_rubber"}
 
-        # Détection de l'archétype géométrique
-        cat = self.category_hint.lower() if self.category_hint else ""
+        # Détection sémantique certifiée sans contamination (Mission 36)
+        decision = classify_product_semantics(
+            self.image_path,
+            self.mask,
+            self.bbox,
+            self.width,
+            self.height,
+            category_hint=self.category_hint
+        )
+        cat = decision["final_category"]
 
         # ==========================================================
         # CAS 1 : Lampe de table minimaliste (Profile Lampe / Éclairage)
         # ==========================================================
-        if "lamp" in cat or "luminaire" in cat:
+        if cat == "slender_pedestal_lamp" or "lamp" in cat or "luminaire" in cat:
             category_name = "minimalist_lighting"
             real_h = 0.36
             real_w = real_h / self.aspect_ratio
@@ -395,7 +405,7 @@ class ReferenceImageAnalyzer:
         # ==========================================================
         # CAS 2 : Boîtier industriel / SSD / Powerbank (Modular Box)
         # ==========================================================
-        elif "ssd" in cat or "powerbank" in cat or "enclosure" in cat:
+        elif cat == "prismatic_enclosure_electronics" or "ssd" in cat or "powerbank" in cat or "enclosure" in cat:
             category_name = "industrial_rugged_electronics"
             real_h = 0.125
             real_w = real_h / self.aspect_ratio
@@ -461,7 +471,7 @@ class ReferenceImageAnalyzer:
         # ==========================================================
         # CAS 3 : Carafe scandinave / Vaisselle (Profil Lathe Revolve)
         # ==========================================================
-        elif "carafe" in cat or "pitcher" in cat or "vase" in cat or self.symmetry_score > 0.85 and self.aspect_ratio > 1.2:
+        elif cat == "tableware_lathe" or "carafe" in cat or "pitcher" in cat or "vase" in cat:
             category_name = "scandinavian_tableware_lathe"
             real_h = 0.25
             real_w = real_h / self.aspect_ratio
@@ -552,6 +562,7 @@ class ReferenceImageAnalyzer:
             },
             "materials": materials,
             "components": components,
+            "semantic_classification": decision,
             "analysis_metadata": {
                 "input_images": [self.image_path],
                 "analysis_mode": "single_view",

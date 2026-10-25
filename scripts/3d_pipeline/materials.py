@@ -115,6 +115,14 @@ MATERIAL_PRESETS = {
         "specular_ior_level": 0.25,
         "sheen_weight": 0.60
     },
+    "contemporary_lounge_fabric": {
+        "base_color": (0.650, 0.620, 0.580, 1.0),
+        "roughness": 0.88,
+        "metallic": 0.0,
+        "specular_ior_level": 0.35,
+        "sheen_weight": 0.50,
+        "sheen_roughness": 0.60
+    },
 
     # 5. Maroquinerie & Cuirs Luxe
     "luxury_leather_black": {

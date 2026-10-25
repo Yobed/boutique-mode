@@ -34,6 +34,12 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 
+# Python & travail du pipeline 3D neuronal (les GLB publiés vivent dans public/models)
+__pycache__/
+*.pyc
+outputs/3d_neural/
+outputs/neural_m38/
+
 # WhatsApp Sessions (Security & Privacy)
 auth_elsi/
 services/elsi-whatsapp-bot/auth_elsi/

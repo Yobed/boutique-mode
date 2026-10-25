@@ -1,0 +1,45 @@
+{
+  "note": "Sac à main femme camel ('Vues du produit')",
+  "boxes": {
+    "front": [
+      14,
+      456,
+      184,
+      648
+    ],
+    "back": [
+      189,
+      456,
+      364,
+      648
+    ],
+    "left": [
+      369,
+      456,
+      490,
+      648
+    ],
+    "right": [
+      495,
+      456,
+      617,
+      648
+    ],
+    "top": [
+      622,
+      456,
+      808,
+      648
+    ],
+    "bottom": [
+      813,
+      456,
+      1000,
+      648
+    ]
+  },
+  "ignore": [
+    "top"
+  ],
+  "ignore_reason": "vue de dessus en perspective d'un sac ouvert : son contour creuse l'enveloppe"
+}

@@ -28,6 +28,11 @@ Conçue selon une architecture **100% Cloud Souveraine à 0 FCFA/mois à vie** :
 4. **Tableau de Bord Gérant (`/admin`)** :
    * Suivi des commandes reçues (N° commande, client, téléphone, adresse, articles, total).
    * Statistiques en direct (Chiffre d'affaires, commandes en attente).
+5. **Modèles 3D générés depuis les photos produit** :
+   * `npm run 3d:setup` (une fois), puis `npm run 3d:catalog` : chaque photo de sac, chaussure ou accessoire devient un modèle GLB publié dans `public/models/` et affiché dans l'onglet « Vue 3D 360° » de la fiche produit.
+   * Contrôle qualité automatique (étanchéité, fidélité à la photo, un seul objet) ; les modèles douteux restent en « review » jusqu'à validation (`--approve`).
+   * Mode fidèle : une planche multi-vues (face, dos, côtés, dessus, dessous) donne un modèle reconstruit au lieu de deviné : `npm run 3d:product -- --sheet planche.png --id mon-sac`.
+   * Avec une seule photo, l'arrière de l'objet n'est pas visible : le modèle est une estimation. Détails et limites : [`docs/3d-pipeline/NEURAL_IMAGE_TO_3D.md`](docs/3d-pipeline/NEURAL_IMAGE_TO_3D.md).
 
 ---
 

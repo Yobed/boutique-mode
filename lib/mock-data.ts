@@ -57,7 +57,7 @@ export const ARTICLES_DEMO: Article[] = [
     genre: 'femme',
     tailles: ['37', '38', '39', '40', '41'],
     couleurs: ['Noir Verni', 'Nude Poudré', 'Rouge Passion'],
-    photos: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&auto=format&fit=crop&q=80'],
+    photos: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&auto=format&fit=crop&q=80', '/images/planches/art-007-planche.jpg'],
     en_stock: true,
     quantite_stock: 6,
   },
@@ -170,7 +170,7 @@ export const ARTICLES_DEMO: Article[] = [
     genre: 'femme',
     tailles: ['Unique'],
     couleurs: ['Noir', 'Bordeaux', 'Cognac'],
-    photos: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80'],
+    photos: ['https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80', '/images/planches/art-009-planche.jpg'],
     modele_3d: {
       src: '/models/sac-elsi.glb',
       poster: '/models/sac-elsi-poster.png',
@@ -216,7 +216,7 @@ export const ARTICLES_DEMO: Article[] = [
     genre: 'femme',
     tailles: ['37', '38', '39', '40', '41'],
     couleurs: ['Noir Verni', 'Nude Poudré', 'Rouge Passion'],
-    photos: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&auto=format&fit=crop&q=80'],
+    photos: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&auto=format&fit=crop&q=80', '/images/planches/art-007-planche.jpg'],
     en_stock: true,
     quantite_stock: 6,
   },
@@ -261,6 +261,7 @@ export const ARTICLES_DEMO: Article[] = [
     photos: [
       P('1691480250099-a63081ecfcb8', 6),
       'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80',
+      '/images/planches/art-101-planche.jpg',
     ],
     modele_3d: {
       src: '/models/sac-elsi.glb',
@@ -281,7 +282,7 @@ export const ARTICLES_DEMO: Article[] = [
     genre: 'mixte',
     tailles: ['Unique'],
     couleurs: ['Havane'],
-    photos: [P('1691480150204-66dd1eb77391', 6)],
+    photos: [P('1691480150204-66dd1eb77391', 6), '/images/planches/art-102-planche.jpg'],
     en_stock: true,
     quantite_stock: 6,
     vedette: true,

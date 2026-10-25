@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { Article, Commande } from './types';
 import { ARTICLES_DEMO } from './mock-data';
+import { attachGeneratedModel, type Models3dManifest } from './models3d';
+import generatedModels from '../config/models3d.json';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -9,7 +11,19 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
+const withModel3d = (article: Article): Article =>
+  attachGeneratedModel(article, generatedModels as Models3dManifest);
+
 export async function getArticles(): Promise<Article[]> {
+  return (await loadArticles()).map(withModel3d);
+}
+
+export async function getArticleById(id: string): Promise<Article | null> {
+  const article = await loadArticleById(id);
+  return article ? withModel3d(article) : null;
+}
+
+async function loadArticles(): Promise<Article[]> {
   if (!supabase) {
     return ARTICLES_DEMO;
   }
@@ -31,7 +45,7 @@ export async function getArticles(): Promise<Article[]> {
   }
 }
 
-export async function getArticleById(id: string): Promise<Article | null> {
+async function loadArticleById(id: string): Promise<Article | null> {
   if (!supabase) {
     return ARTICLES_DEMO.find((a) => a.id === id) || null;
   }

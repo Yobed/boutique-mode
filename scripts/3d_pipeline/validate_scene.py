@@ -41,11 +41,16 @@ def _inspect_mesh_geometry(mesh_data):
 
     try:
         bm.from_mesh(mesh_data)
+        source_vertex_count = len(bm.verts)
+        # glTF duplicates vertices at UV/normal seams. Weld only in this temporary
+        # BMesh copy so topology checks describe the surface without editing the GLB.
+        bmesh.ops.remove_doubles(bm, verts=list(bm.verts), dist=1e-6)
         bm.verts.ensure_lookup_table()
         bm.edges.ensure_lookup_table()
         bm.faces.ensure_lookup_table()
 
         stats["vertex_count"] = len(bm.verts)
+        stats["merged_duplicate_vertex_count"] = source_vertex_count - len(bm.verts)
         stats["edge_count"] = len(bm.edges)
         stats["face_count"] = len(bm.faces)
 
