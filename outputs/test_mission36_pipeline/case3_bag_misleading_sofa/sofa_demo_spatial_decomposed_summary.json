@@ -1,0 +1,60 @@
+{
+  "object_id": "sofa_demo_spatial_decomposed",
+  "object_name": "Sofa Demo Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "validation_verdict": "PASS",
+  "base_vertices": 224,
+  "base_faces": 158,
+  "evaluated_vertices": 448,
+  "evaluated_triangles": 884,
+  "bounding_box": {
+    "min": [
+      -0.086747,
+      -0.033641,
+      0.0
+    ],
+    "max": [
+      0.086747,
+      0.033641,
+      0.2681
+    ],
+    "dimensions": [
+      0.173494,
+      0.067281,
+      0.2681
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\sofa_demo_spatial_decomposed.blend",
+    "size": 128805,
+    "sha256": "febe15067f74918da8e404778bf3240a471a73cd85cbbabe40f3fe3650929e80"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\sofa_demo_spatial_decomposed.glb",
+    "size": 43476,
+    "sha256": "ded022d993a08271b908dd27fe5c41e3daef502dcb55ab6e4489f9a89937afb5",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "sofa_demo_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\previews\\sofa_demo_spatial_decomposed_hero.png",
+      759985
+    ],
+    [
+      "sofa_demo_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\previews\\sofa_demo_spatial_decomposed_front.png",
+      810584
+    ],
+    [
+      "sofa_demo_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\previews\\sofa_demo_spatial_decomposed_side.png",
+      752877
+    ],
+    [
+      "sofa_demo_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\previews\\sofa_demo_spatial_decomposed_top.png",
+      668220
+    ]
+  ]
+}

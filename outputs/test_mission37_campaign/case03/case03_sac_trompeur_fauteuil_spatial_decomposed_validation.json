@@ -1,0 +1,348 @@
+{
+  "verdict": "PASS",
+  "objects_count": 25,
+  "total_base_vertices": 1504,
+  "total_base_faces": 882,
+  "total_evaluated_vertices": 4064,
+  "total_evaluated_triangles": 8028,
+  "issues": [],
+  "objects_audit": {
+    "Socle_Inferieur": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_2_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_2_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_2_3": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_3_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_3_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_3_3": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_4_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_4_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_4_3": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_5_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_5_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_5_3": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_6_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_6_2": {
+      "base_verts": 48,
+      "base_faces": 26,
+      "eval_verts": 144,
+      "eval_triangles": 284,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_6_3": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_6_4": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_7_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_7_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_7_3": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_8_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_8_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Chapeau_Superieur": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Anse_Courbee_Gauche": {
+      "base_verts": 112,
+      "base_faces": 98,
+      "eval_verts": 112,
+      "eval_triangles": 220,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Anse_Courbee_Droite": {
+      "base_verts": 112,
+      "base_faces": 98,
+      "eval_verts": 112,
+      "eval_triangles": 220,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.1456,
+      -0.094219,
+      -0.003479
+    ],
+    "max": [
+      0.1456,
+      0.094219,
+      0.2
+    ],
+    "dimensions": [
+      0.2912,
+      0.188438,
+      0.203479
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.2912,
+      "actual": 0.2912,
+      "error_pct": 0.0,
+      "match": true
+    },
+    "dy": {
+      "target": 0.1893,
+      "actual": 0.188438,
+      "error_pct": 0.46,
+      "match": true
+    },
+    "dz": {
+      "target": 0.2,
+      "actual": 0.203479,
+      "error_pct": 1.74,
+      "match": true
+    }
+  }
+}

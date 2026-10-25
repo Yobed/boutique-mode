@@ -1,0 +1,241 @@
+{
+  "object_id": "case11_tabouret_tripode_spatial_decomposed",
+  "object_name": "Case11 Tabouret Tripode Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1652,
+      0.0641,
+      0.2681
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Cuir_Principal": {
+      "custom": {
+        "base_color": [
+          0.386,
+          0.377,
+          0.368,
+          1.0
+        ],
+        "roughness": 0.38,
+        "metallic": 0.0,
+        "specular_ior_level": 0.52,
+        "coat_weight": 0.12,
+        "coat_roughness": 0.25,
+        "sheen_weight": 0.2
+      }
+    },
+    "M_Bouclerie_Laiton": {
+      "preset": "brushed_brass_gold"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_corps_cuir",
+      "name": "Corps_Principal_Cuir",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        0.1652,
+        0.0641,
+        0.136
+      ],
+      "corner_radius": 0.035,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Corps principal en maroquinerie sellier avec d\u00e9pouille trap\u00e9zo\u00efdale et angles arrondis continus.",
+        "visual_cues": [
+          "Silhouette trap\u00e9zo\u00efdale \u00e9vas\u00e9e vers la base (429px)",
+          "Mat\u00e9riau cuir uniforme"
+        ],
+        "confidence_level": 0.94
+      }
+    },
+    {
+      "id": "comp_2_rabat_cuir",
+      "name": "Rabat_Superieur_Cuir",
+      "role": "top_flap_closure",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        0.1517,
+        0.059,
+        0.056
+      ],
+      "corner_radius": 0.028,
+      "taper_ratio": 0.88,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.0,
+        0.136
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_corps_cuir"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Rabat sup\u00e9rieur de fermeture prolongeant harmonieusement la silhouette du sac.",
+        "visual_cues": [
+          "Continuit\u00e9 du cuir sur le quart sup\u00e9rieur",
+          "R\u00e9tr\u00e9cissement r\u00e9gulier du profil"
+        ],
+        "confidence_level": 0.92
+      }
+    },
+    {
+      "id": "comp_4_anse_arche",
+      "name": "Anse_Arche_Cuir",
+      "role": "top_arch_handle",
+      "primitive": "curved_sweep",
+      "material": "M_Cuir_Principal",
+      "path_points": [
+        [
+          -0.054,
+          0.0,
+          0.192
+        ],
+        [
+          -0.054,
+          0.0,
+          0.2304
+        ],
+        [
+          -0.027,
+          0.0,
+          0.256
+        ],
+        [
+          0.0,
+          0.0,
+          0.2611
+        ],
+        [
+          0.027,
+          0.0,
+          0.256
+        ],
+        [
+          0.054,
+          0.0,
+          0.2304
+        ],
+        [
+          0.054,
+          0.0,
+          0.192
+        ]
+      ],
+      "radius": 0.007,
+      "segments": 16,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_rabat_cuir"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "curved_sweep",
+        "selection_rationale": "Anse en arceau libre confirm\u00e9e par d\u00e9tection d'\u00e9videment interne traversant sous l'anse.",
+        "visual_cues": [
+          "\u00c9videment interne mesur\u00e9 (50555 px)"
+        ],
+        "confidence_level": 0.95
+      }
+    }
+  ],
+  "semantic_classification": {
+    "final_category": "fashion_handbag",
+    "final_confidence": 0.97,
+    "visual_category": "fashion_handbag",
+    "visual_confidence": 0.97,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": null,
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 1.186046511627907,
+      "width_px": 430,
+      "height_px": 510,
+      "rect_fill_ratio": 0.46778385772913816,
+      "symmetry_score": 0.6832325453545904,
+      "void_ratio": 0.6215686274509804,
+      "void_pixels": 50555,
+      "stem_ratio": 0.11627906976744186,
+      "width_cv": 0.1266231509497413,
+      "slender_ratio": 0.700873993008056,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.97,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 430x510 px",
+      "Ratio d'aspect H/W : 1.186",
+      "Sym\u00e9trie bilat\u00e9rale : 0.683",
+      "Facteur de remplissage rectangulaire : 0.468",
+      "Taux d'\u00e9videment interne : 62.2% (50555 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.116",
+      "Variabilit\u00e9 des largeurs (CV) : 0.1266",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  },
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\mission37_test_cases\\case11_tabouret_tripode.png",
+    "analyzer_module": "component_analyzer.py (Mission 36 Fashion Leather Engine)",
+    "detected_strata_count": 3,
+    "total_components_generated": 3,
+    "confidence_score": 0.97,
+    "contradiction_detected": false,
+    "is_fashion_leather": true,
+    "leather_harmonization_applied": true,
+    "hardware_accents_detected": false,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 429x509 px",
+      "Ratio d'aspect mesur\u00e9 : 1.186",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.496",
+      "Mat\u00e9riau principal : Cuir maroquinerie unifi\u00e9 avec reflets PBR Principled BSDF",
+      "Accessoire m\u00e9tallique dor\u00e9 d\u00e9tect\u00e9 en fa\u00e7ade (0 pixels)"
+    ],
+    "indeterminate_elements": [
+      "Profondeur Y et volume interne non visibles sur photo frontale unique, estim\u00e9s selon les proportions standard de maroquinerie sellier."
+    ],
+    "hypotheses": [
+      "D\u00e9composition volumique harmonis\u00e9e : corps principal \u00e9vas\u00e9 + rabat sup\u00e9rieur fermant.",
+      "Unification du mat\u00e9riau cuir (M_Cuir_Principal) pour \u00e9viter la fragmentation luminance.",
+      "Compatibilit\u00e9 directe avec le composant React Product3DViewer de la boutique."
+    ]
+  }
+}

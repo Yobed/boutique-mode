@@ -1,0 +1,60 @@
+{
+  "object_id": "case11_tabouret_tripode_spatial_decomposed",
+  "object_name": "Case11 Tabouret Tripode Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "validation_verdict": "PASS",
+  "base_vertices": 224,
+  "base_faces": 158,
+  "evaluated_vertices": 448,
+  "evaluated_triangles": 884,
+  "bounding_box": {
+    "min": [
+      -0.082454,
+      -0.031993,
+      0.0
+    ],
+    "max": [
+      0.082454,
+      0.031993,
+      0.2681
+    ],
+    "dimensions": [
+      0.164909,
+      0.063987,
+      0.2681
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case11\\case11_tabouret_tripode_spatial_decomposed.blend",
+    "size": 128436,
+    "sha256": "0d65a3dece392472e1ea085d3a2df303d0a104dbb03c11c2f789fc71ae10b640"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case11\\case11_tabouret_tripode_spatial_decomposed.glb",
+    "size": 43496,
+    "sha256": "54a6c0ccad4f2bc8375d8f1aed10bffd1bd9c475b17eabce8e3b80c4015f269f",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case11_tabouret_tripode_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case11\\previews\\case11_tabouret_tripode_spatial_decomposed_hero.png",
+      767198
+    ],
+    [
+      "case11_tabouret_tripode_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case11\\previews\\case11_tabouret_tripode_spatial_decomposed_front.png",
+      810673
+    ],
+    [
+      "case11_tabouret_tripode_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case11\\previews\\case11_tabouret_tripode_spatial_decomposed_side.png",
+      765543
+    ],
+    [
+      "case11_tabouret_tripode_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case11\\previews\\case11_tabouret_tripode_spatial_decomposed_top.png",
+      666686
+    ]
+  ]
+}

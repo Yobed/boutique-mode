@@ -1,0 +1,195 @@
+{
+  "object_id": "accessoire_vase_spatial_decomposed",
+  "object_name": "Accessoire Vase Solide R\u00e9volution",
+  "category": "scandinavian_tableware_lathe",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1874,
+      0.1874,
+      0.25
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Ceramique_Glazed": {
+      "custom": {
+        "base_color": [
+          0.597,
+          0.481,
+          0.408,
+          1.0
+        ],
+        "roughness": 0.12,
+        "metallic": 0.0,
+        "specular_ior_level": 0.55,
+        "coat_weight": 0.4,
+        "coat_roughness": 0.08
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_corps_vase",
+      "name": "Corps_Vase_Ceramique",
+      "role": "main_lathe_body",
+      "primitive": "lathe",
+      "material": "M_Ceramique_Glazed",
+      "segments": 40,
+      "is_hollow": true,
+      "wall_thickness": 0.004,
+      "bevel_width": 0.001,
+      "profile_points": [
+        [
+          0.012,
+          0.0
+        ],
+        [
+          0.0443,
+          0.0167
+        ],
+        [
+          0.0472,
+          0.0333
+        ],
+        [
+          0.0705,
+          0.05
+        ],
+        [
+          0.0835,
+          0.0667
+        ],
+        [
+          0.0908,
+          0.0833
+        ],
+        [
+          0.0937,
+          0.1
+        ],
+        [
+          0.0927,
+          0.1167
+        ],
+        [
+          0.0879,
+          0.1333
+        ],
+        [
+          0.0777,
+          0.15
+        ],
+        [
+          0.0603,
+          0.1667
+        ],
+        [
+          0.0409,
+          0.1833
+        ],
+        [
+          0.0414,
+          0.2
+        ],
+        [
+          0.0419,
+          0.2167
+        ],
+        [
+          0.0598,
+          0.2333
+        ],
+        [
+          0.0148,
+          0.25
+        ]
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "geometric_inference": {
+        "primitive_chosen": "lathe",
+        "selection_rationale": "Solide de r\u00e9volution axisym\u00e9trique d\u00e9duit du profil courb\u00e9 et de la sym\u00e9trie > 0.85.",
+        "visual_cues": [
+          "Sym\u00e9trie axiale 0.993",
+          "16 points d'\u00e9chantillonnage de courbure"
+        ],
+        "confidence_level": 0.96
+      }
+    }
+  ],
+  "semantic_classification": {
+    "final_category": "tableware_lathe",
+    "final_confidence": 0.98,
+    "visual_category": "tableware_lathe",
+    "visual_confidence": 0.98,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": "tableware_lathe",
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 1.3333333333333333,
+      "width_px": 390,
+      "height_px": 520,
+      "rect_fill_ratio": 0.6852169625246548,
+      "symmetry_score": 0.9952022204599524,
+      "void_ratio": 0.0,
+      "void_pixels": 0,
+      "stem_ratio": 0.15897435897435896,
+      "width_cv": 0.24545677850873654,
+      "slender_ratio": 0.8073307034845496,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": true
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.75,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.98,
+      "fashion_handbag": 0.05,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 390x520 px",
+      "Ratio d'aspect H/W : 1.333",
+      "Sym\u00e9trie bilat\u00e9rale : 0.995",
+      "Facteur de remplissage rectangulaire : 0.685",
+      "Taux d'\u00e9videment interne : 0.0% (0 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.159",
+      "Variabilit\u00e9 des largeurs (CV) : 0.2455",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : True"
+    ]
+  },
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\accessoire_vase.png",
+    "analyzer_module": "component_analyzer.py (Mission 36 Lathe Engine)",
+    "detected_strata_count": 1,
+    "total_components_generated": 1,
+    "confidence_score": 0.98,
+    "contradiction_detected": false,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 389x519 px",
+      "Ratio d'aspect mesur\u00e9 : 1.334",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.993",
+      "Arch\u00e9type identifi\u00e9 : Solide de r\u00e9volution axisym\u00e9trique (Vase / Carafe)",
+      "G\u00e9om\u00e9trie de r\u00e9volution pure pr\u00e9serv\u00e9e sans r\u00e9gression"
+    ],
+    "indeterminate_elements": [
+      "\u00c9paisseur de paroi interne estim\u00e9e \u00e0 4mm, non mesurable directement sur photo 2D opaque."
+    ],
+    "hypotheses": [
+      "R\u00e9volution axiale compl\u00e8te 360\u00b0 bas\u00e9e sur la stricte sym\u00e9trie bilat\u00e9rale.",
+      "\u00c9videment int\u00e9rieur d\u00e9bouchant au sommet avec collerette biseaut\u00e9e."
+    ]
+  }
+}

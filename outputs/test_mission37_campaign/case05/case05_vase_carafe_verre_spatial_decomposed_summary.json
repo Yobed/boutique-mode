@@ -1,0 +1,60 @@
+{
+  "object_id": "case05_vase_carafe_verre_spatial_decomposed",
+  "object_name": "Case05 Vase Carafe Verre Solide R\u00e9volution",
+  "category": "scandinavian_tableware_lathe",
+  "validation_verdict": "PASS",
+  "base_vertices": 1282,
+  "base_faces": 1320,
+  "evaluated_vertices": 1682,
+  "evaluated_triangles": 3360,
+  "bounding_box": {
+    "min": [
+      -0.08194,
+      -0.08194,
+      0.0
+    ],
+    "max": [
+      0.08194,
+      0.08194,
+      0.25
+    ],
+    "dimensions": [
+      0.163879,
+      0.163879,
+      0.25
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case05\\case05_vase_carafe_verre_spatial_decomposed.blend",
+    "size": 145857,
+    "sha256": "1b4f091db87e6b8b00fe885ad9cf0cb697a2c0a2376c54a33435495b02a79c67"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case05\\case05_vase_carafe_verre_spatial_decomposed.glb",
+    "size": 209984,
+    "sha256": "866eb10d865c45cd51f4e3099e18e5547ba033b53cdd0aa7ebcf44a8a7090ae9",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case05_vase_carafe_verre_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case05\\previews\\case05_vase_carafe_verre_spatial_decomposed_hero.png",
+      753865
+    ],
+    [
+      "case05_vase_carafe_verre_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case05\\previews\\case05_vase_carafe_verre_spatial_decomposed_front.png",
+      797689
+    ],
+    [
+      "case05_vase_carafe_verre_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case05\\previews\\case05_vase_carafe_verre_spatial_decomposed_side.png",
+      777931
+    ],
+    [
+      "case05_vase_carafe_verre_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case05\\previews\\case05_vase_carafe_verre_spatial_decomposed_top.png",
+      694245
+    ]
+  ]
+}

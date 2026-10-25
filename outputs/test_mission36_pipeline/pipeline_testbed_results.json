@@ -1,0 +1,1577 @@
+[
+  {
+    "case": {
+      "id": "case1_couch_misleading_sac",
+      "file": "sac_demo.jpg",
+      "name": "Canap\u00e9 contemporain (Nom trompeur: sac_demo.jpg)",
+      "ground_truth": "Mobilier lounge horizontal",
+      "filename_hint": "fashion_handbag"
+    },
+    "spec": {
+      "object_id": "sac_demo_spatial_decomposed",
+      "object_name": "Sac Demo Mobilier Lounge",
+      "category": "horizontal_lounge_furniture",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          1.9903,
+          0.9342,
+          0.862
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Cuir_Principal": {
+          "custom": {
+            "base_color": [
+              0.744,
+              0.704,
+              0.671,
+              1.0
+            ],
+            "roughness": 0.82,
+            "metallic": 0.0,
+            "specular_ior_level": 0.35,
+            "sheen_weight": 0.45,
+            "sheen_roughness": 0.55
+          }
+        },
+        "M_Chassis_Lounge": {
+          "preset": "dark_polymer"
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_socle_chassis",
+          "name": "Base_Chassis_Socle",
+          "role": "chassis_base_plinth",
+          "primitive": "rounded_box",
+          "material": "M_Chassis_Lounge",
+          "dimensions": [
+            1.97,
+            0.8408,
+            0.08
+          ],
+          "corner_radius": 0.015,
+          "taper_ratio": 1.0,
+          "bevel_width": 0.002,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "relationship": {
+            "type": "base_anchor",
+            "target": null
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Plinthe basse et pi\u00e9tement continu du mobilier lounge.",
+            "visual_cues": [
+              "Ligne d'appui continue au sol",
+              "Ombre port\u00e9e basse"
+            ],
+            "confidence_level": 0.95
+          }
+        },
+        {
+          "id": "comp_2_assise_coussins",
+          "name": "Assise_Coussins_Principale",
+          "role": "seating_cushion_module",
+          "primitive": "rounded_box",
+          "material": "M_Cuir_Principal",
+          "dimensions": [
+            1.9903,
+            0.8875,
+            0.357
+          ],
+          "corner_radius": 0.04,
+          "taper_ratio": 0.98,
+          "bevel_width": 0.004,
+          "location": [
+            0.0,
+            -0.0374,
+            0.08
+          ],
+          "relationship": {
+            "type": "stacked_on",
+            "target": "comp_1_socle_chassis"
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Plateforme d'assise matelass\u00e9e horizontale continue.",
+            "visual_cues": [
+              "Plan horizontal d'assise \u00e9tendu",
+              "Largeur observ\u00e9e de 313px (AR=0.419)"
+            ],
+            "confidence_level": 0.94
+          }
+        },
+        {
+          "id": "comp_3_dossier_accoudoirs",
+          "name": "Dossier_Accoudoirs_Lounge",
+          "role": "backrest_armrest_module",
+          "primitive": "rounded_box",
+          "material": "M_Cuir_Principal",
+          "dimensions": [
+            1.9497,
+            0.3737,
+            0.425
+          ],
+          "corner_radius": 0.035,
+          "taper_ratio": 0.95,
+          "bevel_width": 0.003,
+          "location": [
+            0.0,
+            0.2429,
+            0.437
+          ],
+          "relationship": {
+            "type": "stacked_on",
+            "target": "comp_2_assise_coussins"
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Dossier arri\u00e8re et retour d'accoudoir en retrait.",
+            "visual_cues": [
+              "Contour sup\u00e9rieur horizontal \u00e9tag\u00e9",
+              "Continuit\u00e9 de texture avec l'assise"
+            ],
+            "confidence_level": 0.92
+          }
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "horizontal_lounge_furniture",
+        "final_confidence": 0.94,
+        "visual_category": "horizontal_lounge_furniture",
+        "visual_confidence": 0.94,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": "fashion_handbag",
+        "contradiction_detected": true,
+        "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sac_demo.jpg' sugg\u00e8re 'fashion_handbag', mais les m\u00e9triques visuelles de l'image (AR=0.420, Sym\u00e9trie=0.835) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.02). L'arch\u00e9type visuel prouv\u00e9 'horizontal_lounge_furniture' (score: 0.94) pr\u00e9vaut rigoureusement.",
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 0.42038216560509556,
+          "width_px": 314,
+          "height_px": 132,
+          "rect_fill_ratio": 0.806190889789616,
+          "symmetry_score": 0.8348873348873349,
+          "void_ratio": 0.007575757575757576,
+          "void_pixels": 21,
+          "stem_ratio": 0.006369426751592357,
+          "width_cv": 0.018687977026147645,
+          "slender_ratio": 0.9866564540836894,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": false
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.94,
+          "slender_pedestal_lamp": 0.04,
+          "prismatic_enclosure_electronics": 0.08,
+          "tableware_lathe": 0.05,
+          "fashion_handbag": 0.02,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 314x132 px",
+          "Ratio d'aspect H/W : 0.420",
+          "Sym\u00e9trie bilat\u00e9rale : 0.835",
+          "Facteur de remplissage rectangulaire : 0.806",
+          "Taux d'\u00e9videment interne : 0.8% (21 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.006",
+          "Variabilit\u00e9 des largeurs (CV) : 0.0187",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_demo.jpg",
+        "analyzer_module": "component_analyzer.py (Mission 36 Lounge Engine)",
+        "detected_strata_count": 3,
+        "total_components_generated": 3,
+        "confidence_score": 0.94,
+        "contradiction_detected": true,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 313x131 px",
+          "Ratio d'aspect mesur\u00e9 : 0.419 (Mobilier \u00e9tal\u00e9 horizontalement)",
+          "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.815",
+          "Arch\u00e9type identifi\u00e9 : Mobilier lounge / canap\u00e9 contemporain",
+          "Absence prouv\u00e9e d'anses, fermoirs m\u00e9talliques ou structures de maroquinerie"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y ergonomique estim\u00e9e \u00e0 0.46x la largeur selon les standards du design de mobilier."
+        ],
+        "hypotheses": [
+          "D\u00e9composition structurelle tripartite : socle bas + assise coussin\u00e9e + dossier enveloppant.",
+          "Rev\u00eatement unifi\u00e9 M_Cuir_Principal pour continuit\u00e9 d'ombrage et support du s\u00e9lecteur Next.js."
+        ]
+      }
+    },
+    "category": "horizontal_lounge_furniture",
+    "contradiction": true,
+    "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sac_demo.jpg' sugg\u00e8re 'fashion_handbag', mais les m\u00e9triques visuelles de l'image (AR=0.420, Sym\u00e9trie=0.835) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.02). L'arch\u00e9type visuel prouv\u00e9 'horizontal_lounge_furniture' (score: 0.94) pr\u00e9vaut rigoureusement.",
+    "components": [
+      "Base_Chassis_Socle",
+      "Assise_Coussins_Principale",
+      "Dossier_Accoudoirs_Lounge"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case1_couch_misleading_sac\\sac_demo_spatial_decomposed.glb",
+    "glb_size": 41844,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case1_couch_misleading_sac\\previews\\sac_demo_spatial_decomposed_hero.png",
+    "render_time_s": 33.9
+  },
+  {
+    "case": {
+      "id": "case2_vase_concordant",
+      "file": "accessoire_vase.png",
+      "name": "Vase en c\u00e9ramique (Nom concordant: accessoire_vase.png)",
+      "ground_truth": "Solide de r\u00e9volution axisym\u00e9trique",
+      "filename_hint": "tableware_lathe"
+    },
+    "spec": {
+      "object_id": "accessoire_vase_spatial_decomposed",
+      "object_name": "Accessoire Vase Solide R\u00e9volution",
+      "category": "scandinavian_tableware_lathe",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          0.1874,
+          0.1874,
+          0.25
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Ceramique_Glazed": {
+          "custom": {
+            "base_color": [
+              0.597,
+              0.481,
+              0.408,
+              1.0
+            ],
+            "roughness": 0.12,
+            "metallic": 0.0,
+            "specular_ior_level": 0.55,
+            "coat_weight": 0.4,
+            "coat_roughness": 0.08
+          }
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_corps_vase",
+          "name": "Corps_Vase_Ceramique",
+          "role": "main_lathe_body",
+          "primitive": "lathe",
+          "material": "M_Ceramique_Glazed",
+          "segments": 40,
+          "is_hollow": true,
+          "wall_thickness": 0.004,
+          "bevel_width": 0.001,
+          "profile_points": [
+            [
+              0.012,
+              0.0
+            ],
+            [
+              0.0443,
+              0.0167
+            ],
+            [
+              0.0472,
+              0.0333
+            ],
+            [
+              0.0705,
+              0.05
+            ],
+            [
+              0.0835,
+              0.0667
+            ],
+            [
+              0.0908,
+              0.0833
+            ],
+            [
+              0.0937,
+              0.1
+            ],
+            [
+              0.0927,
+              0.1167
+            ],
+            [
+              0.0879,
+              0.1333
+            ],
+            [
+              0.0777,
+              0.15
+            ],
+            [
+              0.0603,
+              0.1667
+            ],
+            [
+              0.0409,
+              0.1833
+            ],
+            [
+              0.0414,
+              0.2
+            ],
+            [
+              0.0419,
+              0.2167
+            ],
+            [
+              0.0598,
+              0.2333
+            ],
+            [
+              0.0148,
+              0.25
+            ]
+          ],
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "geometric_inference": {
+            "primitive_chosen": "lathe",
+            "selection_rationale": "Solide de r\u00e9volution axisym\u00e9trique d\u00e9duit du profil courb\u00e9 et de la sym\u00e9trie > 0.85.",
+            "visual_cues": [
+              "Sym\u00e9trie axiale 0.993",
+              "16 points d'\u00e9chantillonnage de courbure"
+            ],
+            "confidence_level": 0.96
+          }
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "tableware_lathe",
+        "final_confidence": 0.98,
+        "visual_category": "tableware_lathe",
+        "visual_confidence": 0.98,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": "tableware_lathe",
+        "contradiction_detected": false,
+        "contradiction_details": null,
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 1.3333333333333333,
+          "width_px": 390,
+          "height_px": 520,
+          "rect_fill_ratio": 0.6852169625246548,
+          "symmetry_score": 0.9952022204599524,
+          "void_ratio": 0.0,
+          "void_pixels": 0,
+          "stem_ratio": 0.15897435897435896,
+          "width_cv": 0.24545677850873654,
+          "slender_ratio": 0.8073307034845496,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": true
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.02,
+          "slender_pedestal_lamp": 0.75,
+          "prismatic_enclosure_electronics": 0.08,
+          "tableware_lathe": 0.98,
+          "fashion_handbag": 0.05,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 390x520 px",
+          "Ratio d'aspect H/W : 1.333",
+          "Sym\u00e9trie bilat\u00e9rale : 0.995",
+          "Facteur de remplissage rectangulaire : 0.685",
+          "Taux d'\u00e9videment interne : 0.0% (0 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.159",
+          "Variabilit\u00e9 des largeurs (CV) : 0.2455",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : True"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\accessoire_vase.png",
+        "analyzer_module": "component_analyzer.py (Mission 36 Lathe Engine)",
+        "detected_strata_count": 1,
+        "total_components_generated": 1,
+        "confidence_score": 0.98,
+        "contradiction_detected": false,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 389x519 px",
+          "Ratio d'aspect mesur\u00e9 : 1.334",
+          "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.993",
+          "Arch\u00e9type identifi\u00e9 : Solide de r\u00e9volution axisym\u00e9trique (Vase / Carafe)",
+          "G\u00e9om\u00e9trie de r\u00e9volution pure pr\u00e9serv\u00e9e sans r\u00e9gression"
+        ],
+        "indeterminate_elements": [
+          "\u00c9paisseur de paroi interne estim\u00e9e \u00e0 4mm, non mesurable directement sur photo 2D opaque."
+        ],
+        "hypotheses": [
+          "R\u00e9volution axiale compl\u00e8te 360\u00b0 bas\u00e9e sur la stricte sym\u00e9trie bilat\u00e9rale.",
+          "\u00c9videment int\u00e9rieur d\u00e9bouchant au sommet avec collerette biseaut\u00e9e."
+        ]
+      }
+    },
+    "category": "scandinavian_tableware_lathe",
+    "contradiction": false,
+    "contradiction_details": null,
+    "components": [
+      "Corps_Vase_Ceramique"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\accessoire_vase_spatial_decomposed.glb",
+    "glb_size": 246464,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\previews\\accessoire_vase_spatial_decomposed_hero.png",
+    "render_time_s": 33.8
+  },
+  {
+    "case": {
+      "id": "case3_bag_misleading_sofa",
+      "file": "sofa_demo.png",
+      "name": "Sac de luxe (Nom trompeur: sofa_demo.png)",
+      "ground_truth": "Sac \u00e0 main maroquinerie",
+      "filename_hint": "horizontal_lounge_furniture"
+    },
+    "spec": {
+      "object_id": "sofa_demo_spatial_decomposed",
+      "object_name": "Sofa Demo Haute Maroquinerie",
+      "category": "fashion_leather_goods",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          0.1738,
+          0.0674,
+          0.2681
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Cuir_Principal": {
+          "custom": {
+            "base_color": [
+              0.594,
+              0.586,
+              0.581,
+              1.0
+            ],
+            "roughness": 0.38,
+            "metallic": 0.0,
+            "specular_ior_level": 0.52,
+            "coat_weight": 0.12,
+            "coat_roughness": 0.25,
+            "sheen_weight": 0.2
+          }
+        },
+        "M_Bouclerie_Laiton": {
+          "preset": "brushed_brass_gold"
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_corps_cuir",
+          "name": "Corps_Principal_Cuir",
+          "role": "main_body_core",
+          "primitive": "rounded_box",
+          "material": "M_Cuir_Principal",
+          "dimensions": [
+            0.1738,
+            0.0674,
+            0.136
+          ],
+          "corner_radius": 0.035,
+          "taper_ratio": 0.92,
+          "bevel_width": 0.003,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "relationship": {
+            "type": "base_anchor",
+            "target": null
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Corps principal en maroquinerie sellier avec d\u00e9pouille trap\u00e9zo\u00efdale et angles arrondis continus.",
+            "visual_cues": [
+              "Silhouette trap\u00e9zo\u00efdale \u00e9vas\u00e9e vers la base (437px)",
+              "Mat\u00e9riau cuir uniforme"
+            ],
+            "confidence_level": 0.94
+          }
+        },
+        {
+          "id": "comp_2_rabat_cuir",
+          "name": "Rabat_Superieur_Cuir",
+          "role": "top_flap_closure",
+          "primitive": "rounded_box",
+          "material": "M_Cuir_Principal",
+          "dimensions": [
+            0.1596,
+            0.062,
+            0.056
+          ],
+          "corner_radius": 0.028,
+          "taper_ratio": 0.88,
+          "bevel_width": 0.003,
+          "location": [
+            0.0,
+            0.0,
+            0.136
+          ],
+          "relationship": {
+            "type": "stacked_on",
+            "target": "comp_1_corps_cuir"
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Rabat sup\u00e9rieur de fermeture prolongeant harmonieusement la silhouette du sac.",
+            "visual_cues": [
+              "Continuit\u00e9 du cuir sur le quart sup\u00e9rieur",
+              "R\u00e9tr\u00e9cissement r\u00e9gulier du profil"
+            ],
+            "confidence_level": 0.92
+          }
+        },
+        {
+          "id": "comp_4_anse_arche",
+          "name": "Anse_Arche_Cuir",
+          "role": "top_arch_handle",
+          "primitive": "curved_sweep",
+          "material": "M_Cuir_Principal",
+          "path_points": [
+            [
+              -0.0567,
+              0.0,
+              0.192
+            ],
+            [
+              -0.0567,
+              0.0,
+              0.2304
+            ],
+            [
+              -0.0284,
+              0.0,
+              0.256
+            ],
+            [
+              0.0,
+              0.0,
+              0.2611
+            ],
+            [
+              0.0284,
+              0.0,
+              0.256
+            ],
+            [
+              0.0567,
+              0.0,
+              0.2304
+            ],
+            [
+              0.0567,
+              0.0,
+              0.192
+            ]
+          ],
+          "radius": 0.007,
+          "segments": 16,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "relationship": {
+            "type": "stacked_on",
+            "target": "comp_2_rabat_cuir"
+          },
+          "geometric_inference": {
+            "primitive_chosen": "curved_sweep",
+            "selection_rationale": "Anse en arceau libre confirm\u00e9e par d\u00e9tection d'\u00e9videment interne traversant sous l'anse.",
+            "visual_cues": [
+              "\u00c9videment interne mesur\u00e9 (23339 px)"
+            ],
+            "confidence_level": 0.95
+          }
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "fashion_handbag",
+        "final_confidence": 0.97,
+        "visual_category": "fashion_handbag",
+        "visual_confidence": 0.97,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": "horizontal_lounge_furniture",
+        "contradiction_detected": true,
+        "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sofa_demo.png' sugg\u00e8re 'horizontal_lounge_furniture', mais les m\u00e9triques visuelles de l'image (AR=1.128, Sym\u00e9trie=0.988) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.02). L'arch\u00e9type visuel prouv\u00e9 'fashion_handbag' (score: 0.97) pr\u00e9vaut rigoureusement.",
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 1.1278538812785388,
+          "width_px": 438,
+          "height_px": 494,
+          "rect_fill_ratio": 0.6628168154844435,
+          "symmetry_score": 0.9880399658284738,
+          "void_ratio": 0.3724696356275304,
+          "void_pixels": 23339,
+          "stem_ratio": 0.0365296803652968,
+          "width_cv": 0.23809356356609832,
+          "slender_ratio": 0.8605999108282214,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": false
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.02,
+          "slender_pedestal_lamp": 0.04,
+          "prismatic_enclosure_electronics": 0.08,
+          "tableware_lathe": 0.05,
+          "fashion_handbag": 0.97,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 438x494 px",
+          "Ratio d'aspect H/W : 1.128",
+          "Sym\u00e9trie bilat\u00e9rale : 0.988",
+          "Facteur de remplissage rectangulaire : 0.663",
+          "Taux d'\u00e9videment interne : 37.2% (23339 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.037",
+          "Variabilit\u00e9 des largeurs (CV) : 0.2381",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sofa_demo.png",
+        "analyzer_module": "component_analyzer.py (Mission 36 Fashion Leather Engine)",
+        "detected_strata_count": 3,
+        "total_components_generated": 3,
+        "confidence_score": 0.97,
+        "contradiction_detected": true,
+        "is_fashion_leather": true,
+        "leather_harmonization_applied": true,
+        "hardware_accents_detected": false,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 437x493 px",
+          "Ratio d'aspect mesur\u00e9 : 1.128",
+          "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.982",
+          "Mat\u00e9riau principal : Cuir maroquinerie unifi\u00e9 avec reflets PBR Principled BSDF",
+          "Accessoire m\u00e9tallique dor\u00e9 d\u00e9tect\u00e9 en fa\u00e7ade (0 pixels)"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y et volume interne non visibles sur photo frontale unique, estim\u00e9s selon les proportions standard de maroquinerie sellier."
+        ],
+        "hypotheses": [
+          "D\u00e9composition volumique harmonis\u00e9e : corps principal \u00e9vas\u00e9 + rabat sup\u00e9rieur fermant.",
+          "Unification du mat\u00e9riau cuir (M_Cuir_Principal) pour \u00e9viter la fragmentation luminance.",
+          "Compatibilit\u00e9 directe avec le composant React Product3DViewer de la boutique."
+        ]
+      }
+    },
+    "category": "fashion_leather_goods",
+    "contradiction": true,
+    "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sofa_demo.png' sugg\u00e8re 'horizontal_lounge_furniture', mais les m\u00e9triques visuelles de l'image (AR=1.128, Sym\u00e9trie=0.988) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.02). L'arch\u00e9type visuel prouv\u00e9 'fashion_handbag' (score: 0.97) pr\u00e9vaut rigoureusement.",
+    "components": [
+      "Corps_Principal_Cuir",
+      "Rabat_Superieur_Cuir",
+      "Anse_Arche_Cuir"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\sofa_demo_spatial_decomposed.glb",
+    "glb_size": 43476,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case3_bag_misleading_sofa\\previews\\sofa_demo_spatial_decomposed_hero.png",
+    "render_time_s": 33.1
+  },
+  {
+    "case": {
+      "id": "case4_vase_misleading_sac",
+      "file": "sac_porcelaine.png",
+      "name": "Vase en c\u00e9ramique (Nom trompeur: sac_porcelaine.png)",
+      "ground_truth": "Solide de r\u00e9volution axisym\u00e9trique",
+      "filename_hint": "fashion_handbag"
+    },
+    "spec": {
+      "object_id": "sac_porcelaine_spatial_decomposed",
+      "object_name": "Sac Porcelaine Solide R\u00e9volution",
+      "category": "scandinavian_tableware_lathe",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          0.1874,
+          0.1874,
+          0.25
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Ceramique_Glazed": {
+          "custom": {
+            "base_color": [
+              0.597,
+              0.481,
+              0.408,
+              1.0
+            ],
+            "roughness": 0.12,
+            "metallic": 0.0,
+            "specular_ior_level": 0.55,
+            "coat_weight": 0.4,
+            "coat_roughness": 0.08
+          }
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_corps_vase",
+          "name": "Corps_Vase_Ceramique",
+          "role": "main_lathe_body",
+          "primitive": "lathe",
+          "material": "M_Ceramique_Glazed",
+          "segments": 40,
+          "is_hollow": true,
+          "wall_thickness": 0.004,
+          "bevel_width": 0.001,
+          "profile_points": [
+            [
+              0.012,
+              0.0
+            ],
+            [
+              0.0443,
+              0.0167
+            ],
+            [
+              0.0472,
+              0.0333
+            ],
+            [
+              0.0705,
+              0.05
+            ],
+            [
+              0.0835,
+              0.0667
+            ],
+            [
+              0.0908,
+              0.0833
+            ],
+            [
+              0.0937,
+              0.1
+            ],
+            [
+              0.0927,
+              0.1167
+            ],
+            [
+              0.0879,
+              0.1333
+            ],
+            [
+              0.0777,
+              0.15
+            ],
+            [
+              0.0603,
+              0.1667
+            ],
+            [
+              0.0409,
+              0.1833
+            ],
+            [
+              0.0414,
+              0.2
+            ],
+            [
+              0.0419,
+              0.2167
+            ],
+            [
+              0.0598,
+              0.2333
+            ],
+            [
+              0.0148,
+              0.25
+            ]
+          ],
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "geometric_inference": {
+            "primitive_chosen": "lathe",
+            "selection_rationale": "Solide de r\u00e9volution axisym\u00e9trique d\u00e9duit du profil courb\u00e9 et de la sym\u00e9trie > 0.85.",
+            "visual_cues": [
+              "Sym\u00e9trie axiale 0.993",
+              "16 points d'\u00e9chantillonnage de courbure"
+            ],
+            "confidence_level": 0.96
+          }
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "tableware_lathe",
+        "final_confidence": 0.98,
+        "visual_category": "tableware_lathe",
+        "visual_confidence": 0.98,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": "fashion_handbag",
+        "contradiction_detected": true,
+        "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sac_porcelaine.png' sugg\u00e8re 'fashion_handbag', mais les m\u00e9triques visuelles de l'image (AR=1.333, Sym\u00e9trie=0.995) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.05). L'arch\u00e9type visuel prouv\u00e9 'tableware_lathe' (score: 0.98) pr\u00e9vaut rigoureusement.",
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 1.3333333333333333,
+          "width_px": 390,
+          "height_px": 520,
+          "rect_fill_ratio": 0.6852169625246548,
+          "symmetry_score": 0.9952022204599524,
+          "void_ratio": 0.0,
+          "void_pixels": 0,
+          "stem_ratio": 0.15897435897435896,
+          "width_cv": 0.24545677850873654,
+          "slender_ratio": 0.8073307034845496,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": true
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.02,
+          "slender_pedestal_lamp": 0.75,
+          "prismatic_enclosure_electronics": 0.08,
+          "tableware_lathe": 0.98,
+          "fashion_handbag": 0.05,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 390x520 px",
+          "Ratio d'aspect H/W : 1.333",
+          "Sym\u00e9trie bilat\u00e9rale : 0.995",
+          "Facteur de remplissage rectangulaire : 0.685",
+          "Taux d'\u00e9videment interne : 0.0% (0 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.159",
+          "Variabilit\u00e9 des largeurs (CV) : 0.2455",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : True"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_porcelaine.png",
+        "analyzer_module": "component_analyzer.py (Mission 36 Lathe Engine)",
+        "detected_strata_count": 1,
+        "total_components_generated": 1,
+        "confidence_score": 0.98,
+        "contradiction_detected": true,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 389x519 px",
+          "Ratio d'aspect mesur\u00e9 : 1.334",
+          "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.993",
+          "Arch\u00e9type identifi\u00e9 : Solide de r\u00e9volution axisym\u00e9trique (Vase / Carafe)",
+          "G\u00e9om\u00e9trie de r\u00e9volution pure pr\u00e9serv\u00e9e sans r\u00e9gression"
+        ],
+        "indeterminate_elements": [
+          "\u00c9paisseur de paroi interne estim\u00e9e \u00e0 4mm, non mesurable directement sur photo 2D opaque."
+        ],
+        "hypotheses": [
+          "R\u00e9volution axiale compl\u00e8te 360\u00b0 bas\u00e9e sur la stricte sym\u00e9trie bilat\u00e9rale.",
+          "\u00c9videment int\u00e9rieur d\u00e9bouchant au sommet avec collerette biseaut\u00e9e."
+        ]
+      }
+    },
+    "category": "scandinavian_tableware_lathe",
+    "contradiction": true,
+    "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sac_porcelaine.png' sugg\u00e8re 'fashion_handbag', mais les m\u00e9triques visuelles de l'image (AR=1.333, Sym\u00e9trie=0.995) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.05). L'arch\u00e9type visuel prouv\u00e9 'tableware_lathe' (score: 0.98) pr\u00e9vaut rigoureusement.",
+    "components": [
+      "Corps_Vase_Ceramique"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\sac_porcelaine_spatial_decomposed.glb",
+    "glb_size": 246464,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\previews\\sac_porcelaine_spatial_decomposed_hero.png",
+    "render_time_s": 33.4
+  },
+  {
+    "case": {
+      "id": "case5_lamp_concordant",
+      "file": "lampe_table.png",
+      "name": "Lampe de table minimaliste (Nom concordant: lampe_table.png)",
+      "ground_truth": "Luminaire sur pied \u00e9lanc\u00e9",
+      "filename_hint": "slender_pedestal_lamp"
+    },
+    "spec": {
+      "object_id": "lampe_table_spatial_decomposed",
+      "object_name": "Lampe Table Luminaire Minimaliste",
+      "category": "minimalist_lighting",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          0.2493,
+          0.2493,
+          0.3379
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Abat_Jour": {
+          "custom": {
+            "base_color": [
+              0.747,
+              0.626,
+              0.398,
+              1.0
+            ],
+            "roughness": 0.25,
+            "metallic": 0.0,
+            "specular_ior_level": 0.5
+          }
+        },
+        "M_Metal_Structure": {
+          "preset": "anodized_aluminum"
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_base_platine",
+          "name": "Base_Platine",
+          "role": "lamp_base_plinth",
+          "primitive": "cylinder",
+          "material": "M_Metal_Structure",
+          "radius_top": 0.0997,
+          "radius_bottom": 0.0997,
+          "height": 0.015,
+          "bevel_width": 0.0015,
+          "segments": 36,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "comp_2_tige_centrale",
+          "name": "Tige_Centrale",
+          "role": "central_slender_rod",
+          "primitive": "cylinder",
+          "material": "M_Metal_Structure",
+          "radius_top": 0.0075,
+          "radius_bottom": 0.0075,
+          "height": 0.252,
+          "bevel_width": 0.0005,
+          "segments": 24,
+          "location": [
+            0.0,
+            0.0,
+            0.015
+          ]
+        },
+        {
+          "id": "comp_3_abat_jour",
+          "name": "Abat_Jour_Conique",
+          "role": "conical_lamp_shade",
+          "primitive": "cylinder",
+          "material": "M_Abat_Jour",
+          "radius_top": 0.0548,
+          "radius_bottom": 0.1197,
+          "height": 0.1512,
+          "bevel_width": 0.002,
+          "segments": 36,
+          "location": [
+            0.0,
+            0.0,
+            0.1687
+          ]
+        },
+        {
+          "id": "comp_4_finial",
+          "name": "Finial_Sommital",
+          "role": "top_finial_nut",
+          "primitive": "cylinder",
+          "material": "M_Metal_Structure",
+          "radius_top": 0.01,
+          "radius_bottom": 0.01,
+          "height": 0.018,
+          "bevel_width": 0.001,
+          "segments": 20,
+          "location": [
+            0.0,
+            0.0,
+            0.3199
+          ]
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "slender_pedestal_lamp",
+        "final_confidence": 0.98,
+        "visual_category": "slender_pedestal_lamp",
+        "visual_confidence": 0.98,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": "slender_pedestal_lamp",
+        "contradiction_detected": false,
+        "contradiction_details": null,
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 1.4428152492668622,
+          "width_px": 341,
+          "height_px": 492,
+          "rect_fill_ratio": 0.1905741124859929,
+          "symmetry_score": 0.971401243424199,
+          "void_ratio": 0.3882113821138211,
+          "void_pixels": 44282,
+          "stem_ratio": 0.02932551319648094,
+          "width_cv": 0.994470248132973,
+          "slender_ratio": 0.382951438938317,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": false
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.02,
+          "slender_pedestal_lamp": 0.98,
+          "prismatic_enclosure_electronics": 0.08,
+          "tableware_lathe": 0.05,
+          "fashion_handbag": 0.97,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 341x492 px",
+          "Ratio d'aspect H/W : 1.443",
+          "Sym\u00e9trie bilat\u00e9rale : 0.971",
+          "Facteur de remplissage rectangulaire : 0.191",
+          "Taux d'\u00e9videment interne : 38.8% (44282 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.029",
+          "Variabilit\u00e9 des largeurs (CV) : 0.9945",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\lampe_table.png",
+        "analyzer_module": "component_analyzer.py (Mission 36 Lighting Engine)",
+        "detected_strata_count": 4,
+        "total_components_generated": 4,
+        "confidence_score": 0.98,
+        "contradiction_detected": false,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 340x491 px",
+          "Ratio d'aspect mesur\u00e9 : 1.444",
+          "Arch\u00e9type identifi\u00e9 : Luminaire sur pied / Lampe de table \u00e0 m\u00e2t \u00e9lanc\u00e9"
+        ],
+        "indeterminate_elements": [
+          "C\u00e2blage interne et ampoule non mod\u00e9lis\u00e9s."
+        ],
+        "hypotheses": [
+          "Sym\u00e9trie axiale centrale \u00e0 360 degr\u00e9s sur socle, tige et abat-jour."
+        ]
+      }
+    },
+    "category": "minimalist_lighting",
+    "contradiction": false,
+    "contradiction_details": null,
+    "components": [
+      "Base_Platine",
+      "Tige_Centrale",
+      "Abat_Jour_Conique",
+      "Finial_Sommital"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\lampe_table_spatial_decomposed.glb",
+    "glb_size": 54236,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\previews\\lampe_table_spatial_decomposed_hero.png",
+    "render_time_s": 29.1
+  },
+  {
+    "case": {
+      "id": "case6_electronics_neutral",
+      "file": "produit_neutre_001.png",
+      "name": "Bo\u00eetier \u00e9lectronique SSD (Nom neutre: produit_neutre_001.png)",
+      "ground_truth": "Bo\u00eetier \u00e9lectronique prismatique",
+      "filename_hint": "None (Neutre)"
+    },
+    "spec": {
+      "object_id": "produit_neutre_001_spatial_decomposed",
+      "object_name": "Produit Neutre 001 Bo\u00eetier \u00c9lectronique",
+      "category": "industrial_rugged_electronics",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          0.0976,
+          0.0238,
+          0.127
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Chassis_Alu": {
+          "preset": "anodized_aluminum"
+        },
+        "M_Bumper_Silicone": {
+          "preset": "matte_rubber"
+        },
+        "M_Accent_LED": {
+          "preset": "emissive_led_ring"
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_chassis_alu",
+          "name": "Chassis_Aluminium",
+          "role": "internal_metal_core",
+          "primitive": "rounded_box",
+          "material": "M_Chassis_Alu",
+          "dimensions": [
+            0.0878,
+            0.0183,
+            0.115
+          ],
+          "corner_radius": 0.008,
+          "taper_ratio": 1.0,
+          "bevel_width": 0.0015,
+          "location": [
+            0.0,
+            0.0,
+            0.005
+          ]
+        },
+        {
+          "id": "comp_2_bumper_silicone",
+          "name": "Bumper_Protection_Silicone",
+          "role": "outer_protective_casing",
+          "primitive": "rounded_box",
+          "material": "M_Bumper_Silicone",
+          "dimensions": [
+            0.0976,
+            0.0215,
+            0.125
+          ],
+          "corner_radius": 0.012,
+          "taper_ratio": 1.0,
+          "bevel_width": 0.002,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "comp_3_led_indicator",
+          "name": "LED_Indicateur_Status",
+          "role": "status_indicator_led",
+          "primitive": "cylinder",
+          "material": "M_Accent_LED",
+          "radius_top": 0.0035,
+          "radius_bottom": 0.0035,
+          "height": 0.002,
+          "segments": 16,
+          "location": [
+            0.0,
+            -0.011,
+            0.0275
+          ],
+          "rotation": [
+            1.5708,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "id": "comp_4_usbc_insert",
+          "name": "Connecteur_USBC_Insert",
+          "role": "io_connector_port",
+          "primitive": "rounded_box",
+          "material": "M_Bumper_Silicone",
+          "dimensions": [
+            0.014,
+            0.008,
+            0.006
+          ],
+          "corner_radius": 0.002,
+          "bevel_width": 0.0005,
+          "location": [
+            0.0,
+            0.0,
+            -0.002
+          ]
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "prismatic_enclosure_electronics",
+        "final_confidence": 0.98,
+        "visual_category": "prismatic_enclosure_electronics",
+        "visual_confidence": 0.98,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": null,
+        "contradiction_detected": false,
+        "contradiction_details": null,
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 1.2805755395683454,
+          "width_px": 417,
+          "height_px": 534,
+          "rect_fill_ratio": 0.7540574282147315,
+          "symmetry_score": 1.0,
+          "void_ratio": 0.0,
+          "void_pixels": 0,
+          "stem_ratio": 0.6115107913669064,
+          "width_cv": 0.0,
+          "slender_ratio": 0.7410071942446043,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": false
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.02,
+          "slender_pedestal_lamp": 0.04,
+          "prismatic_enclosure_electronics": 0.98,
+          "tableware_lathe": 0.05,
+          "fashion_handbag": 0.05,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 417x534 px",
+          "Ratio d'aspect H/W : 1.281",
+          "Sym\u00e9trie bilat\u00e9rale : 1.000",
+          "Facteur de remplissage rectangulaire : 0.754",
+          "Taux d'\u00e9videment interne : 0.0% (0 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.612",
+          "Variabilit\u00e9 des largeurs (CV) : 0.0000",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\produit_neutre_001.png",
+        "analyzer_module": "component_analyzer.py (Mission 36 Electronics Engine)",
+        "detected_strata_count": 4,
+        "total_components_generated": 4,
+        "confidence_score": 0.98,
+        "contradiction_detected": false,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 416x533 px",
+          "Ratio d'aspect mesur\u00e9 : 1.281",
+          "Arch\u00e9type identifi\u00e9 : Bo\u00eetier prismatique industriel / SSD"
+        ],
+        "indeterminate_elements": [
+          "\u00c9paisseur Y front-to-back estim\u00e9e selon les normes d'accessoires informatiques nomades."
+        ],
+        "hypotheses": [
+          "Structure bi-mati\u00e8re : ch\u00e2ssis aluminium interne + surmoulage silicone protecteur."
+        ]
+      }
+    },
+    "category": "industrial_rugged_electronics",
+    "contradiction": false,
+    "contradiction_details": null,
+    "components": [
+      "Chassis_Aluminium",
+      "Bumper_Protection_Silicone",
+      "LED_Indicateur_Status",
+      "Connecteur_USBC_Insert"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\produit_neutre_001_spatial_decomposed.glb",
+    "glb_size": 42080,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\previews\\produit_neutre_001_spatial_decomposed_hero.png",
+    "render_time_s": 29.5
+  },
+  {
+    "case": {
+      "id": "case7_bag_concordant",
+      "file": "sac_cuir_luxe.png",
+      "name": "Sac \u00e0 main de luxe (Nom concordant: sac_cuir_luxe.png)",
+      "ground_truth": "Sac \u00e0 main maroquinerie",
+      "filename_hint": "fashion_handbag"
+    },
+    "spec": {
+      "object_id": "sac_cuir_luxe_spatial_decomposed",
+      "object_name": "Sac Cuir Luxe Haute Maroquinerie",
+      "category": "fashion_leather_goods",
+      "scale_metric": {
+        "unit": "meters",
+        "dimensions": [
+          0.1738,
+          0.0674,
+          0.2681
+        ]
+      },
+      "coordinate_system": {
+        "up_axis": "+Z",
+        "forward_axis": "-Y",
+        "lateral_axis": "+X",
+        "origin": "bottom_center"
+      },
+      "materials": {
+        "M_Cuir_Principal": {
+          "custom": {
+            "base_color": [
+              0.594,
+              0.586,
+              0.581,
+              1.0
+            ],
+            "roughness": 0.38,
+            "metallic": 0.0,
+            "specular_ior_level": 0.52,
+            "coat_weight": 0.12,
+            "coat_roughness": 0.25,
+            "sheen_weight": 0.2
+          }
+        },
+        "M_Bouclerie_Laiton": {
+          "preset": "brushed_brass_gold"
+        }
+      },
+      "components": [
+        {
+          "id": "comp_1_corps_cuir",
+          "name": "Corps_Principal_Cuir",
+          "role": "main_body_core",
+          "primitive": "rounded_box",
+          "material": "M_Cuir_Principal",
+          "dimensions": [
+            0.1738,
+            0.0674,
+            0.136
+          ],
+          "corner_radius": 0.035,
+          "taper_ratio": 0.92,
+          "bevel_width": 0.003,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "relationship": {
+            "type": "base_anchor",
+            "target": null
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Corps principal en maroquinerie sellier avec d\u00e9pouille trap\u00e9zo\u00efdale et angles arrondis continus.",
+            "visual_cues": [
+              "Silhouette trap\u00e9zo\u00efdale \u00e9vas\u00e9e vers la base (437px)",
+              "Mat\u00e9riau cuir uniforme"
+            ],
+            "confidence_level": 0.94
+          }
+        },
+        {
+          "id": "comp_2_rabat_cuir",
+          "name": "Rabat_Superieur_Cuir",
+          "role": "top_flap_closure",
+          "primitive": "rounded_box",
+          "material": "M_Cuir_Principal",
+          "dimensions": [
+            0.1596,
+            0.062,
+            0.056
+          ],
+          "corner_radius": 0.028,
+          "taper_ratio": 0.88,
+          "bevel_width": 0.003,
+          "location": [
+            0.0,
+            0.0,
+            0.136
+          ],
+          "relationship": {
+            "type": "stacked_on",
+            "target": "comp_1_corps_cuir"
+          },
+          "geometric_inference": {
+            "primitive_chosen": "rounded_box",
+            "selection_rationale": "Rabat sup\u00e9rieur de fermeture prolongeant harmonieusement la silhouette du sac.",
+            "visual_cues": [
+              "Continuit\u00e9 du cuir sur le quart sup\u00e9rieur",
+              "R\u00e9tr\u00e9cissement r\u00e9gulier du profil"
+            ],
+            "confidence_level": 0.92
+          }
+        },
+        {
+          "id": "comp_4_anse_arche",
+          "name": "Anse_Arche_Cuir",
+          "role": "top_arch_handle",
+          "primitive": "curved_sweep",
+          "material": "M_Cuir_Principal",
+          "path_points": [
+            [
+              -0.0567,
+              0.0,
+              0.192
+            ],
+            [
+              -0.0567,
+              0.0,
+              0.2304
+            ],
+            [
+              -0.0284,
+              0.0,
+              0.256
+            ],
+            [
+              0.0,
+              0.0,
+              0.2611
+            ],
+            [
+              0.0284,
+              0.0,
+              0.256
+            ],
+            [
+              0.0567,
+              0.0,
+              0.2304
+            ],
+            [
+              0.0567,
+              0.0,
+              0.192
+            ]
+          ],
+          "radius": 0.007,
+          "segments": 16,
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "relationship": {
+            "type": "stacked_on",
+            "target": "comp_2_rabat_cuir"
+          },
+          "geometric_inference": {
+            "primitive_chosen": "curved_sweep",
+            "selection_rationale": "Anse en arceau libre confirm\u00e9e par d\u00e9tection d'\u00e9videment interne traversant sous l'anse.",
+            "visual_cues": [
+              "\u00c9videment interne mesur\u00e9 (23339 px)"
+            ],
+            "confidence_level": 0.95
+          }
+        }
+      ],
+      "semantic_classification": {
+        "final_category": "fashion_handbag",
+        "final_confidence": 0.97,
+        "visual_category": "fashion_handbag",
+        "visual_confidence": 0.97,
+        "user_metadata_hint": null,
+        "extracted_filename_hint": "fashion_handbag",
+        "contradiction_detected": false,
+        "contradiction_details": null,
+        "forced_override_applied": false,
+        "visual_metrics": {
+          "aspect_ratio": 1.1278538812785388,
+          "width_px": 438,
+          "height_px": 494,
+          "rect_fill_ratio": 0.6628168154844435,
+          "symmetry_score": 0.9880399658284738,
+          "void_ratio": 0.3724696356275304,
+          "void_pixels": 23339,
+          "stem_ratio": 0.0365296803652968,
+          "width_cv": 0.23809356356609832,
+          "slender_ratio": 0.8605999108282214,
+          "is_stepped_horizontal": false,
+          "is_revolution_candidate": false
+        },
+        "visual_compatibility_scores": {
+          "horizontal_lounge_furniture": 0.02,
+          "slender_pedestal_lamp": 0.04,
+          "prismatic_enclosure_electronics": 0.08,
+          "tableware_lathe": 0.05,
+          "fashion_handbag": 0.97,
+          "generic_spatial_decomposed": 0.75
+        },
+        "observed_cues": [
+          "Dimensions 2D : 438x494 px",
+          "Ratio d'aspect H/W : 1.128",
+          "Sym\u00e9trie bilat\u00e9rale : 0.988",
+          "Facteur de remplissage rectangulaire : 0.663",
+          "Taux d'\u00e9videment interne : 37.2% (23339 px)",
+          "\u00c9troitesse minimale de tige/m\u00e2t : 0.037",
+          "Variabilit\u00e9 des largeurs (CV) : 0.2381",
+          "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+          "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+        ]
+      },
+      "analysis_metadata": {
+        "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_cuir_luxe.png",
+        "analyzer_module": "component_analyzer.py (Mission 36 Fashion Leather Engine)",
+        "detected_strata_count": 3,
+        "total_components_generated": 3,
+        "confidence_score": 0.97,
+        "contradiction_detected": false,
+        "is_fashion_leather": true,
+        "leather_harmonization_applied": true,
+        "hardware_accents_detected": false,
+        "known_facts": [
+          "Dimensions bo\u00eete englobante 2D : 437x493 px",
+          "Ratio d'aspect mesur\u00e9 : 1.128",
+          "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.982",
+          "Mat\u00e9riau principal : Cuir maroquinerie unifi\u00e9 avec reflets PBR Principled BSDF",
+          "Accessoire m\u00e9tallique dor\u00e9 d\u00e9tect\u00e9 en fa\u00e7ade (0 pixels)"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y et volume interne non visibles sur photo frontale unique, estim\u00e9s selon les proportions standard de maroquinerie sellier."
+        ],
+        "hypotheses": [
+          "D\u00e9composition volumique harmonis\u00e9e : corps principal \u00e9vas\u00e9 + rabat sup\u00e9rieur fermant.",
+          "Unification du mat\u00e9riau cuir (M_Cuir_Principal) pour \u00e9viter la fragmentation luminance.",
+          "Compatibilit\u00e9 directe avec le composant React Product3DViewer de la boutique."
+        ]
+      }
+    },
+    "category": "fashion_leather_goods",
+    "contradiction": false,
+    "contradiction_details": null,
+    "components": [
+      "Corps_Principal_Cuir",
+      "Rabat_Superieur_Cuir",
+      "Anse_Arche_Cuir"
+    ],
+    "val_verdict": "PASS",
+    "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\sac_cuir_luxe_spatial_decomposed.glb",
+    "glb_size": 43480,
+    "hero_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\previews\\sac_cuir_luxe_spatial_decomposed_hero.png",
+    "render_time_s": 29.5
+  }
+]

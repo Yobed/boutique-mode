@@ -1,0 +1,60 @@
+{
+  "object_id": "sac_cuir_luxe_spatial_decomposed",
+  "object_name": "Sac Cuir Luxe Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "validation_verdict": "PASS",
+  "base_vertices": 224,
+  "base_faces": 158,
+  "evaluated_vertices": 448,
+  "evaluated_triangles": 884,
+  "bounding_box": {
+    "min": [
+      -0.086747,
+      -0.033641,
+      0.0
+    ],
+    "max": [
+      0.086747,
+      0.033641,
+      0.2681
+    ],
+    "dimensions": [
+      0.173494,
+      0.067281,
+      0.2681
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\sac_cuir_luxe_spatial_decomposed.blend",
+    "size": 128742,
+    "sha256": "8c8fc5856a974257f269cf16ba4ba1fce9420f617317159816b22570d93e9d78"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\sac_cuir_luxe_spatial_decomposed.glb",
+    "size": 43480,
+    "sha256": "708bbce9cdab73b3fbd0bb56134fa3da1fd9c54fd165d8d07ec1f0acee90787f",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "sac_cuir_luxe_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\previews\\sac_cuir_luxe_spatial_decomposed_hero.png",
+      759988
+    ],
+    [
+      "sac_cuir_luxe_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\previews\\sac_cuir_luxe_spatial_decomposed_front.png",
+      810588
+    ],
+    [
+      "sac_cuir_luxe_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\previews\\sac_cuir_luxe_spatial_decomposed_side.png",
+      752881
+    ],
+    [
+      "sac_cuir_luxe_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case7_bag_concordant\\previews\\sac_cuir_luxe_spatial_decomposed_top.png",
+      668221
+    ]
+  ]
+}

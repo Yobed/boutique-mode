@@ -1,0 +1,60 @@
+{
+  "object_id": "case02_produit_neutre_chaussure_spatial_decomposed",
+  "object_name": "Case02 Produit Neutre Chaussure Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "validation_verdict": "PASS",
+  "base_vertices": 640,
+  "base_faces": 420,
+  "evaluated_vertices": 1472,
+  "evaluated_triangles": 2904,
+  "bounding_box": {
+    "min": [
+      -0.160884,
+      -0.0519,
+      -0.006593
+    ],
+    "max": [
+      0.142555,
+      0.0519,
+      0.202696
+    ],
+    "dimensions": [
+      0.303439,
+      0.1038,
+      0.209288
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case02\\case02_produit_neutre_chaussure_spatial_decomposed.blend",
+    "size": 143971,
+    "sha256": "b84e6d5d381b48cc09b8dc9b4b2e631fd02620598d40db204fd97da567b74e6d"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case02\\case02_produit_neutre_chaussure_spatial_decomposed.glb",
+    "size": 128004,
+    "sha256": "78494d9924792598146cb7838a90e4a8d3ba961b82189766b4a2565f4b73d80d",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case02_produit_neutre_chaussure_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case02\\previews\\case02_produit_neutre_chaussure_spatial_decomposed_hero.png",
+      755194
+    ],
+    [
+      "case02_produit_neutre_chaussure_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case02\\previews\\case02_produit_neutre_chaussure_spatial_decomposed_front.png",
+      791905
+    ],
+    [
+      "case02_produit_neutre_chaussure_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case02\\previews\\case02_produit_neutre_chaussure_spatial_decomposed_side.png",
+      733519
+    ],
+    [
+      "case02_produit_neutre_chaussure_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case02\\previews\\case02_produit_neutre_chaussure_spatial_decomposed_top.png",
+      705761
+    ]
+  ]
+}

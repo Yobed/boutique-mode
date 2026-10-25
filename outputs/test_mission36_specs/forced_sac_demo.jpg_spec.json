@@ -1,0 +1,211 @@
+{
+  "object_id": "sac_demo_spatial_decomposed",
+  "object_name": "Sac Demo Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.4683,
+      0.1816,
+      0.216
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Cuir_Principal": {
+      "custom": {
+        "base_color": [
+          0.744,
+          0.699,
+          0.656,
+          1.0
+        ],
+        "roughness": 0.38,
+        "metallic": 0.0,
+        "specular_ior_level": 0.52,
+        "coat_weight": 0.12,
+        "coat_roughness": 0.25,
+        "sheen_weight": 0.2
+      }
+    },
+    "M_Bouclerie_Laiton": {
+      "preset": "brushed_brass_gold"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_corps_cuir",
+      "name": "Corps_Principal_Cuir",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        0.4683,
+        0.1816,
+        0.136
+      ],
+      "corner_radius": 0.035,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Corps principal en maroquinerie sellier avec d\u00e9pouille trap\u00e9zo\u00efdale et angles arrondis continus.",
+        "visual_cues": [
+          "Silhouette trap\u00e9zo\u00efdale \u00e9vas\u00e9e vers la base (313px)",
+          "Mat\u00e9riau cuir uniforme"
+        ],
+        "confidence_level": 0.94
+      }
+    },
+    {
+      "id": "comp_2_rabat_cuir",
+      "name": "Rabat_Superieur_Cuir",
+      "role": "top_flap_closure",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        0.4301,
+        0.1671,
+        0.056
+      ],
+      "corner_radius": 0.028,
+      "taper_ratio": 0.88,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.0,
+        0.136
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_corps_cuir"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Rabat sup\u00e9rieur de fermeture prolongeant harmonieusement la silhouette du sac.",
+        "visual_cues": [
+          "Continuit\u00e9 du cuir sur le quart sup\u00e9rieur",
+          "R\u00e9tr\u00e9cissement r\u00e9gulier du profil"
+        ],
+        "confidence_level": 0.92
+      }
+    },
+    {
+      "id": "comp_3_fermoir_boucle",
+      "name": "Fermoir_Boucle_Laiton",
+      "role": "hardware_clasp_buckle",
+      "primitive": "rounded_box",
+      "material": "M_Bouclerie_Laiton",
+      "dimensions": [
+        0.045,
+        0.008,
+        0.026
+      ],
+      "corner_radius": 0.005,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0127,
+        -0.0928,
+        0.1386
+      ],
+      "relationship": {
+        "type": "embedded_in_face",
+        "target": "comp_1_corps_cuir"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Fermoir m\u00e9tallique central d\u00e9tect\u00e9 par cluster chromatique dor\u00e9 dense en fa\u00e7ade.",
+        "visual_cues": [
+          "Cluster de pixels dor\u00e9s/laiton (2954 px)",
+          "Reflet m\u00e9tallique sp\u00e9culaire"
+        ],
+        "confidence_level": 0.9
+      }
+    }
+  ],
+  "semantic_classification": {
+    "final_category": "fashion_handbag",
+    "final_confidence": 0.5,
+    "visual_category": "horizontal_lounge_furniture",
+    "visual_confidence": 0.94,
+    "user_metadata_hint": "sac",
+    "extracted_filename_hint": "fashion_handbag",
+    "contradiction_detected": true,
+    "contradiction_details": "CONTRADICTION MAJEURE : L'argument explicite '--category sac' (arch\u00e9type: fashion_handbag) est en contradiction absolue avec la silhouette observ\u00e9e (Ratio aspect=0.420, Sym\u00e9trie=0.835, Score visuel compatible=0.02 << Score visuel naturel=0.94 pour 'horizontal_lounge_furniture').",
+    "forced_override_applied": true,
+    "visual_metrics": {
+      "aspect_ratio": 0.42038216560509556,
+      "width_px": 314,
+      "height_px": 132,
+      "rect_fill_ratio": 0.806190889789616,
+      "symmetry_score": 0.8348873348873349,
+      "void_ratio": 0.007575757575757576,
+      "void_pixels": 21,
+      "stem_ratio": 0.006369426751592357,
+      "width_cv": 0.018687977026147645,
+      "slender_ratio": 0.9866564540836894,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.94,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.02,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 314x132 px",
+      "Ratio d'aspect H/W : 0.420",
+      "Sym\u00e9trie bilat\u00e9rale : 0.835",
+      "Facteur de remplissage rectangulaire : 0.806",
+      "Taux d'\u00e9videment interne : 0.8% (21 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.006",
+      "Variabilit\u00e9 des largeurs (CV) : 0.0187",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  },
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_demo.jpg",
+    "analyzer_module": "component_analyzer.py (Mission 36 Fashion Leather Engine)",
+    "detected_strata_count": 3,
+    "total_components_generated": 3,
+    "confidence_score": 0.5,
+    "contradiction_detected": true,
+    "is_fashion_leather": true,
+    "leather_harmonization_applied": true,
+    "hardware_accents_detected": true,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 313x131 px",
+      "Ratio d'aspect mesur\u00e9 : 0.419",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.815",
+      "Mat\u00e9riau principal : Cuir maroquinerie unifi\u00e9 avec reflets PBR Principled BSDF",
+      "Accessoire m\u00e9tallique dor\u00e9 d\u00e9tect\u00e9 en fa\u00e7ade (2954 pixels)"
+    ],
+    "indeterminate_elements": [
+      "Profondeur Y et volume interne non visibles sur photo frontale unique, estim\u00e9s selon les proportions standard de maroquinerie sellier."
+    ],
+    "hypotheses": [
+      "D\u00e9composition volumique harmonis\u00e9e : corps principal \u00e9vas\u00e9 + rabat sup\u00e9rieur fermant.",
+      "Unification du mat\u00e9riau cuir (M_Cuir_Principal) pour \u00e9viter la fragmentation luminance.",
+      "Compatibilit\u00e9 directe avec le composant React Product3DViewer de la boutique."
+    ]
+  }
+}

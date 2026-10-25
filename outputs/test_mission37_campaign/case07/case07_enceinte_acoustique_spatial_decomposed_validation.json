@@ -1,0 +1,120 @@
+{
+  "verdict": "PASS",
+  "objects_count": 6,
+  "total_base_vertices": 432,
+  "total_base_faces": 290,
+  "total_evaluated_vertices": 1296,
+  "total_evaluated_triangles": 2572,
+  "issues": [],
+  "objects_audit": {
+    "Corps_Revolved_Strate_1": {
+      "base_verts": 64,
+      "base_faces": 34,
+      "eval_verts": 192,
+      "eval_triangles": 380,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Corps_Revolved_Strate_2": {
+      "base_verts": 64,
+      "base_faces": 34,
+      "eval_verts": 192,
+      "eval_triangles": 380,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Bague_Collier_Cerclage_3": {
+      "base_verts": 128,
+      "base_faces": 128,
+      "eval_verts": 384,
+      "eval_triangles": 768,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Corps_Revolved_Strate_4": {
+      "base_verts": 64,
+      "base_faces": 34,
+      "eval_verts": 192,
+      "eval_triangles": 380,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_5_1": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Element_Lateral_5_2": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.0926,
+      -0.0926,
+      0.0
+    ],
+    "max": [
+      0.0926,
+      0.0926,
+      0.2
+    ],
+    "dimensions": [
+      0.1852,
+      0.1852,
+      0.2
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.1852,
+      "actual": 0.1852,
+      "error_pct": 0.0,
+      "match": true
+    },
+    "dy": {
+      "target": 0.1852,
+      "actual": 0.1852,
+      "error_pct": 0.0,
+      "match": true
+    },
+    "dz": {
+      "target": 0.2,
+      "actual": 0.2,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

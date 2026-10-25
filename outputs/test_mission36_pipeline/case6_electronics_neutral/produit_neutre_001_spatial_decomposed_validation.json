@@ -1,0 +1,96 @@
+{
+  "verdict": "PASS",
+  "objects_count": 4,
+  "total_base_vertices": 200,
+  "total_base_faces": 108,
+  "total_evaluated_vertices": 536,
+  "total_evaluated_triangles": 1056,
+  "issues": [],
+  "objects_audit": {
+    "Chassis_Aluminium": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Bumper_Protection_Silicone": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "LED_Indicateur_Status": {
+      "base_verts": 32,
+      "base_faces": 18,
+      "eval_verts": 32,
+      "eval_triangles": 60,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Connecteur_USBC_Insert": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.0488,
+      -0.013,
+      -0.002
+    ],
+    "max": [
+      0.0488,
+      0.01075,
+      0.125
+    ],
+    "dimensions": [
+      0.0976,
+      0.02375,
+      0.127
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.0976,
+      "actual": 0.0976,
+      "error_pct": 0.0,
+      "match": true
+    },
+    "dy": {
+      "target": 0.0238,
+      "actual": 0.02375,
+      "error_pct": 0.21,
+      "match": true
+    },
+    "dz": {
+      "target": 0.127,
+      "actual": 0.127,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

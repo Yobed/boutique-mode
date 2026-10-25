@@ -1,0 +1,60 @@
+{
+  "object_id": "case08_tasse_mug_anse_spatial_decomposed",
+  "object_name": "Case08 Tasse Mug Anse Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "validation_verdict": "PASS",
+  "base_vertices": 224,
+  "base_faces": 158,
+  "evaluated_vertices": 448,
+  "evaluated_triangles": 884,
+  "bounding_box": {
+    "min": [
+      -0.092087,
+      -0.035737,
+      0.0
+    ],
+    "max": [
+      0.092087,
+      0.035737,
+      0.2681
+    ],
+    "dimensions": [
+      0.184175,
+      0.071474,
+      0.2681
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case08\\case08_tasse_mug_anse_spatial_decomposed.blend",
+    "size": 128776,
+    "sha256": "c66d5fbe5396f38da32384f2eff9882bdbedbf3f673c33151442e9277ffb3968"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case08\\case08_tasse_mug_anse_spatial_decomposed.glb",
+    "size": 43492,
+    "sha256": "c0d1a8babc111572c0e872e2fb078d715cfe30d9107614f01f12f2392def436c",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case08_tasse_mug_anse_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case08\\previews\\case08_tasse_mug_anse_spatial_decomposed_hero.png",
+      737400
+    ],
+    [
+      "case08_tasse_mug_anse_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case08\\previews\\case08_tasse_mug_anse_spatial_decomposed_front.png",
+      780069
+    ],
+    [
+      "case08_tasse_mug_anse_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case08\\previews\\case08_tasse_mug_anse_spatial_decomposed_side.png",
+      750653
+    ],
+    [
+      "case08_tasse_mug_anse_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case08\\previews\\case08_tasse_mug_anse_spatial_decomposed_top.png",
+      660384
+    ]
+  ]
+}

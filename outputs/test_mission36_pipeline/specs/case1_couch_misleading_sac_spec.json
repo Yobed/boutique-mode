@@ -1,0 +1,206 @@
+{
+  "object_id": "sac_demo_spatial_decomposed",
+  "object_name": "Sac Demo Mobilier Lounge",
+  "category": "horizontal_lounge_furniture",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      1.9903,
+      0.9342,
+      0.862
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Cuir_Principal": {
+      "custom": {
+        "base_color": [
+          0.744,
+          0.704,
+          0.671,
+          1.0
+        ],
+        "roughness": 0.82,
+        "metallic": 0.0,
+        "specular_ior_level": 0.35,
+        "sheen_weight": 0.45,
+        "sheen_roughness": 0.55
+      }
+    },
+    "M_Chassis_Lounge": {
+      "preset": "dark_polymer"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_socle_chassis",
+      "name": "Base_Chassis_Socle",
+      "role": "chassis_base_plinth",
+      "primitive": "rounded_box",
+      "material": "M_Chassis_Lounge",
+      "dimensions": [
+        1.97,
+        0.8408,
+        0.08
+      ],
+      "corner_radius": 0.015,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.002,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Plinthe basse et pi\u00e9tement continu du mobilier lounge.",
+        "visual_cues": [
+          "Ligne d'appui continue au sol",
+          "Ombre port\u00e9e basse"
+        ],
+        "confidence_level": 0.95
+      }
+    },
+    {
+      "id": "comp_2_assise_coussins",
+      "name": "Assise_Coussins_Principale",
+      "role": "seating_cushion_module",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        1.9903,
+        0.8875,
+        0.357
+      ],
+      "corner_radius": 0.04,
+      "taper_ratio": 0.98,
+      "bevel_width": 0.004,
+      "location": [
+        0.0,
+        -0.0374,
+        0.08
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_socle_chassis"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Plateforme d'assise matelass\u00e9e horizontale continue.",
+        "visual_cues": [
+          "Plan horizontal d'assise \u00e9tendu",
+          "Largeur observ\u00e9e de 313px (AR=0.419)"
+        ],
+        "confidence_level": 0.94
+      }
+    },
+    {
+      "id": "comp_3_dossier_accoudoirs",
+      "name": "Dossier_Accoudoirs_Lounge",
+      "role": "backrest_armrest_module",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        1.9497,
+        0.3737,
+        0.425
+      ],
+      "corner_radius": 0.035,
+      "taper_ratio": 0.95,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.2429,
+        0.437
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_assise_coussins"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Dossier arri\u00e8re et retour d'accoudoir en retrait.",
+        "visual_cues": [
+          "Contour sup\u00e9rieur horizontal \u00e9tag\u00e9",
+          "Continuit\u00e9 de texture avec l'assise"
+        ],
+        "confidence_level": 0.92
+      }
+    }
+  ],
+  "semantic_classification": {
+    "final_category": "horizontal_lounge_furniture",
+    "final_confidence": 0.94,
+    "visual_category": "horizontal_lounge_furniture",
+    "visual_confidence": 0.94,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": "fashion_handbag",
+    "contradiction_detected": true,
+    "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sac_demo.jpg' sugg\u00e8re 'fashion_handbag', mais les m\u00e9triques visuelles de l'image (AR=0.420, Sym\u00e9trie=0.835) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.02). L'arch\u00e9type visuel prouv\u00e9 'horizontal_lounge_furniture' (score: 0.94) pr\u00e9vaut rigoureusement.",
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 0.42038216560509556,
+      "width_px": 314,
+      "height_px": 132,
+      "rect_fill_ratio": 0.806190889789616,
+      "symmetry_score": 0.8348873348873349,
+      "void_ratio": 0.007575757575757576,
+      "void_pixels": 21,
+      "stem_ratio": 0.006369426751592357,
+      "width_cv": 0.018687977026147645,
+      "slender_ratio": 0.9866564540836894,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.94,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.02,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 314x132 px",
+      "Ratio d'aspect H/W : 0.420",
+      "Sym\u00e9trie bilat\u00e9rale : 0.835",
+      "Facteur de remplissage rectangulaire : 0.806",
+      "Taux d'\u00e9videment interne : 0.8% (21 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.006",
+      "Variabilit\u00e9 des largeurs (CV) : 0.0187",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  },
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sac_demo.jpg",
+    "analyzer_module": "component_analyzer.py (Mission 36 Lounge Engine)",
+    "detected_strata_count": 3,
+    "total_components_generated": 3,
+    "confidence_score": 0.94,
+    "contradiction_detected": true,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 313x131 px",
+      "Ratio d'aspect mesur\u00e9 : 0.419 (Mobilier \u00e9tal\u00e9 horizontalement)",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.815",
+      "Arch\u00e9type identifi\u00e9 : Mobilier lounge / canap\u00e9 contemporain",
+      "Absence prouv\u00e9e d'anses, fermoirs m\u00e9talliques ou structures de maroquinerie"
+    ],
+    "indeterminate_elements": [
+      "Profondeur Y ergonomique estim\u00e9e \u00e0 0.46x la largeur selon les standards du design de mobilier."
+    ],
+    "hypotheses": [
+      "D\u00e9composition structurelle tripartite : socle bas + assise coussin\u00e9e + dossier enveloppant.",
+      "Rev\u00eatement unifi\u00e9 M_Cuir_Principal pour continuit\u00e9 d'ombrage et support du s\u00e9lecteur Next.js."
+    ]
+  }
+}

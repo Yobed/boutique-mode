@@ -1,0 +1,146 @@
+{
+  "object_id": "case10_fer_vapeur_multimat_spatial_decomposed",
+  "object_name": "Case10 Fer Vapeur Multimat Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1495,
+      0.0972,
+      0.2
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Socle_Inferieur": {
+      "custom": {
+        "base_color": [
+          0.2627450980392157,
+          0.3568627450980392,
+          0.3843137254901961,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_socle_inferieur",
+      "name": "Socle_Inferieur",
+      "role": "structural_base",
+      "primitive": "rounded_box",
+      "material": "M_Socle_Inferieur",
+      "dimensions": [
+        0.1495,
+        0.0972,
+        0.2
+      ],
+      "location": [
+        0.0027,
+        0.0,
+        0.0
+      ],
+      "corner_radius": 0.015,
+      "taper_ratio": 0.98,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.150m",
+          "Profondeur estim\u00e9e=0.097m",
+          "Remplissage=0.61"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\mission37_test_cases\\case10_fer_vapeur_multimat.png",
+    "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+    "detected_strata_count": 1,
+    "total_components_generated": 1,
+    "feature_analysis": [],
+    "confidence_score": 0.91,
+    "monocular_ambiguity": true,
+    "spatial_decomposition_enabled": true,
+    "geometric_inference_enabled": true,
+    "revolution_profile_detected": false,
+    "appendages_detected_count": 0,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 515x410 px",
+      "Ratio d'aspect mesur\u00e9 : 0.796",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.549",
+      "Nombre de strates physiques distinctes : 1"
+    ],
+    "hypotheses": [
+      "D\u00e9composition spatiale bidimensionnelle (strates verticales + clusters lat\u00e9raux transversaux).",
+      "Inf\u00e9rence automatique de profil de r\u00e9volution (Cylinder/RingCollar) bas\u00e9e sur la sym\u00e9trie axiale.",
+      "D\u00e9tection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+      "Discrimination physique cavit\u00e9 vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+    ]
+  },
+  "semantic_classification": {
+    "final_category": "generic_spatial_decomposed",
+    "final_confidence": 0.75,
+    "visual_category": "generic_spatial_decomposed",
+    "visual_confidence": 0.75,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": null,
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 0.7965116279069767,
+      "width_px": 516,
+      "height_px": 411,
+      "rect_fill_ratio": 0.6053678869839114,
+      "symmetry_score": 0.6483781139459622,
+      "void_ratio": 0.0,
+      "void_pixels": 0,
+      "stem_ratio": 0.005813953488372093,
+      "width_cv": 0.10478466729426876,
+      "slender_ratio": 0.780621730635911,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.05,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 516x411 px",
+      "Ratio d'aspect H/W : 0.797",
+      "Sym\u00e9trie bilat\u00e9rale : 0.648",
+      "Facteur de remplissage rectangulaire : 0.605",
+      "Taux d'\u00e9videment interne : 0.0% (0 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.006",
+      "Variabilit\u00e9 des largeurs (CV) : 0.1048",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  }
+}

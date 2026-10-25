@@ -1,0 +1,241 @@
+{
+  "object_id": "sofa_demo_spatial_decomposed",
+  "object_name": "Sofa Demo Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1738,
+      0.0674,
+      0.216
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Cuir_Principal": {
+      "custom": {
+        "base_color": [
+          0.594,
+          0.586,
+          0.581,
+          1.0
+        ],
+        "roughness": 0.38,
+        "metallic": 0.0,
+        "specular_ior_level": 0.52,
+        "coat_weight": 0.12,
+        "coat_roughness": 0.25,
+        "sheen_weight": 0.2
+      }
+    },
+    "M_Bouclerie_Laiton": {
+      "preset": "brushed_brass_gold"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_corps_cuir",
+      "name": "Corps_Principal_Cuir",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        0.1738,
+        0.0674,
+        0.136
+      ],
+      "corner_radius": 0.035,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Corps principal en maroquinerie sellier avec d\u00e9pouille trap\u00e9zo\u00efdale et angles arrondis continus.",
+        "visual_cues": [
+          "Silhouette trap\u00e9zo\u00efdale \u00e9vas\u00e9e vers la base (437px)",
+          "Mat\u00e9riau cuir uniforme"
+        ],
+        "confidence_level": 0.94
+      }
+    },
+    {
+      "id": "comp_2_rabat_cuir",
+      "name": "Rabat_Superieur_Cuir",
+      "role": "top_flap_closure",
+      "primitive": "rounded_box",
+      "material": "M_Cuir_Principal",
+      "dimensions": [
+        0.1596,
+        0.062,
+        0.056
+      ],
+      "corner_radius": 0.028,
+      "taper_ratio": 0.88,
+      "bevel_width": 0.003,
+      "location": [
+        0.0,
+        0.0,
+        0.136
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_corps_cuir"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Rabat sup\u00e9rieur de fermeture prolongeant harmonieusement la silhouette du sac.",
+        "visual_cues": [
+          "Continuit\u00e9 du cuir sur le quart sup\u00e9rieur",
+          "R\u00e9tr\u00e9cissement r\u00e9gulier du profil"
+        ],
+        "confidence_level": 0.92
+      }
+    },
+    {
+      "id": "comp_4_anse_arche",
+      "name": "Anse_Arche_Cuir",
+      "role": "top_arch_handle",
+      "primitive": "curved_sweep",
+      "material": "M_Cuir_Principal",
+      "path_points": [
+        [
+          -0.0567,
+          0.0,
+          0.192
+        ],
+        [
+          -0.0567,
+          0.0,
+          0.2304
+        ],
+        [
+          -0.0284,
+          0.0,
+          0.256
+        ],
+        [
+          0.0,
+          0.0,
+          0.2611
+        ],
+        [
+          0.0284,
+          0.0,
+          0.256
+        ],
+        [
+          0.0567,
+          0.0,
+          0.2304
+        ],
+        [
+          0.0567,
+          0.0,
+          0.192
+        ]
+      ],
+      "radius": 0.007,
+      "segments": 16,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_rabat_cuir"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "curved_sweep",
+        "selection_rationale": "Anse en arceau libre confirm\u00e9e par d\u00e9tection d'\u00e9videment interne traversant sous l'anse.",
+        "visual_cues": [
+          "\u00c9videment interne mesur\u00e9 (23339 px)"
+        ],
+        "confidence_level": 0.95
+      }
+    }
+  ],
+  "semantic_classification": {
+    "final_category": "fashion_handbag",
+    "final_confidence": 0.97,
+    "visual_category": "fashion_handbag",
+    "visual_confidence": 0.97,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": "horizontal_lounge_furniture",
+    "contradiction_detected": true,
+    "contradiction_details": "CONTAMINATION S\u00c9MANTIQUE D\u00c9TECT\u00c9E PAR NOM DE FICHIER : Le fichier 'sofa_demo.png' sugg\u00e8re 'horizontal_lounge_furniture', mais les m\u00e9triques visuelles de l'image (AR=1.128, Sym\u00e9trie=0.988) r\u00e9futent cette cat\u00e9gorie (compatibilit\u00e9: 0.02). L'arch\u00e9type visuel prouv\u00e9 'fashion_handbag' (score: 0.97) pr\u00e9vaut rigoureusement.",
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 1.1278538812785388,
+      "width_px": 438,
+      "height_px": 494,
+      "rect_fill_ratio": 0.6628168154844435,
+      "symmetry_score": 0.9880399658284738,
+      "void_ratio": 0.3724696356275304,
+      "void_pixels": 23339,
+      "stem_ratio": 0.0365296803652968,
+      "width_cv": 0.23809356356609832,
+      "slender_ratio": 0.8605999108282214,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.97,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 438x494 px",
+      "Ratio d'aspect H/W : 1.128",
+      "Sym\u00e9trie bilat\u00e9rale : 0.988",
+      "Facteur de remplissage rectangulaire : 0.663",
+      "Taux d'\u00e9videment interne : 37.2% (23339 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.037",
+      "Variabilit\u00e9 des largeurs (CV) : 0.2381",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  },
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\sofa_demo.png",
+    "analyzer_module": "component_analyzer.py (Mission 36 Fashion Leather Engine)",
+    "detected_strata_count": 3,
+    "total_components_generated": 3,
+    "confidence_score": 0.97,
+    "contradiction_detected": true,
+    "is_fashion_leather": true,
+    "leather_harmonization_applied": true,
+    "hardware_accents_detected": false,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 437x493 px",
+      "Ratio d'aspect mesur\u00e9 : 1.128",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.982",
+      "Mat\u00e9riau principal : Cuir maroquinerie unifi\u00e9 avec reflets PBR Principled BSDF",
+      "Accessoire m\u00e9tallique dor\u00e9 d\u00e9tect\u00e9 en fa\u00e7ade (0 pixels)"
+    ],
+    "indeterminate_elements": [
+      "Profondeur Y et volume interne non visibles sur photo frontale unique, estim\u00e9s selon les proportions standard de maroquinerie sellier."
+    ],
+    "hypotheses": [
+      "D\u00e9composition volumique harmonis\u00e9e : corps principal \u00e9vas\u00e9 + rabat sup\u00e9rieur fermant.",
+      "Unification du mat\u00e9riau cuir (M_Cuir_Principal) pour \u00e9viter la fragmentation luminance.",
+      "Compatibilit\u00e9 directe avec le composant React Product3DViewer de la boutique."
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case07_enceinte_acoustique.png --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_spec.json
+
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_spec.json
+  - Catégorie certifiée : multi_component_spatial_decomposed
+  - Composants détectés : 6
+  - Matériaux physiques : 6
+  - Contradiction détectée : False
+  - Confiance décisionnelle : 0.75
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07
+
+00:10.250  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\previews\case07_enceinte_acoustique_spatial_decomposed_hero.png'
+00:18.718  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\previews\case07_enceinte_acoustique_spatial_decomposed_front.png'
+00:26.015  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\previews\case07_enceinte_acoustique_spatial_decomposed_side.png'
+00:33.859  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\previews\case07_enceinte_acoustique_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07
+Matériau préparé : M_Corps_Revolved_Strate_1 (preset=anodized_aluminum)
+Matériau préparé : M_Corps_Revolved_Strate_2 (preset=anodized_aluminum)
+Matériau préparé : M_Bague_Collier_Cerclage_3 (preset=natural_wood)
+Matériau préparé : M_Corps_Revolved_Strate_4 (preset=brushed_stainless)
+Matériau préparé : M_Element_Lateral_5_1 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_5_2 (preset=brushed_stainless)
+Composant créé : Corps_Revolved_Strate_1 (type=cylinder, verts=64, faces=34)
+Composant créé : Corps_Revolved_Strate_2 (type=cylinder, verts=64, faces=34)
+Composant créé : Bague_Collier_Cerclage_3 (type=ring_collar, verts=128, faces=128)
+Composant créé : Corps_Revolved_Strate_4 (type=cylinder, verts=64, faces=34)
+Composant créé : Element_Lateral_5_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_5_2 (type=rounded_box, verts=56, faces=30)
+Validation Géométrique : PASS (Issues: 0)
+Studio adaptatif : Centre=<Vector (0.0000, 0.0000, 0.1000)>, Rayon=0.1648m, Dims=[0.18520000576972961, 0.18520000576972961, 0.19999998807907104]
+Rendering view case07_enceinte_acoustique_spatial_decomposed_hero.png at (0.742644005467995, 0.742644005467995, 0.46764554130091923)...
+  -> Generated case07_enceinte_acoustique_spatial_decomposed_hero.png (759320 bytes)
+Rendering view case07_enceinte_acoustique_spatial_decomposed_front.png at (0.0, 1.0504158493182392, 0.2575623714372714)...
+  -> Generated case07_enceinte_acoustique_spatial_decomposed_front.png (782871 bytes)
+Rendering view case07_enceinte_acoustique_spatial_decomposed_side.png at (1.0504158493182392, 0.0, 0.2575623714372714)...
+  -> Generated case07_enceinte_acoustique_spatial_decomposed_side.png (749307 bytes)
+Rendering view case07_enceinte_acoustique_spatial_decomposed_top.png at (0.001, 0.001, 1.1504158433577747)...
+  -> Generated case07_enceinte_acoustique_spatial_decomposed_top.png (698775 bytes)
+Info: Saved "case07_enceinte_acoustique_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_enceinte_acoustique_spatial_decomposed.blend (137143 octets, SHA-256: 7696feba9f20c461611ac8229fffe020d2bad5b4cfba6b49c1ab04fd9f1de654)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:54:49 | INFO: Starting glTF 2.0 export
+14:54:49 | INFO: Extracting primitive: Bague_Collier_Cerclage_3
+14:54:49 | INFO: Primitives created: 1
+14:54:49 | INFO: Extracting primitive: Corps_Revolved_Strate_1
+14:54:49 | INFO: Primitives created: 1
+14:54:49 | INFO: Extracting primitive: Corps_Revolved_Strate_2
+14:54:49 | INFO: Primitives created: 1
+14:54:49 | INFO: Extracting primitive: Corps_Revolved_Strate_4
+14:54:49 | INFO: Primitives created: 1
+14:54:49 | INFO: Extracting primitive: Element_Lateral_5_1
+14:54:49 | INFO: Primitives created: 1
+14:54:49 | INFO: Extracting primitive: Element_Lateral_5_2
+14:54:49 | INFO: Primitives created: 1
+14:54:49 | INFO: Finished glTF 2.0 export in 0.10204792022705078 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_enceinte_acoustique_spatial_decomposed.glb (102824 octets, valid=True, SHA-256: 6d9e9c529b837788c73fe4edf7d7122036a95f7434d8eb94f88771afcc368010)
+=== GÉNÉRATION DU MODÈLE 'case07_enceinte_acoustique_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_enceinte_acoustique_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case07\case07_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

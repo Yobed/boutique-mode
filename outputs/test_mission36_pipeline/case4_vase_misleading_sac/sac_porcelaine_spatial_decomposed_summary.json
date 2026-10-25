@@ -1,0 +1,60 @@
+{
+  "object_id": "sac_porcelaine_spatial_decomposed",
+  "object_name": "Sac Porcelaine Solide R\u00e9volution",
+  "category": "scandinavian_tableware_lathe",
+  "validation_verdict": "PASS",
+  "base_vertices": 1282,
+  "base_faces": 1320,
+  "evaluated_vertices": 2162,
+  "evaluated_triangles": 4320,
+  "bounding_box": {
+    "min": [
+      -0.0937,
+      -0.0937,
+      0.0
+    ],
+    "max": [
+      0.0937,
+      0.0937,
+      0.25
+    ],
+    "dimensions": [
+      0.1874,
+      0.1874,
+      0.25
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\sac_porcelaine_spatial_decomposed.blend",
+    "size": 145769,
+    "sha256": "bf7029e5fcba3664b6b14e47dba38dd86b260d1dabd1b0f11cc2b40fee9494d6"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\sac_porcelaine_spatial_decomposed.glb",
+    "size": 246464,
+    "sha256": "27daa66a2ebae31759b9a4118ee8a617025ce1cb70c2217b170d3d69d13a612a",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "sac_porcelaine_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\previews\\sac_porcelaine_spatial_decomposed_hero.png",
+      753462
+    ],
+    [
+      "sac_porcelaine_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\previews\\sac_porcelaine_spatial_decomposed_front.png",
+      782784
+    ],
+    [
+      "sac_porcelaine_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\previews\\sac_porcelaine_spatial_decomposed_side.png",
+      772540
+    ],
+    [
+      "sac_porcelaine_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case4_vase_misleading_sac\\previews\\sac_porcelaine_spatial_decomposed_top.png",
+      724797
+    ]
+  ]
+}

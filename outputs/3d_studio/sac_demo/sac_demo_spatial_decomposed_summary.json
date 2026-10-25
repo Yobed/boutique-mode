@@ -1,0 +1,60 @@
+{
+  "object_id": "sac_demo_spatial_decomposed",
+  "object_name": "Sac Demo Mobilier Lounge",
+  "category": "horizontal_lounge_furniture",
+  "validation_verdict": "PASS",
+  "base_vertices": 168,
+  "base_faces": 90,
+  "evaluated_vertices": 504,
+  "evaluated_triangles": 996,
+  "bounding_box": {
+    "min": [
+      -0.994927,
+      -0.481051,
+      0.0
+    ],
+    "max": [
+      0.994927,
+      0.429684,
+      0.862
+    ],
+    "dimensions": [
+      1.989855,
+      0.910735,
+      0.862
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\sac_demo\\sac_demo_spatial_decomposed.blend",
+    "size": 127544,
+    "sha256": "0bd34a2ec51f13279f7a4863b66eefb26ea47c0b46e4e35a83e843434e21cf95"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\sac_demo\\sac_demo_spatial_decomposed.glb",
+    "size": 41844,
+    "sha256": "bc3e78413bb14c934ee0b3a751058ba4e84dde720040a5e3a8fab6e2ecc16637",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "sac_demo_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\sac_demo\\previews\\sac_demo_spatial_decomposed_hero.png",
+      863076
+    ],
+    [
+      "sac_demo_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\sac_demo\\previews\\sac_demo_spatial_decomposed_front.png",
+      859074
+    ],
+    [
+      "sac_demo_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\sac_demo\\previews\\sac_demo_spatial_decomposed_side.png",
+      834686
+    ],
+    [
+      "sac_demo_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\sac_demo\\previews\\sac_demo_spatial_decomposed_top.png",
+      858554
+    ]
+  ]
+}

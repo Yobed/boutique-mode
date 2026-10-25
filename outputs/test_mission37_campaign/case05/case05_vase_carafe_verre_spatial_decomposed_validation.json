@@ -1,0 +1,60 @@
+{
+  "verdict": "PASS",
+  "objects_count": 1,
+  "total_base_vertices": 1282,
+  "total_base_faces": 1320,
+  "total_evaluated_vertices": 1682,
+  "total_evaluated_triangles": 3360,
+  "issues": [],
+  "objects_audit": {
+    "Corps_Vase_Ceramique": {
+      "base_verts": 1282,
+      "base_faces": 1320,
+      "eval_verts": 1682,
+      "eval_triangles": 3360,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.08194,
+      -0.08194,
+      0.0
+    ],
+    "max": [
+      0.08194,
+      0.08194,
+      0.25
+    ],
+    "dimensions": [
+      0.163879,
+      0.163879,
+      0.25
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.1648,
+      "actual": 0.163879,
+      "error_pct": 0.56,
+      "match": true
+    },
+    "dy": {
+      "target": 0.1648,
+      "actual": 0.163879,
+      "error_pct": 0.56,
+      "match": true
+    },
+    "dz": {
+      "target": 0.25,
+      "actual": 0.25,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

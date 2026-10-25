@@ -1,0 +1,84 @@
+{
+  "verdict": "PASS",
+  "objects_count": 3,
+  "total_base_vertices": 168,
+  "total_base_faces": 90,
+  "total_evaluated_vertices": 504,
+  "total_evaluated_triangles": 996,
+  "issues": [],
+  "objects_audit": {
+    "Base_Chassis_Socle": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Assise_Coussins_Principale": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Dossier_Accoudoirs_Lounge": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.994927,
+      -0.481051,
+      0.0
+    ],
+    "max": [
+      0.994927,
+      0.429684,
+      0.862
+    ],
+    "dimensions": [
+      1.989855,
+      0.910735,
+      0.862
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 1.9903,
+      "actual": 1.989855,
+      "error_pct": 0.02,
+      "match": true
+    },
+    "dy": {
+      "target": 0.9342,
+      "actual": 0.910735,
+      "error_pct": 2.51,
+      "match": true
+    },
+    "dz": {
+      "target": 0.862,
+      "actual": 0.862,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

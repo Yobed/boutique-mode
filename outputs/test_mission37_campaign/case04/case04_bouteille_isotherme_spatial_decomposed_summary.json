@@ -1,0 +1,60 @@
+{
+  "object_id": "case04_bouteille_isotherme_spatial_decomposed",
+  "object_name": "Case04 Bouteille Isotherme Luminaire Minimaliste",
+  "category": "minimalist_lighting",
+  "validation_verdict": "PASS",
+  "base_vertices": 232,
+  "base_faces": 124,
+  "evaluated_vertices": 696,
+  "evaluated_triangles": 1376,
+  "bounding_box": {
+    "min": [
+      -0.058586,
+      -0.058586,
+      0.0
+    ],
+    "max": [
+      0.058586,
+      0.058586,
+      0.3379
+    ],
+    "dimensions": [
+      0.117172,
+      0.117172,
+      0.3379
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case04\\case04_bouteille_isotherme_spatial_decomposed.blend",
+    "size": 129330,
+    "sha256": "6c9df02bf0398fb107edefc7612ad13d132450717b3ca4a79bbe781a07ebf39a"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case04\\case04_bouteille_isotherme_spatial_decomposed.glb",
+    "size": 56952,
+    "sha256": "8deb12d038d64175d2d74b1c4cf783a37f4c5fefba14daee595b0b3eafd1f3a6",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case04_bouteille_isotherme_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case04\\previews\\case04_bouteille_isotherme_spatial_decomposed_hero.png",
+      734041
+    ],
+    [
+      "case04_bouteille_isotherme_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case04\\previews\\case04_bouteille_isotherme_spatial_decomposed_front.png",
+      748882
+    ],
+    [
+      "case04_bouteille_isotherme_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case04\\previews\\case04_bouteille_isotherme_spatial_decomposed_side.png",
+      774567
+    ],
+    [
+      "case04_bouteille_isotherme_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case04\\previews\\case04_bouteille_isotherme_spatial_decomposed_top.png",
+      662330
+    ]
+  ]
+}

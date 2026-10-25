@@ -1,0 +1,60 @@
+{
+  "object_id": "accessoire_vase_spatial_decomposed",
+  "object_name": "Accessoire Vase Solide R\u00e9volution",
+  "category": "scandinavian_tableware_lathe",
+  "validation_verdict": "PASS",
+  "base_vertices": 1282,
+  "base_faces": 1320,
+  "evaluated_vertices": 2162,
+  "evaluated_triangles": 4320,
+  "bounding_box": {
+    "min": [
+      -0.0937,
+      -0.0937,
+      0.0
+    ],
+    "max": [
+      0.0937,
+      0.0937,
+      0.25
+    ],
+    "dimensions": [
+      0.1874,
+      0.1874,
+      0.25
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\accessoire_vase_spatial_decomposed.blend",
+    "size": 145782,
+    "sha256": "8dcc61235a1b57cd10dac0c686ccaa056189877c3cc2fe3150f0fdb40798ba2f"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\accessoire_vase_spatial_decomposed.glb",
+    "size": 246464,
+    "sha256": "98af4ab7bda87176487fb4e9d60362415aabedd0e21fe3330311deca4c865e92",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "accessoire_vase_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\previews\\accessoire_vase_spatial_decomposed_hero.png",
+      753463
+    ],
+    [
+      "accessoire_vase_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\previews\\accessoire_vase_spatial_decomposed_front.png",
+      782785
+    ],
+    [
+      "accessoire_vase_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\previews\\accessoire_vase_spatial_decomposed_side.png",
+      772541
+    ],
+    [
+      "accessoire_vase_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case2_vase_concordant\\previews\\accessoire_vase_spatial_decomposed_top.png",
+      724798
+    ]
+  ]
+}

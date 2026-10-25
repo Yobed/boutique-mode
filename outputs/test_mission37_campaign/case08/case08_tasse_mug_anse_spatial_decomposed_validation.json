@@ -1,0 +1,84 @@
+{
+  "verdict": "PASS",
+  "objects_count": 3,
+  "total_base_vertices": 224,
+  "total_base_faces": 158,
+  "total_evaluated_vertices": 448,
+  "total_evaluated_triangles": 884,
+  "issues": [],
+  "objects_audit": {
+    "Corps_Principal_Cuir": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Rabat_Superieur_Cuir": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Anse_Arche_Cuir": {
+      "base_verts": 112,
+      "base_faces": 98,
+      "eval_verts": 112,
+      "eval_triangles": 220,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.092087,
+      -0.035737,
+      0.0
+    ],
+    "max": [
+      0.092087,
+      0.035737,
+      0.2681
+    ],
+    "dimensions": [
+      0.184175,
+      0.071474,
+      0.2681
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.1845,
+      "actual": 0.184175,
+      "error_pct": 0.18,
+      "match": true
+    },
+    "dy": {
+      "target": 0.0716,
+      "actual": 0.071474,
+      "error_pct": 0.18,
+      "match": true
+    },
+    "dz": {
+      "target": 0.2681,
+      "actual": 0.2681,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

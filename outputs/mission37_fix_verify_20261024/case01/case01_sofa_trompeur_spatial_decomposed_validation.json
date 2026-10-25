@@ -1,0 +1,96 @@
+{
+  "verdict": "PASS",
+  "objects_count": 4,
+  "total_base_vertices": 280,
+  "total_base_faces": 188,
+  "total_evaluated_vertices": 616,
+  "total_evaluated_triangles": 1216,
+  "issues": [],
+  "objects_audit": {
+    "Corps_Principal_Cuir": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Rabat_Superieur_Cuir": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Fermoir_Boucle_Laiton": {
+      "base_verts": 56,
+      "base_faces": 30,
+      "eval_verts": 168,
+      "eval_triangles": 332,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Anse_Arche_Cuir": {
+      "base_verts": 112,
+      "base_faces": 98,
+      "eval_verts": 112,
+      "eval_triangles": 220,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.09084,
+      -0.0413,
+      0.0
+    ],
+    "max": [
+      0.09084,
+      0.035238,
+      0.2681
+    ],
+    "dimensions": [
+      0.181679,
+      0.076538,
+      0.2681
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.182,
+      "actual": 0.181679,
+      "error_pct": 0.18,
+      "match": true
+    },
+    "dy": {
+      "target": 0.0766,
+      "actual": 0.076538,
+      "error_pct": 0.08,
+      "match": true
+    },
+    "dz": {
+      "target": 0.2681,
+      "actual": 0.2681,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

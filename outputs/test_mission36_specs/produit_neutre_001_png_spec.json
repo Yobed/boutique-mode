@@ -1,0 +1,175 @@
+{
+  "object_id": "produit_neutre_001_spatial_decomposed",
+  "object_name": "Produit Neutre 001 Bo\u00eetier \u00c9lectronique",
+  "category": "industrial_rugged_electronics",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.0976,
+      0.0215,
+      0.125
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Chassis_Alu": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Bumper_Silicone": {
+      "preset": "matte_rubber"
+    },
+    "M_Accent_LED": {
+      "preset": "emissive_led_ring"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_chassis_alu",
+      "name": "Chassis_Aluminium",
+      "role": "internal_metal_core",
+      "primitive": "rounded_box",
+      "material": "M_Chassis_Alu",
+      "dimensions": [
+        0.0878,
+        0.0183,
+        0.115
+      ],
+      "corner_radius": 0.008,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.0015,
+      "location": [
+        0.0,
+        0.0,
+        0.005
+      ]
+    },
+    {
+      "id": "comp_2_bumper_silicone",
+      "name": "Bumper_Protection_Silicone",
+      "role": "outer_protective_casing",
+      "primitive": "rounded_box",
+      "material": "M_Bumper_Silicone",
+      "dimensions": [
+        0.0976,
+        0.0215,
+        0.125
+      ],
+      "corner_radius": 0.012,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.002,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "comp_3_led_indicator",
+      "name": "LED_Indicateur_Status",
+      "role": "status_indicator_led",
+      "primitive": "cylinder",
+      "material": "M_Accent_LED",
+      "radius_top": 0.0035,
+      "radius_bottom": 0.0035,
+      "height": 0.002,
+      "segments": 16,
+      "location": [
+        0.0,
+        -0.011,
+        0.0275
+      ],
+      "rotation": [
+        1.5708,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "comp_4_usbc_insert",
+      "name": "Connecteur_USBC_Insert",
+      "role": "io_connector_port",
+      "primitive": "rounded_box",
+      "material": "M_Bumper_Silicone",
+      "dimensions": [
+        0.014,
+        0.008,
+        0.006
+      ],
+      "corner_radius": 0.002,
+      "bevel_width": 0.0005,
+      "location": [
+        0.0,
+        0.0,
+        -0.002
+      ]
+    }
+  ],
+  "semantic_classification": {
+    "final_category": "prismatic_enclosure_electronics",
+    "final_confidence": 0.98,
+    "visual_category": "prismatic_enclosure_electronics",
+    "visual_confidence": 0.98,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": null,
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 1.2805755395683454,
+      "width_px": 417,
+      "height_px": 534,
+      "rect_fill_ratio": 0.7540574282147315,
+      "symmetry_score": 1.0,
+      "void_ratio": 0.0,
+      "void_pixels": 0,
+      "stem_ratio": 0.6115107913669064,
+      "width_cv": 0.0,
+      "slender_ratio": 0.7410071942446043,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.98,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.05,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 417x534 px",
+      "Ratio d'aspect H/W : 1.281",
+      "Sym\u00e9trie bilat\u00e9rale : 1.000",
+      "Facteur de remplissage rectangulaire : 0.754",
+      "Taux d'\u00e9videment interne : 0.0% (0 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.612",
+      "Variabilit\u00e9 des largeurs (CV) : 0.0000",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  },
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\produit_neutre_001.png",
+    "analyzer_module": "component_analyzer.py (Mission 36 Electronics Engine)",
+    "detected_strata_count": 4,
+    "total_components_generated": 4,
+    "confidence_score": 0.98,
+    "contradiction_detected": false,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 416x533 px",
+      "Ratio d'aspect mesur\u00e9 : 1.281",
+      "Arch\u00e9type identifi\u00e9 : Bo\u00eetier prismatique industriel / SSD"
+    ],
+    "indeterminate_elements": [
+      "\u00c9paisseur Y front-to-back estim\u00e9e selon les normes d'accessoires informatiques nomades."
+    ],
+    "hypotheses": [
+      "Structure bi-mati\u00e8re : ch\u00e2ssis aluminium interne + surmoulage silicone protecteur."
+    ]
+  }
+}

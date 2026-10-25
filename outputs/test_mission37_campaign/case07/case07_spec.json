@@ -1,0 +1,318 @@
+{
+  "object_id": "case07_enceinte_acoustique_spatial_decomposed",
+  "object_name": "Case07 Enceinte Acoustique Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.1852,
+      0.1852,
+      0.2
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Corps_Revolved_Strate_1": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Corps_Revolved_Strate_2": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Bague_Collier_Cerclage_3": {
+      "preset": "natural_wood"
+    },
+    "M_Corps_Revolved_Strate_4": {
+      "preset": "brushed_stainless"
+    },
+    "M_Element_Lateral_5_1": {
+      "preset": "anodized_aluminum"
+    },
+    "M_Element_Lateral_5_2": {
+      "preset": "brushed_stainless"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_revolved",
+      "name": "Corps_Revolved_Strate_1",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_1",
+      "radius_top": 0.0397,
+      "radius_bottom": 0.0381,
+      "height": 0.0083,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0397m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_2_revolved",
+      "name": "Corps_Revolved_Strate_2",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_2",
+      "radius_top": 0.0921,
+      "radius_bottom": 0.0921,
+      "height": 0.0167,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.0083
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_revolved"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0921m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_3_ring",
+      "name": "Bague_Collier_Cerclage_3",
+      "role": "accent_collar_ring",
+      "primitive": "ring_collar",
+      "material": "M_Bague_Collier_Cerclage_3",
+      "radius_ext": 0.0926,
+      "radius_int": 0.0802,
+      "height": 0.0083,
+      "segments": 32,
+      "bevel_width": 0.0004,
+      "location": [
+        0.0,
+        0.0,
+        0.025
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_2_revolved"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "ring_collar",
+        "selection_rationale": "Transition de col/ceinture \u00e0 fort contraste mati\u00e8re sur un solide de r\u00e9volution.",
+        "visual_cues": [
+          "Hauteur r\u00e9duite (0.008m)",
+          "Mat\u00e9riau contrastant (natural_wood)",
+          "Sym\u00e9trie axiale"
+        ],
+        "confidence_level": 0.89,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Cerclage annulaire 360\u00b0",
+          "Ajust\u00e9 au col"
+        ],
+        "indeterminate_elements": [
+          "\u00c9paisseur radiale int\u00e9rieure non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_4_revolved",
+      "name": "Corps_Revolved_Strate_4",
+      "role": "revolved_body_segment",
+      "primitive": "cylinder",
+      "material": "M_Corps_Revolved_Strate_4",
+      "radius_top": 0.0658,
+      "radius_bottom": 0.0658,
+      "height": 0.1458,
+      "segments": 32,
+      "bevel_width": 0.001,
+      "location": [
+        0.0,
+        0.0,
+        0.0333
+      ],
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_3_ring"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "cylinder",
+        "selection_rationale": "Strate d'un solide de r\u00e9volution axisym\u00e9trique (sym\u00e9trie bilat\u00e9rale > 88% sans facettes planes).",
+        "visual_cues": [
+          "Sym\u00e9trie globale=0.99",
+          "Rayon moyen=0.0658m",
+          "Continuit\u00e9 de courbure"
+        ],
+        "confidence_level": 0.91,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Sym\u00e9trie de r\u00e9volution 360\u00b0 autour de Z",
+          "Section circulaire"
+        ],
+        "indeterminate_elements": [
+          "Forme de l'h\u00e9misph\u00e8re arri\u00e8re non visible"
+        ]
+      }
+    },
+    {
+      "id": "comp_5_lat_1",
+      "name": "Element_Lateral_5_1",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0356,
+        0.0889,
+        0.0208
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0384,
+        0.0,
+        0.1792
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=-0.197).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_revolved"
+      },
+      "material": "M_Element_Lateral_5_1"
+    },
+    {
+      "id": "comp_5_lat_2",
+      "name": "Element_Lateral_5_2",
+      "role": "lateral_sub_module",
+      "primitive": "rounded_box",
+      "dimensions": [
+        0.0863,
+        0.0889,
+        0.0208
+      ],
+      "corner_radius": 0.01,
+      "taper_ratio": 1.0,
+      "bevel_width": 0.001,
+      "location": [
+        0.0121,
+        0.0,
+        0.1792
+      ],
+      "confidence": 0.85,
+      "visual_justification": "Sous-module lat\u00e9ral distinct identifi\u00e9 le long de X (rel_x=+0.062).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_4_revolved"
+      },
+      "material": "M_Element_Lateral_5_2"
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\mission37_test_cases\\case07_enceinte_acoustique.png",
+    "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+    "detected_strata_count": 5,
+    "total_components_generated": 6,
+    "feature_analysis": [],
+    "confidence_score": 0.91,
+    "monocular_ambiguity": true,
+    "spatial_decomposition_enabled": true,
+    "geometric_inference_enabled": true,
+    "revolution_profile_detected": true,
+    "appendages_detected_count": 0,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 384x393 px",
+      "Ratio d'aspect mesur\u00e9 : 1.023",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.994",
+      "Nombre de strates physiques distinctes : 5"
+    ],
+    "hypotheses": [
+      "D\u00e9composition spatiale bidimensionnelle (strates verticales + clusters lat\u00e9raux transversaux).",
+      "Inf\u00e9rence automatique de profil de r\u00e9volution (Cylinder/RingCollar) bas\u00e9e sur la sym\u00e9trie axiale.",
+      "D\u00e9tection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+      "Discrimination physique cavit\u00e9 vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+    ]
+  },
+  "semantic_classification": {
+    "final_category": "generic_spatial_decomposed",
+    "final_confidence": 0.75,
+    "visual_category": "generic_spatial_decomposed",
+    "visual_confidence": 0.75,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": null,
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 1.0233766233766233,
+      "width_px": 385,
+      "height_px": 394,
+      "rect_fill_ratio": 0.6876128947194937,
+      "symmetry_score": 0.9956641285956007,
+      "void_ratio": 0.02030456852791878,
+      "void_pixels": 200,
+      "stem_ratio": 0.4883116883116883,
+      "width_cv": 0.02792172051448231,
+      "slender_ratio": 0.6711491040604965,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.05,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 385x394 px",
+      "Ratio d'aspect H/W : 1.023",
+      "Sym\u00e9trie bilat\u00e9rale : 0.996",
+      "Facteur de remplissage rectangulaire : 0.688",
+      "Taux d'\u00e9videment interne : 2.0% (200 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.488",
+      "Variabilit\u00e9 des largeurs (CV) : 0.0279",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  }
+}

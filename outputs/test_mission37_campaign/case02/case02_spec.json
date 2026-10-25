@@ -1,0 +1,572 @@
+{
+  "object_id": "case02_produit_neutre_chaussure_spatial_decomposed",
+  "object_name": "Case02 Produit Neutre Chaussure Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "scale_metric": {
+    "unit": "meters",
+    "dimensions": [
+      0.294,
+      0.1038,
+      0.2017
+    ]
+  },
+  "coordinate_system": {
+    "up_axis": "+Z",
+    "forward_axis": "-Y",
+    "lateral_axis": "+X",
+    "origin": "bottom_center"
+  },
+  "materials": {
+    "M_Socle_Inferieur": {
+      "custom": {
+        "base_color": [
+          0.8784313725490196,
+          0.7607843137254902,
+          0.615686274509804,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Corps_Principal_Strate_2": {
+      "custom": {
+        "base_color": [
+          0.5098039215686274,
+          0.3843137254901961,
+          0.5215686274509804,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_3_1": {
+      "custom": {
+        "base_color": [
+          0.5568627450980392,
+          0.3333333333333333,
+          0.5333333333333333,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_3_2": {
+      "custom": {
+        "base_color": [
+          0.5019607843137255,
+          0.4235294117647059,
+          0.5294117647058824,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Element_Lateral_3_3": {
+      "preset": "brushed_stainless"
+    },
+    "M_Element_Lateral_3_4": {
+      "preset": "brushed_stainless"
+    },
+    "M_Corps_Principal_Strate_4": {
+      "preset": "brushed_stainless"
+    },
+    "M_Chapeau_Superieur": {
+      "preset": "glazed_ceramic_terracotta"
+    },
+    "M_Anse_Courbee_Gauche": {
+      "custom": {
+        "base_color": [
+          0.5843137254901961,
+          0.2980392156862745,
+          0.5333333333333333,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.35,
+        "specular_ior_level": 0.5
+      }
+    },
+    "M_Anse_Courbee_Droite": {
+      "preset": "brushed_stainless"
+    }
+  },
+  "components": [
+    {
+      "id": "comp_1_socle_inferieur",
+      "name": "Socle_Inferieur",
+      "role": "structural_base",
+      "primitive": "rounded_box",
+      "material": "M_Socle_Inferieur",
+      "dimensions": [
+        0.008,
+        0.01,
+        0.005
+      ],
+      "location": [
+        0.0296,
+        0.0,
+        0.0
+      ],
+      "corner_radius": 0.015,
+      "taper_ratio": 0.98,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "base_anchor",
+        "target": null
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.008m",
+          "Profondeur estim\u00e9e=0.010m",
+          "Remplissage=0.56"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    },
+    {
+      "id": "comp_2_corps_principal_strate_2",
+      "name": "Corps_Principal_Strate_2",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Corps_Principal_Strate_2",
+      "dimensions": [
+        0.0832,
+        0.0541,
+        0.0333
+      ],
+      "location": [
+        0.0306,
+        0.0,
+        0.005
+      ],
+      "corner_radius": 0.02,
+      "taper_ratio": 0.96,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_1_socle_inferieur"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.083m",
+          "Profondeur estim\u00e9e=0.054m",
+          "Remplissage=0.56"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    },
+    {
+      "id": "comp_3_lat_1",
+      "name": "Element_Lateral_3_1",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0519,
+      "radius_bottom": 0.0519,
+      "height": 0.15,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.084,
+        0.0,
+        0.0383
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.280).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_corps_principal_strate_2"
+      },
+      "material": "M_Element_Lateral_3_1"
+    },
+    {
+      "id": "comp_3_lat_2",
+      "name": "Element_Lateral_3_2",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0483,
+      "radius_bottom": 0.0483,
+      "height": 0.15,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        -0.0163,
+        0.0,
+        0.0383
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=-0.054).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_corps_principal_strate_2"
+      },
+      "material": "M_Element_Lateral_3_2"
+    },
+    {
+      "id": "comp_3_lat_3",
+      "name": "Element_Lateral_3_3",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0469,
+      "radius_bottom": 0.0469,
+      "height": 0.15,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        0.0542,
+        0.0,
+        0.0383
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=+0.181).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_corps_principal_strate_2"
+      },
+      "material": "M_Element_Lateral_3_3"
+    },
+    {
+      "id": "comp_3_lat_4",
+      "name": "Element_Lateral_3_4",
+      "role": "lateral_columnar_element",
+      "primitive": "cylinder",
+      "radius_top": 0.0316,
+      "radius_bottom": 0.0316,
+      "height": 0.15,
+      "segments": 24,
+      "bevel_width": 0.001,
+      "location": [
+        0.1095,
+        0.0,
+        0.0383
+      ],
+      "confidence": 0.88,
+      "visual_justification": "Colonne/rouleau lat\u00e9ral identifi\u00e9 par analyse spatiale transversale (rel_x=+0.365).",
+      "relationship": {
+        "type": "lateral_array",
+        "target": "comp_2_corps_principal_strate_2"
+      },
+      "material": "M_Element_Lateral_3_4"
+    },
+    {
+      "id": "comp_4_corps_principal_strate_4",
+      "name": "Corps_Principal_Strate_4",
+      "role": "main_body_core",
+      "primitive": "rounded_box",
+      "material": "M_Corps_Principal_Strate_4",
+      "dimensions": [
+        0.0495,
+        0.0322,
+        0.0083
+      ],
+      "location": [
+        0.0162,
+        0.0,
+        0.1883
+      ],
+      "corner_radius": 0.02,
+      "taper_ratio": 0.96,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_3_lat_4"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.049m",
+          "Profondeur estim\u00e9e=0.032m",
+          "Remplissage=0.56"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    },
+    {
+      "id": "comp_5_chapeau_superieur",
+      "name": "Chapeau_Superieur",
+      "role": "top_cap_or_insert",
+      "primitive": "rounded_box",
+      "material": "M_Chapeau_Superieur",
+      "dimensions": [
+        0.008,
+        0.01,
+        0.005
+      ],
+      "location": [
+        0.007,
+        0.0,
+        0.1967
+      ],
+      "corner_radius": 0.012,
+      "taper_ratio": 0.92,
+      "bevel_width": 0.002,
+      "relationship": {
+        "type": "stacked_on",
+        "target": "comp_4_corps_principal_strate_4"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "rounded_box",
+        "selection_rationale": "Forme prismatique ou bo\u00eete industrielle ne pr\u00e9sentant pas d'indices de r\u00e9volution suffisants.",
+        "visual_cues": [
+          "Largeur=0.008m",
+          "Profondeur estim\u00e9e=0.010m",
+          "Remplissage=0.56"
+        ],
+        "confidence_level": 0.85,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Face avant observ\u00e9e, face arri\u00e8re suppos\u00e9e plane/sym\u00e9trique"
+        ],
+        "indeterminate_elements": [
+          "Profondeur Y inf\u00e9r\u00e9e par heuristique proportionnelle"
+        ]
+      }
+    },
+    {
+      "id": "comp_appendage_1",
+      "name": "Anse_Courbee_Gauche",
+      "role": "curved_appendage_handle",
+      "primitive": "curved_sweep",
+      "material": "M_Anse_Courbee_Gauche",
+      "path_points": [
+        [
+          -0.005,
+          0.0,
+          0.0114
+        ],
+        [
+          -0.0863,
+          0.0,
+          0.04
+        ],
+        [
+          -0.147,
+          0.0,
+          0.0686
+        ],
+        [
+          -0.0841,
+          0.0,
+          0.0857
+        ],
+        [
+          -0.1109,
+          0.0,
+          0.12
+        ],
+        [
+          -0.0629,
+          0.0,
+          0.1657
+        ],
+        [
+          -0.0227,
+          0.0,
+          0.1886
+        ]
+      ],
+      "radius": 0.0139,
+      "segments": 16,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "attached_to",
+        "target": "comp_1_socle_inferieur"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "curved_sweep",
+        "selection_rationale": "Appendice en arceau courb\u00e9 d\u00e9tect\u00e9 c\u00f4t\u00e9 gauche (span=2038px, d\u00e9viation=1177.2px) s\u00e9par\u00e9 du corps par un vide traversant.",
+        "visual_cues": [
+          "Vide traversant s\u00e9parant la branche du tronc",
+          "Continuit\u00e9 de trajectoire courb\u00e9e"
+        ],
+        "confidence_level": 0.88,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Trajectoire coplanaire dans le plan XZ",
+          "Section tubulaire circulaire constante"
+        ],
+        "indeterminate_elements": [
+          "Courbure hors-plan Y inaccessible sur vue monoculaire unique"
+        ]
+      }
+    },
+    {
+      "id": "comp_appendage_2",
+      "name": "Anse_Courbee_Droite",
+      "role": "curved_appendage_handle",
+      "primitive": "curved_sweep",
+      "material": "M_Anse_Courbee_Droite",
+      "path_points": [
+        [
+          0.0041,
+          0.0,
+          0.0057
+        ],
+        [
+          0.1022,
+          0.0,
+          0.0743
+        ],
+        [
+          0.1278,
+          0.0,
+          0.1086
+        ],
+        [
+          0.0928,
+          0.0,
+          0.1257
+        ],
+        [
+          0.1076,
+          0.0,
+          0.16
+        ],
+        [
+          0.0484,
+          0.0,
+          0.1829
+        ],
+        [
+          0.0407,
+          0.0,
+          0.1943
+        ]
+      ],
+      "radius": 0.015,
+      "segments": 16,
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relationship": {
+        "type": "attached_to",
+        "target": "comp_1_socle_inferieur"
+      },
+      "geometric_inference": {
+        "primitive_chosen": "curved_sweep",
+        "selection_rationale": "Appendice en arceau courb\u00e9 d\u00e9tect\u00e9 c\u00f4t\u00e9 droite (span=2170px, d\u00e9viation=747.3px) s\u00e9par\u00e9 du corps par un vide traversant.",
+        "visual_cues": [
+          "Vide traversant s\u00e9parant la branche du tronc",
+          "Continuit\u00e9 de trajectoire courb\u00e9e"
+        ],
+        "confidence_level": 0.88,
+        "confidence_disclaimer": "Quantifie la clart\u00e9 des indices 2D et non la conformit\u00e9 de faces cach\u00e9es.",
+        "geometric_assumptions": [
+          "Trajectoire coplanaire dans le plan XZ",
+          "Section tubulaire circulaire constante"
+        ],
+        "indeterminate_elements": [
+          "Courbure hors-plan Y inaccessible sur vue monoculaire unique"
+        ]
+      }
+    }
+  ],
+  "analysis_metadata": {
+    "source_image": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\inputs\\product_images\\mission37_test_cases\\case02_produit_neutre_chaussure.png",
+    "analyzer_module": "component_analyzer.py (Mission 32 Geometric Inference Engine)",
+    "detected_strata_count": 5,
+    "total_components_generated": 10,
+    "feature_analysis": [],
+    "confidence_score": 0.91,
+    "monocular_ambiguity": true,
+    "spatial_decomposition_enabled": true,
+    "geometric_inference_enabled": true,
+    "revolution_profile_detected": false,
+    "appendages_detected_count": 2,
+    "known_facts": [
+      "Dimensions bo\u00eete englobante 2D : 3448x2302 px",
+      "Ratio d'aspect mesur\u00e9 : 0.668",
+      "Sym\u00e9trie bilat\u00e9rale mesur\u00e9e : 0.456",
+      "Nombre de strates physiques distinctes : 5"
+    ],
+    "hypotheses": [
+      "D\u00e9composition spatiale bidimensionnelle (strates verticales + clusters lat\u00e9raux transversaux).",
+      "Inf\u00e9rence automatique de profil de r\u00e9volution (Cylinder/RingCollar) bas\u00e9e sur la sym\u00e9trie axiale.",
+      "D\u00e9tection d'appendices en arceau/anse (CurvedSweep) via suivi des segments satellites traversants.",
+      "Discrimination physique cavit\u00e9 vs saillie : omission de bouton saillant si luminance interne sombre ou gradient non probant."
+    ]
+  },
+  "semantic_classification": {
+    "final_category": "generic_spatial_decomposed",
+    "final_confidence": 0.75,
+    "visual_category": "generic_spatial_decomposed",
+    "visual_confidence": 0.75,
+    "user_metadata_hint": null,
+    "extracted_filename_hint": null,
+    "contradiction_detected": false,
+    "contradiction_details": null,
+    "forced_override_applied": false,
+    "visual_metrics": {
+      "aspect_ratio": 0.6677297767468832,
+      "width_px": 3449,
+      "height_px": 2303,
+      "rect_fill_ratio": 0.5586221509201695,
+      "symmetry_score": 0.5827099848543439,
+      "void_ratio": 0.7646547980894486,
+      "void_pixels": 733383,
+      "stem_ratio": 0.009857929834734706,
+      "width_cv": 0.061643257732494246,
+      "slender_ratio": 0.8117055259205986,
+      "is_stepped_horizontal": false,
+      "is_revolution_candidate": false
+    },
+    "visual_compatibility_scores": {
+      "horizontal_lounge_furniture": 0.02,
+      "slender_pedestal_lamp": 0.04,
+      "prismatic_enclosure_electronics": 0.08,
+      "tableware_lathe": 0.05,
+      "fashion_handbag": 0.02,
+      "generic_spatial_decomposed": 0.75
+    },
+    "observed_cues": [
+      "Dimensions 2D : 3449x2303 px",
+      "Ratio d'aspect H/W : 0.668",
+      "Sym\u00e9trie bilat\u00e9rale : 0.583",
+      "Facteur de remplissage rectangulaire : 0.559",
+      "Taux d'\u00e9videment interne : 76.5% (733383 px)",
+      "\u00c9troitesse minimale de tige/m\u00e2t : 0.010",
+      "Variabilit\u00e9 des largeurs (CV) : 0.0616",
+      "Profil d'assise horizontal d\u00e9tect\u00e9 : False",
+      "Profil de r\u00e9volution axisym\u00e9trique d\u00e9tect\u00e9 : False"
+    ]
+  }
+}

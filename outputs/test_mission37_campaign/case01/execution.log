@@ -1,0 +1,73 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case01_sofa_trompeur.jpg --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_spec.json
+
+[ANTI-CONTAMINATION] CONTAMINATION SÉMANTIQUE DÉTECTÉE PAR NOM DE FICHIER : Le fichier 'case01_sofa_trompeur.jpg' suggère 'horizontal_lounge_furniture', mais les métriques visuelles de l'image (AR=1.077, Symétrie=0.752) réfutent cette catégorie (compatibilité: 0.02). L'archétype visuel prouvé 'fashion_handbag' (score: 0.97) prévaut rigoureusement.
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_spec.json
+  - Catégorie certifiée : fashion_leather_goods
+  - Composants détectés : 4
+  - Matériaux physiques : 2
+  - Contradiction détectée : True
+  - Confiance décisionnelle : 0.97
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01
+
+00:11.750  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\previews\case01_sofa_trompeur_spatial_decomposed_hero.png'
+00:20.250  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\previews\case01_sofa_trompeur_spatial_decomposed_front.png'
+00:28.219  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\previews\case01_sofa_trompeur_spatial_decomposed_side.png'
+00:35.859  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\previews\case01_sofa_trompeur_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01
+Matériau préparé : M_Cuir_Principal (preset=None)
+Matériau préparé : M_Bouclerie_Laiton (preset=brushed_brass_gold)
+Composant créé : Corps_Principal_Cuir (type=rounded_box, verts=56, faces=30)
+Composant créé : Rabat_Superieur_Cuir (type=rounded_box, verts=56, faces=30)
+Composant créé : Fermoir_Boucle_Laiton (type=rounded_box, verts=56, faces=30)
+Composant créé : Anse_Arche_Cuir (type=curved_sweep, verts=112, faces=98)
+Validation Géométrique : FAIL (Issues: 1)
+  - Écart dimensionnel sur dy: 0.0765m vs cible 0.0706m (8.4% > 5.0%).
+Studio adaptatif : Centre=<Vector (0.0000, -0.0030, 0.1340)>, Rayon=0.1664m, Dims=[0.1816791594028473, 0.07653775811195374, 0.26809999346733093]
+Rendering view case01_sofa_trompeur_spatial_decomposed_hero.png at (0.7499419590205912, 0.7469108355910544, 0.5053083922884136)...
+  -> Generated case01_sofa_trompeur_spatial_decomposed_hero.png (750595 bytes)
+Rendering view case01_sofa_trompeur_spatial_decomposed_front.png at (0.0, 1.0577071495840293, 0.2931607376857004)...
+  -> Generated case01_sofa_trompeur_spatial_decomposed_front.png (795159 bytes)
+Rendering view case01_sofa_trompeur_spatial_decomposed_side.png at (1.0607382730135662, -0.0030311234295368195, 0.2931607376857004)...
+  -> Generated case01_sofa_trompeur_spatial_decomposed_side.png (754064 bytes)
+Rendering view case01_sofa_trompeur_spatial_decomposed_top.png at (0.001, -0.0020311234295368194, 1.1947882697472316)...
+  -> Generated case01_sofa_trompeur_spatial_decomposed_top.png (670041 bytes)
+Info: Saved "case01_sofa_trompeur_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_sofa_trompeur_spatial_decomposed.blend (130524 octets, SHA-256: fbc06b9c1c128c410e6a4061054a7f89be249c9e5fc5b7bbca70eedf50fe7d82)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:50:16 | INFO: Starting glTF 2.0 export
+14:50:16 | INFO: Extracting primitive: Anse_Arche_Cuir
+14:50:16 | INFO: Primitives created: 1
+14:50:16 | INFO: Extracting primitive: Corps_Principal_Cuir
+14:50:16 | INFO: Primitives created: 1
+14:50:16 | INFO: Extracting primitive: Fermoir_Boucle_Laiton
+14:50:16 | INFO: Primitives created: 1
+14:50:16 | INFO: Extracting primitive: Rabat_Superieur_Cuir
+14:50:16 | INFO: Primitives created: 1
+14:50:16 | INFO: Finished glTF 2.0 export in 0.07014656066894531 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_sofa_trompeur_spatial_decomposed.glb (57576 octets, valid=True, SHA-256: 9c7fe0389cace16e882341b75b10b156ecfb98767ca271a8bd42ed123a2adb5d)
+=== GÉNÉRATION DU MODÈLE 'case01_sofa_trompeur_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_sofa_trompeur_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case01\case01_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

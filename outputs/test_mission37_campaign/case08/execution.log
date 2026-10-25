@@ -1,0 +1,68 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case08_tasse_mug_anse.png --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_spec.json
+
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_spec.json
+  - Catégorie certifiée : fashion_leather_goods
+  - Composants détectés : 3
+  - Matériaux physiques : 2
+  - Contradiction détectée : False
+  - Confiance décisionnelle : 0.97
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08
+
+00:10.250  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\previews\case08_tasse_mug_anse_spatial_decomposed_hero.png'
+00:19.234  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\previews\case08_tasse_mug_anse_spatial_decomposed_front.png'
+00:26.703  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\previews\case08_tasse_mug_anse_spatial_decomposed_side.png'
+00:34.594  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\previews\case08_tasse_mug_anse_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08
+Matériau préparé : M_Cuir_Principal (preset=None)
+Matériau préparé : M_Bouclerie_Laiton (preset=brushed_brass_gold)
+Composant créé : Corps_Principal_Cuir (type=rounded_box, verts=56, faces=30)
+Composant créé : Rabat_Superieur_Cuir (type=rounded_box, verts=56, faces=30)
+Composant créé : Anse_Arche_Cuir (type=curved_sweep, verts=112, faces=98)
+Validation Géométrique : PASS (Issues: 0)
+Studio adaptatif : Centre=<Vector (0.0000, 0.0000, 0.1340)>, Rayon=0.1665m, Dims=[0.18417476117610931, 0.07147374004125595, 0.26809999346733093]
+Rendering view case08_tasse_mug_anse_spatial_decomposed_hero.png at (0.7504953423053458, 0.7504953423053458, 0.5055823444095793)...
+  -> Generated case08_tasse_mug_anse_spatial_decomposed_hero.png (737400 bytes)
+Rendering view case08_tasse_mug_anse_spatial_decomposed_front.png at (0.0, 1.0615209933597536, 0.2932781457376285)...
+  -> Generated case08_tasse_mug_anse_spatial_decomposed_front.png (780069 bytes)
+Rendering view case08_tasse_mug_anse_spatial_decomposed_side.png at (1.0615209933597536, 0.0, 0.2932781457376285)...
+  -> Generated case08_tasse_mug_anse_spatial_decomposed_side.png (750653 bytes)
+Rendering view case08_tasse_mug_anse_spatial_decomposed_top.png at (0.001, 0.001, 1.195570990093419)...
+  -> Generated case08_tasse_mug_anse_spatial_decomposed_top.png (660384 bytes)
+Info: Saved "case08_tasse_mug_anse_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_tasse_mug_anse_spatial_decomposed.blend (128776 octets, SHA-256: c66d5fbe5396f38da32384f2eff9882bdbedbf3f673c33151442e9277ffb3968)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:55:26 | INFO: Starting glTF 2.0 export
+14:55:26 | INFO: Extracting primitive: Anse_Arche_Cuir
+14:55:26 | INFO: Primitives created: 1
+14:55:26 | INFO: Extracting primitive: Corps_Principal_Cuir
+14:55:26 | INFO: Primitives created: 1
+14:55:26 | INFO: Extracting primitive: Rabat_Superieur_Cuir
+14:55:26 | INFO: Primitives created: 1
+14:55:26 | INFO: Finished glTF 2.0 export in 0.046662330627441406 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_tasse_mug_anse_spatial_decomposed.glb (43492 octets, valid=True, SHA-256: c0d1a8babc111572c0e872e2fb078d715cfe30d9107614f01f12f2392def436c)
+=== GÉNÉRATION DU MODÈLE 'case08_tasse_mug_anse_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_tasse_mug_anse_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case08\case08_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

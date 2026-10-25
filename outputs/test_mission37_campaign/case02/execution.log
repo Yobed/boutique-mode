@@ -1,0 +1,97 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case02_produit_neutre_chaussure.png --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_spec.json
+
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_spec.json
+  - Catégorie certifiée : multi_component_spatial_decomposed
+  - Composants détectés : 10
+  - Matériaux physiques : 10
+  - Contradiction détectée : False
+  - Confiance décisionnelle : 0.75
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02
+
+00:09.312  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\previews\case02_produit_neutre_chaussure_spatial_decomposed_hero.png'
+00:16.687  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\previews\case02_produit_neutre_chaussure_spatial_decomposed_front.png'
+00:24.812  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\previews\case02_produit_neutre_chaussure_spatial_decomposed_side.png'
+00:33.265  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\previews\case02_produit_neutre_chaussure_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02
+Matériau préparé : M_Socle_Inferieur (preset=None)
+Matériau préparé : M_Corps_Principal_Strate_2 (preset=None)
+Matériau préparé : M_Element_Lateral_3_1 (preset=None)
+Matériau préparé : M_Element_Lateral_3_2 (preset=None)
+Matériau préparé : M_Element_Lateral_3_3 (preset=brushed_stainless)
+Matériau préparé : M_Element_Lateral_3_4 (preset=brushed_stainless)
+Matériau préparé : M_Corps_Principal_Strate_4 (preset=brushed_stainless)
+Matériau préparé : M_Chapeau_Superieur (preset=glazed_ceramic_terracotta)
+Matériau préparé : M_Anse_Courbee_Gauche (preset=None)
+Matériau préparé : M_Anse_Courbee_Droite (preset=brushed_stainless)
+Composant créé : Socle_Inferieur (type=rounded_box, verts=56, faces=30)
+Composant créé : Corps_Principal_Strate_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_3_1 (type=cylinder, verts=48, faces=26)
+Composant créé : Element_Lateral_3_2 (type=cylinder, verts=48, faces=26)
+Composant créé : Element_Lateral_3_3 (type=cylinder, verts=48, faces=26)
+Composant créé : Element_Lateral_3_4 (type=cylinder, verts=48, faces=26)
+Composant créé : Corps_Principal_Strate_4 (type=rounded_box, verts=56, faces=30)
+Composant créé : Chapeau_Superieur (type=rounded_box, verts=56, faces=30)
+Composant créé : Anse_Courbee_Gauche (type=curved_sweep, verts=112, faces=98)
+Composant créé : Anse_Courbee_Droite (type=curved_sweep, verts=112, faces=98)
+Validation Géométrique : PASS (Issues: 0)
+Studio adaptatif : Centre=<Vector (-0.0092, 0.0000, 0.0981)>, Rayon=0.1915m, Dims=[0.303439199924469, 0.10379999876022339, 0.20928842900320888]
+Rendering view case02_produit_neutre_chaussure_spatial_decomposed_hero.png at (0.8538395953701772, 0.8630039138125218, 0.5252812753626044)...
+  -> Generated case02_produit_neutre_chaussure_spatial_decomposed_hero.png (755194 bytes)
+Rendering view case02_produit_neutre_chaussure_spatial_decomposed_front.png at (-0.009164318442344666, 1.220656172294939, 0.2811500409036166)...
+  -> Generated case02_produit_neutre_chaussure_spatial_decomposed_front.png (791905 bytes)
+Rendering view case02_produit_neutre_chaussure_spatial_decomposed_side.png at (1.2114918538525943, 0.0, 0.2811500409036166)...
+  -> Generated case02_produit_neutre_chaussure_spatial_decomposed_side.png (733519 bytes)
+Rendering view case02_produit_neutre_chaussure_spatial_decomposed_top.png at (-0.008164318442344665, 0.001, 1.3187077873543147)...
+  -> Generated case02_produit_neutre_chaussure_spatial_decomposed_top.png (705761 bytes)
+Info: Saved "case02_produit_neutre_chaussure_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_produit_neutre_chaussure_spatial_decomposed.blend (143971 octets, SHA-256: b84e6d5d381b48cc09b8dc9b4b2e631fd02620598d40db204fd97da567b74e6d)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:51:09 | INFO: Starting glTF 2.0 export
+14:51:09 | INFO: Extracting primitive: Anse_Courbee_Droite
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Anse_Courbee_Gauche
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Chapeau_Superieur
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Corps_Principal_Strate_2
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Corps_Principal_Strate_4
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Element_Lateral_3_1
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Element_Lateral_3_2
+14:51:09 | INFO: Primitives created: 1
+14:51:09 | INFO: Extracting primitive: Element_Lateral_3_3
+14:51:10 | INFO: Primitives created: 1
+14:51:10 | INFO: Extracting primitive: Element_Lateral_3_4
+14:51:10 | INFO: Primitives created: 1
+14:51:10 | INFO: Extracting primitive: Socle_Inferieur
+14:51:10 | INFO: Primitives created: 1
+14:51:10 | INFO: Finished glTF 2.0 export in 0.14180850982666016 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_produit_neutre_chaussure_spatial_decomposed.glb (128004 octets, valid=True, SHA-256: 78494d9924792598146cb7838a90e4a8d3ba961b82189766b4a2565f4b73d80d)
+=== GÉNÉRATION DU MODÈLE 'case02_produit_neutre_chaussure_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_produit_neutre_chaussure_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case02\case02_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

@@ -1,0 +1,60 @@
+{
+  "object_id": "case10_fer_vapeur_multimat_spatial_decomposed",
+  "object_name": "Case10 Fer Vapeur Multimat Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "validation_verdict": "PASS",
+  "base_vertices": 56,
+  "base_faces": 30,
+  "evaluated_vertices": 168,
+  "evaluated_triangles": 332,
+  "bounding_box": {
+    "min": [
+      -0.072035,
+      -0.04859,
+      0.0
+    ],
+    "max": [
+      0.077435,
+      0.04859,
+      0.2
+    ],
+    "dimensions": [
+      0.14947,
+      0.097181,
+      0.2
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case10\\case10_fer_vapeur_multimat_spatial_decomposed.blend",
+    "size": 124619,
+    "sha256": "2d7db5827faddd02bdf268ca2fa6ce6b6d85640495153a0f77c7dbdd063a72be"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case10\\case10_fer_vapeur_multimat_spatial_decomposed.glb",
+    "size": 14084,
+    "sha256": "7b50577623f08ce0b1363266c216be95bf6098921af8c6486bd84c9c2d76883d",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case10_fer_vapeur_multimat_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case10\\previews\\case10_fer_vapeur_multimat_spatial_decomposed_hero.png",
+      807192
+    ],
+    [
+      "case10_fer_vapeur_multimat_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case10\\previews\\case10_fer_vapeur_multimat_spatial_decomposed_front.png",
+      853735
+    ],
+    [
+      "case10_fer_vapeur_multimat_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case10\\previews\\case10_fer_vapeur_multimat_spatial_decomposed_side.png",
+      767840
+    ],
+    [
+      "case10_fer_vapeur_multimat_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case10\\previews\\case10_fer_vapeur_multimat_spatial_decomposed_top.png",
+      668068
+    ]
+  ]
+}

@@ -1,0 +1,71 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case09_marteau_asymetrique.png --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_spec.json
+
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_spec.json
+  - Catégorie certifiée : minimalist_lighting
+  - Composants détectés : 4
+  - Matériaux physiques : 2
+  - Contradiction détectée : False
+  - Confiance décisionnelle : 0.98
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09
+
+00:10.578  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\previews\case09_marteau_asymetrique_spatial_decomposed_hero.png'
+00:18.703  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\previews\case09_marteau_asymetrique_spatial_decomposed_front.png'
+00:26.546  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\previews\case09_marteau_asymetrique_spatial_decomposed_side.png'
+00:34.296  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\previews\case09_marteau_asymetrique_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09
+Matériau préparé : M_Abat_Jour (preset=None)
+Matériau préparé : M_Metal_Structure (preset=anodized_aluminum)
+Composant créé : Base_Platine (type=cylinder, verts=72, faces=38)
+Composant créé : Tige_Centrale (type=cylinder, verts=48, faces=26)
+Composant créé : Abat_Jour_Conique (type=cylinder, verts=72, faces=38)
+Composant créé : Finial_Sommital (type=cylinder, verts=40, faces=22)
+Validation Géométrique : PASS (Issues: 0)
+Studio adaptatif : Centre=<Vector (0.0000, 0.0000, 0.1690)>, Rayon=0.2053m, Dims=[0.1648586243391037, 0.1648586243391037, 0.3379000127315521]
+Rendering view case09_marteau_asymetrique_spatial_decomposed_hero.png at (0.9251502523813528, 0.9251502523813528, 0.6269451808119904)...
+  -> Generated case09_marteau_asymetrique_spatial_decomposed_hero.png (730199 bytes)
+Rendering view case09_marteau_asymetrique_spatial_decomposed_front.png at (0.0, 1.308557641274898, 0.3652336525570108)...
+  -> Generated case09_marteau_asymetrique_spatial_decomposed_front.png (749142 bytes)
+Rendering view case09_marteau_asymetrique_spatial_decomposed_side.png at (1.308557641274898, 0.0, 0.3652336525570108)...
+  -> Generated case09_marteau_asymetrique_spatial_decomposed_side.png (777632 bytes)
+Rendering view case09_marteau_asymetrique_spatial_decomposed_top.png at (0.001, 0.001, 1.477507647640674)...
+  -> Generated case09_marteau_asymetrique_spatial_decomposed_top.png (682499 bytes)
+Info: Saved "case09_marteau_asymetrique_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_marteau_asymetrique_spatial_decomposed.blend (129309 octets, SHA-256: 6a48814eef7de4a4fcb4b69b3096bcedf37771e75aca87332272967fc3104784)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:56:02 | INFO: Starting glTF 2.0 export
+14:56:02 | INFO: Extracting primitive: Abat_Jour_Conique
+14:56:03 | INFO: Primitives created: 1
+14:56:03 | INFO: Extracting primitive: Base_Platine
+14:56:03 | INFO: Primitives created: 1
+14:56:03 | INFO: Extracting primitive: Finial_Sommital
+14:56:03 | INFO: Primitives created: 1
+14:56:03 | INFO: Extracting primitive: Tige_Centrale
+14:56:03 | INFO: Primitives created: 1
+14:56:03 | INFO: Finished glTF 2.0 export in 0.07404112815856934 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_marteau_asymetrique_spatial_decomposed.glb (54256 octets, valid=True, SHA-256: 316e036d5ac4d62b3e8873242d14fd955ce2be0f26b6d6ef2bd118c266186230)
+=== GÉNÉRATION DU MODÈLE 'case09_marteau_asymetrique_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_marteau_asymetrique_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case09\case09_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

@@ -1,0 +1,60 @@
+{
+  "object_id": "case09_marteau_asymetrique_spatial_decomposed",
+  "object_name": "Case09 Marteau Asymetrique Luminaire Minimaliste",
+  "category": "minimalist_lighting",
+  "validation_verdict": "PASS",
+  "base_vertices": 232,
+  "base_faces": 124,
+  "evaluated_vertices": 696,
+  "evaluated_triangles": 1376,
+  "bounding_box": {
+    "min": [
+      -0.082429,
+      -0.082429,
+      0.0
+    ],
+    "max": [
+      0.082429,
+      0.082429,
+      0.3379
+    ],
+    "dimensions": [
+      0.164859,
+      0.164859,
+      0.3379
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case09\\case09_marteau_asymetrique_spatial_decomposed.blend",
+    "size": 129309,
+    "sha256": "6a48814eef7de4a4fcb4b69b3096bcedf37771e75aca87332272967fc3104784"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case09\\case09_marteau_asymetrique_spatial_decomposed.glb",
+    "size": 54256,
+    "sha256": "316e036d5ac4d62b3e8873242d14fd955ce2be0f26b6d6ef2bd118c266186230",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case09_marteau_asymetrique_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case09\\previews\\case09_marteau_asymetrique_spatial_decomposed_hero.png",
+      730199
+    ],
+    [
+      "case09_marteau_asymetrique_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case09\\previews\\case09_marteau_asymetrique_spatial_decomposed_front.png",
+      749142
+    ],
+    [
+      "case09_marteau_asymetrique_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case09\\previews\\case09_marteau_asymetrique_spatial_decomposed_side.png",
+      777632
+    ],
+    [
+      "case09_marteau_asymetrique_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case09\\previews\\case09_marteau_asymetrique_spatial_decomposed_top.png",
+      682499
+    ]
+  ]
+}

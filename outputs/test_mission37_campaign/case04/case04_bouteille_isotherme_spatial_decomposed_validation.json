@@ -1,0 +1,96 @@
+{
+  "verdict": "PASS",
+  "objects_count": 4,
+  "total_base_vertices": 232,
+  "total_base_faces": 124,
+  "total_evaluated_vertices": 696,
+  "total_evaluated_triangles": 1376,
+  "issues": [],
+  "objects_audit": {
+    "Base_Platine": {
+      "base_verts": 72,
+      "base_faces": 38,
+      "eval_verts": 216,
+      "eval_triangles": 428,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Tige_Centrale": {
+      "base_verts": 48,
+      "base_faces": 26,
+      "eval_verts": 144,
+      "eval_triangles": 284,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Abat_Jour_Conique": {
+      "base_verts": 72,
+      "base_faces": 38,
+      "eval_verts": 216,
+      "eval_triangles": 428,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    },
+    "Finial_Sommital": {
+      "base_verts": 40,
+      "base_faces": 22,
+      "eval_verts": 120,
+      "eval_triangles": 236,
+      "non_manifold_edges": 0,
+      "degenerate_edges": 0,
+      "loose_vertices": 0,
+      "has_unapplied_scale": false,
+      "has_material": true,
+      "has_uv": true
+    }
+  },
+  "bounding_box": {
+    "min": [
+      -0.058586,
+      -0.058586,
+      0.0
+    ],
+    "max": [
+      0.058586,
+      0.058586,
+      0.3379
+    ],
+    "dimensions": [
+      0.117172,
+      0.117172,
+      0.3379
+    ]
+  },
+  "dimension_check": {
+    "dx": {
+      "target": 0.1229,
+      "actual": 0.117172,
+      "error_pct": 4.66,
+      "match": true
+    },
+    "dy": {
+      "target": 0.1229,
+      "actual": 0.117172,
+      "error_pct": 4.66,
+      "match": true
+    },
+    "dz": {
+      "target": 0.3379,
+      "actual": 0.3379,
+      "error_pct": 0.0,
+      "match": true
+    }
+  }
+}

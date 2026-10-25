@@ -1,0 +1,158 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case03_sac_trompeur_fauteuil.png --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_spec.json
+
+[ANTI-CONTAMINATION] CONTAMINATION SÉMANTIQUE DÉTECTÉE PAR NOM DE FICHIER : Le fichier 'case03_sac_trompeur_fauteuil.png' suggère 'fashion_handbag', mais les métriques visuelles de l'image (AR=0.688, Symétrie=0.783) réfutent cette catégorie (compatibilité: 0.02). L'archétype visuel prouvé 'generic_spatial_decomposed' (score: 0.75) prévaut rigoureusement.
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_spec.json
+  - Catégorie certifiée : multi_component_spatial_decomposed
+  - Composants détectés : 25
+  - Matériaux physiques : 25
+  - Contradiction détectée : True
+  - Confiance décisionnelle : 0.75
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03
+
+00:11.031  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\previews\case03_sac_trompeur_fauteuil_spatial_decomposed_hero.png'
+00:20.125  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\previews\case03_sac_trompeur_fauteuil_spatial_decomposed_front.png'
+00:28.813  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\previews\case03_sac_trompeur_fauteuil_spatial_decomposed_side.png'
+00:37.063  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\previews\case03_sac_trompeur_fauteuil_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03
+Matériau préparé : M_Socle_Inferieur (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_2_1 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_2_2 (preset=None)
+Matériau préparé : M_Element_Lateral_2_3 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_3_1 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_3_2 (preset=brushed_stainless)
+Matériau préparé : M_Element_Lateral_3_3 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_4_1 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_4_2 (preset=None)
+Matériau préparé : M_Element_Lateral_4_3 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_5_1 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_5_2 (preset=natural_wood)
+Matériau préparé : M_Element_Lateral_5_3 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_6_1 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_6_2 (preset=None)
+Matériau préparé : M_Element_Lateral_6_3 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_6_4 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_7_1 (preset=brushed_stainless)
+Matériau préparé : M_Element_Lateral_7_2 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_7_3 (preset=anodized_aluminum)
+Matériau préparé : M_Element_Lateral_8_1 (preset=brushed_stainless)
+Matériau préparé : M_Element_Lateral_8_2 (preset=brushed_stainless)
+Matériau préparé : M_Chapeau_Superieur (preset=anodized_aluminum)
+Matériau préparé : M_Anse_Courbee_Gauche (preset=anodized_aluminum)
+Matériau préparé : M_Anse_Courbee_Droite (preset=anodized_aluminum)
+Composant créé : Socle_Inferieur (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_2_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_2_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_2_3 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_3_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_3_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_3_3 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_4_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_4_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_4_3 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_5_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_5_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_5_3 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_6_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_6_2 (type=cylinder, verts=48, faces=26)
+Composant créé : Element_Lateral_6_3 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_6_4 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_7_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_7_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_7_3 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_8_1 (type=rounded_box, verts=56, faces=30)
+Composant créé : Element_Lateral_8_2 (type=rounded_box, verts=56, faces=30)
+Composant créé : Chapeau_Superieur (type=rounded_box, verts=56, faces=30)
+Composant créé : Anse_Courbee_Gauche (type=curved_sweep, verts=112, faces=98)
+Composant créé : Anse_Courbee_Droite (type=curved_sweep, verts=112, faces=98)
+Validation Géométrique : PASS (Issues: 0)
+Studio adaptatif : Centre=<Vector (0.0000, 0.0000, 0.0983)>, Rayon=0.2011m, Dims=[0.2911999970674515, 0.1884377896785736, 0.20347929373383522]
+Rendering view case03_sac_trompeur_fauteuil_spatial_decomposed_hero.png at (0.9062293352003572, 0.9062293277497766, 0.5468887380501066)...
+  -> Generated case03_sac_trompeur_fauteuil_spatial_decomposed_hero.png (816952 bytes)
+Rendering view case03_sac_trompeur_fauteuil_spatial_decomposed_front.png at (7.450580596923828e-09, 1.2817953716404196, 0.2905296637220227)...
+  -> Generated case03_sac_trompeur_fauteuil_spatial_decomposed_front.png (810993 bytes)
+Rendering view case03_sac_trompeur_fauteuil_spatial_decomposed_side.png at (1.2817953790910002, 0.0, 0.2905296637220227)...
+  -> Generated case03_sac_trompeur_fauteuil_spatial_decomposed_side.png (757320 bytes)
+Rendering view case03_sac_trompeur_fauteuil_spatial_decomposed_top.png at (0.001000007450580597, 0.001, 1.3800557296163793)...
+  -> Generated case03_sac_trompeur_fauteuil_spatial_decomposed_top.png (738728 bytes)
+Info: Saved "case03_sac_trompeur_fauteuil_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_sac_trompeur_fauteuil_spatial_decomposed.blend (167573 octets, SHA-256: 068d0269135f78187054c801b22800f4f49cc5b1cc4d91fdd16e862a939c38a6)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:51:50 | INFO: Starting glTF 2.0 export
+14:51:50 | INFO: Extracting primitive: Anse_Courbee_Droite
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Anse_Courbee_Gauche
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Chapeau_Superieur
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_2_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_2_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_2_3
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_3_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_3_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_3_3
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_4_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_4_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_4_3
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_5_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_5_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_5_3
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_6_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_6_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_6_3
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_6_4
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_7_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_7_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_7_3
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_8_1
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Element_Lateral_8_2
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Extracting primitive: Socle_Inferieur
+14:51:50 | INFO: Primitives created: 1
+14:51:50 | INFO: Finished glTF 2.0 export in 0.31291937828063965 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_sac_trompeur_fauteuil_spatial_decomposed.glb (311644 octets, valid=True, SHA-256: ece0aae4087d56712b8c6bd63692ed93c748f1cc665624b643be81d2165a5d63)
+=== GÉNÉRATION DU MODÈLE 'case03_sac_trompeur_fauteuil_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_sac_trompeur_fauteuil_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case03\case03_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

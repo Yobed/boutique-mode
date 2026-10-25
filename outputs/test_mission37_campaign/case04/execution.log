@@ -1,0 +1,72 @@
+=== STEP 1: COMPONENT ANALYZER ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\component_analyzer.py --image C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\inputs\product_images\mission37_test_cases\case04_bouteille_isotherme.png --output C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_spec.json
+
+[ANTI-CONTAMINATION] CONTAMINATION SÉMANTIQUE DÉTECTÉE PAR NOM DE FICHIER : Le fichier 'case04_bouteille_isotherme.png' suggère 'tableware_lathe', mais les métriques visuelles de l'image (AR=2.920, Symétrie=0.990) réfutent cette catégorie (compatibilité: 0.05). L'archétype visuel prouvé 'slender_pedestal_lamp' (score: 0.75) prévaut rigoureusement.
+Spécification spatiale générée avec succès : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_spec.json
+  - Catégorie certifiée : minimalist_lighting
+  - Composants détectés : 4
+  - Matériaux physiques : 2
+  - Contradiction détectée : True
+  - Confiance décisionnelle : 0.75
+
+Exit code: 0
+
+=== STEP 2: 3D ORCHESTRATOR & STUDIO RENDERING ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\blender.exe --factory-startup -b -P C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\orchestrator.py -- --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_spec.json --output-dir C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04
+
+00:10.078  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\previews\case04_bouteille_isotherme_spatial_decomposed_hero.png'
+00:18.390  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\previews\case04_bouteille_isotherme_spatial_decomposed_front.png'
+00:25.625  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\previews\case04_bouteille_isotherme_spatial_decomposed_side.png'
+00:33.062  render           | Saved: 'C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\previews\case04_bouteille_isotherme_spatial_decomposed_top.png'
+=== DÉBUT D'EXÉCUTION DU PIPELINE GÉNÉRIQUE ===
+Spécification : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_spec.json
+Dossier de sortie : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04
+Matériau préparé : M_Abat_Jour (preset=None)
+Matériau préparé : M_Metal_Structure (preset=anodized_aluminum)
+Composant créé : Base_Platine (type=cylinder, verts=72, faces=38)
+Composant créé : Tige_Centrale (type=cylinder, verts=48, faces=26)
+Composant créé : Abat_Jour_Conique (type=cylinder, verts=72, faces=38)
+Composant créé : Finial_Sommital (type=cylinder, verts=40, faces=22)
+Validation Géométrique : PASS (Issues: 0)
+Studio adaptatif : Centre=<Vector (0.0000, 0.0000, 0.1690)>, Rayon=0.1882m, Dims=[0.11717165261507034, 0.11717165261507034, 0.3379000127315521]
+Rendering view case04_bouteille_isotherme_spatial_decomposed_hero.png at (0.8481147274599555, 0.8481147274599555, 0.588808782336051)...
+  -> Generated case04_bouteille_isotherme_spatial_decomposed_hero.png (734041 bytes)
+Rendering view case04_bouteille_isotherme_spatial_decomposed_front.png at (0.0, 1.1995965027722144, 0.3488894817816082)...
+  -> Generated case04_bouteille_isotherme_spatial_decomposed_front.png (748882 bytes)
+Rendering view case04_bouteille_isotherme_spatial_decomposed_side.png at (1.1995965027722144, 0.0, 0.3488894817816082)...
+  -> Generated case04_bouteille_isotherme_spatial_decomposed_side.png (774567 bytes)
+Rendering view case04_bouteille_isotherme_spatial_decomposed_top.png at (0.001, 0.001, 1.3685465091379905)...
+  -> Generated case04_bouteille_isotherme_spatial_decomposed_top.png (662330 bytes)
+Info: Saved "case04_bouteille_isotherme_spatial_decomposed.blend"
+Scène autonome sauvegardée : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_bouteille_isotherme_spatial_decomposed.blend (129330 octets, SHA-256: 6c9df02bf0398fb107edefc7612ad13d132450717b3ca4a79bbe781a07ebf39a)
+INFO Draco is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+14:52:26 | INFO: Starting glTF 2.0 export
+14:52:26 | INFO: Extracting primitive: Abat_Jour_Conique
+14:52:26 | INFO: Primitives created: 1
+14:52:26 | INFO: Extracting primitive: Base_Platine
+14:52:26 | INFO: Primitives created: 1
+14:52:26 | INFO: Extracting primitive: Finial_Sommital
+14:52:26 | INFO: Primitives created: 1
+14:52:26 | INFO: Extracting primitive: Tige_Centrale
+14:52:26 | INFO: Primitives created: 1
+14:52:26 | INFO: Finished glTF 2.0 export in 0.061209917068481445 s
+
+Modèle GLB exporté : C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_bouteille_isotherme_spatial_decomposed.glb (56952 octets, valid=True, SHA-256: 8deb12d038d64175d2d74b1c4cf783a37f4c5fefba14daee595b0b3eafd1f3a6)
+=== GÉNÉRATION DU MODÈLE 'case04_bouteille_isotherme_spatial_decomposed' TERMINÉE AVEC SUCCÈS ===
+Blender 5.2.2 LTS (hash d13f752e3b9c built 2026-09-15 01:37:04)
+
+Blender quit
+
+Exit code: 0
+
+=== STEP 3: GLB VALIDATOR ===
+Command: C:\Users\WILFRIED\Downloads\Blender-5.2.2-Portable\blender-5.2.2-windows-x64\5.2\python\bin\python.exe C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py --glb C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_bouteille_isotherme_spatial_decomposed.glb --spec C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\outputs\test_mission37_campaign\case04\case04_spec.json
+
+Traceback (most recent call last):
+  File "C:\Users\WILFRIED\OneDrive - Gravel Ivoire\Bureau\boutique-mode\scripts\3d_pipeline\validator.py", line 8, in <module>
+    import mathutils
+ModuleNotFoundError: No module named 'mathutils'
+
+Exit code: 1
+

@@ -1,0 +1,60 @@
+{
+  "object_id": "produit_neutre_001_spatial_decomposed",
+  "object_name": "Produit Neutre 001 Bo\u00eetier \u00c9lectronique",
+  "category": "industrial_rugged_electronics",
+  "validation_verdict": "PASS",
+  "base_vertices": 200,
+  "base_faces": 108,
+  "evaluated_vertices": 536,
+  "evaluated_triangles": 1056,
+  "bounding_box": {
+    "min": [
+      -0.0488,
+      -0.013,
+      -0.002
+    ],
+    "max": [
+      0.0488,
+      0.01075,
+      0.125
+    ],
+    "dimensions": [
+      0.0976,
+      0.02375,
+      0.127
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\produit_neutre_001_spatial_decomposed.blend",
+    "size": 129476,
+    "sha256": "32f8525cd9921f207990d19bb857510851427a03e8f38bd61cab7f8c915af2ad"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\produit_neutre_001_spatial_decomposed.glb",
+    "size": 42080,
+    "sha256": "35f9755df0e65f15c770171ed607ba07e7fa70f527d3370c1ed05cd944dbd270",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "produit_neutre_001_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\previews\\produit_neutre_001_spatial_decomposed_hero.png",
+      748385
+    ],
+    [
+      "produit_neutre_001_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\previews\\produit_neutre_001_spatial_decomposed_front.png",
+      851239
+    ],
+    [
+      "produit_neutre_001_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\previews\\produit_neutre_001_spatial_decomposed_side.png",
+      727405
+    ],
+    [
+      "produit_neutre_001_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case6_electronics_neutral\\previews\\produit_neutre_001_spatial_decomposed_top.png",
+      556329
+    ]
+  ]
+}

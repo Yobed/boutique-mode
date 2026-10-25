@@ -1,0 +1,60 @@
+{
+  "object_id": "accessoire_vase_spatial_decomposed",
+  "object_name": "Accessoire Vase Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "validation_verdict": "PASS",
+  "base_vertices": 320,
+  "base_faces": 170,
+  "evaluated_vertices": 960,
+  "evaluated_triangles": 1900,
+  "bounding_box": {
+    "min": [
+      -0.0556,
+      -0.0556,
+      0.0
+    ],
+    "max": [
+      0.0556,
+      0.0556,
+      0.2017
+    ],
+    "dimensions": [
+      0.1112,
+      0.1112,
+      0.2017
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\accessoire_vase\\accessoire_vase_spatial_decomposed.blend",
+    "size": 132518,
+    "sha256": "29530d5e916eaf05508fc08660aee1b308f3cfa90b0cf76a59a8a9d6fd6fb88b"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\accessoire_vase\\accessoire_vase_spatial_decomposed.glb",
+    "size": 71432,
+    "sha256": "03f030bccd1968d3d9d18a530c8480a662779daba04f77e0245504c07e5d94af",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "accessoire_vase_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\accessoire_vase\\previews\\accessoire_vase_spatial_decomposed_hero.png",
+      759263
+    ],
+    [
+      "accessoire_vase_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\accessoire_vase\\previews\\accessoire_vase_spatial_decomposed_front.png",
+      821550
+    ],
+    [
+      "accessoire_vase_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\accessoire_vase\\previews\\accessoire_vase_spatial_decomposed_side.png",
+      770568
+    ],
+    [
+      "accessoire_vase_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\3d_studio\\accessoire_vase\\previews\\accessoire_vase_spatial_decomposed_top.png",
+      639406
+    ]
+  ]
+}

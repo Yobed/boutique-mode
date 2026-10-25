@@ -1,0 +1,60 @@
+{
+  "object_id": "case03_sac_trompeur_fauteuil_spatial_decomposed",
+  "object_name": "Case03 Sac Trompeur Fauteuil Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "validation_verdict": "PASS",
+  "base_vertices": 1504,
+  "base_faces": 882,
+  "evaluated_vertices": 4064,
+  "evaluated_triangles": 8028,
+  "bounding_box": {
+    "min": [
+      -0.1456,
+      -0.094219,
+      -0.003479
+    ],
+    "max": [
+      0.1456,
+      0.094219,
+      0.2
+    ],
+    "dimensions": [
+      0.2912,
+      0.188438,
+      0.203479
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case03\\case03_sac_trompeur_fauteuil_spatial_decomposed.blend",
+    "size": 167573,
+    "sha256": "068d0269135f78187054c801b22800f4f49cc5b1cc4d91fdd16e862a939c38a6"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case03\\case03_sac_trompeur_fauteuil_spatial_decomposed.glb",
+    "size": 311644,
+    "sha256": "ece0aae4087d56712b8c6bd63692ed93c748f1cc665624b643be81d2165a5d63",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case03_sac_trompeur_fauteuil_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case03\\previews\\case03_sac_trompeur_fauteuil_spatial_decomposed_hero.png",
+      816952
+    ],
+    [
+      "case03_sac_trompeur_fauteuil_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case03\\previews\\case03_sac_trompeur_fauteuil_spatial_decomposed_front.png",
+      810993
+    ],
+    [
+      "case03_sac_trompeur_fauteuil_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case03\\previews\\case03_sac_trompeur_fauteuil_spatial_decomposed_side.png",
+      757320
+    ],
+    [
+      "case03_sac_trompeur_fauteuil_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case03\\previews\\case03_sac_trompeur_fauteuil_spatial_decomposed_top.png",
+      738728
+    ]
+  ]
+}

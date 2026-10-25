@@ -1,0 +1,60 @@
+{
+  "object_id": "lampe_table_spatial_decomposed",
+  "object_name": "Lampe Table Luminaire Minimaliste",
+  "category": "minimalist_lighting",
+  "validation_verdict": "PASS",
+  "base_vertices": 232,
+  "base_faces": 124,
+  "evaluated_vertices": 696,
+  "evaluated_triangles": 1376,
+  "bounding_box": {
+    "min": [
+      -0.118911,
+      -0.118911,
+      0.0
+    ],
+    "max": [
+      0.118911,
+      0.118911,
+      0.3379
+    ],
+    "dimensions": [
+      0.237821,
+      0.237821,
+      0.3379
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\lampe_table_spatial_decomposed.blend",
+    "size": 129189,
+    "sha256": "25aa20f2efe33b5b13bf5b76374aff3e81093a7821658d80f907cc8a2a128d44"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\lampe_table_spatial_decomposed.glb",
+    "size": 54236,
+    "sha256": "cc3fcb54ebab24c2bf3e366ad96dc93a003cdc14ae37fb4526a5ce0b017c7ba0",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "lampe_table_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\previews\\lampe_table_spatial_decomposed_hero.png",
+      756299
+    ],
+    [
+      "lampe_table_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\previews\\lampe_table_spatial_decomposed_front.png",
+      768724
+    ],
+    [
+      "lampe_table_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\previews\\lampe_table_spatial_decomposed_side.png",
+      787464
+    ],
+    [
+      "lampe_table_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission36_pipeline\\case5_lamp_concordant\\previews\\lampe_table_spatial_decomposed_top.png",
+      731773
+    ]
+  ]
+}

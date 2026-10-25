@@ -1,0 +1,60 @@
+{
+  "object_id": "case07_enceinte_acoustique_spatial_decomposed",
+  "object_name": "Case07 Enceinte Acoustique Enhanced Spatial Model",
+  "category": "multi_component_spatial_decomposed",
+  "validation_verdict": "PASS",
+  "base_vertices": 432,
+  "base_faces": 290,
+  "evaluated_vertices": 1296,
+  "evaluated_triangles": 2572,
+  "bounding_box": {
+    "min": [
+      -0.0926,
+      -0.0926,
+      0.0
+    ],
+    "max": [
+      0.0926,
+      0.0926,
+      0.2
+    ],
+    "dimensions": [
+      0.1852,
+      0.1852,
+      0.2
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case07\\case07_enceinte_acoustique_spatial_decomposed.blend",
+    "size": 137143,
+    "sha256": "7696feba9f20c461611ac8229fffe020d2bad5b4cfba6b49c1ab04fd9f1de654"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case07\\case07_enceinte_acoustique_spatial_decomposed.glb",
+    "size": 102824,
+    "sha256": "6d9e9c529b837788c73fe4edf7d7122036a95f7434d8eb94f88771afcc368010",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case07_enceinte_acoustique_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case07\\previews\\case07_enceinte_acoustique_spatial_decomposed_hero.png",
+      759320
+    ],
+    [
+      "case07_enceinte_acoustique_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case07\\previews\\case07_enceinte_acoustique_spatial_decomposed_front.png",
+      782871
+    ],
+    [
+      "case07_enceinte_acoustique_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case07\\previews\\case07_enceinte_acoustique_spatial_decomposed_side.png",
+      749307
+    ],
+    [
+      "case07_enceinte_acoustique_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case07\\previews\\case07_enceinte_acoustique_spatial_decomposed_top.png",
+      698775
+    ]
+  ]
+}

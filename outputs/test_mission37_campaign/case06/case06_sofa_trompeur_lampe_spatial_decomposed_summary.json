@@ -1,0 +1,60 @@
+{
+  "object_id": "case06_sofa_trompeur_lampe_spatial_decomposed",
+  "object_name": "Case06 Sofa Trompeur Lampe Haute Maroquinerie",
+  "category": "fashion_leather_goods",
+  "validation_verdict": "PASS",
+  "base_vertices": 224,
+  "base_faces": 158,
+  "evaluated_vertices": 448,
+  "evaluated_triangles": 884,
+  "bounding_box": {
+    "min": [
+      -0.103368,
+      -0.040079,
+      0.0
+    ],
+    "max": [
+      0.103368,
+      0.040079,
+      0.2681
+    ],
+    "dimensions": [
+      0.206735,
+      0.080158,
+      0.2681
+    ]
+  },
+  "delivered_blend": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case06\\case06_sofa_trompeur_lampe_spatial_decomposed.blend",
+    "size": 128743,
+    "sha256": "4835195b288efcaee361cfa86fbc7171fb5e27a3fdca5e10e9659b03bf4d1a57"
+  },
+  "delivered_glb": {
+    "path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case06\\case06_sofa_trompeur_lampe_spatial_decomposed.glb",
+    "size": 43496,
+    "sha256": "dc7656907cf2d179b64d16b753506683b17f1eaa479f6818c18167d86195cdd4",
+    "is_valid_binary_glb": true
+  },
+  "previews": [
+    [
+      "case06_sofa_trompeur_lampe_spatial_decomposed_hero.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case06\\previews\\case06_sofa_trompeur_lampe_spatial_decomposed_hero.png",
+      768561
+    ],
+    [
+      "case06_sofa_trompeur_lampe_spatial_decomposed_front.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case06\\previews\\case06_sofa_trompeur_lampe_spatial_decomposed_front.png",
+      805579
+    ],
+    [
+      "case06_sofa_trompeur_lampe_spatial_decomposed_side.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case06\\previews\\case06_sofa_trompeur_lampe_spatial_decomposed_side.png",
+      763560
+    ],
+    [
+      "case06_sofa_trompeur_lampe_spatial_decomposed_top.png",
+      "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\test_mission37_campaign\\case06\\previews\\case06_sofa_trompeur_lampe_spatial_decomposed_top.png",
+      690991
+    ]
+  ]
+}
