@@ -30,19 +30,19 @@
     "status": "review"
   },
   "art-009": {
-    "backend": "multiview",
+    "backend": "triposr",
     "cameraOrbit": "0deg 75deg 105%",
     "faces": 60000,
-    "generated_at": "2026-10-25T00:59:00+00:00",
-    "monocular_estimate": false,
-    "override": true,
+    "generated_at": "2026-10-25T02:24:50+00:00",
+    "monocular_estimate": true,
     "poster": "/models/art-009-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.942,
-    "source_image": "inputs/multiview/sheet_handbag_beige.png",
+    "silhouette_iou": 0.757,
+    "source_image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1200&auto=format&fit=crop&q=80",
     "src": "/models/art-009.glb",
-    "status": "ok"
+    "status": "ok",
+    "override": true
   },
   "art-101": {
     "backend": "multiview",
@@ -60,17 +60,16 @@
     "status": "ok"
   },
   "art-102": {
-    "backend": "multiview",
-    "background": "#d9dce1",
+    "backend": "triposr",
     "cameraOrbit": "0deg 75deg 105%",
     "faces": 60000,
-    "generated_at": "2026-10-25T00:56:32+00:00",
-    "monocular_estimate": false,
+    "generated_at": "2026-10-25T02:20:32+00:00",
+    "monocular_estimate": true,
     "poster": "/models/art-102-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.928,
-    "source_image": "inputs/multiview/sheet_bag_men_black.png",
+    "silhouette_iou": 0.77,
+    "source_image": "https://images.unsplash.com/photo-1691480150204-66dd1eb77391?w=1600&auto=format&q=80&exp=6",
     "src": "/models/art-102.glb",
     "status": "ok"
   },
