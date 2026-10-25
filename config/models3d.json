@@ -21,7 +21,7 @@
     "monocular_estimate": true,
     "poster": "/models/art-008-poster.png",
     "reasons": [
-      "revue visuelle : gros plan sur une paire de chaussures, mod\u00e8le d\u00e9form\u00e9 ; refaire avec un packshot d'une seule chaussure"
+      "revue visuelle : gros plan sur une paire de chaussures, modèle déformé ; refaire avec un packshot d'une seule chaussure"
     ],
     "recolor": false,
     "silhouette_iou": 0.911,
@@ -38,7 +38,7 @@
     "override": true,
     "poster": "/models/art-009-poster.png",
     "reasons": [
-      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
     ],
     "recolor": false,
     "silhouette_iou": 0.757,
@@ -62,16 +62,16 @@
     "status": "ok"
   },
   "art-102": {
-    "backend": "blender_procedural",
+    "backend": "multiview",
     "cameraOrbit": "0deg 75deg 105%",
-    "faces": 7324,
-    "generated_at": "2026-10-25T11:50:50+00:00",
+    "faces": 60000,
+    "generated_at": "2026-10-25T12:01:58+00:00",
     "monocular_estimate": false,
     "override": true,
     "poster": "/models/art-102-poster.png",
     "reasons": [],
     "recolor": false,
-    "silhouette_iou": 0.95,
+    "silhouette_iou": 0.87,
     "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
     "src": "/models/art-102.glb",
     "status": "ok"
@@ -84,7 +84,7 @@
     "monocular_estimate": true,
     "poster": "/models/art-103-poster.png",
     "reasons": [
-      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
     ],
     "recolor": false,
     "silhouette_iou": 0.797,
@@ -100,7 +100,7 @@
     "monocular_estimate": true,
     "poster": "/models/art-104-poster.png",
     "reasons": [
-      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
     ],
     "recolor": false,
     "silhouette_iou": 0.607,
@@ -116,7 +116,7 @@
     "monocular_estimate": true,
     "poster": "/models/art-105-poster.png",
     "reasons": [
-      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
     ],
     "recolor": false,
     "silhouette_iou": 0.687,
@@ -147,7 +147,7 @@
     "monocular_estimate": true,
     "poster": "/models/art-203-poster.png",
     "reasons": [
-      "\u00e9paisseur disproportionn\u00e9e (forme de pav\u00e9) ; attente de mod\u00e9lisation fine ou planche multi-vues"
+      "épaisseur disproportionnée (forme de pavé) ; attente de modélisation fine ou planche multi-vues"
     ],
     "recolor": false,
     "silhouette_iou": 0.882,

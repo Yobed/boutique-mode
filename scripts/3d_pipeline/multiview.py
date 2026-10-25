@@ -35,11 +35,11 @@ CROP_MARGIN_PX = 8
 ALPHA_THRESHOLD = 127
 MIN_SPECKLE_FRACTION = 0.0005
 CARVE_DILATE_FRACTION = 0.025  # tolérance de projection pour interconnecter les anses et sangles sans boucher les ouvertures
-SOFT_SIGMA_FRACTION = 0.006   # flou des silhouettes (fraction de la taille de l'image)
+SOFT_SIGMA_FRACTION = 0.012   # flou des silhouettes pour adoucir les arêtes et gradins de découpe
 SEARCH_GRID = 96
 ORIENTATION_MARGIN = 1.02   # gain de volume minimal pour contredire la convention d'orientation d'une vue
 HULL_GRID = 256
-HULL_SMOOTH_SIGMA = 1.5
+HULL_SMOOTH_SIGMA = 2.6   # arrondi volumétrique doux des arêtes de coupe à 90°
 MARCHING_STEP = 1
 MARCHING_STEPS = (1, 2)
 MAX_FACES_RATIO = 1.5   # au-delà, la décimation a calé : on retente avec un maillage de départ plus grossier
@@ -452,6 +452,8 @@ def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4
         mesh = fm.decimate(fm.smooth(mesh, SMOOTH_ITERATIONS), target_faces)
         if len(mesh.faces) <= target_faces * MAX_FACES_RATIO:
             break
+    # Finitions arrondies organiques (anse et flancs) après décimation
+    trimesh.smoothing.filter_humphrey(mesh, alpha=0.1, beta=0.5, iterations=15)
     watertight = bool(mesh.is_watertight)
     vertices, faces, uvs, normals = fm.unwrap(mesh)
     texture, covered = bake_views_texture(vertices, faces, uvs, normals, views, dims, flips, texture_size)
