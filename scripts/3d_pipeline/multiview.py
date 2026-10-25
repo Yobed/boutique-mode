@@ -428,7 +428,7 @@ def bake_views_texture(vertices, faces, uvs, normals, views, dims, flips, size):
 
 # ----------------------------------------------------------------------------- pipeline complet
 def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4096, target_faces=60_000,
-                      boxes=None):
+                      boxes=None, enhance=True):
     """Planche -> GLB texturé + rapport (mêmes clés que neural_reconstruct.reconstruct)."""
     import json
     import time
@@ -438,7 +438,7 @@ def reconstruct_sheet(sheet_path, out_dir, layout=DEFAULT_LAYOUT, texture_size=4
 
     t0 = time.time()
     os.makedirs(out_dir, exist_ok=True)
-    views = extract_views(sheet_path, layout, boxes=boxes)
+    views = extract_views(sheet_path, layout, boxes=boxes, enhance=enhance)
     dims = estimate_dims(views)
     flips = choose_orientations(views, dims)
     field, grid = carve(views, dims, flips, HULL_GRID)

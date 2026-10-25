@@ -39,9 +39,9 @@ ROUGHNESS = 0.6
 MAP_SIZE = 1024                 # cartes de relief et de métal/rugosité
 GRAIN_SIGMA = 3.0               # px : sépare le grain fin de l'ombrage cuit dans la photo
 NORMAL_STRENGTH = 0.6
-GOLD_HUE = (0.09, 0.17)         # teinte jaune-or (0-1) ; un cuir camel ou beige reste en dessous
-GOLD_MIN_SATURATION, GOLD_MIN_VALUE = 0.4, 0.55
-MAX_METAL_FRACTION = 0.08       # au-delà, la matière « dorée » est le produit lui-même, pas la quincaillerie
+GOLD_HUE = (0.13, 0.16)         # teinte jaune-or (0-1) pure ; exclut le cuir cognac, fauve ou caramel
+GOLD_MIN_SATURATION, GOLD_MIN_VALUE = 0.6, 0.65
+MAX_METAL_FRACTION = 0.04       # au-delà, la matière n'est pas de la quincaillerie (boucles/rivets < 4%)
 BASE_ROUGHNESS, METAL_ROUGHNESS = 0.55, 0.28
 
 

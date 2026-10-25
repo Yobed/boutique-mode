@@ -1,0 +1,11 @@
+{
+  "note": "Sac Cabas Cuir Cognac art-101 (Planche V2 studio)",
+  "boxes": {
+    "front": [45, 64, 446, 486],
+    "back": [462, 66, 861, 482],
+    "left": [869, 69, 1076, 489],
+    "right": [1099, 69, 1319, 488],
+    "bottom": [928, 522, 1303, 730]
+  },
+  "ignore": ["top"]
+}

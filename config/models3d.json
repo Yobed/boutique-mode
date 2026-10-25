@@ -70,15 +70,16 @@
     "status": "ok"
   },
   "art-101": {
-    "backend": "triposr",
+    "backend": "multiview",
     "cameraOrbit": "0deg 75deg 105%",
     "poster": "/models/art-101-poster.png",
     "src": "/models/art-101.glb",
     "recolor": false,
     "status": "ok",
     "override": true,
-    "faces": 65466,
-    "monocular_estimate": true
+    "faces": 60000,
+    "monocular_estimate": false,
+    "source_image": "inputs/multiview/sheet_art_101_cabas_cognac_v2.png"
   },
   "art-101-test": {
     "backend": "triposr",
