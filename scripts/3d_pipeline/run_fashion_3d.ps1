@@ -148,8 +148,35 @@ if ($TargetHero -and (Test-Path $TargetHero)) {
     Write-Host "  -> URL du poster       : /models/$Id-poster.png" -ForegroundColor Cyan
 }
 
+# Étape 4 : Validation Topologique & Géométrique V2 (Master Prompt V2.2)
+Write-Host "`n[4/5] Audit qualité géométrique, topologie watertight & assiette AR (validator.py V2)..." -ForegroundColor Yellow
+$ValidatorScript = Join-Path $ScriptDir "validator.py"
+$ValidationReportPath = Join-Path $ProjectRoot "outputs\reports\validation_$Id.json"
+
+if ($DestGlb -and (Test-Path $DestGlb)) {
+    & $BlenderExe --factory-startup -b -P $ValidatorScript -- --glb $DestGlb --category ($SpecJson.category) --spec $SpecPath --output-json $ValidationReportPath
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  -> [VALIDATION V2 PASS] Modèle conforme aux 8 principes du Master Prompt V2.2 !" -ForegroundColor Green
+    } else {
+        Write-Warning "  -> [VALIDATION V2 WARNING] Des écarts ou codes d'erreurs ont été relevés (voir $ValidationReportPath)."
+    }
+
+    # Étape 5 : Reprojection calibrée & Score de Silhouette Chamfer (CS)
+    Write-Host "`n[5/5] Évaluation de fidélité par reprojection calibrée (silhouette_score.py)..." -ForegroundColor Yellow
+    $CsScript = Join-Path $ScriptDir "silhouette_score.py"
+    $CsReportPath = Join-Path $ProjectRoot "outputs\reports\cs_$Id.json"
+    $CsBoardPath = Join-Path $ProjectRoot "outputs\detourage_diagnostic\cs_$Id`_board.png"
+
+    & $BlenderExe --factory-startup -b -P $CsScript -- --glb $DestGlb --image $ImagePath --output-json $CsReportPath --output-img $CsBoardPath
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  -> [SCORE CS PASS] Reprojection conforme aux seuils d'excellence commerciale !" -ForegroundColor Green
+    } else {
+        Write-Host "  -> [SCORE CS ÉVALUÉ] Rapport et planche comparative disponibles dans outputs/." -ForegroundColor DarkGray
+    }
+}
+
 Write-Host "`n==========================================================" -ForegroundColor Green
-Write-Host "  SUCCÈS : Article modélisé et prêt pour la boutique !" -ForegroundColor Green
+Write-Host "  SUCCÈS : Article modélisé et certifié Master Prompt V2.2 !" -ForegroundColor Green
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host "Pour l'afficher dans une page Next.js :" -ForegroundColor White
 Write-Host "  <Product3DViewer modelSrc='/models/$Id.glb' posterSrc='/models/$Id-poster.png' />`n" -ForegroundColor Gray

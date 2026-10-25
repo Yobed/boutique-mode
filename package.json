@@ -16,7 +16,9 @@
     "3d:catalog": "powershell -ExecutionPolicy Bypass -File scripts/3d_pipeline/run_neural.ps1 --catalog",
     "3d:test": "powershell -ExecutionPolicy Bypass -File scripts/3d_pipeline/run_neural.ps1 --self-test",
     "3d:model": "powershell -ExecutionPolicy Bypass -File scripts/3d_pipeline/run_fashion_3d.ps1",
-    "3d:pipeline": "C:\\Users\\WILFRIED\\Downloads\\Blender-5.2.2-Portable\\blender-5.2.2-windows-x64\\blender.exe --factory-startup -b -P scripts/3d_pipeline/orchestrator.py --"
+    "3d:pipeline": "C:\\Users\\WILFRIED\\Downloads\\Blender-5.2.2-Portable\\blender-5.2.2-windows-x64\\blender.exe --factory-startup -b -P scripts/3d_pipeline/orchestrator.py --",
+    "3d:validate": "\"C:\\Users\\WILFRIED\\Downloads\\Blender-5.2.2-Portable\\blender-5.2.2-windows-x64\\blender.exe\" --factory-startup -b -P scripts/3d_pipeline/validator.py --",
+    "3d:score": "\"C:\\Users\\WILFRIED\\Downloads\\Blender-5.2.2-Portable\\blender-5.2.2-windows-x64\\blender.exe\" --factory-startup -b -P scripts/3d_pipeline/silhouette_score.py --"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
