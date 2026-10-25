@@ -1,0 +1,11 @@
+{
+  "note": "Sac Trapeze Croco Jaune Kita art-103 (Planche studio)",
+  "boxes": {
+    "front": [41, 164, 358, 532],
+    "back": [378, 166, 689, 533],
+    "left": [706, 165, 852, 540],
+    "right": [872, 165, 1012, 541],
+    "bottom": [1035, 355, 1340, 529]
+  },
+  "ignore": ["top"]
+}

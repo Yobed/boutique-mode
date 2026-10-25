@@ -1,0 +1,11 @@
+{
+  "note": "Vanity Rond Cuir Chocolat art-104 (Planche 2 rangées)",
+  "boxes": {
+    "front": [62, 78, 331, 461],
+    "back": [382, 78, 651, 462],
+    "left": [712, 78, 942, 462],
+    "right": [1056, 78, 1288, 461],
+    "bottom": [1054, 498, 1309, 735]
+  },
+  "ignore": ["top"]
+}

@@ -1,0 +1,42 @@
+{
+  "image": "inputs/multiview/sheet_art_104_vanity_chocolat.png",
+  "glb": "outputs/art_104_multiview\\mesh.glb",
+  "seconds": 84.8,
+  "vertices": 32480,
+  "faces": 60000,
+  "watertight": true,
+  "silhouette_iou_front": 0.915,
+  "view_ious": {
+    "front": 0.931,
+    "back": 0.942,
+    "left": 0.897,
+    "right": 0.902,
+    "bottom": 0.904
+  },
+  "orientations": {
+    "left": [
+      false,
+      false
+    ],
+    "right": [
+      false,
+      false
+    ],
+    "bottom": [
+      false,
+      false
+    ]
+  },
+  "dimensions_w_h_d": [
+    1.023,
+    1.0,
+    0.594
+  ],
+  "texture": "baked-multiview",
+  "texture_covered_fraction": 0.0,
+  "glb_megabytes": 2.14,
+  "matte_coverage": 0.873,
+  "matte_objects": 1,
+  "backend": "multiview",
+  "monocular_estimate": false
+}

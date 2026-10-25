@@ -1,0 +1,42 @@
+{
+  "image": "inputs/multiview/sheet_art_101_cabas_cognac_v2.png",
+  "glb": "outputs/multiview_v2_test\\mesh.glb",
+  "seconds": 445.7,
+  "vertices": 32304,
+  "faces": 60000,
+  "watertight": true,
+  "silhouette_iou_front": 0.842,
+  "view_ious": {
+    "front": 0.853,
+    "back": 0.852,
+    "left": 0.798,
+    "right": 0.774,
+    "bottom": 0.931
+  },
+  "orientations": {
+    "left": [
+      false,
+      false
+    ],
+    "right": [
+      false,
+      false
+    ],
+    "bottom": [
+      false,
+      false
+    ]
+  },
+  "dimensions_w_h_d": [
+    0.981,
+    1.0,
+    0.509
+  ],
+  "texture": "baked-multiview",
+  "texture_covered_fraction": 0.0,
+  "glb_megabytes": 2.36,
+  "matte_coverage": 0.616,
+  "matte_objects": 1,
+  "backend": "multiview",
+  "monocular_estimate": false
+}

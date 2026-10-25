@@ -1,0 +1,42 @@
+{
+  "image": "inputs/multiview/sheet_art_103_sac_trapeze_jaune.png",
+  "glb": "outputs/art_103_multiview\\mesh.glb",
+  "seconds": 69.7,
+  "vertices": 31876,
+  "faces": 60000,
+  "watertight": true,
+  "silhouette_iou_front": 0.889,
+  "view_ious": {
+    "front": 0.918,
+    "back": 0.907,
+    "left": 0.854,
+    "right": 0.855,
+    "bottom": 0.91
+  },
+  "orientations": {
+    "left": [
+      false,
+      false
+    ],
+    "right": [
+      false,
+      false
+    ],
+    "bottom": [
+      false,
+      false
+    ]
+  },
+  "dimensions_w_h_d": [
+    0.878,
+    1.0,
+    0.377
+  ],
+  "texture": "baked-multiview",
+  "texture_covered_fraction": 0.0,
+  "glb_megabytes": 2.21,
+  "matte_coverage": 0.71,
+  "matte_objects": 1,
+  "backend": "multiview",
+  "monocular_estimate": false
+}
