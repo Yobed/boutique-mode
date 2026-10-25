@@ -13,7 +13,6 @@ interface Product3DViewerProps {
   cameraOrbit?: string;
   selectedColor?: string;
   onColorChange?: (color: string) => void;
-  onModelError?: () => void;
   showColorPicker?: boolean;
   /** false : modèle déjà coloré d'après la photo, ni recoloration du matériau ni sélecteur de teintes. */
   recolor?: boolean;
@@ -50,9 +49,8 @@ export default function Product3DViewer({
   cameraOrbit = '0deg 75deg 105%',
   selectedColor = 'Noir',
   onColorChange,
-  onModelError,
-  showColorPicker = false,
-  recolor = false,
+  showColorPicker = true,
+  recolor = true,
   background = DEFAULT_BACKGROUND,
 }: Product3DViewerProps) {
   const viewerRef = useRef<any>(null);
@@ -66,10 +64,6 @@ export default function Product3DViewer({
       setCurrentColor(selectedColor);
     }
   }, [selectedColor]);
-
-  useEffect(() => {
-    setIsLoaded(false);
-  }, [modelSrc]);
 
   // Ensure <model-viewer> is registered even if Next Script is delayed
   useEffect(() => {
@@ -121,14 +115,6 @@ export default function Product3DViewer({
 
     return () => viewer.removeEventListener('load', applyColor);
   }, [currentColor, recolor]);
-
-  useEffect(() => {
-    const viewer = viewerRef.current;
-    if (!viewer) return;
-    const handleError = () => onModelError?.();
-    viewer.addEventListener('error', handleError);
-    return () => viewer.removeEventListener('error', handleError);
-  }, [modelSrc, onModelError]);
 
   const handleSelectColor = (colorKey: string) => {
     const cap = colorKey.charAt(0).toUpperCase() + colorKey.slice(1);
