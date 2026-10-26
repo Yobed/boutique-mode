@@ -135,12 +135,12 @@
     "poster": "/models/art-102-poster.png",
     "src": "/models/art-102.glb",
     "recolor": false,
-    "status": "ok",
+    "status": "CERTIFIED_READY",
     "override": true,
     "faces": 50280,
     "monocular_estimate": false,
     "source_image": "inputs/multiview/sheet_sac_messager_havane.png",
-    "sha256": "f1f5d47eeaa0f72d8dadd9d47f3c1af6b59945b7bff656c0b6d75c99b6530c68",
+    "sha256": "27ecc23aa6a0c77892bd24510dfd7a19726026c7bd09eb1bf8f877643793e5d5",
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
@@ -152,17 +152,19 @@
         "non_manifold_edges": 0,
         "boundary_edges": 0,
         "intra_self_intersections": 0,
-        "uv_overlap_pct": 0.74,
+        "uv_overlap_pct": 0.83,
         "ar_anchor_z_min_m": 0.0,
         "dimensions_m": [
-          0.2758,
-          0.1135,
-          0.2799
+          0.2779,
+          0.0923,
+          0.28
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiée : double poignée supérieure séparée avec ouverture centrale libre, échelle maroquinerie structurée 1:1, assiette AR parfaite au sol."
-    }
+      "note": "Reconstruction multi-vues V2.2 certifiee : anse unique continue sans fragment flottant, galbe maroquinerie naturel, zero deformation horizontale, conformite totale."
+    },
+    "file_size_bytes": 2054992,
+    "file_size_mb": 1.96
   },
   "art-103": {
     "backend": "multiview",

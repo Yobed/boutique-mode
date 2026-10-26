@@ -1,0 +1,21 @@
+{
+  "pipeline": "repair_bag.py (Master Prompt V2.2)",
+  "verdict": "VALIDÉ",
+  "glb_file": "Sac_Luxe_repare.glb",
+  "glb_sha256": "a1c28f90494e9ecfdd1aa0f2483944497c2fe01ad3a348e6bafee6d6801a6fb9",
+  "file_size_bytes": 1417324,
+  "file_size_mb": 1.35,
+  "draw_calls": 2,
+  "triangles": 57464,
+  "budget_triangles": 60000,
+  "non_manifold_edges": 0,
+  "boundary_edges": 0,
+  "is_watertight": true,
+  "dimensions_m": [
+    0.2779,
+    0.0923,
+    0.28
+  ],
+  "ar_anchor_z_min": 0.0,
+  "thresholds_version": "V2.2"
+}

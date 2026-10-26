@@ -1,0 +1,102 @@
+{
+  "verdict": "PASS",
+  "glb_path": "C:\\Users\\WILFRIED\\OneDrive - Gravel Ivoire\\Bureau\\boutique-mode\\outputs\\repair_out\\Sac_Luxe_repare.glb",
+  "sha256": "a1c28f90494e9ecfdd1aa0f2483944497c2fe01ad3a348e6bafee6d6801a6fb9",
+  "file_size_bytes": 1417324,
+  "file_size_mb": 1.35,
+  "error_codes": [],
+  "metrics": {
+    "mesh_objects_count": 2,
+    "draw_calls": 2,
+    "materials_count": 2,
+    "total_vertices": 28744,
+    "total_triangles": 57464,
+    "budget_triangles": 60000,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "degenerate_edges": 0,
+    "loose_vertices": 0,
+    "is_watertight": true,
+    "intra_self_intersections": 0,
+    "inter_island_overlaps": 120
+  },
+  "bounding_box": {
+    "min": [
+      -0.139,
+      -0.0461,
+      0.0
+    ],
+    "max": [
+      0.139,
+      0.0461,
+      0.3741
+    ],
+    "dimensions_m": [
+      0.2779,
+      0.0923,
+      0.3741
+    ],
+    "center": [
+      0.0,
+      -0.0,
+      0.1871
+    ]
+  },
+  "ar_anchor": {
+    "valid": true,
+    "z_min_m": 0.0,
+    "offset_from_ground_mm": 0.0
+  },
+  "scale_audit": {
+    "category": "sac_a_main",
+    "dimensions_m": [
+      0.2779,
+      0.0923,
+      0.3741
+    ],
+    "max_dim_m": 0.3741,
+    "prior_matched": true,
+    "target_spec_matched": null
+  },
+  "issues": [],
+  "objects": {
+    "Sac_Luxe_Cuir_Luxe_Calibre": {
+      "vertices": 28104,
+      "triangles": 56184,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 120,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 631,
+        "degenerate_uv_faces": 2638,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 39.14
+      },
+      "materials": [
+        "Cuir_Luxe_Calibre"
+      ]
+    },
+    "Sac_Luxe_Fil_Couture_Ecru": {
+      "vertices": 640,
+      "triangles": 1280,
+      "is_watertight": true,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "intra_self_intersections": 0,
+      "inter_island_overlaps": 0,
+      "uv": {
+        "has_uv": true,
+        "islands_count": 10,
+        "degenerate_uv_faces": 115,
+        "uv_overlap_pct": 0.0,
+        "total_uv_coverage_pct": 2.64
+      },
+      "materials": [
+        "Fil_Couture_Ecru"
+      ]
+    }
+  }
+}
