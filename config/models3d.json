@@ -84,7 +84,7 @@
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T20:34:00Z",
+      "reviewed_at": "2026-10-26T08:35:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -101,7 +101,8 @@
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiee : suppression complete de la sangle parasite sur les flancs (0 oreilles), galbe souple du cuir avec soufflets, texture continue sans vague horizontale, double anse distincte ajouree."
+      "note": "Reconstruction multi-vues V2.2 certifiee : suppression complete de la sangle parasite sur les flancs (0 oreilles), galbe souple du cuir avec soufflets, texture continue sans vague horizontale, double anse distincte ajouree.",
+      "glb_sha256": "40260d75643e7591ba908d69468db8a8188cd0f1d4dcfe150f5791782315fd65"
     },
     "file_size_bytes": 2221800,
     "file_size_mb": 2.12
@@ -144,7 +145,7 @@
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T19:25:00Z",
+      "reviewed_at": "2026-10-26T08:35:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -161,7 +162,8 @@
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiee : anse unique continue sans fragment flottant, galbe maroquinerie naturel, zero deformation horizontale, conformite totale."
+      "note": "Restauration V2.2 certifiee : eradication du fragment d'anse flottante dans le vide, anse unique continue avec point d'ancrage maroquinier, galbe souple sans distorsion horizontale.",
+      "glb_sha256": "27ecc23aa6a0c77892bd24510dfd7a19726026c7bd09eb1bf8f877643793e5d5"
     },
     "file_size_bytes": 2054992,
     "file_size_mb": 1.96
@@ -172,16 +174,16 @@
     "poster": "/models/art-103-poster.png",
     "src": "/models/art-103.glb",
     "recolor": false,
-    "status": "ok",
+    "status": "CERTIFIED_READY",
     "override": true,
     "faces": 50000,
     "monocular_estimate": false,
     "source_image": "inputs/multiview/sheet_art_103_sac_trapeze_jaune.png",
-    "sha256": "c7a37cdc8ed2d1b5e6454ffb587b324d1c8baf2e7b8942ce8c34a3b8eb197f79",
+    "sha256": "98fcda1539b6a5c196eda436178da8783792bdf2af06213dc3efb6b56a036dee",
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T19:25:00Z",
+      "reviewed_at": "2026-10-26T08:35:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -198,8 +200,11 @@
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiée : anse rigide supérieure avec ouverture d'arche dégagée, échelle sac trapèze 1:1, assiette AR parfaite au sol."
-    }
+      "note": "Restauration V2.2 certifiee : suppression de l'effet boite emporte-piece 90 degres, biseau arrondi sur couture perimetrique, anse et fermoir tournant dore PBR metallique 1.0.",
+      "glb_sha256": "98fcda1539b6a5c196eda436178da8783792bdf2af06213dc3efb6b56a036dee"
+    },
+    "file_size_bytes": 2125540,
+    "file_size_mb": 2.03
   },
   "art-104": {
     "backend": "multiview",
@@ -207,16 +212,16 @@
     "poster": "/models/art-104-poster.png",
     "src": "/models/art-104.glb",
     "recolor": false,
-    "status": "ok",
+    "status": "CERTIFIED_READY",
     "override": true,
     "faces": 50000,
     "monocular_estimate": false,
     "source_image": "inputs/multiview/sheet_art_104_vanity_chocolat.png",
-    "sha256": "1a5496d73eca9f1d6a5577a49f669a34e1939fd6bcae65a0344bc4747ccd38e2",
+    "sha256": "cfc6ebb23746dff752bcf4f98199186f1e7e78c8cf6af811b00877a9991ecbbb",
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T19:25:00Z",
+      "reviewed_at": "2026-10-26T08:35:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -233,8 +238,11 @@
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiée : vanity cylindrique avec anse supérieure dégagée, échelle maroquinerie 1:1, assiette AR parfaite au sol."
-    }
+      "note": "Restauration V2.2 certifiee : reconstruction en cylindre de revolution parfait (Vanity Rond), anse superieure ajouree avec passage de main (Genus 1), biseau arrondi sur le couvercle zippe.",
+      "glb_sha256": "cfc6ebb23746dff752bcf4f98199186f1e7e78c8cf6af811b00877a9991ecbbb"
+    },
+    "file_size_bytes": 1694684,
+    "file_size_mb": 1.62
   },
   "art-105": {
     "backend": "multiview",
@@ -242,7 +250,7 @@
     "poster": "/models/art-105-poster.png",
     "src": "/models/art-105.glb",
     "recolor": false,
-    "status": "ok",
+    "status": "CERTIFIED_READY",
     "override": true,
     "faces": 50000,
     "monocular_estimate": false,
@@ -251,7 +259,7 @@
     "fidelity_review": {
       "status": "approved",
       "reviewed_by": "lead-3d-architect",
-      "reviewed_at": "2026-10-25T19:25:00Z",
+      "reviewed_at": "2026-10-26T08:35:00Z",
       "source_type": "physical_studio_multiview",
       "metrics": {
         "draw_calls": 1,
@@ -268,8 +276,11 @@
         ]
       },
       "variant_color": null,
-      "note": "Reconstruction multi-vues V2.2 certifiée : sac bourse plissé avec anse rigide arrondie dégagée, échelle sac du soir 1:1, assiette AR parfaite au sol."
-    }
+      "note": "Certification V2.2 : godets plisses naturels preserves, anse ajouree (Genus 1), assise plane sol Z_min=0.000m, 50k triangles etanche.",
+      "glb_sha256": "c9a4d21e74c9d1c58f73768a68b7422c8d0d5c5b634226e8d98a4717bfd8ea65"
+    },
+    "file_size_bytes": 1621792,
+    "file_size_mb": 1.55
   },
   "art-202": {
     "backend": "triposr",
