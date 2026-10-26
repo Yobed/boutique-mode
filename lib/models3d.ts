@@ -3,7 +3,7 @@ import type { Article } from './types';
 /**
  * Modèles 3D générés par `npm run 3d:catalog` / `3d:product` (voir docs/3d-pipeline/NEURAL_IMAGE_TO_3D.md).
  * Le manifeste `config/models3d.json` est indexé par identifiant d'article normalisé.
- * Seules les entrées validées (status "ok") sont attachées au site ; "review" attend un contrôle visuel.
+ * Seules les entrées validées (status "ok" ou "CERTIFIED_READY") sont attachées au site ; "review" attend un contrôle visuel.
  */
 export interface GeneratedModel {
   src: string;
@@ -31,7 +31,8 @@ export function modelKey(id: string): string {
  */
 export function attachGeneratedModel(article: Article, manifest: Models3dManifest): Article {
   const entry = manifest[modelKey(article.id)];
-  if (!entry || entry.status !== 'ok' || !entry.src) return article;
+  const isApproved = entry?.status === 'ok' || entry?.status === 'CERTIFIED_READY';
+  if (!entry || !isApproved || !entry.src) return article;
   if (article.modele_3d && !entry.override) return article;
   const { src, poster, cameraOrbit, recolor, background } = entry;
   return { ...article, modele_3d: { src, poster, cameraOrbit, recolor, background } };
