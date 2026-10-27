@@ -1,11 +1,12 @@
 services:
   - type: web
-    name: elsi-boutique
+    name: boutique-mode
     runtime: node
     plan: free
     region: frankfurt
     buildCommand: npm install && npm run build
     startCommand: npm start
+    healthCheckPath: /health
     envVars:
       - key: NODE_VERSION
         value: 20
